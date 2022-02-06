@@ -1,8 +1,11 @@
+import { Routes, Route } from "react-router-dom";
+import Explorer from "./pages/Explorer";
+
 const App = () => {
   return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
+    <Routes>
+      <Route path="/" element={<Explorer />} />
+    </Routes>
   );
 };
 
