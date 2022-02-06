@@ -5,3 +5,7 @@
 .active {
   @apply border-red-600;
 }
+
+body {
+  @apply bg-[#F7F7F9];
+}
