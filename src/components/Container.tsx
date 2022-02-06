@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-export const Container: FC<{ className: string }> = ({
+export const Container: FC<{ className?: string }> = ({
   children,
   className,
 }) => {
