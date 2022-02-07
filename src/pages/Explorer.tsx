@@ -1,4 +1,5 @@
 import { ExplorerCards } from "../components/ExplorerCards";
+import { ExplorerEvents } from "../components/ExplorerEvents";
 import { Navbar } from "../components/Navbar";
 import { SearchBar } from "../components/SearchBar";
 
@@ -8,6 +9,7 @@ export const Explorer = () => {
       <Navbar />
       <ExplorerCards />
       <SearchBar />
+      <ExplorerEvents />
     </div>
   );
 };
