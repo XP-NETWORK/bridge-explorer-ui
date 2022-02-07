@@ -19,7 +19,7 @@ export const Navbar = () => {
           <img src={logo} alt="logo" />
         </Link>
         <div ref={menu} className="flex sm:flex flex-col sm:flex-row gap-x-4">
-          <NavItem to="/">Bridige</NavItem>
+          <NavItem to="/">Bridge</NavItem>
           <NavItem to="/network">Network</NavItem>
           <NavItem to="/dashboard">Dashboard</NavItem>
           <NavItem to="/explorer">Explorer</NavItem>
