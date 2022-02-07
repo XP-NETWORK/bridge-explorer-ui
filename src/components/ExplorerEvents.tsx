@@ -16,10 +16,25 @@ export interface IEvent {
   senderAddress: string;
   targetAddress?: string;
   createdAt: Date;
+  nftUri: string;
+  imgUri?: string;
 }
 
 export const ExplorerEvents = () => {
   const [events, setEvents] = useState<IEvent[]>([]);
+
+  useEffect(() => {
+    events.forEach((event) => {
+      fetch(event.nftUri)
+        .then((res) => res.json())
+        .then((metadata) => {
+          setEvents((_events) => [
+            { imgUri: metadata.image, ...event },
+            ..._events,
+          ]);
+        });
+    });
+  }, []);
 
   useEffect(() => {
     fetch("https://dev-explorer-api.herokuapp.com/")
