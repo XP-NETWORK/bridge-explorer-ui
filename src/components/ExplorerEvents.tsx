@@ -15,6 +15,7 @@ export interface IEvent {
   toHash?: string;
   senderAddress: string;
   targetAddress?: string;
+  createdAt: Date;
 }
 
 export const ExplorerEvents = () => {
@@ -59,7 +60,7 @@ export const ExplorerEvents = () => {
                 <TableData>{event.type}</TableData>
                 <TableData>{event.fromChain}</TableData>
                 <TableData>{event.toChain}</TableData>
-                <TableData>14 days ago</TableData>
+                <TableData>{event.createdAt}</TableData>
                 <TableData>{event.status}</TableData>
               </tr>
             ))
