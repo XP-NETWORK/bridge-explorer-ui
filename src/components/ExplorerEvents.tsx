@@ -60,7 +60,7 @@ export const ExplorerEvents = () => {
                 <TableData>{event.type}</TableData>
                 <TableData>{event.fromChain}</TableData>
                 <TableData>{event.toChain}</TableData>
-                <TableData>{event.createdAt}</TableData>
+                <TableData>{event.createdAt.toUTCString()}</TableData>
                 <TableData>{event.status}</TableData>
               </tr>
             ))
