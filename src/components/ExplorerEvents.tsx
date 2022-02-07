@@ -80,12 +80,14 @@ export const ExplorerEvents = () => {
               </tr>
             ))
           ) : (
-            <td
-              colSpan={8}
-              className="px-3 py-6 text-center w-full text-xs font-medium text-gray-800"
-            >
-              No Events Found
-            </td>
+            <tr>
+              <td
+                colSpan={8}
+                className="px-3 py-6 text-center w-full text-xs font-medium text-gray-800"
+              >
+                No Events Found
+              </td>
+            </tr>
           )}
         </tbody>
       </table>
