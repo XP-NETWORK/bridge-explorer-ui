@@ -31,8 +31,6 @@ jobs:
           private: false
 
 
-name: Deploy Bridge Explorer to staging
-
 on:
   push:
     branches:
