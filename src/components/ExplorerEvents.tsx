@@ -75,7 +75,7 @@ export const ExplorerEvents = () => {
                 <TableData>{event.type}</TableData>
                 <TableData>{event.fromChain}</TableData>
                 <TableData>{event.toChain}</TableData>
-                <TableData>{event.createdAt.toUTCString()}</TableData>
+                <TableData>{event?.createdAt?.toString()}</TableData>
                 <TableData>{event.status}</TableData>
               </tr>
             ))
@@ -105,7 +105,7 @@ const TableHeading: FC = ({ children }) => (
 );
 
 const TableData: FC = ({ children }) => (
-  <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
+  <td className="px-3 py-4 whitespace-nowrap max-w-[10rem] text-ellipsis overflow-hidden text-sm text-gray-500">
     {children}
   </td>
 );
