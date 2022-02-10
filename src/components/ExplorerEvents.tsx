@@ -42,7 +42,7 @@ export const ExplorerEvents = () => {
       .then((data) => {
         setEvents(data);
       });
-  }, [events]);
+  }, []);
 
   return (
     <Container className="mt-5 overflow-x-auto">
@@ -70,12 +70,15 @@ export const ExplorerEvents = () => {
                     src="https://via.placeholder.com/50"
                     alt=""
                   />
+                  {console.log(event.nftUri)}
                 </TableData>
                 <TableData>{event.fromHash}</TableData>
                 <TableData>{event.type}</TableData>
                 <TableData>{event.fromChain}</TableData>
                 <TableData>{event.toChain}</TableData>
-                <TableData>{event?.createdAt?.toString()}</TableData>
+                <TableData>
+                  {new Date(event.createdAt).toLocaleDateString()}
+                </TableData>
                 <TableData>{event.status}</TableData>
               </tr>
             ))
