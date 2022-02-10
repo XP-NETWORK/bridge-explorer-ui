@@ -37,7 +37,10 @@ export const Navbar = () => {
 
 const NavItem: FC<{ to: string }> = ({ children, to }) => {
   return (
-    <NavLink className="sm:flex items-end pb-2 sm:border-t-2 " to={to}>
+    <NavLink
+      className="sm:flex items-end pb-2 sm:border-t-2 border-transparent"
+      to={to}
+    >
       {children}
     </NavLink>
   );
