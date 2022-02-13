@@ -108,7 +108,7 @@ const TableHeading: FC = ({ children }) => (
 );
 
 const TableData: FC = ({ children }) => (
-  <td className="px-3 py-4 whitespace-nowrap max-w-[10rem] text-ellipsis overflow-hidden text-sm text-gray-500">
+  <td className="px-3 py-4 whitespace-nowrap max-w-sm text-ellipsis overflow-hidden text-sm text-gray-500">
     {children}
   </td>
 );
