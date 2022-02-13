@@ -25,15 +25,18 @@ export const ExplorerEvents = () => {
 
   useEffect(() => {
     events.forEach((event) => {
-      fetch(event.nftUri)
-        .then((res) => res.json())
-        .then((metadata) => {
-          setEvents((_events) => [
-            { imgUri: metadata.image, ...event },
-            ..._events,
-          ]);
-        });
+      if (event.nftUri) {
+        fetch(event.nftUri)
+          .then((res) => res.json())
+          .then((metadata) => {
+            setEvents((_events) => [
+              { imgUri: metadata.image, ...event },
+              ..._events,
+            ]);
+          });
+      }
     });
+    console.log(events);
   }, []);
 
   useEffect(() => {
@@ -67,7 +70,7 @@ export const ExplorerEvents = () => {
                 <TableData>
                   <img
                     className="rounded-lg"
-                    src="https://via.placeholder.com/50"
+                    src={event?.nftUri || "https://via.placeholder.com/50"}
                     alt=""
                   />
                   {console.log(event.nftUri)}
