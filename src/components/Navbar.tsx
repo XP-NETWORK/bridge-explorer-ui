@@ -14,8 +14,8 @@ export const Navbar = () => {
 
   return (
     <nav className="bg-white shadow">
-      <Container className="relative items-stretch flex flex-col sm:flex-row gap-y-4 justify-between px-4 border-red-400">
-        <Link to="/">
+      <Container className="relative flex-shrink flex flex-col sm:flex-row gap-y-4 justify-between px-4 border-red-400">
+        <Link to="/" className="max-w-fit">
           <img src={logo} alt="logo" />
         </Link>
         <div ref={menu} className="flex sm:flex flex-col sm:flex-row gap-x-4">
@@ -38,7 +38,7 @@ export const Navbar = () => {
 const NavItem: FC<{ to: string }> = ({ children, to }) => {
   return (
     <NavLink
-      className="sm:flex items-end pb-2 sm:border-t-2 border-transparent"
+      className="sm:flex items-end pb-2 max-w-fit sm:border-t-2 border-transparent"
       to={to}
     >
       {children}
