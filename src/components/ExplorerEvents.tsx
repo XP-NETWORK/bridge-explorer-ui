@@ -72,14 +72,14 @@ export const ExplorerEvents = () => {
                   />
                   {console.log(event.nftUri)}
                 </TableData>
-                <TableData>{event.fromHash}</TableData>
-                <TableData>{event.type}</TableData>
-                <TableData>{event.fromChain}</TableData>
-                <TableData>{event.toChain}</TableData>
+                <TableData>{event.fromHash || "N/A"}</TableData>
+                <TableData>{event.type || "N/A"}</TableData>
+                <TableData>{event.fromChain || "N/A"}</TableData>
+                <TableData>{event.toChain || "N/A"}</TableData>
                 <TableData>
-                  {new Date(event.createdAt).toLocaleDateString()}
+                  {new Date(event.createdAt).toLocaleDateString() || "N/A"}
                 </TableData>
-                <TableData>{event.status}</TableData>
+                <TableData>{event.status || "N/A"}</TableData>
               </tr>
             ))
           ) : (
