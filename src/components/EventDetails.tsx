@@ -32,7 +32,7 @@ export const EventDetails = () => {
   return (
     <Container>
       <div className="mt-10 bg-white rounded-2xl p-8">
-        <div className="flex flex-col sm:flex-row gap-4 border p-10 rounded-xl">
+        <div className="flex flex-col sm:flex-row gap-4 border p-5 md:p-10 rounded-xl">
           <img
             className="rounded-lg "
             src={
@@ -43,11 +43,11 @@ export const EventDetails = () => {
             alt="nft preview"
           />
           <div className="flex flex-col gap-4">
-            <div className="grid grid-cols-2 space-x-10">
+            <div className="grid grid-cols-2 gap-x-4">
               <div>NFT name:</div>
               <div>{metadata?.name || "N/A"}</div>
             </div>
-            <div className="grid grid-cols-2 space-x-10">
+            <div className="grid grid-cols-2 gap-x-4">
               <div>ID:</div>
               {/* TODO: Change to ID */}
               <div>{metadata?.id || "N/A"}</div>
