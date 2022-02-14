@@ -20,12 +20,13 @@ export const EventDetails = () => {
 
   // TODO: fetch metadata from nftUri
   useEffect(() => {
-    if (metadata?.nftUri) {
-      fetch(event!.nftUri)
-        .then((res) => res.json())
-        .then((metadata) => setMetadata(metadata));
-      console.log(metadata);
-    }
+    fetch(event?.nftUri!)
+      .then((res) => res.json())
+      .then((metadata) => {
+        setMetadata(metadata);
+
+        console.log(metadata);
+      });
   }, [event]);
 
   return (
@@ -37,6 +38,8 @@ export const EventDetails = () => {
             src={
               metadata?.image || "https://via.placeholder.com/100?text=No+Image"
             }
+            width="100"
+            height={100}
             alt="nft preview"
           />
           <div className="flex flex-col gap-4">
@@ -47,18 +50,15 @@ export const EventDetails = () => {
             <div className="grid grid-cols-2 space-x-10">
               <div>ID:</div>
               {/* TODO: Change to ID */}
-              <div>{metadata?.name || "N/A"}</div>
-            </div>
-            <div className="grid grid-cols-2 space-x-10">
-              <div>Transaction hash:</div>
-              {/* TODO: Change to Transaction Has */}
-              <div>{metadata?.name || "N/A"}</div>
+              <div>{metadata?.id || "N/A"}</div>
             </div>
           </div>
         </div>
-        <h1 className="text-2xl font-bold">{metadata?.name}</h1>
-        <h1 className="text-gray-700">{metadata?.description}</h1>
-        <h1 className="text-gray-700">{metadata?.description}</h1>
+        <div className="my-5">
+          <h1 className="text-2xl font-bold mb-5">{metadata?.name}</h1>
+          <h1 className="text-gray-700">{metadata?.description}</h1>
+          <h1 className="text-gray-700">{metadata?.description}</h1>
+        </div>
         <div className="overflow-x-auto mt-5">
           <table className="min-w-full divide-y divide-gray-200">
             <tbody className="bg-white divide-y divide-gray-200">
