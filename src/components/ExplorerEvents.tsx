@@ -64,7 +64,7 @@ export const ExplorerEvents = () => {
                   <Link
                     className="text-blue-500"
                     key={event.id}
-                    to={`/${event.fromHash}`}
+                    to={`/tx/${event.fromHash}`}
                   >
                     {event.fromHash || "N/A"}
                   </Link>

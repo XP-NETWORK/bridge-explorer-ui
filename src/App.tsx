@@ -6,7 +6,7 @@ export const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Explorer />} />
-      <Route path="/:fromHash" element={<Event />} />
+      <Route path="/tx/:fromHash" element={<Event />} />
     </Routes>
   );
 };
