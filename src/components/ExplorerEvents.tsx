@@ -24,7 +24,8 @@ export interface IEvent {
 }
 
 export const ExplorerEvents = () => {
-  let events = useContext(EventsContext);
+  // @ts-ignore
+  const { events } = useContext(EventsContext);
 
   useEffect(() => {
     console.log(events);
@@ -47,7 +48,7 @@ export const ExplorerEvents = () => {
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
           {events.length ? (
-            events.map((event, index) => (
+            events.map((event: IEvent, index: number) => (
               <tr key={event.id}>
                 <TableData>{index + 1}</TableData>
                 <TableData>
