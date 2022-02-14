@@ -24,26 +24,15 @@ export const ExplorerEvents = () => {
   const [events, setEvents] = useState<IEvent[]>([]);
 
   useEffect(() => {
-    events.forEach((event) => {
-      if (event.nftUri) {
-        fetch(event.nftUri)
-          .then((res) => res.json())
-          .then((metadata) => {
-            setEvents((_events) => [
-              { imgUri: metadata.image, ...event },
-              ..._events,
-            ]);
-          });
-      }
-    });
-    console.log(events);
-  }, []);
-
-  useEffect(() => {
     fetch("https://dev-explorer-api.herokuapp.com/")
       .then((res) => res.json())
-      .then((data) => {
-        setEvents(data);
+      .then(async (data: IEvent[]) => {
+        const newEvents = data.map(async (data) => {
+          const res = await fetch(data.nftUri);
+          const metadata = await res.json();
+          return { imgUri: metadata.image as string, ...data };
+        });
+        setEvents(await Promise.all(newEvents));
       });
   }, []);
 
@@ -70,10 +59,9 @@ export const ExplorerEvents = () => {
                 <TableData>
                   <img
                     className="rounded-lg"
-                    src={event?.nftUri || "https://via.placeholder.com/50"}
+                    src={event?.imgUri || "https://via.placeholder.com/50"}
                     alt=""
                   />
-                  {console.log(event.nftUri)}
                 </TableData>
                 <TableData>{event.fromHash || "N/A"}</TableData>
                 <TableData>{event.type || "N/A"}</TableData>
