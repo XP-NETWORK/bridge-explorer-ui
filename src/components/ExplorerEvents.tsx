@@ -1,6 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Container } from "./Container";
+import { useContext } from "react";
+import { EventsContext } from "../context/Events";
 
 export interface IEvent {
   id: string;
@@ -22,20 +24,11 @@ export interface IEvent {
 }
 
 export const ExplorerEvents = () => {
-  const [events, setEvents] = useState<IEvent[]>([]);
+  let events = useContext(EventsContext);
 
   useEffect(() => {
-    fetch("https://dev-explorer-api.herokuapp.com/")
-      .then((res) => res.json())
-      .then(async (data: IEvent[]) => {
-        const newEvents = data.map(async (data) => {
-          const res = await fetch(data.nftUri);
-          const metadata = await res.json();
-          return { imgUri: metadata.image as string, ...data };
-        });
-        setEvents(await Promise.all(newEvents));
-      });
-  }, []);
+    console.log(events);
+  }, [events]);
 
   return (
     <Container className="mt-5 overflow-x-auto">
