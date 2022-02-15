@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Container } from "./Container";
 import { useContext } from "react";
 import { EventsContext } from "../context/Events";
+import { Status } from "./Status";
 
 export interface IEvent {
   id: string;
@@ -75,7 +76,9 @@ export const ExplorerEvents = () => {
                 <TableData>
                   {new Date(event.createdAt).toLocaleDateString() || "N/A"}
                 </TableData>
-                <TableData>{event.status || "N/A"}</TableData>
+                <TableData>
+                  <Status status={event.status} />
+                </TableData>
               </tr>
             ))
           ) : (
@@ -104,7 +107,7 @@ const TableHeading: FC = ({ children }) => (
 );
 
 const TableData: FC = ({ children }) => (
-  <td className="px-3 py-4 whitespace-nowrap max-w-xs text-ellipsis overflow-hidden text-sm text-gray-500">
+  <td className="px-3 py-4 whitespace-nowrap max-w-xs text-ellipsis overflow-hidden text-xs text-gray-500">
     {children}
   </td>
 );

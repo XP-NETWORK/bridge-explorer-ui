@@ -2,6 +2,7 @@ import { Container } from "./Container";
 import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IEvent } from "./ExplorerEvents";
+import { Status } from "./Status";
 
 export const EventDetails = () => {
   let params = useParams();
@@ -92,7 +93,10 @@ export const EventDetails = () => {
               </tr>
               <tr>
                 <TableData>Status</TableData>
-                <TableData>{event?.status || "N/A"}</TableData>
+                <TableData>
+                  {/* @ts-ignore */}
+                  <Status status={event.status} />
+                </TableData>
               </tr>
             </tbody>
           </table>
