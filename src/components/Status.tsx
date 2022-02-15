@@ -4,7 +4,7 @@ import failedIcon from "../assets/icons/failed.svg";
 import pendingIcon from "../assets/icons/pending.svg";
 import canceledIcon from "../assets/icons/canceled.svg";
 
-export const Status: FC<{ status: string }> = ({ status }) => {
+export const Status: FC<{ status?: string }> = ({ status }) => {
   if (status === "Completed")
     return (
       <div className="flex space-x-1 text-xs text-green-600">

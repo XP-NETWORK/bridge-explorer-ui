@@ -94,8 +94,7 @@ export const EventDetails = () => {
               <tr>
                 <TableData>Status</TableData>
                 <TableData>
-                  {/* @ts-ignore */}
-                  <Status status={event.status} />
+                  <Status status={event?.status} />
                 </TableData>
               </tr>
             </tbody>
