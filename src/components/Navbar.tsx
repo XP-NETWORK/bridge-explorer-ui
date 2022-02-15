@@ -18,11 +18,14 @@ export const Navbar = () => {
         <Link to="/" className="max-w-fit">
           <img src={logo} alt="logo" />
         </Link>
-        <div ref={menu} className="flex sm:flex flex-col sm:flex-row gap-x-4">
-          <NavItem to="/">Bridge</NavItem>
+        <div
+          ref={menu}
+          className="flex sm:flex flex-col justify-between sm:flex-row gap-x-4"
+        >
+          <NavItem to="/">Explorer</NavItem>
+          <NavItem to="/bridge">Bridge</NavItem>
           <NavItem to="/network">Network</NavItem>
           <NavItem to="/dashboard">Dashboard</NavItem>
-          <NavItem to="/explorer">Explorer</NavItem>
         </div>
         <button
           className="absolute right-4 top-7 sm:hidden"
@@ -38,7 +41,7 @@ export const Navbar = () => {
 const NavItem: FC<{ to: string }> = ({ children, to }) => {
   return (
     <NavLink
-      className="sm:flex items-end pb-2 max-w-fit sm:border-t-2 border-transparent"
+      className="sm:flex items-end font-normal tracking-wide hover:tracking-[0.0175em] text-center hover:font-medium text-[15px] pb-2 max-w-fit sm:border-t-2 border-transparent"
       to={to}
     >
       {children}
