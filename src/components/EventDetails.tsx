@@ -58,7 +58,6 @@ export const EventDetails = () => {
         <div className="my-5">
           <h1 className="text-2xl font-bold mb-5">{metadata?.name}</h1>
           <h1 className="text-gray-700">{metadata?.description}</h1>
-          <h1 className="text-gray-700">{metadata?.description}</h1>
         </div>
         <div className="overflow-x-auto mt-5">
           <table className="min-w-full divide-y divide-gray-200">
