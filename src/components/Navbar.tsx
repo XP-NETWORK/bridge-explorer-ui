@@ -15,9 +15,9 @@ export const Navbar = () => {
   return (
     <nav className="bg-white shadow-md">
       <Container className="relative flex-shrink flex flex-col sm:flex-row gap-y-4 justify-between px-4 border-red-400">
-        <Link to="/" className="max-w-fit">
+        <a href="https://xp.network" className="max-w-fit">
           <img src={logo} alt="logo" />
-        </Link>
+        </a>
         <div
           ref={menu}
           className="flex sm:flex flex-col justify-between sm:flex-row gap-x-4"
