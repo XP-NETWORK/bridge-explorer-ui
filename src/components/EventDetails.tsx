@@ -39,8 +39,8 @@ export const EventDetails = () => {
             src={
               metadata?.image || "https://via.placeholder.com/100?text=No+Image"
             }
-            width="100"
-            height={100}
+            width="128"
+            height="128"
             alt="nft preview"
           />
           <div className="flex flex-col gap-4">
