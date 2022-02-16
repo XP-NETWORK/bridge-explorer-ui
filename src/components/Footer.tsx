@@ -6,7 +6,7 @@ export const Footer = () => {
     <footer className="mt-10 bg-zinc-800 py-10">
       <Container className="text-zinc-400 text-sm">
         <div className="flex flex-col md:flex-row gap-y-10 justify-between">
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             <h1 className="font-medium text-white">Products</h1>
             <FooterLink href="https://bridge.xp.network/">
               Cross-Chain NFT Bridge
@@ -16,7 +16,7 @@ export const Footer = () => {
             </FooterLink>
             <FooterLink href="https://xp.network/api/">XPNET-JS API</FooterLink>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             <h1 className="font-medium text-white">Resources</h1>
             <FooterLink href="https://xp.network/whitepaper/">
               Whitepaper
@@ -29,7 +29,7 @@ export const Footer = () => {
               GitHub
             </FooterLink>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             <h1 className="font-medium text-white">XPNET</h1>
             <FooterLink disabled href="/">
               Token
@@ -38,7 +38,7 @@ export const Footer = () => {
               Staking
             </FooterLink>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             <h1 className="font-medium text-white">XP.NETWORK</h1>
             <FooterLink href="https://xp.network/team/">Team</FooterLink>
             <FooterLink href="https://blog.xp.network/">Blog</FooterLink>
@@ -46,7 +46,7 @@ export const Footer = () => {
               Brand Assets
             </FooterLink>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             <h1 className="font-medium text-white">Community</h1>
             <FooterLink disabled href="/">
               Ambassadors ship
@@ -55,7 +55,7 @@ export const Footer = () => {
               Global Channels
             </FooterLink>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             <h1 className="font-medium text-white">Follow</h1>
             <FooterLink href="https://twitter.com/xpnetwork_">
               Twitter
