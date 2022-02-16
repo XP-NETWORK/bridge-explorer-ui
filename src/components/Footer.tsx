@@ -1,18 +1,27 @@
 import { FC } from "react";
 import { Container } from "./Container";
+import logo2 from "../assets/img/logo2.svg";
 
 export const Footer = () => {
   return (
-    <footer className="mt-32 bg-zinc-800 py-10">
-      <Container className="text-zinc-400 text-sm">
+    <footer className="mt-32 bg-zinc-800 py-8">
+      <Container className="text-white text-sm">
         <div className="flex flex-col md:flex-row gap-y-10 justify-between">
+          <div className="font-poppins flex flex-col gap-3">
+            <FooterLink href="/">
+              <img src={logo2} className="mb-4" alt="logo" />
+            </FooterLink>
+            <FooterLink href="tel:+1 (650) 924-9214">
+              +1 (650) 924-9214
+            </FooterLink>
+            <FooterLink href="mailto:contact@xp.network">
+              contact@xp.network
+            </FooterLink>
+          </div>
           <div className="flex flex-col gap-3">
             <h1 className="font-medium text-white">Products</h1>
             <FooterLink href="https://bridge.xp.network/">
               Cross-Chain NFT Bridge
-            </FooterLink>
-            <FooterLink disabled href="/">
-              NFT Bridge Widget
             </FooterLink>
             <FooterLink href="https://xp.network/api/">XPNET-JS API</FooterLink>
           </div>
@@ -30,15 +39,6 @@ export const Footer = () => {
             </FooterLink>
           </div>
           <div className="flex flex-col gap-3">
-            <h1 className="font-medium text-white">XPNET</h1>
-            <FooterLink disabled href="/">
-              Token
-            </FooterLink>
-            <FooterLink href="https://stake.xp.network/stake">
-              Staking
-            </FooterLink>
-          </div>
-          <div className="flex flex-col gap-3">
             <h1 className="font-medium text-white">XP.NETWORK</h1>
             <FooterLink href="https://xp.network/team/">Team</FooterLink>
             <FooterLink href="https://blog.xp.network/">Blog</FooterLink>
@@ -48,15 +48,6 @@ export const Footer = () => {
           </div>
           <div className="flex flex-col gap-3">
             <h1 className="font-medium text-white">Community</h1>
-            <FooterLink disabled href="/">
-              Ambassadors ship
-            </FooterLink>
-            <FooterLink href="https://xp.network/community/">
-              Global Channels
-            </FooterLink>
-          </div>
-          <div className="flex flex-col gap-3">
-            <h1 className="font-medium text-white">Follow</h1>
             <FooterLink href="https://twitter.com/xpnetwork_">
               Twitter
             </FooterLink>
@@ -81,10 +72,14 @@ export const Footer = () => {
             </FooterLink>
           </div>
         </div>
-        <hr className="border-zinc-700 my-10" />
-        <div className="flex text-[.85rem] flex-col md:flex-row gap-y-8 justify-between">
-          <p>A blockchain-agnostic network for building NFT dApps</p>
-          <p>© 2021 XP.network Ltd. All Rights Reserved</p>
+        <hr className="border-zinc-700 my-5" />
+        <div className="text-[.85rem] gap-y-8 justify-between">
+          <p className="text-white text-opacity-50 text-xs mb-8">
+            A blockchain-agnostic network for building NFT dApps
+          </p>
+          <p className="text-white text-sm text-opacity-70">
+            © 2021 XP.network Ltd. All Rights Reserved
+          </p>
         </div>
       </Container>
     </footer>
@@ -100,7 +95,9 @@ const FooterLink: FC<{ disabled?: boolean; href: string }> = ({
     <a
       target="_blank"
       href={href}
-      className={disabled ? "pointer-events-none text-zinc-500" : ""}
+      className={`text-white text-opacity-70 hover:text-opacity-100 ${
+        disabled && "pointer-events-none text-opacity-25"
+      }`}
     >
       {children}
     </a>
