@@ -48,7 +48,7 @@ export const Footer = () => {
           </div>
         </div>
         <hr className="border-zinc-700 my-10" />
-        <div className="flex flex-col md:flex-row gap-y-8 justify-between">
+        <div className="flex text-[.85rem] flex-col md:flex-row gap-y-8 justify-between">
           <p>A blockchain-agnostic network for building NFT dApps</p>
           <p>© 2021 XP.network Ltd. All Rights Reserved</p>
         </div>
