@@ -37,7 +37,6 @@ export const ExplorerEvents = () => {
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
-            <TableHeading>#</TableHeading>
             <TableHeading>NFT</TableHeading>
             <TableHeading>Tx Hash</TableHeading>
             <TableHeading>Tx Type</TableHeading>
@@ -49,9 +48,8 @@ export const ExplorerEvents = () => {
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
           {events.length ? (
-            events.map((event: IEvent, index: number) => (
+            events.map((event: IEvent) => (
               <tr key={event.id}>
-                <TableData>{index + 1}</TableData>
                 <TableData>
                   <img
                     className="rounded-lg"
