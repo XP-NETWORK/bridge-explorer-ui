@@ -57,8 +57,8 @@ export const ExplorerEvents = () => {
                     className="rounded-lg"
                     src={event?.imgUri || "https://via.placeholder.com/50"}
                     alt=""
-                    width={50}
-                    height={50}
+                    width={38}
+                    height={38}
                   />
                 </TableData>
                 <TableData>
