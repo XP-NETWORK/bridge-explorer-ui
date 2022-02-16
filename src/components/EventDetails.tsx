@@ -65,11 +65,15 @@ export const EventDetails = () => {
             <tbody className="bg-white divide-y divide-gray-200">
               <tr>
                 <TableData className="font-medium">Source Hash:</TableData>
-                <TableData>{event?.fromHash || "N/A"}</TableData>
+                <TableData className="text-blue-600">
+                  {event?.fromHash || "N/A"}
+                </TableData>
               </tr>
               <tr>
                 <TableData className="font-medium">Destination Hash:</TableData>
-                <TableData>{event?.toHash || "N/A"}</TableData>
+                <TableData className="text-blue-600">
+                  {event?.toHash || "N/A"}
+                </TableData>
               </tr>
               <tr>
                 <TableData className="font-medium">Source Chain:</TableData>
@@ -83,15 +87,21 @@ export const EventDetails = () => {
               </tr>
               <tr>
                 <TableData className="font-medium">From:</TableData>
-                <TableData>{event?.senderAddress || "N/A"}</TableData>
+                <TableData className="text-blue-600">
+                  {event?.senderAddress || "N/A"}
+                </TableData>
               </tr>
               <tr>
                 <TableData className="font-medium">To:</TableData>
-                <TableData>{event?.targetAddress || "N/A"}</TableData>
+                <TableData className="text-blue-600">
+                  {event?.targetAddress || "N/A"}
+                </TableData>
               </tr>
               <tr>
                 <TableData className="font-medium">Date:</TableData>
-                <TableData>{event?.createdAt || "N/A"}</TableData>
+                <TableData>
+                  {new Date(event?.createdAt!).toLocaleString() ?? "N/A"}
+                </TableData>
               </tr>
               <tr>
                 <TableData className="font-medium">Status:</TableData>
