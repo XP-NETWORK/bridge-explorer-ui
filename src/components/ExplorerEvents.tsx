@@ -100,14 +100,14 @@ export const ExplorerEvents = () => {
 const TableHeading: FC = ({ children }) => (
   <th
     scope="col"
-    className="px-3 py-3 text-left max-w-xs text-xs font-medium text-gray-800 tracking-wider"
+    className="px-3 py-3 text-left max-w-xs text-sm font-medium text-[#222222] tracking-wider"
   >
     {children}
   </th>
 );
 
 const TableData: FC = ({ children }) => (
-  <td className="px-3 py-4 whitespace-nowrap max-w-xs text-ellipsis overflow-hidden text-xs text-gray-500">
+  <td className="px-3 py-4 whitespace-nowrap max-w-xs text-ellipsis overflow-hidden text-sm text-gray-500">
     {children}
   </td>
 );
