@@ -67,12 +67,30 @@ export const ExplorerEvents = () => {
                     key={event.id}
                     to={`/tx/${event.fromHash}`}
                   >
-                    {event.fromHash || "N/A"}
+                    {event.fromHash.slice(0, 15) || "N/A"}...
                   </Link>
                 </TableData>
                 <TableData>{event.type || "N/A"}</TableData>
-                <TableData>{event.fromChain || "N/A"}</TableData>
-                <TableData>{event.toChain || "N/A"}</TableData>
+                <TableData>
+                  <div>{event.fromChain || "N/A"} </div>{" "}
+                  <Link
+                    className="text-blue-500"
+                    key={event.id}
+                    to={`/tx/${event.fromHash}`}
+                  >
+                    {event.fromHash.slice(0, 12)}...
+                  </Link>
+                </TableData>
+                <TableData>
+                  <div>{event.toChain || "N/A"}</div>
+                  <Link
+                    className="text-blue-500"
+                    key={event.id}
+                    to={`/tx/${event.fromHash}`}
+                  >
+                    {event?.toHash?.slice(0, 12)}...
+                  </Link>
+                </TableData>
                 <TableData>
                   {new Date(event.createdAt).toLocaleDateString() || "N/A"}
                 </TableData>
@@ -107,7 +125,7 @@ const TableHeading: FC = ({ children }) => (
 );
 
 const TableData: FC = ({ children }) => (
-  <td className="px-3 py-4 whitespace-nowrap max-w-xs text-ellipsis overflow-hidden text-sm text-gray-500">
+  <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
     {children}
   </td>
 );
