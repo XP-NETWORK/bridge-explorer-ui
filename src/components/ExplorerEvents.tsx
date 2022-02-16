@@ -63,7 +63,7 @@ export const ExplorerEvents = () => {
                 </TableData>
                 <TableData>
                   <Link
-                    className="text-blue-500"
+                    className="text-[#235EF5]"
                     key={event.id}
                     to={`/tx/${event.fromHash}`}
                   >
@@ -75,7 +75,7 @@ export const ExplorerEvents = () => {
                 <TableData>
                   <div>{event.fromChain || "N/A"} </div>{" "}
                   <Link
-                    className="text-blue-500"
+                    className="text-[#235EF5]"
                     key={event.id}
                     to={`/tx/${event.fromHash}`}
                   >
@@ -86,7 +86,7 @@ export const ExplorerEvents = () => {
                 <TableData>
                   <div>{event.toChain || "N/A"}</div>
                   <Link
-                    className="text-blue-500"
+                    className="text-[#235EF5]"
                     key={event.id}
                     to={`/tx/${event.fromHash}`}
                   >
