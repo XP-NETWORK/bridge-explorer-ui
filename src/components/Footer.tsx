@@ -3,7 +3,7 @@ import { Container } from "./Container";
 
 export const Footer = () => {
   return (
-    <footer className="mt-10 bg-zinc-800 py-10">
+    <footer className="mt-32 bg-zinc-800 py-10">
       <Container className="text-zinc-400 text-sm">
         <div className="flex flex-col md:flex-row gap-y-10 justify-between">
           <div className="flex flex-col gap-3">
