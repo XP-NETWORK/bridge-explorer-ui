@@ -13,7 +13,7 @@ export const Footer = () => {
           </div>
           <div className="flex flex-col gap-4">
             <h1 className="font-semibold">Resources</h1>
-            <a href="/">White Paper</a>
+            <a href="/">Whitepaper</a>
             <a href="/">Wiki</a>
             <a href="/">Docs</a>
             <a href="/">Roadmap</a>
