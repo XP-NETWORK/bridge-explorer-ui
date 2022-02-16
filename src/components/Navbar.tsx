@@ -41,7 +41,7 @@ export const Navbar = () => {
 const NavItem: FC<{ to: string }> = ({ children, to }) => {
   return (
     <NavLink
-      className="sm:flex items-end font-normal tracking-wide hover:tracking-[0.0175em] text-center hover:font-medium text-[15px] pb-2 max-w-fit sm:border-t-2 border-transparent"
+      className="sm:flex items-end font-normal tracking-wide hover:tracking-[0.0175em] text-center hover:font-medium text-[15px] pb-2.5 max-w-fit sm:border-t-2 border-transparent"
       to={to}
     >
       {children}
