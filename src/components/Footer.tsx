@@ -52,7 +52,7 @@ export const Footer = () => {
               Ambassadors ship
             </FooterLink>
             <FooterLink href="https://xp.network/community/">
-              Global Chanels
+              Global Channels
             </FooterLink>
           </div>
           <div className="flex flex-col gap-4">
