@@ -67,7 +67,8 @@ export const ExplorerEvents = () => {
                     key={event.id}
                     to={`/tx/${event.fromHash}`}
                   >
-                    {event.fromHash.slice(0, 15) || "N/A"}...
+                    {event.fromHash.slice(0, 6)}...
+                    {event.fromHash.slice(-6)}
                   </Link>
                 </TableData>
                 <TableData>{event.type || "N/A"}</TableData>
@@ -78,7 +79,8 @@ export const ExplorerEvents = () => {
                     key={event.id}
                     to={`/tx/${event.fromHash}`}
                   >
-                    {event.fromHash.slice(0, 12)}...
+                    {event.fromHash.slice(0, 6)}...
+                    {event.fromHash.slice(-6)}
                   </Link>
                 </TableData>
                 <TableData>
@@ -88,7 +90,8 @@ export const ExplorerEvents = () => {
                     key={event.id}
                     to={`/tx/${event.fromHash}`}
                   >
-                    {event?.toHash?.slice(0, 12)}...
+                    {event?.toHash?.slice(0, 6)}...
+                    {event?.toHash?.slice(-6)}
                   </Link>
                 </TableData>
                 <TableData>
