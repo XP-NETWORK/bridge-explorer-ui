@@ -5,6 +5,6 @@ export const Container: FC<{ className?: string }> = ({
   className,
 }) => {
   return (
-    <div className={"lg:max-w-4xl mx-auto px-4 " + className}>{children}</div>
+    <div className={"lg:max-w-5xl mx-auto px-4 " + className}>{children}</div>
   );
 };
