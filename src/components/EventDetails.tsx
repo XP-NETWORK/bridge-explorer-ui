@@ -33,7 +33,7 @@ export const EventDetails = () => {
   return (
     <Container>
       <div className="mt-10 bg-white rounded-2xl p-8 shadow-lg text-sm">
-        <div className="flex flex-col sm:flex-row gap-4 border p-5 md:p-10 rounded-xl">
+        <div className="flex flex-col sm:flex-row gap-4 border p-5 md:p-6 rounded-xl">
           <img
             className="rounded-lg "
             src={
@@ -43,12 +43,12 @@ export const EventDetails = () => {
             height="128"
             alt="nft preview"
           />
-          <div className="flex flex-col gap-4">
-            <div className="grid grid-cols-2 gap-x-4">
+          <div className="flex flex-col md:p-4 gap-4">
+            <div className="grid grid-cols-2 gap-x-10">
               <div className="font-medium">NFT Name:</div>
               <div>{metadata?.name || "N/A"}</div>
             </div>
-            <div className="grid grid-cols-2 gap-x-4">
+            <div className="grid grid-cols-2 gap-x-10">
               <div className="font-medium">ID:</div>
               {/* TODO: Change to ID */}
               <div>{metadata?.id || "N/A"}</div>
@@ -119,8 +119,7 @@ export const EventDetails = () => {
 const TableData: FC<{ className?: string }> = ({ children, className }) => (
   <td
     className={
-      "px-3 py-4 whitespace-nowrap overflow-hidden text-sm text-gray-500 " +
-      className
+      "px-3 py-4 whitespace-nowrap overflow-hidden text-sm " + className
     }
   >
     {children}
