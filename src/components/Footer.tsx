@@ -49,15 +49,9 @@ export const Footer = () => {
         </div>
         <hr className="border-zinc-700 my-10" />
         <div className="flex flex-col md:flex-row gap-y-8 justify-between">
-          <div>
-            <a href="/">Privacy Policy</a>
-            <a className="ml-10" href="/">
-              Terms of use
-            </a>
-          </div>
           <p>A blockchain-agnostic network for building NFT dApps</p>
+          <p>© 2021 XP.network Ltd. All Rights Reserved</p>
         </div>
-        <p className="mt-8">© 2021 XP.network Ltd. All Rights Reserved</p>
       </Container>
     </footer>
   );
