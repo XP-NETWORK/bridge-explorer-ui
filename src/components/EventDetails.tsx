@@ -32,7 +32,7 @@ export const EventDetails = () => {
 
   return (
     <Container>
-      <div className="mt-10 bg-white rounded-2xl p-8 shadow-lg">
+      <div className="mt-10 bg-white rounded-2xl p-8 shadow-lg text-sm">
         <div className="flex flex-col sm:flex-row gap-4 border p-5 md:p-10 rounded-xl">
           <img
             className="rounded-lg "
@@ -45,11 +45,11 @@ export const EventDetails = () => {
           />
           <div className="flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-x-4">
-              <div>NFT name:</div>
+              <div className="font-medium">NFT name:</div>
               <div>{metadata?.name || "N/A"}</div>
             </div>
             <div className="grid grid-cols-2 gap-x-4">
-              <div>ID:</div>
+              <div className="font-medium">ID:</div>
               {/* TODO: Change to ID */}
               <div>{metadata?.id || "N/A"}</div>
             </div>
@@ -64,35 +64,37 @@ export const EventDetails = () => {
           <table className="min-w-full divide-y divide-gray-200">
             <tbody className="bg-white divide-y divide-gray-200">
               <tr>
-                <TableData>Source Hash</TableData>
+                <TableData className="font-medium">Source Hash:</TableData>
                 <TableData>{event?.fromHash || "N/A"}</TableData>
               </tr>
               <tr>
-                <TableData>Destination Hash</TableData>
+                <TableData className="font-medium">Destination Hash:</TableData>
                 <TableData>{event?.toHash || "N/A"}</TableData>
               </tr>
               <tr>
-                <TableData>Source Chain</TableData>
+                <TableData className="font-medium">Source Chain:</TableData>
                 <TableData>{event?.fromChain || "N/A"}</TableData>
               </tr>
               <tr>
-                <TableData>Destination Chain</TableData>
+                <TableData className="font-medium">
+                  Destination Chain:
+                </TableData>
                 <TableData>{event?.toChain || "N/A"}</TableData>
               </tr>
               <tr>
-                <TableData>From</TableData>
+                <TableData className="font-medium">From:</TableData>
                 <TableData>{event?.senderAddress || "N/A"}</TableData>
               </tr>
               <tr>
-                <TableData>To</TableData>
+                <TableData className="font-medium">To:</TableData>
                 <TableData>{event?.targetAddress || "N/A"}</TableData>
               </tr>
               <tr>
-                <TableData>Date</TableData>
+                <TableData className="font-medium">Date:</TableData>
                 <TableData>{event?.createdAt || "N/A"}</TableData>
               </tr>
               <tr>
-                <TableData>Status</TableData>
+                <TableData className="font-medium">Status:</TableData>
                 <TableData>
                   <Status status={event?.status} />
                 </TableData>
@@ -105,8 +107,13 @@ export const EventDetails = () => {
   );
 };
 
-const TableData: FC = ({ children }) => (
-  <td className="px-3 py-4 whitespace-nowrap overflow-hidden text-sm text-gray-500">
+const TableData: FC<{ className?: string }> = ({ children, className }) => (
+  <td
+    className={
+      "px-3 py-4 whitespace-nowrap overflow-hidden text-sm text-gray-500 " +
+      className
+    }
+  >
     {children}
   </td>
 );
