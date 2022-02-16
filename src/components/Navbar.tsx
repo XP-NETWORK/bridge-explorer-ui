@@ -13,7 +13,7 @@ export const Navbar = () => {
   }, [isMenuOpen]);
 
   return (
-    <nav className="bg-white shadow">
+    <nav className="bg-white shadow-md">
       <Container className="relative flex-shrink flex flex-col sm:flex-row gap-y-4 justify-between px-4 border-red-400">
         <Link to="/" className="max-w-fit">
           <img src={logo} alt="logo" />
