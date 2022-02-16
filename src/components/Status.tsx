@@ -7,7 +7,7 @@ import canceledIcon from "../assets/icons/canceled.svg";
 export const Status: FC<{ status?: string }> = ({ status }) => {
   if (status === "Completed")
     return (
-      <div className="flex space-x-1 text-xs text-green-600">
+      <div className="flex space-x-1 text-xs text-[#10B67A]">
         <img src={completedIcon} alt="completed icon" />
         <h1>Completed</h1>
       </div>
@@ -15,7 +15,7 @@ export const Status: FC<{ status?: string }> = ({ status }) => {
 
   if (status === "Pending")
     return (
-      <div className="flex space-x-1 text-xs text-purple-600">
+      <div className="flex space-x-1 text-xs text-[#C058FF]">
         <img src={pendingIcon} alt="pending icon" />
         <h1>Pending</h1>
       </div>
@@ -23,7 +23,7 @@ export const Status: FC<{ status?: string }> = ({ status }) => {
 
   if (status === "Failed")
     return (
-      <div className="flex space-x-1 text-xs text-orange-600">
+      <div className="flex space-x-1 text-xs text-[#C23165]">
         <img src={failedIcon} alt="failed icon" />
         <h1>Failed</h1>
       </div>
@@ -31,7 +31,7 @@ export const Status: FC<{ status?: string }> = ({ status }) => {
 
   if (status === "Canceled")
     return (
-      <div className="flex space-x-1 text-xs text-orange-600">
+      <div className="flex space-x-1 text-xs text-[#D7600A]">
         <img src={canceledIcon} alt="canceled icon" />
         <h1>Canceled</h1>
       </div>
