@@ -18,7 +18,7 @@ export const SearchBar = () => {
         <input
           type="search"
           placeholder="Search address or name"
-          className="flex-1 bg-transparent focus:outline-none"
+          className="flex-1 bg-transparent focus:outline-none placeholder:text-sm"
           onChange={(e) => setValue(e.target.value)}
           value={value}
         />
