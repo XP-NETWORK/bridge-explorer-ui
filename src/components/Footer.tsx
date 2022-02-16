@@ -6,13 +6,13 @@ export const Footer = () => {
       <Container className="text-zinc-400 text-sm">
         <div className="flex flex-col md:flex-row gap-y-10 justify-between">
           <div className="flex flex-col gap-4">
-            <h1 className="font-semibold">Products</h1>
+            <h1 className="font-medium text-white">Products</h1>
             <a href="/">Cross-Chain NFT Bridge</a>
             <a href="/">NFT Bridge Widget</a>
             <a href="/">XPNET-JS API</a>
           </div>
           <div className="flex flex-col gap-4">
-            <h1 className="font-semibold">Resources</h1>
+            <h1 className="font-medium text-white">Resources</h1>
             <a href="/">Whitepaper</a>
             <a href="/">Wiki</a>
             <a href="/">Docs</a>
@@ -20,23 +20,23 @@ export const Footer = () => {
             <a href="/">GitHub</a>
           </div>
           <div className="flex flex-col gap-4">
-            <h1 className="font-semibold">XPNET</h1>
+            <h1 className="font-medium text-white">XPNET</h1>
             <a href="/">Token</a>
             <a href="/">Staking</a>
           </div>
           <div className="flex flex-col gap-4">
-            <h1 className="font-semibold">XP.NETWORK</h1>
+            <h1 className="font-medium text-white">XP.NETWORK</h1>
             <a href="/">Team</a>
             <a href="/">Blog</a>
             <a href="/">Brand Assets</a>
           </div>
           <div className="flex flex-col gap-4">
-            <h1 className="font-semibold">Community</h1>
+            <h1 className="font-medium text-white">Community</h1>
             <a href="/">Ambassadors ship</a>
             <a href="/">Global Chanels</a>
           </div>
           <div className="flex flex-col gap-4">
-            <h1 className="font-semibold">Follow</h1>
+            <h1 className="font-medium text-white">Follow</h1>
             <a href="/">Twitter</a>
             <a href="/">Telegram</a>
             <a href="/">Reddit</a>
