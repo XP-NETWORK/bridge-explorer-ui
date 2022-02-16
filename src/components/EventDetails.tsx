@@ -32,7 +32,7 @@ export const EventDetails = () => {
 
   return (
     <Container>
-      <div className="mt-10 bg-white rounded-2xl p-8">
+      <div className="mt-10 bg-white rounded-2xl p-8 shadow-lg">
         <div className="flex flex-col sm:flex-row gap-4 border p-5 md:p-10 rounded-xl">
           <img
             className="rounded-lg "
