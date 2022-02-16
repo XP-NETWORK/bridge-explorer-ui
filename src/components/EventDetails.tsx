@@ -45,7 +45,7 @@ export const EventDetails = () => {
           />
           <div className="flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-x-4">
-              <div className="font-medium">NFT name:</div>
+              <div className="font-medium">NFT Name:</div>
               <div>{metadata?.name || "N/A"}</div>
             </div>
             <div className="grid grid-cols-2 gap-x-4">
