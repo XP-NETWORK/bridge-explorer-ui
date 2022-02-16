@@ -1,5 +1,5 @@
 import { FC, useEffect, useRef } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Container } from "./Container";
 import logo from "../assets/img/logo.svg";
 import { useToggle } from "../hooks/use-toggle";
