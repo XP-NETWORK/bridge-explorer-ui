@@ -33,31 +33,33 @@ export const EventDetails = () => {
   return (
     <Container className="p-0">
       <div className="mt-10 bg-white rounded-2xl md:p-8 p-4 shadow-[0_0px_10px_0px_rgba(0,0,0,0.2)] text-sm">
-        <div className="flex text-[#222222] flex-col sm:flex-row gap-4 sm:border p-1 sm:p-5 md:p-6 rounded-xl">
-          <img
-            className="rounded-lg"
-            src={
-              metadata?.image || "https://via.placeholder.com/100?text=No+Image"
-            }
-            width="128"
-            height="128"
-            alt="nft preview"
-          />
-          <div className="flex flex-col w-full md:p-5 gap-4">
-            <div className="grid grid-cols-12 gap-4 md:gap-0">
-              <div className="col-span-3 font-medium">NFT Name:</div>
-              <p className="col-span-9">{metadata?.name || "N/A"}</p>
-            </div>
-            <div className="grid grid-cols-12 gap-4 md:gap-0">
-              <div className="col-span-3 font-medium">ID:</div>
-              <div className="col-span-9">{metadata?.id || "N/A"}</div>
+        <div className="text-[#222222] sm:border p-1 sm:p-5 md:p-6 rounded-xl">
+          <h1 className="text-xl font-medium">Send Item {metadata?.name}</h1>
+          <hr className="mb-5 mt-3" />
+          <div className="flex flex-col sm:flex-row gap-4">
+            <img
+              className="rounded-lg"
+              src={
+                metadata?.image ||
+                "https://via.placeholder.com/100?text=No+Image"
+              }
+              width="128"
+              height="128"
+              alt="nft preview"
+            />
+            <div className="flex flex-col w-full md:p-5 gap-4">
+              <div className="grid grid-cols-12 gap-4 md:gap-0">
+                <div className="col-span-3 font-medium">NFT Name:</div>
+                <p className="col-span-9">{metadata?.name || "N/A"}</p>
+              </div>
+              <div className="grid grid-cols-12 gap-4 md:gap-0">
+                <div className="col-span-3 font-medium">ID:</div>
+                <div className="col-span-9">{metadata?.id || "N/A"}</div>
+              </div>
             </div>
           </div>
         </div>
-        <div className="my-5">
-          <h1 className="text-2xl font-bold mb-5">{metadata?.name}</h1>
-          <h1 className="">{metadata?.description}</h1>
-        </div>
+
         <div className="overflow-x-auto mt-5">
           <table className="min-w-full divide-y divide-gray-200">
             <tbody className="bg-white divide-y divide-gray-200">
