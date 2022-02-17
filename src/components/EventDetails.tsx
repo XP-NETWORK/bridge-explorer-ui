@@ -33,7 +33,7 @@ export const EventDetails = () => {
   return (
     <Container>
       <div className="mt-10 bg-white rounded-2xl p-8 shadow-lg text-sm">
-        <div className="flex flex-col sm:flex-row gap-4 border p-5 md:p-6 rounded-xl">
+        <div className="flex text-[#222222] flex-col sm:flex-row gap-4 border p-5 md:p-6 rounded-xl">
           <img
             className="rounded-lg "
             src={
@@ -57,20 +57,20 @@ export const EventDetails = () => {
         </div>
         <div className="my-5">
           <h1 className="text-2xl font-bold mb-5">{metadata?.name}</h1>
-          <h1 className="text-gray-700">{metadata?.description}</h1>
+          <h1 className="">{metadata?.description}</h1>
         </div>
         <div className="overflow-x-auto mt-5">
           <table className="min-w-full divide-y divide-gray-200">
             <tbody className="bg-white divide-y divide-gray-200">
               <tr>
                 <TableData className="font-medium">Source Hash:</TableData>
-                <TableData className="text-blue-600">
+                <TableData className="text-[#235EF5]">
                   {event?.fromHash || "N/A"}
                 </TableData>
               </tr>
               <tr>
                 <TableData className="font-medium">Destination Hash:</TableData>
-                <TableData className="text-blue-600">
+                <TableData className="text-[#235EF5]">
                   {event?.toHash || "N/A"}
                 </TableData>
               </tr>
@@ -86,13 +86,13 @@ export const EventDetails = () => {
               </tr>
               <tr>
                 <TableData className="font-medium">From:</TableData>
-                <TableData className="text-blue-600">
+                <TableData className="text-[#235EF5]">
                   {event?.senderAddress || "N/A"}
                 </TableData>
               </tr>
               <tr>
                 <TableData className="font-medium">To:</TableData>
-                <TableData className="text-blue-600">
+                <TableData className="text-[#235EF5]">
                   {event?.targetAddress || "N/A"}
                 </TableData>
               </tr>
