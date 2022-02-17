@@ -31,11 +31,11 @@ export const EventDetails = () => {
   }, [event]);
 
   return (
-    <Container>
-      <div className="mt-10 bg-white rounded-2xl p-8 shadow-[0_0px_10px_0px_rgba(0,0,0,0.2)] text-sm">
-        <div className="flex text-[#222222] flex-col sm:flex-row gap-4 border p-5 md:p-6 rounded-xl">
+    <Container className="p-0">
+      <div className="mt-10 bg-white rounded-2xl md:p-8 p-4 shadow-[0_0px_10px_0px_rgba(0,0,0,0.2)] text-sm">
+        <div className="flex text-[#222222] flex-col sm:flex-row gap-4 sm:border p-1 sm:p-5 md:p-6 rounded-xl">
           <img
-            className="rounded-lg "
+            className="rounded-lg"
             src={
               metadata?.image || "https://via.placeholder.com/100?text=No+Image"
             }
@@ -43,15 +43,20 @@ export const EventDetails = () => {
             height="128"
             alt="nft preview"
           />
-          <div className="flex flex-col md:p-4 gap-4">
-            <div className="grid grid-cols-2 gap-x-10">
-              <div className="font-medium">NFT Name:</div>
-              <div>{metadata?.name || "N/A"}</div>
+          <div className="flex flex-col w-full md:p-5 gap-4">
+            <div className="grid grid-cols-6 gap-4 md:gap-0">
+              <div className="col-span-2 md:col-span-1 font-medium">
+                NFT Name:
+              </div>
+              <p className="col-span-4 md:col-span-5">
+                {metadata?.name || "N/A"}
+              </p>
             </div>
-            <div className="grid grid-cols-2 gap-x-10">
-              <div className="font-medium">ID:</div>
-              {/* TODO: Change to ID */}
-              <div>{metadata?.id || "N/A"}</div>
+            <div className="grid grid-cols-6 gap-4 md:gap-0">
+              <div className="col-span-2 md:col-span-1 font-medium">ID:</div>
+              <div className="col-span-4 md:col-span-5">
+                {metadata?.id || "N/A"}
+              </div>
             </div>
           </div>
         </div>
