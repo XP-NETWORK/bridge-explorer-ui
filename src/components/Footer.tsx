@@ -23,7 +23,7 @@ export const Footer = () => {
             <FooterLink href="https://bridge.xp.network/">
               Cross-Chain NFT Bridge
             </FooterLink>
-            <FooterLink href="https://xp.network/api/">XPNET-JS API</FooterLink>
+            <FooterLink href="https://xp.network/api/">XPJS API</FooterLink>
           </div>
           <div className="flex flex-col gap-3">
             <h1 className="font-poppins font-medium text-white">Resources</h1>
