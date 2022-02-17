@@ -7,7 +7,7 @@ export const Footer = () => {
     <footer className="mt-32 bg-zinc-800 py-8">
       <Container className="text-white text-sm">
         <div className="flex flex-col md:flex-row gap-y-10 justify-between">
-          <div className="font-poppins flex flex-col gap-3">
+          <div className="flex flex-col gap-3">
             <FooterLink href="/">
               <img src={logo2} className="mb-4" alt="logo" />
             </FooterLink>
@@ -19,14 +19,14 @@ export const Footer = () => {
             </FooterLink>
           </div>
           <div className="flex flex-col gap-3">
-            <h1 className="font-medium text-white">Products</h1>
+            <h1 className="font-poppins font-medium text-white">Products</h1>
             <FooterLink href="https://bridge.xp.network/">
               Cross-Chain NFT Bridge
             </FooterLink>
             <FooterLink href="https://xp.network/api/">XPNET-JS API</FooterLink>
           </div>
           <div className="flex flex-col gap-3">
-            <h1 className="font-medium text-white">Resources</h1>
+            <h1 className="font-poppins font-medium text-white">Resources</h1>
             <FooterLink href="https://xp.network/whitepaper/">
               Whitepaper
             </FooterLink>
@@ -39,7 +39,7 @@ export const Footer = () => {
             </FooterLink>
           </div>
           <div className="flex flex-col gap-3">
-            <h1 className="font-medium text-white">XP.NETWORK</h1>
+            <h1 className="font-poppins font-medium text-white">XP.NETWORK</h1>
             <FooterLink href="https://xp.network/team/">Team</FooterLink>
             <FooterLink href="https://blog.xp.network/">Blog</FooterLink>
             <FooterLink href="https://drive.google.com/drive/folders/1i8evWmyH_8APiDDO89depEw_8JnDSACK">
@@ -47,7 +47,7 @@ export const Footer = () => {
             </FooterLink>
           </div>
           <div className="flex flex-col gap-3">
-            <h1 className="font-medium text-white">Community</h1>
+            <h1 className="font-poppins font-medium text-white">Community</h1>
             <FooterLink href="https://twitter.com/xpnetwork_">
               Twitter
             </FooterLink>
@@ -95,7 +95,7 @@ const FooterLink: FC<{ disabled?: boolean; href: string }> = ({
     <a
       target="_blank"
       href={href}
-      className={`text-white text-opacity-70 hover:text-opacity-100 ${
+      className={`font-poppins text-white text-opacity-70 hover:text-opacity-100 ${
         disabled && "pointer-events-none text-opacity-25"
       }`}
     >
