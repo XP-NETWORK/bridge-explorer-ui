@@ -11,10 +11,10 @@ export const Footer = () => {
             <FooterLink href="/">
               <img src={logo2} className="mb-4" alt="logo" />
             </FooterLink>
-            <FooterLink href="tel:+1 (650) 924-9214">
+            <FooterLink openInNewTab={false} href="tel:+1 (650) 924-9214">
               +1 (650) 924-9214
             </FooterLink>
-            <FooterLink href="mailto:contact@xp.network">
+            <FooterLink openInNewTab={false} href="mailto:contact@xp.network">
               contact@xp.network
             </FooterLink>
           </div>
@@ -86,14 +86,14 @@ export const Footer = () => {
   );
 };
 
-const FooterLink: FC<{ disabled?: boolean; href: string }> = ({
-  children,
-  disabled = false,
-  href,
-}) => {
+const FooterLink: FC<{
+  disabled?: boolean;
+  href: string;
+  openInNewTab?: boolean;
+}> = ({ children, disabled = false, openInNewTab = true, href }) => {
   return (
     <a
-      target="_blank"
+      target={openInNewTab ? "_blank" : "_self"}
       href={href}
       className={`font-poppins text-white text-opacity-70 hover:text-opacity-100 ${
         disabled && "pointer-events-none text-opacity-25"
