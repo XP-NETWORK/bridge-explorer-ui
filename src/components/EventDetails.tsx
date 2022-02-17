@@ -44,19 +44,13 @@ export const EventDetails = () => {
             alt="nft preview"
           />
           <div className="flex flex-col w-full md:p-5 gap-4">
-            <div className="grid grid-cols-6 gap-4 md:gap-0">
-              <div className="col-span-2 md:col-span-1 font-medium">
-                NFT Name:
-              </div>
-              <p className="col-span-4 md:col-span-5">
-                {metadata?.name || "N/A"}
-              </p>
+            <div className="grid grid-cols-12 gap-4 md:gap-0">
+              <div className="col-span-3 font-medium">NFT Name:</div>
+              <p className="col-span-9">{metadata?.name || "N/A"}</p>
             </div>
-            <div className="grid grid-cols-6 gap-4 md:gap-0">
-              <div className="col-span-2 md:col-span-1 font-medium">ID:</div>
-              <div className="col-span-4 md:col-span-5">
-                {metadata?.id || "N/A"}
-              </div>
+            <div className="grid grid-cols-12 gap-4 md:gap-0">
+              <div className="col-span-3 font-medium">ID:</div>
+              <div className="col-span-9">{metadata?.id || "N/A"}</div>
             </div>
           </div>
         </div>
