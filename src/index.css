@@ -11,3 +11,41 @@
 body {
   @apply bg-[#F7F7F9];
 }
+
+.wave {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  width: 6px;
+  height: 6px;
+  margin-right: 10px;
+  position: relative;
+  z-index: 1;
+  background: #18bd1e;
+  border-radius: 50%;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.wave:after {
+  z-index: -1;
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: #18bd1e;
+  border-radius: 50%;
+  @apply animate-ping;
+  animation-duration: 4s;
+}
+
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
