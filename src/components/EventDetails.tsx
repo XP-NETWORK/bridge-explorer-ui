@@ -61,8 +61,8 @@ export const EventDetails = () => {
         </div>
 
         <div className="overflow-x-auto mt-5">
-          <table className="min-w-full divide-y divide-gray-200">
-            <tbody className="bg-white divide-y divide-gray-200">
+          <table className="min-w-full border-b">
+            <tbody className="bg-white divide-y">
               <tr>
                 <TableData className="font-medium">Source Hash:</TableData>
                 <TableData className="text-[#235EF5]">
@@ -104,8 +104,9 @@ export const EventDetails = () => {
                 </TableData>
               </tr>
               <tr>
-                <TableData className="font-medium">Status:</TableData>
+                <TableData className="font-medium pt-10">Status:</TableData>
                 <TableData>
+                  <div className="pt-7"></div>
                   <Status status={event?.status} />
                 </TableData>
               </tr>
@@ -120,7 +121,7 @@ export const EventDetails = () => {
 const TableData: FC<{ className?: string }> = ({ children, className }) => (
   <td
     className={
-      "px-3 py-4 whitespace-nowrap overflow-hidden text-sm " + className
+      "px-3 py-4 whitespace-nowrap overflow-hidden text-sm" + className
     }
   >
     {children}
