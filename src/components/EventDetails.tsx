@@ -34,7 +34,7 @@ export const EventDetails = () => {
     <Container className="p-0">
       <div className="mt-10 bg-white rounded-2xl md:p-8 p-4 shadow-[0_0px_10px_0px_rgba(0,0,0,0.2)] text-sm">
         <div className="text-[#222222] sm:border p-1 sm:p-5 md:p-6 rounded-xl">
-          <h1 className="text-xl font-medium">Send Item {metadata?.name}</h1>
+          <h1 className="text-base font-medium">Send Item {metadata?.name}</h1>
           <hr className="mb-5 mt-3" />
           <div className="flex flex-col sm:flex-row gap-4">
             <img
