@@ -121,7 +121,7 @@ export const EventDetails = () => {
 const TableData: FC<{ className?: string }> = ({ children, className }) => (
   <td
     className={
-      "px-3 py-4 whitespace-nowrap overflow-hidden text-sm" + className
+      "px-3 py-4 whitespace-nowrap overflow-hidden text-sm " + className
     }
   >
     {children}
