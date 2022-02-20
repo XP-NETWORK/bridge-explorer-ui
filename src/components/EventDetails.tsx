@@ -3,6 +3,8 @@ import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IEvent } from "./ExplorerEvents";
 import { Status } from "./Status";
+import CopyIcon from "../assets/icons/copy.svg";
+import ClipboardJS from "clipboard";
 
 export const EventDetails = () => {
   let params = useParams();
@@ -10,6 +12,8 @@ export const EventDetails = () => {
   const [metadata, setMetadata] = useState<any>();
 
   useEffect(() => {
+    new ClipboardJS(".copy-btn");
+
     console.log(params.fromHash);
     fetch(`https://dev-explorer-api.herokuapp.com/?fromHash=${params.fromHash}`)
       .then((res) => res.json())
@@ -65,14 +69,26 @@ export const EventDetails = () => {
             <tbody className="bg-white divide-y">
               <tr>
                 <TableData className="font-medium">Source Hash:</TableData>
-                <TableData className="text-[#235EF5]">
-                  {event?.fromHash || "N/A"}
+                <TableData className="flex space-x-1 text-[#235EF5]">
+                  <button
+                    className="copy-btn"
+                    data-clipboard-text={event?.fromHash}
+                  >
+                    <img src={CopyIcon} alt="copy button" />
+                  </button>
+                  <span>{event?.fromHash || "N/A"}</span>
                 </TableData>
               </tr>
               <tr>
                 <TableData className="font-medium">Destination Hash:</TableData>
-                <TableData className="text-[#235EF5]">
-                  {event?.toHash || "N/A"}
+                <TableData className="flex space-x-1 text-[#235EF5]">
+                  <button
+                    className="copy-btn"
+                    data-clipboard-text={event?.toHash}
+                  >
+                    <img src={CopyIcon} alt="copy button" />
+                  </button>
+                  <span>{event?.toHash || "N/A"}</span>
                 </TableData>
               </tr>
               <tr>
@@ -87,14 +103,26 @@ export const EventDetails = () => {
               </tr>
               <tr>
                 <TableData className="font-medium">From:</TableData>
-                <TableData className="text-[#235EF5]">
-                  {event?.senderAddress || "N/A"}
+                <TableData className="flex space-x-1 text-[#235EF5]">
+                  <button
+                    className="copy-btn"
+                    data-clipboard-text={event?.senderAddress}
+                  >
+                    <img src={CopyIcon} alt="copy button" />
+                  </button>
+                  <span>{event?.senderAddress || "N/A"}</span>
                 </TableData>
               </tr>
               <tr>
                 <TableData className="font-medium">To:</TableData>
-                <TableData className="text-[#235EF5]">
-                  {event?.targetAddress || "N/A"}
+                <TableData className="flex space-x-1 text-[#235EF5]">
+                  <button
+                    className="copy-btn"
+                    data-clipboard-text={event?.targetAddress}
+                  >
+                    <img src={CopyIcon} alt="copy button" />
+                  </button>
+                  <span>{event?.targetAddress || "N/A"}</span>
                 </TableData>
               </tr>
               <tr>
