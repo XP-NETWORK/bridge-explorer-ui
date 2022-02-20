@@ -23,7 +23,12 @@ export const Navbar = () => {
           className="flex sm:flex flex-col justify-between sm:flex-row gap-x-4"
         >
           <NavItem to="/">Explorer</NavItem>
-          <NavItem to="/bridge">Bridge</NavItem>
+          <a
+            className="sm:flex text-[#030303] items-end font-normal tracking-wide hover:tracking-[0.0175em] text-center hover:font-medium text-[15px] pb-2.5 max-w-fit sm:border-t-2 border-transparent"
+            href="https://bridge.xp.network/"
+          >
+            Bridge
+          </a>
           <NavItem to="/network">Network</NavItem>
           <NavItem to="/dashboard">Dashboard</NavItem>
         </div>
