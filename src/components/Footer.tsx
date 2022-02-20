@@ -18,7 +18,7 @@ export const Footer = () => {
       <Container className="text-white text-sm">
         <div className="flex flex-col md:flex-row gap-y-10 justify-between">
           <div className="flex flex-col gap-2">
-            <FooterLink href="/">
+            <FooterLink href="https://xp.network">
               <img src={logo2} className="mb-4" alt="logo" />
             </FooterLink>
             <FooterLink openInNewTab={false} href="tel:+1 (650) 924-9214">
