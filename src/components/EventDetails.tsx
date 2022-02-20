@@ -5,6 +5,7 @@ import { IEvent } from "./ExplorerEvents";
 import { Status } from "./Status";
 import CopyIcon from "../assets/icons/copy.svg";
 import ClipboardJS from "clipboard";
+import moment from "moment";
 
 export const EventDetails = () => {
   let params = useParams();
@@ -128,7 +129,7 @@ export const EventDetails = () => {
               <tr>
                 <TableData className="font-medium">Date:</TableData>
                 <TableData>
-                  {new Date(event?.createdAt!).toLocaleString() ?? "N/A"}
+                  {moment(event?.createdAt).format("YYYY/MM/DD H:mm") ?? "N/A"}
                 </TableData>
               </tr>
               <tr>
