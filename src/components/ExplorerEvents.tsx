@@ -11,6 +11,8 @@ export interface IEvent {
   type: "Transfer" | "Unfreeze";
   fromChain?: string;
   toChain: string;
+  fromChainName?: string;
+  toChainName?: string;
   actionId: string;
   txFees: string;
   tokenId?: string;
@@ -71,7 +73,7 @@ export const ExplorerEvents = () => {
                 </TableData>
                 <TableData>{event.type || "N/A"}</TableData>
                 <TableData>
-                  <div>{event.fromChain || "N/A"} </div>{" "}
+                  <div>{event.fromChainName || "N/A"} </div>{" "}
                   <Link
                     className="text-[#235EF5]"
                     key={event.id}
@@ -82,7 +84,7 @@ export const ExplorerEvents = () => {
                   </Link>
                 </TableData>
                 <TableData>
-                  <div>{event.toChain || "N/A"}</div>
+                  <div>{event.toChainName || "N/A"}</div>
                   <Link
                     className="text-[#235EF5]"
                     key={event.id}
