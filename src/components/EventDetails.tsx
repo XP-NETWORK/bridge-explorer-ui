@@ -43,116 +43,128 @@ export const EventDetails = () => {
           <hr className="mb-5 mt-3" />
           <div className="flex flex-col sm:flex-row gap-4">
             <img
-              className="rounded-lg"
+              className="rounded-lg sm:w-32 sm:h-32"
               src={
                 metadata?.image ||
                 "https://via.placeholder.com/100?text=No+Image"
               }
-              width="128"
-              height="128"
               alt="nft preview"
             />
-            <div className="flex flex-col w-full md:p-5 gap-4">
-              <div className="grid grid-cols-12 gap-4 md:gap-0">
-                <div className="col-span-3 font-medium">NFT Name:</div>
-                <p className="col-span-9">{metadata?.name || "N/A"}</p>
+            <div className="flex flex-col gap-3 md:p-5 w-full">
+              <div className="flex w-full">
+                <div className="font-medium w-32">NFT Name:</div>
+                <p
+                  className="break-words w-[calc(100%-8rem)] md:w-fit"
+                  // style={{ width: "calc(100% - 8rem)" }}
+                >
+                  {metadata?.name || "N/A"}
+                </p>
               </div>
-              <div className="grid grid-cols-12 gap-4 md:gap-0">
-                <div className="col-span-3 font-medium">ID:</div>
-                <div className="col-span-9">{metadata?.id || "N/A"}</div>
+              <div className="flex w-full">
+                <div className="font-medium w-32">ID:</div>
+                <p
+                  className="break-words w-[calc(100%-8rem)] md:w-fit"
+                  // style={{ width: "calc(100% - 8rem)" }}
+                >
+                  {metadata?.id || "N/A"}
+                </p>
+              </div>
+              <div className="flex items-start justify-start">
+                <div className="font-medium w-32">Transaction Hash:</div>
+                <p className="break-words shrink w-[calc(100%-8rem)] md:w-fit">
+                  <span className="text-[#235EF5]">
+                    {event?.fromHash || "N/A"}
+                  </span>
+                </p>
+                <button
+                  className="copy-btn"
+                  data-clipboard-text={event?.toHash}
+                >
+                  <img src={CopyIcon} alt="copy button" />
+                </button>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="overflow-x-auto mt-5">
-          <table className="min-w-full border-b">
-            <tbody className="bg-white divide-y">
-              <tr>
-                <TableData className="font-medium">Source Hash:</TableData>
-                <TableData className="flex space-x-1 text-[#235EF5]">
-                  <button
-                    className="copy-btn"
-                    data-clipboard-text={event?.fromHash}
-                  >
-                    <img src={CopyIcon} alt="copy button" />
-                  </button>
-                  <span>{event?.fromHash || "N/A"}</span>
-                </TableData>
-              </tr>
-              <tr>
-                <TableData className="font-medium">Destination Hash:</TableData>
-                <TableData className="flex space-x-1 text-[#235EF5]">
-                  <button
-                    className="copy-btn"
-                    data-clipboard-text={event?.toHash}
-                  >
-                    <img src={CopyIcon} alt="copy button" />
-                  </button>
-                  <span>{event?.toHash || "N/A"}</span>
-                </TableData>
-              </tr>
-              <tr>
-                <TableData className="font-medium">Source Chain:</TableData>
-                <TableData>{event?.fromChain || "N/A"}</TableData>
-              </tr>
-              <tr>
-                <TableData className="font-medium">
-                  Destination Chain:
-                </TableData>
-                <TableData>{event?.toChain || "N/A"}</TableData>
-              </tr>
-              <tr>
-                <TableData className="font-medium">From:</TableData>
-                <TableData className="flex space-x-1 text-[#235EF5]">
-                  <button
-                    className="copy-btn"
-                    data-clipboard-text={event?.senderAddress}
-                  >
-                    <img src={CopyIcon} alt="copy button" />
-                  </button>
-                  <span>{event?.senderAddress || "N/A"}</span>
-                </TableData>
-              </tr>
-              <tr>
-                <TableData className="font-medium">To:</TableData>
-                <TableData className="flex space-x-1 text-[#235EF5]">
-                  <button
-                    className="copy-btn"
-                    data-clipboard-text={event?.targetAddress}
-                  >
-                    <img src={CopyIcon} alt="copy button" />
-                  </button>
-                  <span>{event?.targetAddress || "N/A"}</span>
-                </TableData>
-              </tr>
-              <tr>
-                <TableData className="font-medium">Date:</TableData>
-                <TableData>
-                  {moment(event?.createdAt).format("YYYY/MM/DD H:mm") ?? "N/A"}
-                </TableData>
-              </tr>
-              <tr>
-                <TableData className="font-medium pt-10">Status:</TableData>
-                <TableData>
-                  <div className="pt-7"></div>
-                  <Status status={event?.status} />
-                </TableData>
-              </tr>
-            </tbody>
-          </table>
+        <div className="flex flex-col w-full">
+          <div className="flex items-start justify-start gap-2 border-b py-4">
+            <div className="font-medium w-32">Source Hash:</div>
+            <p
+              // style={{ width: "calc(100% - 6rem)" }}
+              className="md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit"
+            >
+              <span className="text-[#235EF5]">{event?.fromHash || "N/A"}</span>
+            </p>
+            <button className="copy-btn" data-clipboard-text={event?.fromHash}>
+              <img src={CopyIcon} alt="copy button" />
+            </button>
+          </div>
+          <div className="flex items-start justify-start gap-2 border-b py-4">
+            <div className="font-medium w-32">Dest Hash:</div>
+            <p className="md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit">
+              <span className="text-[#235EF5]">{event?.toHash || "N/A"}</span>
+            </p>
+            <button className="copy-btn" data-clipboard-text={event?.toHash}>
+              <img src={CopyIcon} alt="copy button" />
+            </button>
+          </div>
+          <div className="flex items-start justify-start gap-2 border-b py-4">
+            <div className="font-medium w-32">Source Chain:</div>
+            <p className="md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit">
+              <span>{event?.fromChainName || "N/A"}</span>
+            </p>
+          </div>
+          <div className="flex items-start justify-start gap-2 border-b py-4">
+            <div className="font-medium w-32">Dest Chain:</div>
+            <p className="md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit">
+              <span>{event?.toChainName || "N/A"}</span>
+            </p>
+          </div>
+          <div className="flex items-start justify-start gap-2 border-b py-4">
+            <div className="font-medium w-32">From:</div>
+            <p className="md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit">
+              <span className="text-[#235EF5]">
+                {event?.senderAddress || "N/A"}
+              </span>
+            </p>
+            <button
+              className="copy-btn"
+              data-clipboard-text={event?.senderAddress}
+            >
+              <img src={CopyIcon} alt="copy button" />
+            </button>
+          </div>
+          <div className="flex items-start justify-start gap-2 border-b py-4">
+            <div className="font-medium w-32">To:</div>
+            <p className="md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit">
+              <span className="text-[#235EF5]">
+                {event?.targetAddress || "N/A"}
+              </span>
+            </p>
+            <button
+              className="copy-btn"
+              data-clipboard-text={event?.targetAddress}
+            >
+              <img src={CopyIcon} alt="copy button" />
+            </button>
+          </div>
+          <div className="flex items-start justify-start gap-2 border-b py-4">
+            <div className="font-medium w-32">Date:</div>
+            <p className="md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit">
+              <span>
+                {moment(event?.createdAt).format("YYYY/MM/DD H:mm") ?? "N/A"}
+              </span>
+            </p>
+          </div>
+          <div className="flex items-start justify-start gap-2 border-b py-4 md:mt-10">
+            <div className="font-medium w-32">Status:</div>
+            <p className="md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit">
+              <Status status={event?.status} />
+            </p>
+          </div>
         </div>
       </div>
     </Container>
   );
 };
-
-const TableData: FC<{ className?: string }> = ({ children, className }) => (
-  <td
-    className={
-      "px-3 py-4 whitespace-nowrap overflow-hidden text-sm " + className
-    }
-  >
-    {children}
-  </td>
-);
