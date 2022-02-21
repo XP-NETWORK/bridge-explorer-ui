@@ -26,6 +26,7 @@ export const Navbar = () => {
           <a
             className="sm:flex text-[#030303] items-end font-normal tracking-wide hover:tracking-[0.0175em] text-center hover:font-medium text-[15px] pb-2.5 max-w-fit sm:border-t-2 border-transparent"
             href="https://bridge.xp.network/"
+            target="_blank"
           >
             Bridge
           </a>
