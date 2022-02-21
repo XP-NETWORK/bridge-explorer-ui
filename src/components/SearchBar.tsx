@@ -6,10 +6,10 @@ import { EventsContext } from "../context/Events";
 export const SearchBar = () => {
   const [value, setValue] = useState("");
   // @ts-ignore
-  const { setFromHash } = useContext(EventsContext);
+  const { setChainName } = useContext(EventsContext);
 
   useEffect(() => {
-    setFromHash(value);
+    setChainName(value);
   }, [value]);
 
   return (

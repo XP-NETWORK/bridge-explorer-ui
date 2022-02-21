@@ -10,18 +10,18 @@ import { IEvent } from "../components/ExplorerEvents";
 
 interface IEventsContext {
   events: IEvent[];
-  setFromHash: (fromHash: string) => void;
+  setChainName: (chainName: string) => void;
 }
 
 export const EventsContext = createContext<IEventsContext | null>(null);
 
 export const EventsProvider: FC = ({ children }) => {
   const [events, setEvents] = useState<IEvent[]>([]);
-  const [fromHash, setFromHash] = useState("");
+  const [chainName, setChainName] = useState("");
 
   useEffect(() => {
-    if (fromHash.length) {
-      fetch("https://dev-explorer-api.herokuapp.com/?fromHash=" + fromHash)
+    if (chainName.length) {
+      fetch("https://dev-explorer-api.herokuapp.com/?chainName=" + chainName)
         .then((res) => res.json())
         .then(async (data: IEvent[]) => {
           console.log(data);
@@ -45,10 +45,10 @@ export const EventsProvider: FC = ({ children }) => {
           setEvents(await Promise.all(newEvents));
         });
     }
-  }, [fromHash]);
+  }, [chainName]);
 
   return (
-    <EventsContext.Provider value={{ events, setFromHash }}>
+    <EventsContext.Provider value={{ events, setChainName }}>
       {children}
     </EventsContext.Provider>
   );
