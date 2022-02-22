@@ -5,10 +5,14 @@ import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
 import { SearchBar } from "../components/SearchBar";
 import { EventsProvider } from "../context/Events";
-import { BreadCrumbs } from "../components/elements/BreadCrumbs";
+import {
+  BreadCrumbs,
+  TabsNavigator,
+  tabs,
+} from "../components/elements/BreadCrumbs";
 
 export const Explorer = () => {
-  const [tab, setTab] = useState("View Tx");
+  const [tab, setTab] = useState(tabs[0]);
   return (
     <div>
       <Navbar />
@@ -17,10 +21,10 @@ export const Explorer = () => {
         <SearchBar />
         <BreadCrumbs
           onChange={(value: string) => setTab(value)}
-          tabs={["View Tx", "Pending Txns", "Tools"]}
+          tabs={tabs}
           selecedTab={tab}
         />
-        {tab === "View Tx" && <ExplorerEvents />}
+        <TabsNavigator tab={tab} />
       </EventsProvider>
       <Footer />
     </div>

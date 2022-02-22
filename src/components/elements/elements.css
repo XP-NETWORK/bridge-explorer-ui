@@ -18,3 +18,58 @@
   color: black;
   background-color: #fff;
 }
+
+.chartWrapper {
+  background: #fff;
+  box-shadow: 0px 1px 15px rgba(47, 48, 50, 0.08);
+  border-radius: 6px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 25px;
+}
+
+.chartVisual {
+  flex: 1;
+}
+
+.chartVisual h3 {
+}
+
+.chartRates {
+  /*display: flex;
+  flex-direction: column;
+  justify-content: space-between;*/
+}
+
+.periodButtons {
+  margin-bottom: 30px;
+}
+
+.periodButtons span {
+  display: inline-block;
+  border: 1px solid var(--grey-borders);
+  border-radius: 2px 0px 0px 2px;
+  padding: 5px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.periodButtons span:hover {
+  border: 1px solid var(--accent-blue);
+  color: var(--accent-blue);
+  opacity: 0.6;
+}
+
+.periodButtons span.selectedButton {
+  border: 1px solid var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+ul.chartInfoList li {
+  background: var(--neutral-background);
+  padding: 20px 15px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
