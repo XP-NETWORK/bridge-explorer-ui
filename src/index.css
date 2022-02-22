@@ -42,6 +42,32 @@ body {
   animation-duration: 4s;
 }
 
+.copyTip {
+  border-radius: 6px !important;
+  background: #1d1c1c !important;
+  padding: 5px 6px !important;
+}
+
+.copy-btn:hover img {
+  filter: brightness(15%);
+}
+
+.copyTip.copied {
+  padding-left: 20px !important;
+}
+
+.copyTip.copied::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 12px !important;
+  top: 40% !important;
+  transform: translateY(-50%) !important;
+  width: 18px !important;
+  height: 18px !important;
+  background: url("./assets/icons/check.svg") center no-repeat !important;
+  background-size: cover !important;
+}
+
 @keyframes ping {
   75%,
   100% {

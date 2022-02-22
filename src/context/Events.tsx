@@ -19,12 +19,13 @@ export const EventsProvider: FC = ({ children }) => {
   const [events, setEvents] = useState<IEvent[]>([]);
   const [chainName, setChainName] = useState("");
 
+  console.log(events, "events2");
+
   useEffect(() => {
     if (chainName.length) {
       fetch("https://dev-explorer-api.herokuapp.com/?chainName=" + chainName)
         .then((res) => res.json())
         .then(async (data: IEvent[]) => {
-          console.log(data);
           const newEvents = data.map(async (data) => {
             const res = await fetch(data.nftUri);
             const metadata = await res.json();
@@ -36,12 +37,18 @@ export const EventsProvider: FC = ({ children }) => {
       fetch("https://dev-explorer-api.herokuapp.com/")
         .then((res) => res.json())
         .then(async (data: IEvent[]) => {
-          console.log(data);
           const newEvents = data.map(async (data) => {
-            const res = await fetch(data.nftUri);
-            const metadata = await res.json();
-            return { imgUri: metadata.image as string, ...data };
+            try {
+              console.log(data.nftUri);
+              const res = await fetch(data.nftUri);
+              const metadata = await res.json();
+              return { imgUri: metadata.image as string, ...data };
+            } catch (e: any) {
+              console.log(e);
+              return { imgUri: "", ...data };
+            }
           });
+
           setEvents(await Promise.all(newEvents));
         });
     }

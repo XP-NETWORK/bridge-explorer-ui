@@ -1,16 +1,20 @@
 import { Container } from "./Container";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { IEvent } from "./ExplorerEvents";
 import { Status } from "./Status";
 import CopyIcon from "../assets/icons/copy.svg";
+import Check from "../assets/icons/check.svg";
 import ClipboardJS from "clipboard";
 import moment from "moment";
+
+import ReactTooltip from "react-tooltip";
 
 export const EventDetails = () => {
   let params = useParams();
   const [event, setEvent] = useState<IEvent>();
   const [metadata, setMetadata] = useState<any>();
+  const [tooltipCopy, setTooltipCopy] = useState<number | null>(null);
 
   useEffect(() => {
     new ClipboardJS(".copy-btn");
@@ -34,6 +38,20 @@ export const EventDetails = () => {
         console.log(metadata);
       });
   }, [event]);
+
+  let tooltips: any = useRef([]);
+
+  useEffect(() => {
+    if (tooltipCopy) {
+      console.log(tooltipCopy);
+      ReactTooltip.rebuild();
+      ReactTooltip.show(tooltips.current[tooltipCopy]);
+      setTimeout(() => setTooltipCopy(null), 500);
+    } else {
+      ReactTooltip.rebuild();
+      ReactTooltip.hide();
+    }
+  }, [tooltipCopy]);
 
   return (
     <Container className="p-0">
@@ -76,9 +94,18 @@ export const EventDetails = () => {
                     {event?.fromHash || "N/A"}
                   </span>
                 </p>
+                <ReactTooltip
+                  effect="solid"
+                  className={`${tooltipCopy ? "copyTip copied" : "copyTip"}`}
+                />
                 <button
-                  className="copy-btn"
+                  className={`copy-btn`}
+                  data-tip={tooltipCopy ? `Сopied to clipboard` : "Copy"}
                   data-clipboard-text={event?.toHash}
+                  ref={(node) => (tooltips.current[1] = node)}
+                  onClick={() => {
+                    setTooltipCopy(1);
+                  }}
                 >
                   <img src={CopyIcon} alt="copy button" />
                 </button>
@@ -96,7 +123,15 @@ export const EventDetails = () => {
             >
               <span className="text-[#235EF5]">{event?.fromHash || "N/A"}</span>
             </p>
-            <button className="copy-btn" data-clipboard-text={event?.fromHash}>
+            <button
+              className="copy-btn"
+              data-clipboard-text={event?.fromHash}
+              data-tip={tooltipCopy ? `Сopied to clipboard` : "Copy"}
+              ref={(node) => (tooltips.current[2] = node)}
+              onClick={() => {
+                setTooltipCopy(2);
+              }}
+            >
               <img src={CopyIcon} alt="copy button" />
             </button>
           </div>
@@ -105,7 +140,15 @@ export const EventDetails = () => {
             <p className="md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit">
               <span className="text-[#235EF5]">{event?.toHash || "N/A"}</span>
             </p>
-            <button className="copy-btn" data-clipboard-text={event?.toHash}>
+            <button
+              className="copy-btn"
+              data-clipboard-text={event?.toHash}
+              data-tip={tooltipCopy ? `Сopied to clipboard` : "Copy"}
+              ref={(node) => (tooltips.current[3] = node)}
+              onClick={() => {
+                setTooltipCopy(3);
+              }}
+            >
               <img src={CopyIcon} alt="copy button" />
             </button>
           </div>
@@ -131,6 +174,11 @@ export const EventDetails = () => {
             <button
               className="copy-btn"
               data-clipboard-text={event?.senderAddress}
+              data-tip={tooltipCopy ? `Сopied to clipboard` : "Copy"}
+              ref={(node) => (tooltips.current[4] = node)}
+              onClick={() => {
+                setTooltipCopy(4);
+              }}
             >
               <img src={CopyIcon} alt="copy button" />
             </button>
@@ -145,6 +193,11 @@ export const EventDetails = () => {
             <button
               className="copy-btn"
               data-clipboard-text={event?.targetAddress}
+              data-tip={tooltipCopy ? `Сopied to clipboard` : "Copy"}
+              ref={(node) => (tooltips.current[5] = node)}
+              onClick={() => {
+                setTooltipCopy(5);
+              }}
             >
               <img src={CopyIcon} alt="copy button" />
             </button>
