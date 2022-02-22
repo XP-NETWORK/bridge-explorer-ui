@@ -1,0 +1,20 @@
+.breadCrumbs {
+  display: flex;
+  border-bottom: 1px solid #caccd2;
+}
+
+.breadCrumbTab {
+  margin-right: 5px;
+  box-shadow: inset -1px 0px 0px #caccd2, inset 0px 1px 0px #caccd2,
+    inset 1px 0px 0px #caccd2;
+  border-radius: 4px 4px 0px 0px;
+  padding: 9px 16px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.breadCrumbTab.selectedTab {
+  opacity: 1;
+  color: black;
+  background-color: #fff;
+}

@@ -68,6 +68,43 @@ body {
   background-size: cover !important;
 }
 
+.clearWrapper {
+  margin-right: 20px;
+  position: relative;
+  display: flex;
+}
+
+.clearWrapper img {
+  margin: auto 0;
+}
+
+.clearWrapper::after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  height: 100%;
+  width: 1px;
+  background: rgb(240, 239, 237);
+  right: -12px;
+  top: 0;
+}
+
+.searchIcon {
+  cursor: pointer;
+}
+
+.searchIcon:hover {
+  filter: brightness(86%);
+}
+
+.infoTextWrap {
+  margin-left: 35px;
+}
+
+.infoTextContainer {
+  padding-right: 0 !important;
+}
+
 @keyframes ping {
   75%,
   100% {

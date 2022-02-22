@@ -19,8 +19,6 @@ export const EventsProvider: FC = ({ children }) => {
   const [events, setEvents] = useState<IEvent[]>([]);
   const [chainName, setChainName] = useState("");
 
-  console.log(events, "events2");
-
   useEffect(() => {
     if (chainName.length) {
       fetch("https://dev-explorer-api.herokuapp.com/?chainName=" + chainName)

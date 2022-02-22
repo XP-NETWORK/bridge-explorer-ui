@@ -68,11 +68,11 @@ export const EventDetails = () => {
               }
               alt="nft preview"
             />
-            <div className="flex flex-col gap-3 md:p-5 w-full">
+            <div className="flex flex-col gap-3 md:p-5 w-full infoTextContainer">
               <div className="flex w-full">
                 <div className="font-medium w-32">NFT Name:</div>
                 <p
-                  className="break-words w-[calc(100%-8rem)] md:w-fit"
+                  className="break-words w-[calc(100%-8rem)] md:w-fit infoTextWrap"
                   // style={{ width: "calc(100% - 8rem)" }}
                 >
                   {metadata?.name || "N/A"}
@@ -81,7 +81,7 @@ export const EventDetails = () => {
               <div className="flex w-full">
                 <div className="font-medium w-32">ID:</div>
                 <p
-                  className="break-words w-[calc(100%-8rem)] md:w-fit"
+                  className="break-words w-[calc(100%-8rem)] md:w-fit infoTextWrap"
                   // style={{ width: "calc(100% - 8rem)" }}
                 >
                   {metadata?.id || "N/A"}
@@ -89,7 +89,7 @@ export const EventDetails = () => {
               </div>
               <div className="flex items-start justify-start">
                 <div className="font-medium w-32">Transaction Hash:</div>
-                <p className="break-words shrink w-[calc(100%-8rem)] md:w-fit">
+                <p className="break-words shrink w-[calc(100%-8rem)] md:w-fit infoTextWrap">
                   <span className="text-[#235EF5]">
                     {event?.fromHash || "N/A"}
                   </span>
