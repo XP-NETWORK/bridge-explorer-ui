@@ -8,16 +8,35 @@ import {
 } from "react";
 import { IEvent } from "../components/ExplorerEvents";
 
-const url = "http://localhost:3100/"; //'https://dev-explorer-api.herokuapp.com/'
+import { withSocket } from "./ServcieProvder";
+
+const url = "https://dev-explorer-api.herokuapp.com/"; //"http://localhost:3100/"; //'https://dev-explorer-api.herokuapp.com/'
 interface IEventsContext {
   events: IEvent[];
   setChainName: (chainName: string) => void;
 }
 
 export const EventsContext = createContext<IEventsContext | null>(null);
-export const EventsProvider: FC = ({ children }) => {
+export const EventsProvider: FC = withSocket(({ children, socket }) => {
   const [events, setEvents] = useState<IEvent[]>([]);
   const [chainName, setChainName] = useState("");
+
+  useEffect(() => {
+    socket.on("incomingEvent", async (event: any) => {
+      console.log(event);
+      try {
+        console.log(event.nftUri);
+        const res = await fetch(event.nftUri);
+        const metadata = await res.json();
+        const incoming = { imgUri: metadata.image as string, ...event };
+        setEvents([incoming, ...events]);
+      } catch (e: any) {
+        console.log(e);
+        const incoming = { imgUri: "", ...event };
+        setEvents([incoming, ...events]);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     //socket.emit("test");
@@ -54,9 +73,10 @@ export const EventsProvider: FC = ({ children }) => {
         });
     }
   }, [chainName]);
+
   return (
     <EventsContext.Provider value={{ events, setChainName }}>
       {children}
     </EventsContext.Provider>
   );
-};
+});

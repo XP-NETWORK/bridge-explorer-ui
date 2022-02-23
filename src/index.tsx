@@ -4,18 +4,19 @@ import { App } from "./App";
 import "./index.css";
 import "./components/elements/elements.css";
 import { BrowserRouter } from "react-router-dom";
+import { ServiceProvider } from "../src/context/ServcieProvder";
 import io from "socket.io-client";
 
-console.log("d");
-const socket = io("ws://localhost:3100", { path: "/socket.io" });
-socket.on("msg", (data) => {
-  console.log(data);
+const socket = io("ws://dev-explorer-api.herokuapp.com", {
+  path: "/socket.io",
 });
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <ServiceProvider value={socket}>
+        <App />
+      </ServiceProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
