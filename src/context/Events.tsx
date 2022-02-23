@@ -10,7 +10,7 @@ import { IEvent } from "../components/ExplorerEvents";
 
 import { withSocket } from "./ServcieProvder";
 
-const url = "https://dev-explorer-api.herokuapp.com/"; //"http://localhost:3100/"; //'https://dev-explorer-api.herokuapp.com/'
+const url = "https://dev-explorer-api.herokuapp.com/"; //"https://dev-explorer-api.herokuapp.com/"; //"http://localhost:3100/";
 interface IEventsContext {
   events: IEvent[];
   setChainName: (chainName: string) => void;
@@ -21,7 +21,11 @@ export const EventsProvider: FC = withSocket(({ children, socket }) => {
   const [events, setEvents] = useState<IEvent[]>([]);
   const [chainName, setChainName] = useState("");
 
+  useEffect(() => {}, []);
+
   useEffect(() => {
+    socket.off("incomingEvent");
+    socket.off("updateEvent");
     socket.on("incomingEvent", async (event: any) => {
       console.log(event);
       try {
@@ -29,17 +33,22 @@ export const EventsProvider: FC = withSocket(({ children, socket }) => {
         const res = await fetch(event.nftUri);
         const metadata = await res.json();
         const incoming = { imgUri: metadata.image as string, ...event };
+        console.log(events, "on event===");
         setEvents([incoming, ...events]);
       } catch (e: any) {
         console.log(e);
         const incoming = { imgUri: "", ...event };
-        setEvents([incoming, ...events]);
+        setEvents([incoming, ...events]); //updateEvent
       }
     });
-  }, []);
+    socket.on("updateEvent", async (updated: any) => {
+      console.log(updated);
+      try {
+        const idx = events.findIndex((event) => event.id === updated.id);
 
-  useEffect(() => {
-    //socket.emit("test");
+        setEvents([...events.slice(0, idx), updated, ...events.slice(idx + 1)]);
+      } catch (e: any) {}
+    });
   }, [events]);
 
   useEffect(() => {
