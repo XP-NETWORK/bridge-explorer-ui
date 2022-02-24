@@ -27,12 +27,11 @@ export const EventsProvider: FC = withSocket(({ children, socket }) => {
     socket.off("incomingEvent");
     socket.off("updateEvent");
     socket.on("incomingEvent", async (event: any) => {
-      console.log(event);
+      console.log(event, 'incoming');
       try {
-        console.log(event.nftUri);
-        const res = await fetch(event.nftUri);
-        const metadata = await res.json();
-        const incoming = { imgUri: metadata.image as string, ...event };
+        //const res = await fetch(event.nftUri);
+        //const metadata = await res.json();
+        const incoming = { imgUri:'', ...event };
         console.log(events, "on event===");
         setEvents([incoming, ...events]);
       } catch (e: any) {
@@ -42,12 +41,18 @@ export const EventsProvider: FC = withSocket(({ children, socket }) => {
       }
     });
     socket.on("updateEvent", async (updated: any) => {
-      console.log(updated);
+      console.log(updated ,'updated');
+      const idx = events.findIndex((event) => event.actionId + event.tokenId + updated.fromHash === updated.actionId + updated.tokenId + event.fromHash);
       try {
-        const idx = events.findIndex((event) => event.id === updated.id);
-
-        setEvents([...events.slice(0, idx), updated, ...events.slice(idx + 1)]);
-      } catch (e: any) {}
+        const res = await fetch(updated.nftUri);
+        const metadata = await res.json();
+        const updatedEvent = {imgUri: metadata.image as string, ...updated}
+        setEvents([...events.slice(0, idx), updatedEvent, ...events.slice(idx + 1)]);
+      } catch (e: any) {
+        console.log(e,'img fetch error');
+        const updatedEvent = { imgUri: "", ...updated };
+        setEvents([...events.slice(0, idx), updatedEvent, ...events.slice(idx + 1)]); //updateEvent
+      }
     });
   }, [events]);
 

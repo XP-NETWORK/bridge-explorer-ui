@@ -11,7 +11,7 @@ import io from "socket.io-client";
   path: "/socket.io",
 });*/
 
-const socket = io("ws://dev-explorer-api.herokuapp.com/", {
+const socket = io("ws://dev-explorer-api.herokuapp.com", {
   path: "/socket.io",
 });
 
