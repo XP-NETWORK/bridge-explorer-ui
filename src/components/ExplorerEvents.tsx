@@ -53,6 +53,7 @@ export const ExplorerEvents = () => {
             events.map((event: IEvent) => (
               <tr key={event.id}>
                 <TableData>
+                  { event?.imgUri ? 
                   <img
                     className="rounded-lg"
                     src={
@@ -63,7 +64,8 @@ export const ExplorerEvents = () => {
                     alt=""
                     width={38}
                     height={38}
-                  />
+                  />:  <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>}
+
                 </TableData>
                 <TableData>
                   <Link

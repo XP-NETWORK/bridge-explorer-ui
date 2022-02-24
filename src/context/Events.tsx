@@ -10,7 +10,7 @@ import { IEvent } from "../components/ExplorerEvents";
 
 import { withSocket } from "./ServcieProvder";
 
-const url = "https://dev-explorer-api.herokuapp.com/"; //"https://dev-explorer-api.herokuapp.com/"; //"http://localhost:3100/";
+const url = "http://localhost:3100/"; //"https://dev-explorer-api.herokuapp.com/"; //"http://localhost:3100/";
 interface IEventsContext {
   events: IEvent[];
   setChainName: (chainName: string) => void;
