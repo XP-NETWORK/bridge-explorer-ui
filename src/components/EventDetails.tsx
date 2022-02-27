@@ -20,7 +20,7 @@ export const EventDetails = () => {
     new ClipboardJS(".copy-btn");
 
     console.log(params.fromHash);
-    fetch(`https://dev-explorer-api.herokuapp.com/?fromHash=${params.fromHash}`)
+    fetch(`https://dev-explorer-api.herokuapp.com/?fromHash=${params.fromHash}`)//https://dev-explorer-api.herokuapp.com
       .then((res) => res.json())
       .then((data) => {
         setEvent(data[0]);
@@ -101,7 +101,7 @@ export const EventDetails = () => {
                 <button
                   className={`copy-btn`}
                   data-tip={tooltipCopy ? `Сopied to clipboard` : "Copy"}
-                  data-clipboard-text={event?.toHash}
+                  data-clipboard-text={event?.fromHash}
                   ref={(node) => (tooltips.current[1] = node)}
                   onClick={() => {
                     setTooltipCopy(1);
