@@ -157,7 +157,10 @@ ul.chartInfoList li {
   transition: all .7s ease;
   color: transparent;
   padding: 10px 0 0 0;
+}
 
+.loadingWrapper span{
+  color: transparent;
 }
 
 .loadedWrapper {
