@@ -159,7 +159,7 @@ const TableHeading: FC = ({ children }) => (
 );
 
 const TableData: FC = ({ children }) => (
-  <td className="px-3 py-4 whitespace-nowrap text-sm text-[#222222]">
+  <td className="px-3 py-4 min-w-[62px] whitespace-nowrap text-sm text-[#222222]">
     {children}
   </td>
 );
