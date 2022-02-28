@@ -21,7 +21,7 @@ export const Navbar = () => {
         </a>
         <div
           ref={menu}
-          className="absolute overflow-hidden sm:static bg-white right-0  top-16 z-40 rounded-xl sm:overflow-visible sm:rounded-0 flex sm:flex flex-col justify-between sm:flex-row gap-x-4"
+          className="absolute overflow-hidden sm:static right-4 shadow-[0_0px_10px_0px_rgba(0,0,0,0.2)] sm:shadow-none bg-white top-16 z-40 rounded-xl sm:overflow-visible sm:rounded-0 flex sm:flex flex-col justify-between sm:flex-row gap-x-4"
         >
           <NavItem to="/">Explorer</NavItem>
           <a
