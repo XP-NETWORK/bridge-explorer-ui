@@ -40,7 +40,9 @@ export const ExplorerEvents = () => {
       <table className="min-w-full divide-y border-b divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
-            <TableHeading>NFT</TableHeading>
+            <TableHeading className="sticky left-0 bg-[#F7F7F9]">
+              NFT
+            </TableHeading>
             <TableHeading>Tx Hash</TableHeading>
             <TableHeading>Tx Type</TableHeading>
             <TableHeading>From</TableHeading>
@@ -49,29 +51,20 @@ export const ExplorerEvents = () => {
             <TableHeading>Status</TableHeading>
           </tr>
         </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
+        <tbody className="bg-white divide-y  divide-gray-200 overflow-x-scroll">
           {events.length ? (
             events.map((event: IEvent) => (
               <tr key={event.id}>
-                <TableData>
-                  {event?.imgUri ? (
-                    <img
-                      className="rounded-lg"
-                      src={event?.imgUri || ImgBroken}
-                      alt=""
-                      width={38}
-                      height={38}
-                    />
-                  ) : (
-                    <div className="lds-ellipsis">
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                    </div>
-                  )}
+                <TableData className="sticky left-0 text-center max-w-[62px] bg-white">
+                  <img
+                    className="rounded-lg"
+                    src={event?.imgUri || ImgBroken}
+                    alt=""
+                    width={38}
+                    height={38}
+                  />
                 </TableData>
-                <TableData>
+                <TableData className="">
                   <Link
                     className="text-[#235EF5]"
                     key={event.id}
@@ -149,17 +142,25 @@ export const ExplorerEvents = () => {
   );
 };
 
-const TableHeading: FC = ({ children }) => (
+const TableHeading: FC<{ className?: string }> = ({ children, className }) => (
   <th
     scope="col"
-    className="px-3 py-3 text-left max-w-xs text-sm font-medium text-[#222222] tracking-wider"
+    className={
+      "px-3 py-3 text-left max-w-xs text-sm font-medium text-[#222222] tracking-wider " +
+      className
+    }
   >
     {children}
   </th>
 );
 
-const TableData: FC = ({ children }) => (
-  <td className="px-3 py-4 min-w-[62px] whitespace-nowrap text-sm text-[#222222]">
+const TableData: FC<{ className?: string }> = ({ children, className }) => (
+  <td
+    className={
+      "px-3 py-4 min-w-[62px] border-0 whitespace-nowrap text-sm text-[#222222] " +
+      className
+    }
+  >
     {children}
   </td>
 );
