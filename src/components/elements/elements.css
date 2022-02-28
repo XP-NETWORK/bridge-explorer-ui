@@ -131,3 +131,55 @@ ul.chartInfoList li {
     transform: translate(24px, 0);
   }
 }
+
+.detailsCard {
+  border-color: #E4E5E7;
+}
+
+.nftImage {
+  width: 100%;
+  height: 100%;
+ display: block;
+  
+}
+
+.nftWrapper {
+  position: relative;
+  width: 128px !important;
+  height: 128px;
+  border-radius: 6px;
+  
+}
+
+.loadingWrapper {
+  background: linear-gradient(312.76deg, #EFEFEF 22.7%, #DADADA 41.09%, #F2F2F2 92.17%);
+  border-radius: 6px;
+  transition: all .7s ease;
+  color: transparent;
+  padding: 10px 0 0 0;
+
+}
+
+.loadedWrapper {
+  background: transparent;
+  color: black;
+  transition: all .5s ease;
+  padding: 10px 0 0 0;
+}
+
+
+.nftWrapper.loadingWrapper, .nftWrapper.loadedWrapper {
+  padding: 0;
+}
+
+.nftWrapper.loadingWrapper::before {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    content: '';
+}
+
+.trxHash {
+  margin-left: 10px;
+}

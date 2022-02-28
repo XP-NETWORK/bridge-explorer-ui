@@ -106,7 +106,12 @@ body {
 }
 
 .infoTextContainer {
-  padding-right: 0 !important;
+  padding: 10px 0 !important;
+  justify-content: space-between;
+}
+
+.infoTextContainer.longCol {
+  margin-left: -10px;
 }
 
 @keyframes ping {
