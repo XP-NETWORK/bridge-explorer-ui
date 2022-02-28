@@ -4,6 +4,7 @@ import { Container } from "./Container";
 import { useContext } from "react";
 import { EventsContext } from "../context/Events";
 import { Status } from "./Status";
+import ImgBroken from "../assets/img-broken.png";
 
 export interface IEvent {
   id: string;
@@ -53,19 +54,22 @@ export const ExplorerEvents = () => {
             events.map((event: IEvent) => (
               <tr key={event.id}>
                 <TableData>
-                  { event?.imgUri ? 
-                  <img
-                    className="rounded-lg"
-                    src={
-                      event?.imgUri ||
-                      event?.nftUri ||
-                      "https://via.placeholder.com/50"
-                    }
-                    alt=""
-                    width={38}
-                    height={38}
-                  />:  <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>}
-
+                  {event?.imgUri ? (
+                    <img
+                      className="rounded-lg"
+                      src={event?.imgUri || ImgBroken}
+                      alt=""
+                      width={38}
+                      height={38}
+                    />
+                  ) : (
+                    <div className="lds-ellipsis">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                  )}
                 </TableData>
                 <TableData>
                   <Link
