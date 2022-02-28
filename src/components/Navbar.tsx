@@ -17,11 +17,11 @@ export const Navbar = () => {
     <nav className="bg-white shadow-md">
       <Container className="relative flex-shrink  flex flex-col sm:flex-row gap-y-4 justify-between px-4 border-red-400">
         <a target="_blank" href="https://xp.network" className="max-w-fit">
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="logo" height={60} width={192} />
         </a>
         <div
           ref={menu}
-          className="absolute overflow-hidden sm:static bg-white right-0  top-16 z-40 rounded-xl flex sm:flex flex-col justify-between sm:flex-row gap-x-4"
+          className="absolute overflow-hidden sm:static bg-white right-0  top-16 z-40 rounded-xl sm:overflow-visible sm:rounded-0 flex sm:flex flex-col justify-between sm:flex-row gap-x-4"
         >
           <NavItem to="/">Explorer</NavItem>
           <a
