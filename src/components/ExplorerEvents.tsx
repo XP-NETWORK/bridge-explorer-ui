@@ -37,7 +37,7 @@ export const ExplorerEvents = () => {
 
   return (
     <Container className="mt-5 px-0 sm:px-4 overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-200">
+      <table className="min-w-full divide-y border-b divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
             <TableHeading>NFT</TableHeading>
