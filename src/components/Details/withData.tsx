@@ -15,7 +15,7 @@ export const withData = function (Wrapped: React.FC<any>) {
       let params = useParams();
     useEffect(() => {
         //setLoading(true);
-        fetch(`http://localhost:3100/?fromHash=${params.fromHash}`)//https://dev-explorer-api.herokuapp.com
+        fetch(`https://dev-explorer-api.herokuapp.com/?fromHash=${params.fromHash}`)//https://dev-explorer-api.herokuapp.com
           .then((res) => res.json())
           .then((data) => {
             setEvent(data[0]);
