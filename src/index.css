@@ -16,6 +16,10 @@ body {
   --neutral-background: #f7f7f9;
 }
 
+.mobileOnly {
+  display: none;
+}
+
 .wave {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;

@@ -1,8 +1,11 @@
 
 import ReactTooltip from "react-tooltip";
-import CopyIcon from "../../assets/icons/copy.svg";
+import CopyWithTooltip from "./CopyWithTooltop";
+import useIsMobile from '../../hooks/isMobile';
 import { truncate } from "./helpers";
 import {IEvent} from '../ExplorerEvents'
+import { useMemo } from 'react';
+
 
 export interface DetailsCard {
     data: {
@@ -21,7 +24,10 @@ export interface DetailsCard {
 const DetailsCard = ({data, copyProps } : DetailsCard) => {
 
     const {loading : dataLoad, event, metadata} = data
-    const {setTooltipCopy, tooltipCopy, tooltips} = copyProps
+    const { tooltipCopy} = copyProps
+
+    const isMobile = useIsMobile()
+    const truncateSize = useMemo(() => isMobile? 30: 60, [isMobile])   
 
 
 
@@ -73,10 +79,12 @@ const DetailsCard = ({data, copyProps } : DetailsCard) => {
 
             <div className="flex flex-col gap-3 md:p-5  w-full infoTextContainer longCol" >
               <div className="flex w-full loadedWrapper">
+                <div className={`mobileOnly  ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}>NFT Name:</div>
                 <div className="font-medium w-32">{dataLoad ? '': '2.86' }</div>
             
               </div>
               <div className="flex w-full loadedWrapper">
+                <div className={`mobileOnly  ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}>ID:</div>
                 <div className="font-medium w-32">{dataLoad ? '': '2.86' }</div>
 
               </div>
@@ -85,18 +93,12 @@ const DetailsCard = ({data, copyProps } : DetailsCard) => {
                   effect="solid"
                   className={`${tooltipCopy ? "copyTip copied" : "copyTip"}`}
                 />
-                <button
-                  className={`copy-btn`}
-                  data-tip={tooltipCopy ? `Сopied to clipboard` : "Copy"}
-                  data-clipboard-text={'TEST COPY TEXT'}
-                  ref={(node) => (tooltips.current[1] = node)}
-                  onClick={() => {
-                    setTooltipCopy(1);
-                  }}
-                >
-                  <img src={CopyIcon} alt="copy button" />
-                </button>
-                <div className="font-medium w-32 trxHash">{truncate('0x1036291556ac582965d45905e5d87011e41a575c92de18b28972486a173fa92e', 60)}</div>
+           
+                <div className="mobileOnly">Transaction Hash:</div>
+                <div className="copyBtnWrapper"> {!dataLoad && <CopyWithTooltip copyValue={event?.fromHash} copyProps={copyProps} copyIdx={1}/>}
+                <div className="font-medium w-32 trxHash">{truncate('0x1036291556ac582965d45905e5d87011e41a575c92de18b28972486a173fa92e', truncateSize)}</div>
+                </div>
+             
               </div>}
             </div>
           </div>

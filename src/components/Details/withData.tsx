@@ -19,7 +19,7 @@ export const withData = function (Wrapped: React.FC<any>) {
           .then((res) => res.json())
           .then((data) => {
             setEvent(data[0]);
-            setLoading(false)
+           setLoading(false)
           });
       }, []);
 

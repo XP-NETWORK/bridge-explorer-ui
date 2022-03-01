@@ -1,4 +1,4 @@
-export const truncate = function (fullStr:string, strLen:number, separator?: string) {
+export const truncate = function (fullStr:string | undefined, strLen:number, separator?: string) {
     if (!fullStr) return;
     if (fullStr.length <= strLen) return fullStr;
   

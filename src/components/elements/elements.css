@@ -148,6 +148,7 @@ ul.chartInfoList li {
   width: 128px !important;
   height: 128px;
   border-radius: 6px;
+  margin-right: 15px;
   
 }
 
@@ -185,4 +186,37 @@ ul.chartInfoList li {
 
 .trxHash {
   margin-left: 10px;
+}
+
+.detailsListRow {
+  align-items: center;
+  padding-left: 15px;
+}
+
+.detailsListRow .loadingWrapper {
+  width: 60%;
+  padding: 3px 0 !important;
+}
+
+.detailsListRow .loadedWrapper {
+  padding: 3px 0 !important;
+}
+
+.detailsListRow p {
+  align-items: center;
+  display: flex;
+  margin-left: 60px;
+}
+
+.detailsListRow span {
+ margin-left: 7px;
+}
+
+.detailsListRow img {
+  max-width: initial;
+ }
+
+.copyBtnWrapper {
+  display: flex;
+  align-items: center;
 }
