@@ -5,8 +5,7 @@ import { useContext } from "react";
 import { EventsContext } from "../context/Events";
 import { Status } from "./Status";
 import { LoaderRow } from "./elements/LoaderRow";
-
-
+import { ethers } from "ethers";
 export interface IEvent {
   id: string;
   chainName: string;
@@ -42,7 +41,8 @@ export const ExplorerEvents = () => {
         <thead className="bg-gray-50">
           <tr>
             <TableHeading>NFT</TableHeading>
-            <TableHeading>Tx Hash</TableHeading>
+            <TableHeading>Tx Value</TableHeading>
+            {false && <TableHeading>Tx Hash</TableHeading>}
             <TableHeading>Tx Type</TableHeading>
             <TableHeading>From</TableHeading>
             <TableHeading>To</TableHeading>
@@ -69,7 +69,14 @@ export const ExplorerEvents = () => {
                   />:  <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>}
 
                 </TableData>
+
                 <TableData>
+                  {ethers.utils.formatEther(event.txFees) }
+                </TableData>
+
+
+
+             { false &&   <TableData>
                   <Link
                     className="text-[#235EF5]"
                     key={event.id}
@@ -78,7 +85,10 @@ export const ExplorerEvents = () => {
                     {event.fromHash.slice(0, 6)}...
                     {event.fromHash.slice(-6)}
                   </Link>
-                </TableData>
+                </TableData>}
+
+
+
                 <TableData>{event.type || "N/A"}</TableData>
                 <TableData>
                   <div>{event.fromChainName || "N/A"} </div>{" "}
