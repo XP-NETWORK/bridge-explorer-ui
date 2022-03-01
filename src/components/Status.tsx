@@ -7,9 +7,14 @@ import canceledIcon from "../assets/icons/canceled.svg";
 export const Status: FC<{ status?: string }> = ({ status }) => {
   if (status === "Completed")
     return (
-      <div className="flex space-x-1 text-xs text-[#10B67A]">
-        <img src={completedIcon} alt="completed icon" />
-        <h1>Completed</h1>
+      <div className="flex min-w-[80px] flex-nowrap space-x-1 text-xs text-[#10B67A]">
+        <img
+          src={completedIcon}
+          className="aspect-square"
+          alt="completed icon"
+          width={15}
+        />
+        <div>Completed</div>
       </div>
     );
 
