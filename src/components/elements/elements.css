@@ -154,6 +154,8 @@ ul.chartInfoList li {
 
 .loadingWrapper {
   background: linear-gradient(312.76deg, #EFEFEF 22.7%, #DADADA 41.09%, #F2F2F2 92.17%);
+  animation: gradient 4s ease infinite;
+  background-size: 400% 400%;
   border-radius: 6px;
   transition: all .7s ease;
   color: transparent;
@@ -233,4 +235,18 @@ ul.chartInfoList li {
   background-color:  var(--green);
   border-radius: 50%;
   margin-right: 7px;
+}
+
+
+
+@keyframes gradient {
+  0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
