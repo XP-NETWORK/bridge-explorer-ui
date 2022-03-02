@@ -6,6 +6,8 @@ import { EventsContext } from "../context/Events";
 import { Status } from "./Status";
 import { LoaderRow } from "./elements/LoaderRow";
 import { ethers } from "ethers";
+import { currency } from "../constants";
+
 export interface IEvent {
   id: string;
   chainName: string;
@@ -71,7 +73,7 @@ export const ExplorerEvents = () => {
                 </TableData>
 
                 <TableData>
-                  {ethers.utils.formatEther(event.txFees) }
+                  {ethers.utils.formatEther(event.txFees)} {event.fromChain && currency[event.fromChain]}
                 </TableData>
 
 
