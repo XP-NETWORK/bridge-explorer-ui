@@ -5,7 +5,7 @@ import useIsMobile from '../../hooks/isMobile';
 import { truncate } from "./helpers";
 import {IEvent} from '../ExplorerEvents'
 import { useMemo } from 'react';
-
+import { txExplorers } from "../../constants";
 
 export interface DetailsCard {
     data: {
@@ -85,7 +85,7 @@ const DetailsCard = ({data, copyProps } : DetailsCard) => {
               </div>
               <div className="flex w-full loadedWrapper">
                 <div className={`mobileOnly  ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}>ID:</div>
-                <div className="font-medium w-32">{dataLoad ? '': '2.86' }</div>
+                <div className="font-medium w-32">{dataLoad ? '': event.tokenId }</div>
 
               </div>
              {!dataLoad &&  <div className="flex items-start justify-start loadedWrapper">
@@ -95,8 +95,10 @@ const DetailsCard = ({data, copyProps } : DetailsCard) => {
                 />
            
                 <div className="mobileOnly">Transaction Hash:</div>
+                <div className="copyBtnWrapper ">
+                <a href={`${event?.fromChain && txExplorers[event?.fromChain]}${event.fromHash}`} target="_blank" rel="noreferrer" className="font-medium w-32 trxHash">{truncate(event.fromHash, truncateSize)}</a>
                 <div className="copyBtnWrapper"> {!dataLoad && <CopyWithTooltip copyValue={event?.fromHash} copyProps={copyProps} copyIdx={1}/>}
-                <div className="font-medium w-32 trxHash">{truncate('0x1036291556ac582965d45905e5d87011e41a575c92de18b28972486a173fa92e', truncateSize)}</div>
+                </div>
                 </div>
              
               </div>}

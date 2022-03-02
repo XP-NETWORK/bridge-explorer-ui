@@ -8,6 +8,8 @@ import ImgBroken from "../assets/img-broken.png";
 import { LoaderRow } from "./elements/LoaderRow";
 import { ethers } from "ethers";
 import { currency } from "../constants";
+import ReactTooltip from "react-tooltip";
+import moment from "moment";
 
 export interface IEvent {
   id: string;
@@ -40,12 +42,14 @@ export const ExplorerEvents = () => {
 
   return (
     <Container className="mt-5 px-0 sm:px-4 overflow-x-auto">
+  
       <table className="min-w-full divide-y border-b divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
             <TableHeading>NFT</TableHeading>
             <TableHeading>Tx Value</TableHeading>
             {false && <TableHeading>Tx Hash</TableHeading>}
+            <TableHeading>Coin</TableHeading>
             <TableHeading>Tx Type</TableHeading>
             <TableHeading>From</TableHeading>
             <TableHeading>To</TableHeading>
@@ -54,6 +58,10 @@ export const ExplorerEvents = () => {
           </tr>
         </thead>
         <tbody className="bg-white divide-y  divide-gray-200 overflow-x-scroll">
+        <ReactTooltip
+                  effect="solid"
+                
+                />
           {events.length ? (
             events.map((event: IEvent) => (
               <tr key={event.id}>
@@ -67,8 +75,12 @@ export const ExplorerEvents = () => {
                   />
                 </TableData>
 
+                <TableData >
+                  <span data-tip={ethers.utils.formatEther(event.txFees)}>{Number(ethers.utils.formatEther(event.txFees)).toFixed(7).toString()}</span>
+                </TableData>
+
                 <TableData>
-                  {ethers.utils.formatEther(event.txFees)} {event.fromChain && currency[event.fromChain]}
+                {event.fromChain && currency[event.fromChain]}
                 </TableData>
 
 
@@ -110,7 +122,7 @@ export const ExplorerEvents = () => {
                   </Link>
                 </TableData>
                 <TableData>
-                  {new Date(event.createdAt).toLocaleDateString() || "N/A"}
+                  { moment(event?.createdAt).format("YYYY/MM/DD H:mm") || "N/A"}
                 </TableData>
                 <TableData>
                   <Status status={event.status} />

@@ -31,8 +31,8 @@ export const Navbar = () => {
           >
             Bridge
           </a>
-          <NavItem to="/network">Network</NavItem>
-          <NavItem to="/dashboard">Dashboard</NavItem>
+          <NavItem to="/network" className="nonactive">Network</NavItem>
+          <NavItem to="/dashboard" className="nonactive">Dashboard</NavItem>
         </div>
         <button
           className="absolute right-4 top-7 sm:hidden"
@@ -45,10 +45,10 @@ export const Navbar = () => {
   );
 };
 
-const NavItem: FC<{ to: string }> = ({ children, to }) => {
+const NavItem: FC<{ to: string, className?:string }> = ({ children, to, className }) => {
   return (
     <NavLink
-      className="sm:flex p-4 w-full min-w-[14rem] z-20 sm:min-w-fit sm:p-0 sm:hover:bg-white  hover:bg-slate-100 text-[#030303] items-end font-normal tracking-wide sm:pb-2.5  hover:tracking-[0.0175em] hover:font-medium text-[15px] max-w-fit sm:border-t-2 border-transparent"
+      className={`sm:flex p-4 w-full min-w-[14rem] z-20 sm:min-w-fit sm:p-0 sm:hover:bg-white  hover:bg-slate-100 text-[#030303] items-end font-normal tracking-wide sm:pb-2.5  hover:tracking-[0.0175em] hover:font-medium text-[15px] max-w-fit sm:border-t-2 border-transparent ${className}`}
       to={to}
     >
       {children}

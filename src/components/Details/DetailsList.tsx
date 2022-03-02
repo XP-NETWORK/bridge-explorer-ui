@@ -7,7 +7,9 @@ import moment from 'moment'
 import { truncate } from './helpers';
 import useIsMobile from '../../hooks/isMobile';
 import { useMemo } from 'react';
- 
+import { txExplorers } from '../../constants'; 
+
+
 const DetailsList = ({data, copyProps } : DetailsCard) => {
 
     const {loading : dataLoad, event} = data
@@ -19,7 +21,7 @@ const DetailsList = ({data, copyProps } : DetailsCard) => {
     console.log(isMobile);
 
     return <div  className="flex flex-col w-full">
-             <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
+             <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow" style={{display: 'none'}}>
             <div className="font-medium w-32">Source Hash:</div>
             <p
               // style={{ width: "calc(100% - 6rem)" }}
@@ -37,8 +39,8 @@ const DetailsList = ({data, copyProps } : DetailsCard) => {
             <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
             <div className="font-medium w-32">Dest Hash:</div>
             <p className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}>
+              <a href={`${event?.toChain && txExplorers[event?.toChain]}${event?.toHash}`} target="_blank" rel="noreferrer" className="text-[#235EF5]">{truncate(event?.toHash, truncateSize) || "N/A"}</a>
             {!dataLoad && <CopyWithTooltip copyValue={event?.fromChainName} copyProps={copyProps} copyIdx={6}/>}
-              <span className="text-[#235EF5]">{truncate(event?.toHash, truncateSize) || "N/A"}</span>
             </p>
           
           </div>
@@ -57,20 +59,22 @@ const DetailsList = ({data, copyProps } : DetailsCard) => {
           <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
             <div className="font-medium w-32">From:</div>
             <p className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}>
-            {!dataLoad && <CopyWithTooltip copyValue={event?.targetAddress}  copyProps={copyProps} copyIdx={7}/>}
+           
               <span className="text-[#235EF5]">
                 {truncate(event?.senderAddress, truncateSize) || "N/A"}
               </span>
+              {!dataLoad && <CopyWithTooltip copyValue={event?.senderAddress}  copyProps={copyProps} copyIdx={7}/>}
             </p>
          
           </div>
           <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
             <div className="font-medium w-32">To:</div>
             <p className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}>
-            {!dataLoad && <CopyWithTooltip copyValue={event?.targetAddress} copyProps={copyProps} copyIdx={8}/>}
+           
               <span className="text-[#235EF5]">
                 {truncate(event?.targetAddress, truncateSize) || "N/A"}
               </span>
+              {!dataLoad && <CopyWithTooltip copyValue={event?.targetAddress} copyProps={copyProps} copyIdx={8}/>}
             </p>
             
           </div>

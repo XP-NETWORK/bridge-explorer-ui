@@ -162,7 +162,7 @@ ul.chartInfoList li {
   padding: 10px 0 0 0;
 }
 
-.loadingWrapper span{
+.loadingWrapper span, .loadingWrapper a{
   color: transparent;
 }
 
@@ -187,7 +187,8 @@ ul.chartInfoList li {
 }
 
 .trxHash {
-  margin-left: 10px;
+  color: #235EF5;
+  width: 100%;
 }
 
 .detailsListRow {
@@ -210,9 +211,7 @@ ul.chartInfoList li {
   margin-left: 60px;
 }
 
-.detailsListRow span {
- margin-left: 7px;
-}
+
 
 .detailsListRow img {
   max-width: initial;
@@ -235,6 +234,13 @@ ul.chartInfoList li {
   background-color:  var(--green);
   border-radius: 50%;
   margin-right: 7px;
+}
+
+
+.nonactive {
+  opacity: .5;
+  pointer-events: none;
+  cursor: initial;
 }
 
 

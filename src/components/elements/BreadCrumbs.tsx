@@ -34,8 +34,10 @@ export const BreadCrumbs: React.FC<{
           <div
             key={i + "tab"}
             className={`breadCrumbTab ${
-              selecedTab === tab ? "selectedTab" : ""
-            }`}
+              
+              selecedTab === tab ? " selectedTab " : "" 
+             
+            } ${ i === 1 || i === 2 ? ' nonactive ': ''}` }
             onClick={() => onChange(tab)}
           >
             {tab}
