@@ -6,7 +6,8 @@ import { EventsContext } from "../context/Events";
 import { Status } from "./Status";
 import ImgBroken from "../assets/img-broken.png";
 import { LoaderRow } from "./elements/LoaderRow";
-
+import { ethers } from "ethers";
+import { currency } from "../constants";
 
 export interface IEvent {
   id: string;
@@ -42,10 +43,9 @@ export const ExplorerEvents = () => {
       <table className="min-w-full divide-y border-b divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
-            <TableHeading className="sticky left-0 bg-[#F7F7F9]">
-              NFT
-            </TableHeading>
-            <TableHeading>Tx Hash</TableHeading>
+            <TableHeading>NFT</TableHeading>
+            <TableHeading>Tx Value</TableHeading>
+            {false && <TableHeading>Tx Hash</TableHeading>}
             <TableHeading>Tx Type</TableHeading>
             <TableHeading>From</TableHeading>
             <TableHeading>To</TableHeading>
@@ -66,7 +66,14 @@ export const ExplorerEvents = () => {
                     height={38}
                   />
                 </TableData>
-                <TableData className="">
+
+                <TableData>
+                  {ethers.utils.formatEther(event.txFees)} {event.fromChain && currency[event.fromChain]}
+                </TableData>
+
+
+
+             { false &&   <TableData>
                   <Link
                     className="text-[#235EF5]"
                     key={event.id}
@@ -75,7 +82,10 @@ export const ExplorerEvents = () => {
                     {event.fromHash.slice(0, 6)}...
                     {event.fromHash.slice(-6)}
                   </Link>
-                </TableData>
+                </TableData>}
+
+
+
                 <TableData>{event.type || "N/A"}</TableData>
                 <TableData>
                   <div>{event.fromChainName || "N/A"} </div>{" "}
