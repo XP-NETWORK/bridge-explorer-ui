@@ -103,7 +103,7 @@ export const ExplorerEvents = () => {
 
 
 
-                <TableData>{event.type || "N/A"}</TableData>
+                <TableData><span className="methodDataTable">{event.type || "N/A"}</span></TableData>
                 <TableData>
                   <div>{event.fromChainName || "N/A"} </div>{" "}
                   <Link

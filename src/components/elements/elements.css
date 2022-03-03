@@ -212,7 +212,6 @@ ul.chartInfoList li {
 }
 
 
-
 .detailsListRow img {
   max-width: initial;
  }
@@ -236,22 +235,26 @@ ul.chartInfoList li {
   margin-right: 7px;
 }
 
-
 .nonactive {
   opacity: .5;
   pointer-events: none;
   cursor: initial;
 }
 
-
 .imgTableData .lds-ellipsis{
   right: 12px;
 }
 
-
 .homeTooltip {
   opacity: .7;
 
+}
+
+.methodDataTable {
+  background-color: rgb(236, 230, 230);
+  border-radius: 20px;
+  font-size: 13px;
+  padding: 5px 8px;
 }
 
 @keyframes gradient {

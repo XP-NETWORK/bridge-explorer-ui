@@ -6,6 +6,9 @@ export const currency:any = {
     '20': 'IOTX',
     '16': 'Fuse',
     '6': 'AVAX',
+    '21': 'AETH',
+    '7': 'MATIC',
+
 }
 
 export const txExplorers: any = {
@@ -16,6 +19,8 @@ export const txExplorers: any = {
     '20': 'https://iotexscan.io/tx/',
     '6': 'https://snowtrace.io/tx/',
     '16': 'https://explorer.fuse.io/tx/',
+    '21': 'https://explorer.mainnet.aurora.dev/tx/',
+    '7': 'https://polygonscan.com/tx/'
 }
 
 export const url = 'https://dev-explorer-api.herokuapp.com/';
