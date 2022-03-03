@@ -9,7 +9,7 @@ import { ServiceProvider } from "../src/context/ServcieProvder";
 import io from "socket.io-client";
 
 
-const socket = io("ws://dev-explorer-api.herokuapp.com", {
+const socket = io("wss://dev-explorer-api.herokuapp.com", {
   path: "/socket.io",
 });
 

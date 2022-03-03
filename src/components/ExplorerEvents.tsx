@@ -22,7 +22,7 @@ export interface IEvent {
   actionId: string;
   txFees: string;
   tokenId?: string;
-  status: "pending" | "success";
+  status: "Completed" | "Pending";
   fromHash: string;
   toHash?: string;
   senderAddress: string;
@@ -41,9 +41,11 @@ export const ExplorerEvents = () => {
   }, [events]);
 
   return (
+    
     <Container className="mt-5 px-0 sm:px-4 overflow-x-auto">
-  
+     
       <table className="min-w-full divide-y border-b divide-gray-200">
+  
         <thead className="bg-gray-50">
           <tr>
             <TableHeading>NFT</TableHeading>
@@ -58,21 +60,24 @@ export const ExplorerEvents = () => {
           </tr>
         </thead>
         <tbody className="bg-white divide-y  divide-gray-200 overflow-x-scroll">
-        <ReactTooltip
-                  effect="solid"
-                
-                />
+       
           {events.length ? (
             events.map((event: IEvent) => (
               <tr key={event.id}>
-                <TableData className="sticky left-0 text-center max-w-[62px] bg-white">
+                <TableData className="sticky left-0 text-center max-w-[62px] bg-white imgTableData" >
+                <ReactTooltip
+                  effect="solid"
+                  className="homeTooltip"
+                
+                />
+                { event?.status === "Completed" || event?.imgUri ? 
                   <img
                     className="rounded-lg"
                     src={event?.imgUri || ImgBroken}
                     alt=""
                     width={38}
                     height={38}
-                  />
+                  />:  <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>}
                 </TableData>
 
                 <TableData >

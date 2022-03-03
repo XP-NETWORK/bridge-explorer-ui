@@ -244,6 +244,15 @@ ul.chartInfoList li {
 }
 
 
+.imgTableData .lds-ellipsis{
+  right: 12px;
+}
+
+
+.homeTooltip {
+  opacity: .7;
+
+}
 
 @keyframes gradient {
   0% {
