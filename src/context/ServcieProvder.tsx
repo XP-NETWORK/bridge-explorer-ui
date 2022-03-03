@@ -3,12 +3,12 @@ import React from "react";
 const { Provider: ServiceProvider, Consumer: ServiceConsumer } =
   React.createContext({});
 
-const withSocket = (Wrapped: React.FC<any>) => {
+const withContainer = (Wrapped: React.FC<any>) => {
   return (props: any) => (
     <ServiceConsumer>
-      {(socket) => <Wrapped {...props} socket={socket} />}
+      {(container) => <Wrapped {...props} container={{...container}} />}
     </ServiceConsumer>
   );
 };
 
-export { ServiceProvider, ServiceConsumer, withSocket };
+export { ServiceProvider, ServiceConsumer, withContainer };

@@ -5,24 +5,14 @@ import "./index.css";
 import "./components/elements/elements.css";
 import "./assets/media.css"
 import { BrowserRouter } from "react-router-dom";
-import { ServiceProvider } from "../src/context/ServcieProvder";
-import io from "socket.io-client";
 
 
-const socket = io("wss://dev-explorer-api.herokuapp.com", {
-  path: "/socket.io",
-});
 
-/*const socket = io("ws://localhost:3100", {
-  path: "/socket.io",
-});*/
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ServiceProvider value={socket}>
         <App />
-      </ServiceProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

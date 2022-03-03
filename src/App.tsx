@@ -3,14 +3,54 @@ import { Explorer } from "./pages/Explorer";
 import { Event } from "./pages/Event";
 import { Dashboard } from "./pages/Dashboard";
 import {Network} from "./pages/Network";
+import { ServiceProvider } from "../src/context/ServcieProvder";
+import io from "socket.io-client";
+import { useEffect, useState } from "react";
+
+import { socketUrl, url } from "./constants";
+
+const socket = io(socketUrl, {
+  path: "/socket.io",
+});
+
+interface AppData {
+  totalTx: number;
+  totalWallets: number
+}
+
 
 export const App = () => {
+
+  const [appData, setAppData] = useState<AppData>({
+    totalTx: 0,
+    totalWallets: 0
+  })
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch(`${url}getMetrics`);
+        const metrics = await res.json()
+        if (metrics) {
+          setAppData({
+            totalTx: metrics.totalTx,
+            totalWallets: metrics.totalWallets
+          })
+        }
+      } catch (e) {
+        console.log(e, 'get metrics route');
+      }
+    })()
+  }, [])
+
   return (
-    <Routes>
-      <Route path="/" element={<Explorer />} />
-      <Route path="/tx/:fromHash" element={<Event />} />
-      <Route path="/network" element={<Network />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-    </Routes>
+    <ServiceProvider value={{socket, appData}}>
+        <Routes>
+          <Route path="/" element={<Explorer />} />
+          <Route path="/tx/:fromHash" element={<Event />} />
+          <Route path="/network" element={<Network />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+    </ServiceProvider>
   );
 };

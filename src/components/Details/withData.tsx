@@ -2,6 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import { useParams } from 'react-router';
 import { IEvent } from '../ExplorerEvents';
 
+import { url } from '../../constants';
 
 export const withData = function (Wrapped: React.FC<any>) {
     
@@ -14,8 +15,7 @@ export const withData = function (Wrapped: React.FC<any>) {
 
       let params = useParams();
     useEffect(() => {
-        //fetch(`http://localhost:3100/?fromHash=${params.fromHash}`)
-        fetch(`https://dev-explorer-api.herokuapp.com/?fromHash=${params.fromHash}`)
+        fetch(`${url}?fromHash=${params.fromHash}`)
           .then((res) => res.json())
           .then((data) => {
             setEvent(data[0]);

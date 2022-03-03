@@ -8,21 +8,25 @@ import {
 } from "react";
 import { IEvent } from "../components/ExplorerEvents";
 
-import { withSocket } from "./ServcieProvder";
+import { url } from "../constants";
 
-const url = "https://dev-explorer-api.herokuapp.com/";
-//const url = "http://localhost:3100/"; 
+import { withContainer } from "./ServcieProvder";
+
+
+
 interface IEventsContext {
   events: IEvent[];
   setChainName: (chainName: string) => void;
 }
 
 export const EventsContext = createContext<IEventsContext | null>(null);
-export const EventsProvider: FC = withSocket(({ children, socket }) => {
+export const EventsProvider: FC = withContainer(({ children, container: {socket} }) => {
   const [events, setEvents] = useState<IEvent[]>([]);
   const [chainName, setChainName] = useState("");
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    
+  }, []);
 
   useEffect(() => {
     socket.off("incomingEvent");

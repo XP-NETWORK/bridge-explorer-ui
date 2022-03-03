@@ -3,8 +3,9 @@ export const currency:any = {
     '19': 'VLX',
     '14': 'xDAI',
     '2': 'EGLD',
-    '20': ' IOTX'
-
+    '20': 'IOTX',
+    '16': 'Fuse',
+    '6': 'AVAX',
 }
 
 export const txExplorers: any = {
@@ -12,5 +13,13 @@ export const txExplorers: any = {
     '19': 'https://explorer.velas.com/tx/',
     '14': 'https://blockscout.com/xdai/mainnet/tx/',
     '2': 'https://explorer.elrond.com/transactions/',
-    '20': 'https://iotexscan.io/tx/'
+    '20': 'https://iotexscan.io/tx/',
+    '6': 'https://snowtrace.io/tx/',
+    '16': 'https://explorer.fuse.io/tx/',
 }
+
+export const url = 'https://dev-explorer-api.herokuapp.com/';
+export const socketUrl = 'wss://dev-explorer-api.herokuapp.com';
+
+//export const url = 'http://localhost:3100/';
+//export const socketUrl = 'ws://localhost:3100';

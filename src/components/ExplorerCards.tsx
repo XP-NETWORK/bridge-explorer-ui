@@ -3,16 +3,18 @@ import { Container } from "./Container";
 import TransactionsIcon from "../assets/icons/transactions.svg";
 import UsersIcon from "../assets/icons/users.svg";
 import VolumeIcon from "../assets/icons/volume.svg";
+import { withContainer } from "../context/ServcieProvder";
 
-export const ExplorerCards = () => {
+export const ExplorerCards = withContainer(({container: {appData: {totalTx, totalWallets}}}) => {
+  console.log(totalTx);
   return (
     <Container className="flex flex-col md:flex-row gap-4 mt-8">
       <ExplorerCard
-        title="14,611"
+        title={totalTx}
         subtitle="Transactions"
         icon={TransactionsIcon}
       />
-      <ExplorerCard title="5,674" subtitle="Users" icon={UsersIcon} />
+      <ExplorerCard title={totalWallets} subtitle="Users" icon={UsersIcon} />
       <ExplorerCard
         title="$453.43M"
         subtitle="Volume (USD)"
@@ -20,4 +22,4 @@ export const ExplorerCards = () => {
       />
     </Container>
   );
-};
+});
