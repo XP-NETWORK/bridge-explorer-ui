@@ -8,6 +8,7 @@ export const currency:any = {
     '6': 'AVAX',
     '21': 'AETH',
     '7': 'MATIC',
+    '5': 'ETH'
 
 }
 
@@ -20,7 +21,8 @@ export const txExplorers: any = {
     '6': 'https://snowtrace.io/tx/',
     '16': 'https://explorer.fuse.io/tx/',
     '21': 'https://explorer.mainnet.aurora.dev/tx/',
-    '7': 'https://polygonscan.com/tx/'
+    '7': 'https://polygonscan.com/tx/',
+    '5': 'https://ethplorer.io/tx/'
 }
 
 export const addressExplorers: any = {
@@ -32,7 +34,8 @@ export const addressExplorers: any = {
     '6': 'https://snowtrace.io/address/',
     '16': 'https://explorer.fuse.io/address/',
     '21': 'https://explorer.mainnet.aurora.dev/address/',
-    '7': 'https://polygonscan.com/address/'
+    '7': 'https://polygonscan.com/address/',
+    '5': 'https://ethplorer.io/address/'
 }
 
 export const url = 'https://dev-explorer-api.herokuapp.com/';

@@ -104,9 +104,14 @@
         width: 24%;
     }
 
-    
-    .tableWrapper tbody tr .sticky {
-        border-bottom: 1px solid rgba(0,0,0, .05)
-        
+    .tableWrapper tbody .sticky {
+        border-bottom: 1.7px solid rgba(0, 0, 0, .05);
     }
+    
+
+    .copyTip.copied {
+     
+
+      }
+      
 }
