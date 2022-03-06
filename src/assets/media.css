@@ -34,7 +34,7 @@
 
     .infoTextContainer.longCol .loadedWrapper{
         flex-direction: column;
-        border-bottom: 1px solid var(--grey-borders);
+        border-bottom: .5px solid var(--grey-borders);
         padding-bottom: 12px;
     }
 
@@ -44,6 +44,16 @@
         border-bottom: none;
     }
 
+    .loadedWrapper > div{
+        font-weight: normal;
+    }
 
+     .loadedWrapper .hashTitle, .mobileOnly.loadedWrapper  {
+        font-weight: 500;
+    }
+    
+    .flex.items-start.justify-start.loadedWrapper {
+        padding-bottom: 20px;
+    }
 
 }

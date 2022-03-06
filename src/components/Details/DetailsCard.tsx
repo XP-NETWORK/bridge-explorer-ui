@@ -94,7 +94,7 @@ const DetailsCard = ({data, copyProps } : DetailsCard) => {
                   className={`${tooltipCopy ? "copyTip copied" : "copyTip"}`}
                 />
            
-                <div className="mobileOnly">Transaction Hash:</div>
+                <div className="mobileOnly hashTitle">Transaction Hash:</div>
                 <div className="copyBtnWrapper ">
                 <a href={`${event?.fromChain && txExplorers[event?.fromChain]}${event.fromHash}`} target="_blank" rel="noreferrer" className="font-medium w-32 trxHash">{truncate(event.fromHash, truncateSize)}</a>
                 <div className="copyBtnWrapper"> {!dataLoad && <CopyWithTooltip copyValue={event?.fromHash} copyProps={copyProps} copyIdx={1}/>}

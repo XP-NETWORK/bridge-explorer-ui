@@ -67,7 +67,7 @@ export const ExplorerEvents = () => {
                 <TableData className="sticky left-0 text-center max-w-[62px] bg-white imgTableData" >
                 <ReactTooltip
                   effect="solid"
-                  className="homeTooltip"
+                  backgroundColor = "#575151"
                 
                 />
                 { event?.status === "Completed" || event?.imgUri ? 
@@ -81,7 +81,7 @@ export const ExplorerEvents = () => {
                 </TableData>
 
                 <TableData >
-                  <span data-tip={ethers.utils.formatEther(event.txFees)}>{Number(ethers.utils.formatEther(event.txFees)).toFixed(7).toString()}</span>
+                  <span className="valueData" data-tip={ethers.utils.formatEther(event.txFees)}>{Number(ethers.utils.formatEther(event.txFees)).toFixed(7).toString()}</span>
                 </TableData>
 
                 <TableData>
