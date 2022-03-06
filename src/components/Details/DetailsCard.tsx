@@ -3,8 +3,10 @@ import CopyWithTooltip from "./CopyWithTooltop";
 import useIsMobile from "../../hooks/isMobile";
 import { truncate } from "./helpers";
 import { IEvent } from "../ExplorerEvents";
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { txExplorers } from "../../constants";
+import SoundOnIcon from "../../assets/icons/sound-on.svg";
+import SoundOffIcon from "../../assets/icons/sound-off.svg";
 
 export interface DetailsCard {
   data: {
@@ -22,9 +24,21 @@ export interface DetailsCard {
 const DetailsCard = ({ data, copyProps }: DetailsCard) => {
   const { loading: dataLoad, event, metadata } = data;
   const { tooltipCopy } = copyProps;
+  const [soundOn, setSoundOn] = useState(true);
+  const nftVideo = useRef<HTMLVideoElement | null>(null);
 
   const isMobile = useIsMobile();
   const truncateSize = useMemo(() => (isMobile ? 33 : 60), [isMobile]);
+
+  useEffect(() => {
+    console.log(metadata);
+  }, [metadata]);
+
+  // @ts-ignore
+  const toggleSound = () => {
+    nftVideo.current!.muted = soundOn;
+    setSoundOn(!soundOn);
+  };
 
   return (
     <div className="text-[#222222] sm:border p-1 sm:p-5 md:p-6 rounded-xl detailsCard">
@@ -41,9 +55,21 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
             {!dataLoad && metadata && (
               <>
                 {metadata?.animation_url ? (
-                  <video className="rounded-lg  nftImage" autoPlay loop>
-                    <source src={metadata?.animation_url} type="video/mp4" />
-                  </video>
+                  <div className="relative rounded-lg overflow-hidden nftImage">
+                    <video ref={nftVideo} className="z-10" autoPlay loop>
+                      <source src={metadata?.animation_url} type="video/mp4" />
+                    </video>
+                    <button
+                      onClick={toggleSound}
+                      className="absolute z-20 h-10 w-10 flex items-center justify-center top-2 right-2 bg-gray-400 rounded-full"
+                    >
+                      <img
+                        src={soundOn ? SoundOnIcon : SoundOffIcon}
+                        alt="sound button"
+                        width={20}
+                      />
+                    </button>
+                  </div>
                 ) : (
                   <img
                     className="rounded-lg  nftImage"

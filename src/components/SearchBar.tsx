@@ -15,7 +15,12 @@ export const SearchBar = () => {
 
   return (
     <Container className="mt-8">
-      <form className="flex border px-4 py-2 bg-white rounded">
+      <form
+        className="flex border px-4 py-2 bg-white rounded"
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
         <input
           //type="search"
           placeholder="Search address or name"
