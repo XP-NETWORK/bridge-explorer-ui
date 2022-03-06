@@ -258,6 +258,19 @@ ul.chartInfoList li {
   cursor: default;
 }
 
+.tableWrapper {
+  position: relative;
+}
+
+.scrollTopBtn {
+  position: sticky;
+  bottom: 0;
+  /*transform: rotate(-270deg);
+  cursor: pointer;
+  bottom: 30px;
+  right: 20%;*/
+}
+
 @keyframes gradient {
   0% {
 		background-position: 0% 50%;

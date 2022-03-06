@@ -10,6 +10,7 @@ import { ethers } from "ethers";
 import { currency } from "../constants";
 import ReactTooltip from "react-tooltip";
 import moment from "moment";
+import scrollUp from '../assets/img/collapse.svg'
 
 export interface IEvent {
   id: string;
@@ -40,13 +41,19 @@ export const ExplorerEvents = () => {
     console.log(events);
   }, [events]);
 
-  return (
-    
-    <Container className="mt-5 px-0 sm:px-4 overflow-x-auto">
+  useEffect(() => {
      
-      <table className="min-w-full divide-y border-b divide-gray-200">
-  
-        <thead className="bg-gray-50">
+
+      
+  }, [events])
+
+  return (
+
+    <Container className="mt-5 px-0 sm:px-4 overflow-x-auto tableWrapper">
+   { false && <img src={scrollUp} alt="scrollUp" className="scrollTopBtn" /> }
+      <table className="min-w-full divide-y border-b divide-gray-200 eventsTable">
+ 
+        <thead className="bg-gray-50 ">
           <tr>
             <TableHeading>NFT</TableHeading>
             <TableHeading>Tx Value</TableHeading>
@@ -60,7 +67,7 @@ export const ExplorerEvents = () => {
           </tr>
         </thead>
         <tbody className="bg-white divide-y  divide-gray-200 overflow-x-scroll">
-       
+      
           {events.length ? (
             events.map((event: IEvent) => (
               <tr key={event.id}>
@@ -137,6 +144,7 @@ export const ExplorerEvents = () => {
           ) : (
             <LoaderRow/>
           )}
+       
         </tbody>
       </table>
     </Container>

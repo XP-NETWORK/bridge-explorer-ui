@@ -23,6 +23,18 @@ export const txExplorers: any = {
     '7': 'https://polygonscan.com/tx/'
 }
 
+export const addressExplorers: any = {
+    '4': 'https://bscscan.com//address/',
+    '19': 'https://explorer.velas.com/address/',
+    '14': 'https://blockscout.com/xdai/mainnet/address/',
+    '2': 'https://explorer.elrond.com/accounts/',
+    '20': 'https://iotexscan.io/address/',
+    '6': 'https://snowtrace.io/address/',
+    '16': 'https://explorer.fuse.io/address/',
+    '21': 'https://explorer.mainnet.aurora.dev/address/',
+    '7': 'https://polygonscan.com/address/'
+}
+
 export const url = 'https://dev-explorer-api.herokuapp.com/';
 export const socketUrl = 'wss://dev-explorer-api.herokuapp.com';
 

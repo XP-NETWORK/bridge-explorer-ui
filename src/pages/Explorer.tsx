@@ -5,6 +5,7 @@ import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
 import { SearchBar } from "../components/SearchBar";
 import { EventsProvider } from "../context/Events";
+
 import {
   BreadCrumbs,
   TabsNavigator,
@@ -25,6 +26,7 @@ export const Explorer = () => {
           selecedTab={tab}
         />
         <TabsNavigator tab={tab} />
+      
       </EventsProvider>
       <Footer />
     </div>

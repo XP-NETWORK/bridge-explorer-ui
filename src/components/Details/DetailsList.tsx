@@ -7,7 +7,7 @@ import moment from 'moment'
 import { truncate } from './helpers';
 import useIsMobile from '../../hooks/isMobile';
 import { useMemo } from 'react';
-import { txExplorers } from '../../constants'; 
+import { txExplorers, addressExplorers } from '../../constants'; 
 
 
 const DetailsList = ({data, copyProps } : DetailsCard) => {
@@ -16,7 +16,7 @@ const DetailsList = ({data, copyProps } : DetailsCard) => {
     const {setTooltipCopy, tooltipCopy, tooltips} = copyProps
 
     const isMobile = useIsMobile()
-    const truncateSize = useMemo(() => isMobile? 30: 60, [isMobile])   
+    const truncateSize = useMemo(() => isMobile? 33: 60, [isMobile])   
 
     console.log(isMobile);
 
@@ -58,22 +58,26 @@ const DetailsList = ({data, copyProps } : DetailsCard) => {
           </div>
           <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
             <div className="font-medium w-32">From:</div>
-            <p className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}>
-           
-              <span className="text-[#235EF5]">
-                {truncate(event?.senderAddress, truncateSize) || "N/A"}
-              </span>
-              {!dataLoad && <CopyWithTooltip copyValue={event?.senderAddress}  copyProps={copyProps} copyIdx={7}/>}
-            </p>
-         
+
+                <p className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}>
+              
+                  <span className="text-[#235EF5]">
+                    <a target="_blank" rel="noreferrer"    href={`${event?.fromChain && addressExplorers[event?.fromChain]}${
+                        event?.senderAddress
+                      }`}>{truncate(event?.senderAddress, truncateSize) || "N/A"}</a>
+                  </span>
+                  {!dataLoad && <CopyWithTooltip copyValue={event?.senderAddress}  copyProps={copyProps} copyIdx={7}/>}
+                </p>
+
           </div>
           <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
             <div className="font-medium w-32">To:</div>
             <p className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}>
-           
-              <span className="text-[#235EF5]">
-                {truncate(event?.targetAddress, truncateSize) || "N/A"}
-              </span>
+            <a target="_blank" rel="noreferrer" href={`${event?.toChain && addressExplorers[event?.toChain]}${event?.targetAddress}`}>
+                  <span className="text-[#235EF5]">
+                    {truncate(event?.targetAddress, truncateSize) || "N/A"}
+                  </span>
+              </a>
               {!dataLoad && <CopyWithTooltip copyValue={event?.targetAddress} copyProps={copyProps} copyIdx={8}/>}
             </p>
             
