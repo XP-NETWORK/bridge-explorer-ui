@@ -64,6 +64,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
                       poster={metadata?.image}
                       className="z-10"
                       autoPlay
+                      playsInline
                       muted
                       loop
                     >
