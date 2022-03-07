@@ -56,7 +56,14 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
               <>
                 {metadata?.animation_url ? (
                   <div className="relative rounded-lg overflow-hidden nftImage">
-                    <video ref={nftVideo} className="z-10" autoPlay muted loop>
+                    <video
+                      ref={nftVideo}
+                      poster={metadata?.image}
+                      className="z-10"
+                      autoPlay
+                      muted
+                      loop
+                    >
                       <source src={metadata?.animation_url} type="video/mp4" />
                     </video>
                     <button
