@@ -24,15 +24,15 @@ export interface DetailsCard {
 const DetailsCard = ({ data, copyProps }: DetailsCard) => {
   const { loading: dataLoad, event, metadata } = data;
   const { tooltipCopy } = copyProps;
-  const [soundOn, setSoundOn] = useState(true);
+  const [soundOn, setSoundOn] = useState(false);
   const nftVideo = useRef<HTMLVideoElement | null>(null);
 
   const isMobile = useIsMobile();
   const truncateSize = useMemo(() => (isMobile ? 30 : 60), [isMobile]);
 
   useEffect(() => {
-    console.log(metadata);
-  }, [metadata]);
+    nftVideo.current?.play();
+  }, []);
 
   // @ts-ignore
   const toggleSound = () => {
@@ -56,17 +56,17 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
               <>
                 {metadata?.animation_url ? (
                   <div className="relative rounded-lg overflow-hidden nftImage">
-                    <video ref={nftVideo} className="z-10" autoPlay loop>
+                    <video ref={nftVideo} className="z-10" autoPlay muted loop>
                       <source src={metadata?.animation_url} type="video/mp4" />
                     </video>
                     <button
                       onClick={toggleSound}
-                      className="absolute z-20 h-10 w-10 flex items-center justify-center top-2 right-2 bg-gray-400 rounded-full"
+                      className="absolute z-20 h-7 w-7 flex items-center justify-center top-2 right-2 bg-white rounded-full"
                     >
                       <img
                         src={soundOn ? SoundOnIcon : SoundOffIcon}
                         alt="sound button"
-                        width={20}
+                        width={14}
                       />
                     </button>
                   </div>
