@@ -245,16 +245,30 @@ ul.chartInfoList li {
   right: 12px;
 }
 
-.homeTooltip {
-  opacity: .7;
 
-}
 
 .methodDataTable {
   background-color: rgb(236, 230, 230);
   border-radius: 20px;
   font-size: 13px;
   padding: 5px 8px;
+}
+
+.valueData {
+  cursor: default;
+}
+
+.tableWrapper {
+  position: relative;
+}
+
+.scrollTopBtn {
+  position: sticky;
+  bottom: 0;
+  /*transform: rotate(-270deg);
+  cursor: pointer;
+  bottom: 30px;
+  right: 20%;*/
 }
 
 @keyframes gradient {

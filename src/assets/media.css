@@ -29,12 +29,12 @@
     }
 
     .infoTextContainer.longCol {
-        padding-left: 21px  !important;
+        padding-left: 1px  !important;
     }
 
     .infoTextContainer.longCol .loadedWrapper{
         flex-direction: column;
-        border-bottom: 1px solid var(--grey-borders);
+        border-bottom: .5px solid var(--grey-borders);
         padding-bottom: 12px;
     }
 
@@ -44,6 +44,74 @@
         border-bottom: none;
     }
 
+    .loadedWrapper > div{
+        font-weight: normal;
+    }
+
+     .loadedWrapper .hashTitle, .mobileOnly.loadedWrapper, .loadedWrapper .boldTxt  {
+        font-weight: 500;
+    }
+
+    
+    
+    .flex.items-start.justify-start.loadedWrapper {
+        padding-bottom: 20px;
+    }
+
+    .loadedWrapper.trxWrapper .mobileOnly{
+        margin-bottom: 10px;
+
+    }
+
+    .copyBtnWrapper a {
+        font-weight: normal;
+
+    }
+
+    .flex.w-full.loadedWrapper {
+        padding-bottom: 16px;
+        padding-top: 0px;
+        padding-left: 12px;
+    }
+    
+    .loadedWrapper.trxWrapper {
+        padding-left: 12px;
+    }
 
 
+    .detailsCard {
+        padding: 0;
+    }
+
+    .infoTextContainer.longCol {
+        margin-left: 0;
+    }
+
+    .detailsListRow {
+        padding-top: 10px;
+    }
+
+    .flex.items-start.justify-start.gap-2.border-b.py-4.detailsListRow {
+        padding-top: 14px;
+        padding-bottom: 12px;
+    }
+
+    .explorerCard {
+        padding-left: 35px;
+    }
+
+    .dotsImg {
+        width: 24%;
+    }
+
+    .tableWrapper tbody .sticky {
+        border-bottom: 1.7px solid rgba(0, 0, 0, .05);
+    }
+    
+
+    .copyTip.copied {
+     
+
+      }
+      
 }

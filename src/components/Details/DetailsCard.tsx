@@ -28,7 +28,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
   const nftVideo = useRef<HTMLVideoElement | null>(null);
 
   const isMobile = useIsMobile();
-  const truncateSize = useMemo(() => (isMobile ? 30 : 60), [isMobile]);
+  const truncateSize = useMemo(() => (isMobile ? 33 : 60), [isMobile]);
 
   useEffect(() => {
     nftVideo.current?.play();
@@ -138,13 +138,13 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
             </div>
           </div>
           {!dataLoad && (
-            <div className="flex items-start justify-start loadedWrapper">
+            <div className="flex items-start justify-start loadedWrapper trxWrapper">
               <ReactTooltip
                 effect="solid"
                 className={`${tooltipCopy ? "copyTip copied" : "copyTip"}`}
               />
 
-              <div className="mobileOnly">Transaction Hash:</div>
+              <div className="mobileOnly boldTxt">Transaction Hash:</div>
               <div className="copyBtnWrapper ">
                 <a
                   href={`${event?.fromChain && txExplorers[event?.fromChain]}${
