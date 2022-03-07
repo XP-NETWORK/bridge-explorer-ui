@@ -31,6 +31,9 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
   const truncateSize = useMemo(() => (isMobile ? 33 : 60), [isMobile]);
 
   useEffect(() => {
+    nftVideo.current?.addEventListener("loadeddata", () => {
+      nftVideo.current?.click();
+    });
     nftVideo.current?.play();
   }, []);
 
