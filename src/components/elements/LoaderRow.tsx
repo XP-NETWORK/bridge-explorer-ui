@@ -5,7 +5,7 @@ export const LoaderRow = () =>   <tr>
   colSpan={8}
   className="px-3 py-6 w-full text-xs font-medium text-gray-800"
 >
-  <div className="flex justify-center">
+  <div className="flex justify-center loaderWrap">
     <svg
       className=" animate-spin -ml-1 mr-3 h-5 w-5"
       xmlns="http://www.w3.org/2000/svg"

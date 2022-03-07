@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useState } from "react";
+import { FC, ReactNode, useEffect, useState, useRef, MutableRefObject } from "react";
 import { Link } from "react-router-dom";
 import { Container } from "./Container";
 import { useContext } from "react";
@@ -33,6 +33,8 @@ export interface IEvent {
   imgUri?: string;
 }
 
+
+
 export const ExplorerEvents = () => {
   // @ts-ignore
   const { events } = useContext(EventsContext);
@@ -41,16 +43,33 @@ export const ExplorerEvents = () => {
     console.log(events);
   }, [events]);
 
-  useEffect(() => {
-     
+  let scrollBtn = useRef<any>(null);
 
+  const scrollHandler = function () {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
+      scrollBtn.current.style.bottom = '500px';
+    } else {
+      scrollBtn.current.style.bottom = '30px';
+    }
+  }
+
+  useEffect(() => {
+     if (events.length) {
+      scrollBtn.current.style.visibility = 'visible';
+      window.addEventListener('scroll', scrollHandler)
+      return () => window.removeEventListener('scroll', scrollHandler)
+
+     }
+     
       
   }, [events])
 
   return (
-
+    <>
     <Container className="mt-5 px-0 sm:px-4 overflow-x-auto tableWrapper">
-   { false && <img src={scrollUp} alt="scrollUp" className="scrollTopBtn" /> }
+    <img src={scrollUp} alt="scrollUp" className="scrollTopBtn" ref={scrollBtn} onClick={(e) =>  {
+        setTimeout(() => window.scrollTo({top: 10, behavior: 'smooth'}), 100)
+    }} /> 
       <table className="min-w-full divide-y border-b divide-gray-200 eventsTable">
  
         <thead className="bg-gray-50 ">
@@ -147,7 +166,7 @@ export const ExplorerEvents = () => {
        
         </tbody>
       </table>
-    </Container>
+    </Container></>
   );
 };
 

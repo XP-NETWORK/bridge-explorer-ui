@@ -263,12 +263,13 @@ ul.chartInfoList li {
 }
 
 .scrollTopBtn {
-  position: sticky;
-  bottom: 0;
-  /*transform: rotate(-270deg);
+  visibility: hidden;
+  position: fixed;
+  transform: rotate(-270deg);
   cursor: pointer;
   bottom: 30px;
-  right: 20%;*/
+  z-index: 999;
+  right: 21%;
 }
 
 @keyframes gradient {
