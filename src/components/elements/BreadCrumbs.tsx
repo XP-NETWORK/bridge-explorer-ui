@@ -37,7 +37,8 @@ export const BreadCrumbs: React.FC<{
               
               selecedTab === tab ? " selectedTab " : "" 
              
-            } ${ i === 1 || i === 2 ? ' nonactive ': ''}` }
+            } 
+            ` }
             onClick={() => onChange(tab)}
           >
             {tab}
@@ -47,3 +48,4 @@ export const BreadCrumbs: React.FC<{
     </div>
   );
 };
+//${ i === 1 || i === 2 ? ' nonactive ': ''}

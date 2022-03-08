@@ -155,8 +155,12 @@
         width: 24%;
     }
 
-    .tableWrapper tbody .sticky {
-        border-bottom: 1.7px solid rgba(0, 0, 0, .05);
+      .tableWrapper tbody tr{
+        border-bottom: 1px solid rgba(0, 0, 0, .1) !important;
+    }
+
+    .tableWrapper tbody tr .sticky {
+        border-bottom: 1.4px solid rgba(0, 0, 0, .1) !important;
     }
     
 
