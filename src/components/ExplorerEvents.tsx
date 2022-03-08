@@ -40,16 +40,13 @@ export interface IEvent {
   imgUri?: string;
 }
 
-export const ExplorerEvents: FC<{ chainName?: string }> = ({
-  chainName = "",
-}) => {
+export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   const eventsContext = useContext(EventsContext);
 
   useEffect(() => {
-    eventsContext?.setChainName(chainName);
-    console.log(eventsContext?.events);
-    console.log("chainName", chainName);
-  }, [chainName]);
+    eventsContext?.setStatus(status);
+    console.log(eventsContext?.events, status);
+  }, [status]);
 
   let scrollBtn = useRef<any>(null);
 

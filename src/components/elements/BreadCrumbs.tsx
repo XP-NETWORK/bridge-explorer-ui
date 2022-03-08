@@ -10,7 +10,7 @@ export const TabsNavigator = ({ tab }: { tab: string }) => {
     }
 
     case "Pending Txns": {
-      return <ExplorerEvents chainName="Pending" />;
+      return <ExplorerEvents status="Pending" />;
     }
 
     case "Tools": {
