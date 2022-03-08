@@ -101,7 +101,7 @@ export const EventsProvider: FC = withContainer(
           });
       } else if (chainName.length && status.length > 0) {
         console.log("chain name and status");
-        fetch(`${url}?status=Pending&chainName=` + chainName)
+        fetch(`${url}?pendingSearch=` + chainName)
           .then((res) => res.json())
           .then(async (data: IEvent[]) => {
             const newEvents = data.map(async (data) => {
