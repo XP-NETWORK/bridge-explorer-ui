@@ -7,40 +7,36 @@ import { Line, Column } from '@ant-design/plots';
 export const Chart = ({dailyData}:{dailyData: DailyData[]}) => {
 
   let mockData = [
-    ...dailyData,
     {
       txNumber:22,
       walletsNumber:3,
-      date:"2022/3/9"
+      date:"2022/3/3"
     },
     {
       txNumber:7,
       walletsNumber:3,
-      date:"2022/3/10"
+      date:"2022/3/4"
     },
     {
       txNumber:19,
       walletsNumber:3,
-      date:"2022/3/10"
+      date:"2022/3/5"
     },
     {
       txNumber:56,
       walletsNumber:3,
-      date:"2022/3/11"
+      date:"2022/3/6"
     },
     {
       txNumber:31,
       walletsNumber:3,
-      date:"2022/3/12"
-    }]
+      date:"2022/3/7"
+    }, 
+    ...dailyData,
+  
+  ]
 
-   /* for (let j = 0; j < 20; j++) {
-      mockData.push({
-        txNumber: j,
-        walletsNumber:3,
-        date:"2022/3/12"
-      })
-    }*/
+
 
   mockData =  mockData.map((item, i) => ({
       ...item,
@@ -53,29 +49,36 @@ console.log(mockData);
     data: mockData,
     xField: 'adate',
     yField: 'txNumber',
+    tooltip: {
+      showTitle: false,
+      fields: ['txNumber', 'date']
+    },
     xAxis: {
      label: {
       formatter: (text:string) => {
-        console.log(text);
-        return new Date(+text).getMonth()
+        //const dataObj = new Date(+text).toISOString()
+        return null//dataObj.split('T')[0]
       }
      }
     },
  
   };
 
-  console.log(mockData[999]);
 
   return (
     <div className="lg:max-w-5xl mx-auto px-4 mt-8">
       <div className="chartWrapper">
         <div className="chartVisual">
           <h3 className="font-medium">Daily Transactions</h3>
+          <div className="chartMetrics">
+            <span>Today Tx: {mockData[mockData.length -1].txNumber}</span>
+            <span>Total Tx: {mockData.reduce((acc, cur) => acc += cur.txNumber, 0)}</span>
+          </div>
            <div className="lineWrapper">
               <Column {...config}/>
            </div>
         </div>
-        <div className="chartRates">
+        {false && <div className="chartRates">
           <div className="periodButtons">
             <span>Today</span>
             <span>Last 7 days</span>
@@ -103,7 +106,7 @@ console.log(mockData);
               <span className="chartItemValue">213.12s/2.12m</span>
             </li>
           </ul>
-        </div>
+        </div>}
       </div>
     </div>
   );

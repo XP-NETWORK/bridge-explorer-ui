@@ -30,12 +30,24 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
   const isMobile = useIsMobile();
   const truncateSize = useMemo(() => (isMobile ? 33 : 60), [isMobile]);
 
+
+
+
+  const videoHandler = () => {
+ 
+      //nftVideo.current?.click();
+      console.log("video loaded");
+   //nftVideo.current?.play();
+  }
+
   useEffect(() => {
-    nftVideo.current?.addEventListener("loadeddata", () => {
-      nftVideo.current?.click();
-    });
-    nftVideo.current?.play();
-  }, []);
+    if (data) {
+    console.log(nftVideo);
+    nftVideo?.current?.addEventListener("loadeddata", videoHandler)
+
+    }
+  return () => nftVideo?.current?.removeEventListener("loadeddata", videoHandler)
+  }, [data]);
 
   // @ts-ignore
   const toggleSound = () => {
@@ -99,9 +111,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
             }`}
           >
             <div className="font-medium w-32">NFT Name:</div>
-            <p className="break-words w-[calc(100%-8rem)] md:w-fit infoTextWrap">
-           
-            </p>
+            <p className="break-words w-[calc(100%-8rem)] md:w-fit infoTextWrap"></p>
           </div>
           <div
             className={`flex w-full  ${
@@ -134,7 +144,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
             >
               NFT Name:
             </div>
-            <div className="font-medium w-32">{dataLoad ? "" :event.name}</div>
+            <div className="font-medium w-32">{dataLoad ? "" : event.name}</div>
           </div>
           <div className="flex w-full loadedWrapper">
             <div

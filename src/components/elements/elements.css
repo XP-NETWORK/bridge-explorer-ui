@@ -30,11 +30,25 @@
 
 .chartVisual {
   flex: 1;
+  font-family: Inter, sans-serif;
 }
 
 .chartVisual h3 {
+  margin-bottom: 12px;
+  font-family: Poppins, sans-serif;;
 }
 
+.chartMetrics {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 12px;
+}
+
+.chartMetrics span{
+
+  padding: 3px 0;
+}
 .chartRates {
   /*display: flex;
   flex-direction: column;

@@ -19,6 +19,8 @@ import ReactTooltip from "react-tooltip";
 import moment from "moment";
 import scrollUp from "../assets/img/collapse.svg";
 import { NoEventsRow } from "./elements/NoEventsRow";
+import { ImgOrFail } from "./elements/ImgOrFail";
+
 
 export interface IEvent {
   id: string;
@@ -76,7 +78,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   }, [eventsContext?.events]);
 
   return (
-    <>
+    <>  
       <Container className="mt-5 px-0 sm:px-4 overflow-x-auto tableWrapper">
         <img
           src={scrollUp}
@@ -100,7 +102,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
               <TableHeading>Tx Type</TableHeading>
               <TableHeading>From</TableHeading>
               <TableHeading>To</TableHeading>
-              <TableHeading>Date</TableHeading>
+              <TableHeading>Age</TableHeading>
               <TableHeading>Status</TableHeading>
             </tr>
           </thead>
@@ -114,13 +116,10 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                   <TableData className="sticky left-0 text-center max-w-[62px] bg-white imgTableData">
                     <ReactTooltip effect="solid" backgroundColor="#575151" />
                     {event?.status === "Completed" || event?.imgUri ? (
-                      <img
-                        className="rounded-lg"
-                        src={event?.imgUri || ImgBroken}
-                        alt=""
-                        width={38}
-                        height={38}
-                      />
+
+                      <ImgOrFail className="rounded-lg" src={event?.imgUri || ImgBroken} width={38}
+                      height={38}/>
+        
                     ) : (
                       <div className="lds-ellipsis">
                         <div></div>
@@ -187,8 +186,11 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                     </Link>
                   </TableData>
                   <TableData>
-                    {moment(event?.createdAt).format("YYYY/MM/DD H:mm") ||
+                    <span  data-tip={moment(event?.createdAt).format("YYYY/MM/DD H:mm")}>
+                    {moment(event?.createdAt).fromNow() || 
                       "N/A"}
+                    </span>
+                   
                   </TableData>
                   <TableData>
                     <Status status={event.status} />

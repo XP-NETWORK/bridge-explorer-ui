@@ -19,6 +19,7 @@ export const withData = function (Wrapped: React.FC<any>) {
           .then((res) => res.json())
           .then(async (data) => {
             const res = await fetch(data[0].nftUri);
+            console.log(res, 'ds');
             const metadata = await res.json();
             setEvent({
               ...data[0],

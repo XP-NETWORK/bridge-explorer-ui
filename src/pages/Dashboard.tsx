@@ -29,10 +29,7 @@ export const Dashboard = () => {
 
   return (
     <div>
-      <Navbar />
-      <ExplorerCards />
       <Chart dailyData={dailyData}/>
-      <Footer />
     </div>
   );
 };

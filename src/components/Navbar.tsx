@@ -32,7 +32,7 @@ export const Navbar = () => {
             Bridge
           </a>
           <NavItem to="/network" className="nonactive">Network</NavItem>
-          <NavItem to="/dashboard" className="nonactive">Dashboard</NavItem>
+       {false &&   <NavItem to="/dashboard" className="nonactive">Dashboard</NavItem>}
         </div>
         <button
           className="absolute right-4 top-7 sm:hidden"
