@@ -25,35 +25,46 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
   const { loading: dataLoad, event, metadata } = data;
   const { tooltipCopy } = copyProps;
   const [soundOn, setSoundOn] = useState(false);
+  const [hasSound, setHasSound] = useState(false);
   const nftVideo = useRef<HTMLVideoElement | null>(null);
 
   const isMobile = useIsMobile();
   const truncateSize = useMemo(() => (isMobile ? 33 : 60), [isMobile]);
-
-
-
-
-  const videoHandler = () => {
- 
-      //nftVideo.current?.click();
-      console.log("video loaded");
-   //nftVideo.current?.play();
-  }
-
-  useEffect(() => {
-    if (data) {
-    console.log(nftVideo);
-    nftVideo?.current?.addEventListener("loadeddata", videoHandler)
-
-    }
-  return () => nftVideo?.current?.removeEventListener("loadeddata", videoHandler)
-  }, [data]);
 
   // @ts-ignore
   const toggleSound = () => {
     nftVideo.current!.muted = soundOn;
     setSoundOn(!soundOn);
   };
+
+  const videoHandler = () => {
+    nftVideo.current?.click();
+    nftVideo.current?.play();
+
+    if ("WebkitAppearance" in document.documentElement.style) {
+      // @ts-ignore
+      setHasSound(nftVideo.current?.webkitAudioDecodedByteCount > 0);
+      // @ts-ignore
+    } else if (nftVideo.current?.mozHasAudio) {
+      // @ts-ignore
+      setHasSound(true);
+    }
+    console.log(nftVideo.current);
+    if (hasSound) {
+      console.log("audio track detected");
+    } else {
+      console.log("audio track not detected");
+    }
+  };
+
+  useEffect(() => {
+    if (data) {
+      console.log(nftVideo);
+      nftVideo?.current?.addEventListener("loadeddata", videoHandler);
+    }
+    return () =>
+      nftVideo?.current?.removeEventListener("loadeddata", videoHandler);
+  }, [data]);
 
   return (
     <div className="text-[#222222] sm:border p-1 sm:p-5 md:p-6 rounded-xl detailsCard">
@@ -82,16 +93,18 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
                     >
                       <source src={metadata?.animation_url} type="video/mp4" />
                     </video>
-                    <button
-                      onClick={toggleSound}
-                      className="absolute z-20 h-7 w-7 flex items-center justify-center top-2 right-2 bg-white rounded-full"
-                    >
-                      <img
-                        src={soundOn ? SoundOnIcon : SoundOffIcon}
-                        alt="sound button"
-                        width={14}
-                      />
-                    </button>
+                    {hasSound && (
+                      <button
+                        onClick={toggleSound}
+                        className="absolute z-20 h-7 w-7 flex items-center justify-center top-2 right-2 bg-white rounded-full"
+                      >
+                        <img
+                          src={soundOn ? SoundOnIcon : SoundOffIcon}
+                          alt="sound button"
+                          width={14}
+                        />
+                      </button>
+                    )}
                   </div>
                 ) : (
                   <img
