@@ -17,8 +17,13 @@ export const withData = function (Wrapped: React.FC<any>) {
     useEffect(() => {
         fetch(`${url}?fromHash=${params.fromHash}`)
           .then((res) => res.json())
-          .then((data) => {
-            setEvent(data[0]);
+          .then(async (data) => {
+            const res = await fetch(data[0].nftUri);
+            const metadata = await res.json();
+            setEvent({
+              ...data[0],
+              name:metadata.name
+            });
            setLoading(false)
           });
       }, []);

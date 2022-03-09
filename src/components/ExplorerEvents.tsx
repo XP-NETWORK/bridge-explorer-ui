@@ -31,6 +31,7 @@ export interface IEvent {
   createdAt: Date;
   nftUri: string;
   imgUri?: string;
+  name: string;
 }
 
 
