@@ -19,7 +19,7 @@ export const Tools = () => {
 const Form = () => {
   return (
     <form>
-      <label className="block mt-5 space-y-2">
+      <label className="block  space-y-2">
         <span>Tx Hash:</span>
         <input type="text" className="w-full border-gray-200 rounded" />
       </label>
