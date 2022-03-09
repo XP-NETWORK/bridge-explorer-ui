@@ -39,6 +39,12 @@ const Form = () => {
           ))}
         </select>
       </label>
+      <button
+        type="submit"
+        className="block mt-5 w-full p-2 text-center text-white rounded-md bg-[#297EFE]"
+      >
+        Send
+      </button>
     </form>
   );
 };
