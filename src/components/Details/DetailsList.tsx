@@ -40,7 +40,7 @@ const DetailsList = ({data, copyProps } : DetailsCard) => {
             <div className="font-medium w-32">Dest Hash:</div>
             <p className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}>
               <a href={`${event?.toChain && txExplorers[event?.toChain]}${event?.toHash}`} target="_blank" rel="noreferrer" className="text-[#235EF5]">{truncate(event?.toHash, truncateSize) || "N/A"}</a>
-            {!dataLoad && <CopyWithTooltip copyValue={event?.fromChainName} copyProps={copyProps} copyIdx={6}/>}
+            {!dataLoad && <CopyWithTooltip copyValue={event?.toHash} copyProps={copyProps} copyIdx={6}/>}
             </p>
           
           </div>

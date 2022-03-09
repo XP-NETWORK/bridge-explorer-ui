@@ -39,6 +39,7 @@ export interface IEvent {
   createdAt: Date;
   nftUri: string;
   imgUri?: string;
+  name: string;
 }
 
 export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {

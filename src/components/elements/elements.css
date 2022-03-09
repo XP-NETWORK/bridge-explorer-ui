@@ -262,6 +262,10 @@ ul.chartInfoList li {
   position: relative;
 }
 
+.tableWrapper tr .sticky img {
+  height: 38px;
+}
+
 .scrollTopBtn {
   visibility: hidden;
   position: fixed;
