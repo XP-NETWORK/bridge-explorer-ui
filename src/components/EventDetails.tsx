@@ -19,12 +19,10 @@ export const EventDetails = () => {
   useEffect(() => {
     new ClipboardJS(".copy-btn");
 
-    console.log(params.fromHash);
     fetch(`https://dev-explorer-api.herokuapp.com/?fromHash=${params.fromHash}`) //https://dev-explorer-api.herokuapp.com
       .then((res) => res.json())
       .then((data) => {
         setEvent(data[0]);
-        console.log(data[0]);
       });
   }, []);
 
@@ -34,8 +32,6 @@ export const EventDetails = () => {
       .then((res) => res.json())
       .then((metadata) => {
         setMetadata(metadata);
-
-        console.log(metadata);
       });
   }, [event]);
 
@@ -43,7 +39,6 @@ export const EventDetails = () => {
 
   useEffect(() => {
     if (tooltipCopy) {
-      console.log(tooltipCopy);
       ReactTooltip.rebuild();
       ReactTooltip.show(tooltips.current[tooltipCopy]);
       setTimeout(() => setTooltipCopy(null), 500);

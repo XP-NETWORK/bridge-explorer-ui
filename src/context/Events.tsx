@@ -17,6 +17,7 @@ interface IEventsContext {
   status: string;
   setStatus: Dispatch<SetStateAction<string>>;
   setChainName: (chainName: string) => void;
+  isLoading: boolean;
 }
 
 export const EventsContext = createContext<IEventsContext | null>(null);
@@ -25,17 +26,16 @@ export const EventsProvider: FC = withContainer(
     const [events, setEvents] = useState<IEvent[]>([]);
     const [chainName, setChainName] = useState("");
     const [status, setStatus] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
       socket.off("incomingEvent");
       socket.off("updateEvent");
       socket.on("incomingEvent", async (event: any) => {
-        console.log(event, "incoming");
         try {
           //const res = await fetch(event.nftUri);
           //const metadata = await res.json();
           const incoming = { imgUri: "", ...event };
-          console.log(events, "on event===");
           setEvents([incoming, ...events]);
         } catch (e: any) {
           console.log(e);
@@ -44,7 +44,6 @@ export const EventsProvider: FC = withContainer(
         }
       });
       socket.on("updateEvent", async (updated: any) => {
-        console.log(updated, "updated");
         const idx = events.findIndex(
           (event) =>
             event.actionId + event.tokenId + updated.fromHash ===
@@ -72,6 +71,8 @@ export const EventsProvider: FC = withContainer(
     }, [events]);
 
     useEffect(() => {
+      setIsLoading(true);
+
       if (chainName.length && status.length === 0) {
         console.log("only chain name");
 
@@ -84,7 +85,8 @@ export const EventsProvider: FC = withContainer(
               return { imgUri: metadata.image as string, ...data };
             });
             setEvents(await Promise.all(newEvents));
-          });
+          })
+          .then(() => setIsLoading(false));
       } else if (status.length && chainName.length === 0) {
         console.log("only status");
 
@@ -98,7 +100,8 @@ export const EventsProvider: FC = withContainer(
             });
             setEvents(await Promise.all(newEvents));
             console.log(await Promise.all(newEvents), "new events");
-          });
+          })
+          .then(() => setIsLoading(false));
       } else if (chainName.length && status.length > 0) {
         console.log("chain name and status");
         fetch(`${url}?pendingSearch=` + chainName)
@@ -110,7 +113,8 @@ export const EventsProvider: FC = withContainer(
               return { imgUri: metadata.image as string, ...data };
             });
             setEvents(await Promise.all(newEvents));
-          });
+          })
+          .then(() => setIsLoading(false));
       } else {
         console.log("no query");
         fetch(`${url}`)
@@ -118,7 +122,6 @@ export const EventsProvider: FC = withContainer(
           .then(async (data: IEvent[]) => {
             const newEvents = data.map(async (data) => {
               try {
-                console.log(data.nftUri);
                 const res = await fetch(data.nftUri);
                 const metadata = await res.json();
                 return { imgUri: metadata.image as string, ...data };
@@ -128,14 +131,22 @@ export const EventsProvider: FC = withContainer(
               }
             });
             setEvents(await Promise.all(newEvents));
-          });
+          })
+          .then(() => setIsLoading(false));
       }
-      console.log("fetching events");
+      console.log("isLoading", isLoading);
+      console.log("fetching events", events.length, isLoading);
     }, [chainName, status]);
+
+    useEffect(() => {
+      if (events.length > 0) {
+        setIsLoading(false);
+      }
+    }, [events]);
 
     return (
       <EventsContext.Provider
-        value={{ events, status, setStatus, setChainName }}
+        value={{ events, status, setStatus, setChainName, isLoading }}
       >
         {children}
       </EventsContext.Provider>

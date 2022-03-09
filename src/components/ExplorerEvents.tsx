@@ -18,6 +18,7 @@ import { currency } from "../constants";
 import ReactTooltip from "react-tooltip";
 import moment from "moment";
 import scrollUp from "../assets/img/collapse.svg";
+import { NoEventsRow } from "./elements/NoEventsRow";
 
 export interface IEvent {
   id: string;
@@ -49,6 +50,10 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   }, [status]);
 
   let scrollBtn = useRef<any>(null);
+
+  useEffect(() => {
+    console.log(eventsContext?.isLoading, "isLoading");
+  }, [eventsContext?.isLoading]);
 
   const scrollHandler = function () {
     if (
@@ -99,7 +104,10 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y  divide-gray-200 overflow-x-scroll">
-            {eventsContext?.events.length ? (
+            {eventsContext?.isLoading ? (
+              <LoaderRow />
+            ) : // if events length is 0 after 2 seconds, show loader
+            eventsContext?.events.length ? (
               eventsContext?.events.map((event: IEvent) => (
                 <tr key={event.id}>
                   <TableData className="sticky left-0 text-center max-w-[62px] bg-white imgTableData">
@@ -187,7 +195,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                 </tr>
               ))
             ) : (
-              <LoaderRow />
+              <NoEventsRow />
             )}
           </tbody>
         </table>
