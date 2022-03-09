@@ -1,3 +1,4 @@
+
 export const truncate = function (fullStr:string | undefined, strLen:number, separator?: string) {
     if (!fullStr) return;
     if (fullStr.length <= strLen) return fullStr;
@@ -15,4 +16,5 @@ export const truncate = function (fullStr:string | undefined, strLen:number, sep
       fullStr.substr(fullStr.length - backChars)
     );
   };
-  
+
+

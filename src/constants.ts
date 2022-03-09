@@ -10,6 +10,7 @@ export const currency:any = {
     '7': 'MATIC',
     '5': 'ETH',
     '8': 'FTM',
+    '12': 'ONE',
 
 }
 
@@ -25,6 +26,7 @@ export const txExplorers: any = {
     '7': 'https://polygonscan.com/tx/',
     '5': 'https://ethplorer.io/tx/',
     '8': 'https://ftmscan.com/tx/',
+    '12': 'https://explorer.harmony.one/tx/',
     
 }
 
@@ -39,7 +41,8 @@ export const addressExplorers: any = {
     '21': 'https://explorer.mainnet.aurora.dev/address/',
     '7': 'https://polygonscan.com/address/',
     '5': 'https://ethplorer.io/address/',
-    '8': 'https://ftmscan.com/address/'
+    '8': 'https://ftmscan.com/address/',
+    '12': 'https://explorer.harmony.one/address/',
 }
 
 export const url = 'https://dev-explorer-api.herokuapp.com/';

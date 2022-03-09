@@ -37,21 +37,21 @@ const DetailsList = ({data, copyProps } : DetailsCard) => {
             </div>
 
             <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
-            <div className="font-medium w-32">Dest Hash:</div>
+            <div className="font-medium w-32">Destination Hash:</div>
             <p className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}>
-              <a href={`${event?.toChain && txExplorers[event?.toChain]}${event?.toHash}`} target="_blank" rel="noreferrer" className="text-[#235EF5]">{truncate(event?.toHash, truncateSize) || "N/A"}</a>
+              <a href={`${event?.toChain && txExplorers[event?.toChain]}${event?.toHash}`} target="_blank" rel="noreferrer" className={`text-[#235EF5] ${event?.toHash ? '' : 'nonactive '}`}>{truncate(event?.toHash, truncateSize) || "N/A"}</a>
             {!dataLoad && <CopyWithTooltip copyValue={event?.toHash} copyProps={copyProps} copyIdx={6}/>}
             </p>
-          
+                    
           </div>
           <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
-            <div className="font-medium w-32">Source Chain:</div>
+            <div className="font-medium w-32">Departure Chain:</div>
             <p className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}>
               <span>{event?.fromChainName || "N/A"}</span>
             </p>
           </div>
           <div className={`flex items-start justify-start gap-2 border-b py-4 detailsListRow`}>
-            <div className="font-medium w-32">Dest Chain:</div>
+            <div className="font-medium w-32">Destination Chain:</div>
             <p className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}>
               <span>{event?.toChainName || "N/A"}</span>
             </p>

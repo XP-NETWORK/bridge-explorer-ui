@@ -28,7 +28,7 @@ export const SearchBar = () => {
           onChange={(e) => setValue(e.target.value)}
           value={value}
         />
-        <div className="clearWrapper">
+        <div className="clearWrapper" style={{display: value? 'flex': 'none'}}>
           <img
             src={Cross}
             alt="cross"
