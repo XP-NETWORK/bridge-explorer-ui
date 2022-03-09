@@ -33,6 +33,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
   useEffect(() => {
     nftVideo.current?.addEventListener("loadeddata", () => {
       nftVideo.current?.click();
+      console.log("video loaded");
     });
     nftVideo.current?.play();
   }, []);
@@ -99,9 +100,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
             }`}
           >
             <div className="font-medium w-32">NFT Name:</div>
-            <p className="break-words w-[calc(100%-8rem)] md:w-fit infoTextWrap">
-           
-            </p>
+            <p className="break-words w-[calc(100%-8rem)] md:w-fit infoTextWrap"></p>
           </div>
           <div
             className={`flex w-full  ${
@@ -134,7 +133,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
             >
               NFT Name:
             </div>
-            <div className="font-medium w-32">{dataLoad ? "" :event.name}</div>
+            <div className="font-medium w-32">{dataLoad ? "" : event.name}</div>
           </div>
           <div className="flex w-full loadedWrapper">
             <div
