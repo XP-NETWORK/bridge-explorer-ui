@@ -1,5 +1,6 @@
 import React from "react";
 import { ExplorerEvents } from "../ExplorerEvents";
+import { Tools } from "../Tools";
 
 export const tabs = ["View Tx", "Pending Txns", "Tools"];
 
@@ -14,7 +15,7 @@ export const TabsNavigator = ({ tab }: { tab: string }) => {
     }
 
     case "Tools": {
-      return <></>;
+      return <Tools />;
     }
 
     default:
@@ -35,8 +36,7 @@ export const BreadCrumbs: React.FC<{
             key={i + "tab"}
             className={`breadCrumbTab ${
               selecedTab === tab ? " selectedTab " : ""
-            } ${i === 2 ? " nonactive " : ""} 
-            `}
+            } `}
             onClick={() => onChange(tab)}
           >
             {tab}
