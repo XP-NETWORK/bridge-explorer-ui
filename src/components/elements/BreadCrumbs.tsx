@@ -10,7 +10,7 @@ export const TabsNavigator = ({ tab }: { tab: string }) => {
     }
 
     case "Pending Txns": {
-      return <></>;
+      return <ExplorerEvents status="Pending" />;
     }
 
     case "Tools": {
@@ -34,11 +34,9 @@ export const BreadCrumbs: React.FC<{
           <div
             key={i + "tab"}
             className={`breadCrumbTab ${
-              
-              selecedTab === tab ? " selectedTab " : "" 
-             
-            } 
-            ` }
+              selecedTab === tab ? " selectedTab " : ""
+            } ${i === 2 ? " nonactive " : ""} 
+            `}
             onClick={() => onChange(tab)}
           >
             {tab}
