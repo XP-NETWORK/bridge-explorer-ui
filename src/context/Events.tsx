@@ -138,12 +138,6 @@ export const EventsProvider: FC = withContainer(
       console.log("fetching events", events.length, isLoading);
     }, [chainName, status]);
 
-    useEffect(() => {
-      if (events.length > 0) {
-        setIsLoading(false);
-      }
-    }, [events]);
-
     return (
       <EventsContext.Provider
         value={{ events, status, setStatus, setChainName, isLoading }}
