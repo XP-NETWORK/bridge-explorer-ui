@@ -18,7 +18,7 @@ export const withData = function (Wrapped: React.FC<any>) {
         fetch(`${url}?fromHash=${params.fromHash}`)
           .then((res) => res.json())
           .then(async (data) => {
-            const res = await fetch(data[0].nftUri);
+            const res = data[0].nftUri.includes('ipfs://')? await fetch(`https://ipfs.io/ipfs/${data[0].nftUri.split('://')[1]}`) : await fetch(data[0].nftUri);
             console.log(res, 'ds');
             const metadata = await res.json();
             setEvent({

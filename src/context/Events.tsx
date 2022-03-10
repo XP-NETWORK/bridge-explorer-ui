@@ -80,7 +80,7 @@ export const EventsProvider: FC = withContainer(
           .then((res) => res.json())
           .then(async (data: IEvent[]) => {
             const newEvents = data.map(async (data) => {
-              const res = await fetch(data.nftUri);
+              const res = data.nftUri.includes('ipfs://')? await fetch(`https://ipfs.io/ipfs/${data.nftUri.split('://')[1]}`) : await fetch(data.nftUri);
               const metadata = await res.json();
               return { imgUri: metadata.image as string, ...data };
             });
@@ -94,7 +94,7 @@ export const EventsProvider: FC = withContainer(
           .then((res) => res.json())
           .then(async (data: IEvent[]) => {
             const newEvents = data.map(async (data) => {
-              const res = await fetch(data.nftUri);
+              const res = data.nftUri.includes('ipfs://')? await fetch(`https://ipfs.io/ipfs/${data.nftUri.split('://')[1]}`) : await fetch(data.nftUri);
               const metadata = await res.json();
               return { imgUri: metadata.image as string, ...data };
             });
@@ -108,7 +108,7 @@ export const EventsProvider: FC = withContainer(
           .then((res) => res.json())
           .then(async (data: IEvent[]) => {
             const newEvents = data.map(async (data) => {
-              const res = await fetch(data.nftUri);
+              const res = data.nftUri.includes('ipfs://')? await fetch(`https://ipfs.io/ipfs/${data.nftUri.split('://')[1]}`) : await fetch(data.nftUri);
               const metadata = await res.json();
               return { imgUri: metadata.image as string, ...data };
             });
