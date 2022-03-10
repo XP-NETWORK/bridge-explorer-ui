@@ -157,7 +157,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
             >
               NFT Name:
             </div>
-            <div className="break font-medium w-full">
+            <div className="break text-[#222222] w-full">
               {dataLoad ? "" : event.name}
             </div>
           </div>
@@ -169,7 +169,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
             >
               ID:
             </div>
-            <div className="font-medium w-32">
+            <div className="text-[#222222] w-32">
               {dataLoad ? "" : event.tokenId}
             </div>
           </div>
@@ -188,7 +188,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
                   }`}
                   target="_blank"
                   rel="noreferrer"
-                  className="font-medium w-32 trxHash"
+                  className="text-[#222222] w-32 trxHash"
                 >
                   {truncate(event.fromHash, truncateSize)}
                 </a>
