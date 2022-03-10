@@ -158,9 +158,9 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
-          <span>
-            {moment(event?.createdAt).format("YYYY/MM/DD H:mm") ?? "N/A"}
-          </span>
+          <span>{`${moment(event?.createdAt).fromNow()} (${new Date(
+            event?.createdAt
+          ).toUTCString()})`}</span>
         </p>
       </div>
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
