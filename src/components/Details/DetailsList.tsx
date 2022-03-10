@@ -8,6 +8,7 @@ import useIsMobile from "../../hooks/isMobile";
 import { useMemo } from "react";
 import { txExplorers, addressExplorers, currency } from "../../constants";
 import { ethers } from "ethers";
+import ClockIcon from "../../assets/icons/clock.svg";
 
 const DetailsList = ({ data, copyProps }: DetailsCard) => {
   const { loading: dataLoad, event } = data;
@@ -24,7 +25,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
         className="flex items-start justify-start gap-2 border-b py-4 detailsListRow"
         style={{ display: "none" }}
       >
-        <div className="font-medium w-32">Source Hash:</div>
+        <div className="text-[#222222] font-medium w-32">Source Hash:</div>
         <p
           // style={{ width: "calc(100% - 6rem)" }}
           className={`md:pl-14 break-words  md:w-fit  ${
@@ -49,7 +50,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
       </div>
 
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
-        <div className="font-medium w-32">Destination Hash:</div>
+        <div className="text-[#222222] font-medium w-32">Destination Hash:</div>
         <p
           className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${
             dataLoad ? "loadingWrapper" : "loadedWrapper"
@@ -75,29 +76,33 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
         </p>
       </div>
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
-        <div className="font-medium w-32">Departure Chain:</div>
+        <div className="text-[#222222] font-medium w-32">Departure Chain:</div>
         <p
           className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
-          <span>{event?.fromChainName || "N/A"}</span>
+          <span className="text-[#222222]">
+            {event?.fromChainName || "N/A"}
+          </span>
         </p>
       </div>
       <div
         className={`flex items-start justify-start gap-2 border-b py-4 detailsListRow`}
       >
-        <div className="font-medium w-32">Destination Chain:</div>
+        <div className="text-[#222222] font-medium w-32">
+          Destination Chain:
+        </div>
         <p
           className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
-          <span>{event?.toChainName || "N/A"}</span>
+          <span className="text-[#222222]">{event?.toChainName || "N/A"}</span>
         </p>
       </div>
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
-        <div className="font-medium w-32">From:</div>
+        <div className="text-[#222222] font-medium w-32">From:</div>
 
         <p
           className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${
@@ -125,7 +130,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
         </p>
       </div>
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
-        <div className="font-medium w-32">To:</div>
+        <div className="text-[#222222] font-medium w-32">To:</div>
         <p
           className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${
             dataLoad ? "loadingWrapper" : "loadedWrapper"
@@ -152,25 +157,36 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
         </p>
       </div>
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
-        <div className="font-medium w-32">Date:</div>
+        <div className="text-[#222222] font-medium w-32">Date:</div>
         <p
           className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
-          <span>{`${moment(event?.createdAt).fromNow()} (${new Date(
+          <span className="mr-1">
+            <img src={ClockIcon} alt="clock icon" />
+          </span>
+          <span className="text-[#222222]">{`${moment(event?.createdAt)
+            .fromNow()
+            .replace("a ", "1 ")
+            .replace("an ", "1 ")
+            .replace("hour ", "hr ")
+            .replace("hours", "hrs")
+            .replace("minute ", "min ")
+            .replace("second ", "sec ")
+            .replace("seconds ", "secs ")} (${new Date(
             event?.createdAt
           ).toUTCString()})`}</span>
         </p>
       </div>
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
-        <div className="font-medium w-32">Transaction Fee:</div>
+        <div className="text-[#222222] font-medium w-32">Transaction Fee:</div>
         <p
           className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
-          <span>
+          <span className="text-[#222222]">
             {event?.txFees && Number(ethers.utils.formatEther(event.txFees))}{" "}
             {event?.fromChain && currency[event.fromChain]}
           </span>
@@ -178,7 +194,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
       </div>
 
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
-        <div className="font-medium w-32">Status:</div>
+        <div className="text-[#222222] font-medium w-32">Status:</div>
         <p
           className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${
             dataLoad ? "loadingWrapper" : "loadedWrapper"

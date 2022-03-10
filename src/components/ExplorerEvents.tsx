@@ -193,7 +193,15 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                         "YYYY/MM/DD H:mm"
                       )}
                     >
-                      {moment(event?.createdAt).fromNow() || "N/A"}
+                      {moment(event?.createdAt)
+                        .fromNow()
+                        .replace("a ", "1 ")
+                        .replace("an ", "1 ")
+                        .replace("hour ", "hr ")
+                        .replace("hours", "hrs")
+                        .replace("minute ", "min ")
+                        .replace("second ", "sec ")
+                        .replace("seconds ", "secs ") || "N/A"}
                     </span>
                   </TableData>
                   <TableData>

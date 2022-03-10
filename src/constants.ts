@@ -93,8 +93,8 @@ export const chains = [
   },
 ];
 
-//export const url = "https://dev-explorer-api.herokuapp.com/";
-//export const socketUrl = "wss://dev-explorer-api.herokuapp.com";
+export const url = "https://dev-explorer-api.herokuapp.com/";
+export const socketUrl = "wss://dev-explorer-api.herokuapp.com";
 
-export const url = 'http://localhost:3100/';
-export const socketUrl = 'ws://localhost:3100';
+//export const url = 'http://localhost:3100/';
+//export const socketUrl = 'ws://localhost:3100';
