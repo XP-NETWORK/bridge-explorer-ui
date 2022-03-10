@@ -23,9 +23,24 @@ const Form = () => {
   const [depChain, setDepChain] = useState(chains[0].name);
   const [destChain, setDestChain] = useState(chains[0].name);
   const [validError, setValidError] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [captchaRender, setCaptchaRender] = useState(false)
 
   const sendIssue = async () => {
-    if (!txHash) return setValidError(true);
+    
+   // if (!txHash) return setValidError(true);
+   setCaptchaRender(true);
+     // @ts-ignore
+    window?.grecaptcha.render("captchaContainer", {
+       // @ts-ignore
+      sitekey: window.SITE_KEY_CAPTCHA,
+      callback: async (token:string) => {
+        console.log(token);
+      }
+
+    })
+
+return;
     const res = await fetch(`${url}reportIssue`, {
       headers: _headers,
       method: "POST",
@@ -35,8 +50,17 @@ const Form = () => {
         destChain,
       }),
     });
-    console.log(res);
-    console.log(await res.json());
+    if (res && res.ok) {
+        const {message} = await res.json()
+
+        if (message === 'Hash not found') {
+            return setValidError(true)
+        }
+        if (message === 'Success') {
+        setSuccess(true)
+        }
+    }
+    
   };
 
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
@@ -69,12 +93,14 @@ const Form = () => {
         <span>Destination Chain:</span>
         <Dropdown setSelectedChain={setDestChain} />
       </label>
-      <button
+      <div id="captchaContainer"></div>
+     {!captchaRender &&  <button
         className="block mt-5 w-full p-2 text-center text-white rounded-md bg-[#297EFE]"
         type="submit"
       >
         Send
-      </button>
+      </button>}
+      {success && <span className="formSuccess">Report has been sent</span>}
     </form>
   );
 };

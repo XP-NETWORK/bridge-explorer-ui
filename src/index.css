@@ -119,6 +119,15 @@ body {
   margin-left: -10px;
 }
 
+.formSuccess {
+  color: #04B200;
+  font-size: 12px;
+}
+
+#captchaContainer {
+  margin-top: 20px;
+}
+
 @keyframes ping {
   75%,
   100% {

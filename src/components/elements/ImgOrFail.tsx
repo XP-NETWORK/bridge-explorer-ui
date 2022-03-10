@@ -6,15 +6,17 @@ export const ImgOrFail = ({
     src,
     className,
     width,
+    alt,
     height
 } : {
     src: string;
     className:string;
+    alt?:string,
     width: number;
     height: number
 }) => {
 
     const [failed, setFailed] = useState(false)
 
-    return <img src={!failed? src: failImage} alt="" className={className} width={width} height={height} onError={() => setFailed(true)}/>
+    return <img alt={alt} src={!failed? src: failImage} className={className} width={width} height={height} onError={() => setFailed(true)}/>
 }

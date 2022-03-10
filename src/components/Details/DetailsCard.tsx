@@ -7,6 +7,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { txExplorers } from "../../constants";
 import SoundOnIcon from "../../assets/icons/sound-on.svg";
 import SoundOffIcon from "../../assets/icons/sound-off.svg";
+import { ImgOrFail } from "../elements/ImgOrFail";
 
 export interface DetailsCard {
   data: {
@@ -59,6 +60,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
 
   useEffect(() => {
     if (data) {
+      console.log(data, "md");
       console.log(nftVideo);
       nftVideo?.current?.addEventListener("loadeddata", videoHandler);
     }
@@ -107,10 +109,12 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
                     )}
                   </div>
                 ) : (
-                  <img
-                    className="rounded-lg  nftImage"
-                    src={metadata?.image}
+                  <ImgOrFail
                     alt="nft preview"
+                    className={"rounded-lg  nftImage"}
+                    src={metadata?.image}
+                    width={3}
+                    height={3}
                   />
                 )}
               </>
@@ -157,7 +161,9 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
             >
               NFT Name:
             </div>
-            <div className="font-medium w-32">{dataLoad ? "" : event.name}</div>
+            <div className="font-medium w-32">
+              {dataLoad ? "" : metadata?.name}
+            </div>
           </div>
           <div className="flex w-full loadedWrapper">
             <div

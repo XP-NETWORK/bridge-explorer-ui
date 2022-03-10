@@ -80,9 +80,18 @@ export const EventsProvider: FC = withContainer(
           .then((res) => res.json())
           .then(async (data: IEvent[]) => {
             const newEvents = data.map(async (data) => {
-              const res = data.nftUri.includes('ipfs://')? await fetch(`https://ipfs.io/ipfs/${data.nftUri.split('://')[1]}`) : await fetch(data.nftUri);
+              const res = data.nftUri.includes("ipfs://")
+                ? await fetch(
+                    `https://ipfs.io/ipfs/${data.nftUri.split("://")[1]}`
+                  )
+                : await fetch(data.nftUri);
               const metadata = await res.json();
-              return { imgUri: metadata.image as string, ...data };
+              return {
+                imgUri: /^ipfs:\/\//.test(metadata.image)
+                  ? `https://ipfs.io/ipfs/${metadata.image.split("ipfs://")[1]}`
+                  : (metadata.image as string),
+                ...data,
+              };
             });
             setEvents(await Promise.all(newEvents));
           })
@@ -94,9 +103,18 @@ export const EventsProvider: FC = withContainer(
           .then((res) => res.json())
           .then(async (data: IEvent[]) => {
             const newEvents = data.map(async (data) => {
-              const res = data.nftUri.includes('ipfs://')? await fetch(`https://ipfs.io/ipfs/${data.nftUri.split('://')[1]}`) : await fetch(data.nftUri);
+              const res = data.nftUri.includes("ipfs://")
+                ? await fetch(
+                    `https://ipfs.io/ipfs/${data.nftUri.split("://")[1]}`
+                  )
+                : await fetch(data.nftUri);
               const metadata = await res.json();
-              return { imgUri: metadata.image as string, ...data };
+              return {
+                imgUri: /^ipfs:\/\//.test(metadata.image)
+                  ? `https://ipfs.io/ipfs/${metadata.image.split("ipfs://")[1]}`
+                  : (metadata.image as string),
+                ...data,
+              };
             });
             setEvents(await Promise.all(newEvents));
             console.log(await Promise.all(newEvents), "new events");
@@ -108,9 +126,18 @@ export const EventsProvider: FC = withContainer(
           .then((res) => res.json())
           .then(async (data: IEvent[]) => {
             const newEvents = data.map(async (data) => {
-              const res = data.nftUri.includes('ipfs://')? await fetch(`https://ipfs.io/ipfs/${data.nftUri.split('://')[1]}`) : await fetch(data.nftUri);
+              const res = data.nftUri.includes("ipfs://")
+                ? await fetch(
+                    `https://ipfs.io/ipfs/${data.nftUri.split("://")[1]}`
+                  )
+                : await fetch(data.nftUri);
               const metadata = await res.json();
-              return { imgUri: metadata.image as string, ...data };
+              return {
+                imgUri: /^ipfs:\/\//.test(metadata.image)
+                  ? `https://ipfs.io/ipfs/${metadata.image.split("ipfs://")[1]}`
+                  : (metadata.image as string),
+                ...data,
+              };
             });
             setEvents(await Promise.all(newEvents));
           })
@@ -122,9 +149,21 @@ export const EventsProvider: FC = withContainer(
           .then(async (data: IEvent[]) => {
             const newEvents = data.map(async (data) => {
               try {
-                const res = data.nftUri.includes('ipfs://')? await fetch(`https://ipfs.io/ipfs/${data.nftUri.split('://')[1]}`) : await fetch(data.nftUri);
+                const res = data.nftUri.includes("ipfs://")
+                  ? await fetch(
+                      `https://ipfs.io/ipfs/${data.nftUri.split("://")[1]}`
+                    )
+                  : await fetch(data.nftUri);
                 const metadata = await res.json();
-                return { imgUri: metadata.image as string, ...data };
+
+                return {
+                  imgUri: /^ipfs:\/\//.test(metadata.image)
+                    ? `https://ipfs.io/ipfs/${
+                        metadata.image.split("ipfs://")[1]
+                      }`
+                    : (metadata.image as string),
+                  ...data,
+                };
               } catch (e: any) {
                 console.log(e);
                 return { imgUri: "", ...data };
