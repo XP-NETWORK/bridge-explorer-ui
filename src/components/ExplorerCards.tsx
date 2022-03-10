@@ -2,7 +2,7 @@ import { ExplorerCard } from "./ExplorerCard";
 import { Container } from "./Container";
 import TransactionsIcon from "../assets/icons/transactions.svg";
 import UsersIcon from "../assets/icons/users.svg";
-import VolumeIcon from "../assets/icons/volume.svg";
+import ChainsIcon from "../assets/icons/chains.svg";
 import { withContainer } from "../context/ServcieProvder";
 
 export const ExplorerCards = withContainer(
@@ -19,11 +19,7 @@ export const ExplorerCards = withContainer(
           icon={TransactionsIcon}
         />
         <ExplorerCard title={totalWallets} subtitle="Users" icon={UsersIcon} />
-        <ExplorerCard
-          title="$453.43M"
-          subtitle="Volume (USD)"
-          icon={VolumeIcon}
-        />
+        <ExplorerCard title="10" subtitle="Chains" icon={ChainsIcon} />
       </Container>
     );
   }

@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC, useState, useEffect, useMemo } from "react";
 import { chains } from "../constants";
 import { Container } from "./Container";
 import { url, _headers } from "../constants";
@@ -24,52 +24,63 @@ const Form = () => {
   const [destChain, setDestChain] = useState(chains[0].name);
   const [validError, setValidError] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [captchaRender, setCaptchaRender] = useState(false)
+  const [errorStatus, setError] = useState('');
+  const [captchaRender, setCaptchaRender] = useState(false);
+  
 
-  const sendIssue = async () => {
-    
-   // if (!txHash) return setValidError(true);
-   setCaptchaRender(true);
-     // @ts-ignore
-    window?.grecaptcha.render("captchaContainer", {
-       // @ts-ignore
-      sitekey: window.SITE_KEY_CAPTCHA,
-      callback: async (token:string) => {
-        console.log(token);
+
+  const captchaHandler = async (token: string) => {
+   
+      const res = await fetch(`${url}reportIssue`, {
+        headers: _headers,
+        method: "POST",
+        body: JSON.stringify({
+          txHash,
+          depChain,
+          destChain,
+          token,
+        }),
+      });
+      if (res && res.ok) {
+        const { message } = await res.json();
+        
+        if (message === "Hash not found") {
+     
+          setValidError(true);
+        } else if (message === "Success") {
+         
+          setSuccess(true);
+        }
+      } else {
+        setError((await res.json()).message)
       }
 
-    })
-
-return;
-    const res = await fetch(`${url}reportIssue`, {
-      headers: _headers,
-      method: "POST",
-      body: JSON.stringify({
-        txHash,
-        depChain,
-        destChain,
-      }),
-    });
-    if (res && res.ok) {
-        const {message} = await res.json()
-
-        if (message === 'Hash not found') {
-            return setValidError(true)
-        }
-        if (message === 'Success') {
-        setSuccess(true)
-        }
+      setCaptchaRender(false);
+        //@ts-ignore
+        document.getElementById('captchaContainer')?.parentElement?.removeChild(document.getElementById('captchaContainer'));
+        const newContainer = document.createElement('div')
+        newContainer.id = 'captchaContainer'
+        document.querySelector('#root form.issueForm')?.appendChild(newContainer);
     }
-    
+
+  const sendIssue =  () => {
+    if (!txHash) return setValidError(true);
+    setCaptchaRender(true);
+        // @ts-ignore
+      window?.grecaptcha.render("captchaContainer", {
+      // @ts-ignore
+      sitekey: window.SITE_KEY_CAPTCHA,
+      callback: captchaHandler,
+    });
   };
 
-  const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    sendIssue();
+     sendIssue();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="issueForm">
       <div className="block  space-y-2">
         <span>Tx Hash:</span>
         <div className={`inputWrap ${validError ? "failValid" : ""}`}>
@@ -79,28 +90,37 @@ return;
             className="bg-white flex justify-between items-center focus:outline-none w-full select-none border rounded px-4 py-2"
             onChange={(e) => {
               setValidError(false);
+              setSuccess(false);
+              setError('');
               setHash(e.target.value);
             }}
           />
           <span className="inputError">Invalid Hash</span>
         </div>
       </div>
-      <label className="block mt-5 space-y-2">
+      <div className="block mt-5 space-y-2">
         <span>Departure Chain:</span>
         <Dropdown setSelectedChain={setDepChain} />
-      </label>
-      <label className="block mt-5 space-y-2">
+      </div>
+      <div className="block mt-5 space-y-2">
         <span>Destination Chain:</span>
         <Dropdown setSelectedChain={setDestChain} />
-      </label>
-      <div id="captchaContainer"></div>
-     {!captchaRender &&  <button
-        className="block mt-5 w-full p-2 text-center text-white rounded-md bg-[#297EFE]"
-        type="submit"
-      >
-        Send
-      </button>}
+      </div>
+      <div
+        id="captchaContainer"
+        style={{ display: captchaRender ? "block" : "none" }}
+      ></div>
+
+      {!captchaRender && (
+        <button
+          className="block mt-5 w-full p-2 text-center text-white rounded-md bg-[#297EFE]"
+          type="submit"
+        >
+          Send
+        </button>
+      )}
       {success && <span className="formSuccess">Report has been sent</span>}
+      {errorStatus && <span className="formFail">{errorStatus}</span>}
     </form>
   );
 };
@@ -112,60 +132,72 @@ const Dropdown: FC<{
   const [_selectedChain, _setSelectedChain] = useState("");
 
   return (
-    <div className="relative">
-      <h1
-        className="bg-white flex justify-between items-center select-none border rounded px-4 py-2"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <span>{_selectedChain.length ? _selectedChain : "Select Chain"}</span>
-        <svg
-          width="8"
-          height="4"
-          viewBox="0 0 8 4"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+    <>
+      {/* backdrop */}
+      <div
+        className={` ${
+          isOpen ? "fixed" : "hidden"
+        } top-0 left-0 w-full h-full z-10`}
+        onClick={() => setIsOpen(false)}
+      />
+      <div className="relative">
+        <h1
+          className="bg-white flex justify-between items-center select-none border rounded px-4 py-2"
+          onClick={() => setIsOpen(!isOpen)}
         >
-          <path d="M0 -3.49691e-07L4 4L8 0L0 -3.49691e-07Z" fill="#62718A" />
-        </svg>
-      </h1>
-      <ul
-        className={`${
-          isOpen || "hidden"
-        } z-10 rounded absolute w-full py-2 bg-white shadow max-h-72 overflow-y-scroll`}
-      >
-        {chains.map((chain) => (
-          <li
-            onClick={(e) => {
-              _setSelectedChain(e.currentTarget.innerText);
-              setSelectedChain(e.currentTarget.innerText);
-              setIsOpen(false);
-            }}
-            className="py-2 px-4 select-none cursor-pointer hover:bg-slate-100"
-            key={chain.name}
+          <span>{_selectedChain.length ? _selectedChain : "Select Chain"}</span>
+          <svg
+            width="8"
+            height="4"
+            viewBox="0 0 8 4"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            {chain.name}
-          </li>
-        ))}
-      </ul>
-    </div>
+            <path d="M0 -3.49691e-07L4 4L8 0L0 -3.49691e-07Z" fill="#62718A" />
+          </svg>
+        </h1>
+        <ul
+          className={`${
+            isOpen || "hidden"
+          } z-10 rounded absolute w-full py-2 bg-white shadow max-h-72 overflow-y-scroll`}
+        >
+          {chains.map((chain) => (
+            <li
+              onClick={(e) => {
+                _setSelectedChain(e.currentTarget.innerText);
+                setSelectedChain(e.currentTarget.innerText);
+                setIsOpen(false);
+              }}
+              className="py-2 px-4 select-none cursor-pointer hover:bg-slate-100"
+              key={chain.name}
+            >
+              {chain.name}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 
 const Card = () => {
   return (
     <div className="bg-white rounded-sm border p-5">
-      <h2>Keep calm</h2>
+      <h2 className="font-medium">Keep calm. We are on it!</h2>
+      <p className="mt-4">First of all, don't panic.</p>
+      <p className="mt-4">Your asset is safe.</p>
       <p className="mt-4">
-        Due to the unpredictable glitches on different blockchain networks and
-        the decentralized nature of XP.NETWORK protocol, you may not find your
-        cross chain transaction in the XP.NETWORK explorer sometimes. Don't
-        worry, your asset is safe.
+        Sometimes you may not see your cross-chain transaction in the XP.NETWORK
+        explorer due to unpredictable glitches on different blockchain networks
+        and the decentralized nature of XP.NETWORK protocol.
       </p>
-      <p className="mt-6">
-        You can use the tool below if your transaction is not showing up in our
-        explorer. XP.NETWORK will then register your transaction.
+      <p className="mt-4">
+        If your transaction is not showing up in our explorer,
       </p>
-      <p className="mt-6">
+      <p className="mt-4">
+        You can use the tool below, and we will register your transaction.
+      </p>
+      <p className="mt-4">
         Please check your transaction in XP.NETWORK explorer 5 minutes after
         using this tool.
       </p>

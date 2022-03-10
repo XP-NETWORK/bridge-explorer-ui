@@ -69,7 +69,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
   }, [data]);
 
   return (
-    <div className="text-[#222222] sm:border p-1 sm:p-5 md:p-6 rounded-xl detailsCard">
+    <div className="text-[#222222] overflow-hidden sm:border p-1 sm:p-5 md:p-6 rounded-xl detailsCard">
       <h1 className="text-base font-medium">Sent Item {}</h1>
       <hr className="mb-5 mt-3" />
 
@@ -161,7 +161,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
             >
               NFT Name:
             </div>
-            <div className="font-medium w-32">
+            <div className="break text-[#222222] w-full">
               {dataLoad ? "" : metadata?.name}
             </div>
           </div>
@@ -173,7 +173,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
             >
               ID:
             </div>
-            <div className="font-medium w-32">
+            <div className="text-[#222222] w-32">
               {dataLoad ? "" : event.tokenId}
             </div>
           </div>
@@ -192,7 +192,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
                   }`}
                   target="_blank"
                   rel="noreferrer"
-                  className="font-medium w-32 trxHash"
+                  className="text-[#222222] w-32 trxHash"
                 >
                   {truncate(event.fromHash, truncateSize)}
                 </a>

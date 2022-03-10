@@ -124,6 +124,12 @@ body {
   font-size: 12px;
 }
 
+.formFail {
+  color: #c93d49;
+  font-size: 12px;
+
+}
+
 #captchaContainer {
   margin-top: 20px;
 }

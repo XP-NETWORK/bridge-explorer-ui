@@ -25,7 +25,7 @@ export const Navbar = () => {
         >
           <NavItem to="/">Explorer</NavItem>
           <a
-            className="sm:flex p-4 w-full min-w-[14rem] z-20  hover:bg-slate-100 sm:min-w-fit sm:p-0 sm:hover:bg-white  text-[#030303] items-end font-normal tracking-wide hover:tracking-[0.0175em] hover:font-medium text-[15px] sm:pb-2.5 max-w-fit sm:border-t-2 border-transparent"
+            className="sm:flex p-4 w-full min-w-[14rem] z-20  hover:bg-slate-100 sm:min-w-fit sm:p-0 sm:hover:bg-white  text-[#030303] items-end font-medium text-[15px] sm:pb-2.5 max-w-fit sm:border-t-2 border-transparent"
             href="https://bridge.xp.network/"
             target="_blank"
           >
@@ -58,7 +58,7 @@ const NavItem: FC<{ to: string; className?: string }> = ({
 }) => {
   return (
     <NavLink
-      className={`sm:flex p-4 w-full min-w-[14rem] z-20 sm:min-w-fit sm:p-0 sm:hover:bg-white  hover:bg-slate-100 text-[#030303] items-end font-normal tracking-wide sm:pb-2.5  hover:tracking-[0.0175em] hover:font-medium text-[15px] max-w-fit sm:border-t-2 border-transparent ${className}`}
+      className={`sm:flex p-4 w-full min-w-[14rem] z-20 sm:min-w-fit sm:p-0 sm:hover:bg-white  hover:bg-slate-100 text-[#030303] items-end font-medium sm:pb-2.5  text-[15px] max-w-fit sm:border-t-2 border-transparent ${className}`}
       to={to}
     >
       {children}
