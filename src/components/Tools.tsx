@@ -128,18 +128,21 @@ const Dropdown: FC<{
 const Card = () => {
   return (
     <div className="bg-white rounded-sm border p-5">
-      <h2>Keep calm</h2>
+      <h2 className="font-medium">Keep calm. We are on it!</h2>
+      <p className="mt-4">First of all, don't panic.</p>
+      <p className="mt-4">Your asset is safe.</p>
       <p className="mt-4">
-        Due to the unpredictable glitches on different blockchain networks and
-        the decentralized nature of XP.NETWORK protocol, you may not find your
-        cross chain transaction in the XP.NETWORK explorer sometimes. Don't
-        worry, your asset is safe.
+        Sometimes you may not see your cross-chain transaction in the XP.NETWORK
+        explorer due to unpredictable glitches on different blockchain networks
+        and the decentralized nature of XP.NETWORK protocol.
       </p>
-      <p className="mt-6">
-        You can use the tool below if your transaction is not showing up in our
-        explorer. XP.NETWORK will then register your transaction.
+      <p className="mt-4">
+        If your transaction is not showing up in our explorer,
       </p>
-      <p className="mt-6">
+      <p className="mt-4">
+        You can use the tool below, and we will register your transaction.
+      </p>
+      <p className="mt-4">
         Please check your transaction in XP.NETWORK explorer 5 minutes after
         using this tool.
       </p>
