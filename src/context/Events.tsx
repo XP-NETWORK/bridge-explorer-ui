@@ -71,8 +71,9 @@ export const EventsProvider: FC = withContainer(
     }, [events]);
 
     useEffect(() => {
-      setIsLoading(true);
-
+      if (events.length !== events.length) {
+        setIsLoading(true);
+      }
       if (chainName.length && status.length === 0) {
         console.log("only chain name");
 
@@ -80,7 +81,11 @@ export const EventsProvider: FC = withContainer(
           .then((res) => res.json())
           .then(async (data: IEvent[]) => {
             const newEvents = data.map(async (data) => {
-              const res = data.nftUri.includes('ipfs://')? await fetch(`https://ipfs.io/ipfs/${data.nftUri.split('://')[1]}`) : await fetch(data.nftUri);
+              const res = data.nftUri.includes("ipfs://")
+                ? await fetch(
+                    `https://ipfs.io/ipfs/${data.nftUri.split("://")[1]}`
+                  )
+                : await fetch(data.nftUri);
               const metadata = await res.json();
               return { imgUri: metadata.image as string, ...data };
             });
@@ -94,7 +99,11 @@ export const EventsProvider: FC = withContainer(
           .then((res) => res.json())
           .then(async (data: IEvent[]) => {
             const newEvents = data.map(async (data) => {
-              const res = data.nftUri.includes('ipfs://')? await fetch(`https://ipfs.io/ipfs/${data.nftUri.split('://')[1]}`) : await fetch(data.nftUri);
+              const res = data.nftUri.includes("ipfs://")
+                ? await fetch(
+                    `https://ipfs.io/ipfs/${data.nftUri.split("://")[1]}`
+                  )
+                : await fetch(data.nftUri);
               const metadata = await res.json();
               return { imgUri: metadata.image as string, ...data };
             });
@@ -108,7 +117,11 @@ export const EventsProvider: FC = withContainer(
           .then((res) => res.json())
           .then(async (data: IEvent[]) => {
             const newEvents = data.map(async (data) => {
-              const res = data.nftUri.includes('ipfs://')? await fetch(`https://ipfs.io/ipfs/${data.nftUri.split('://')[1]}`) : await fetch(data.nftUri);
+              const res = data.nftUri.includes("ipfs://")
+                ? await fetch(
+                    `https://ipfs.io/ipfs/${data.nftUri.split("://")[1]}`
+                  )
+                : await fetch(data.nftUri);
               const metadata = await res.json();
               return { imgUri: metadata.image as string, ...data };
             });
@@ -122,7 +135,11 @@ export const EventsProvider: FC = withContainer(
           .then(async (data: IEvent[]) => {
             const newEvents = data.map(async (data) => {
               try {
-                const res = data.nftUri.includes('ipfs://')? await fetch(`https://ipfs.io/ipfs/${data.nftUri.split('://')[1]}`) : await fetch(data.nftUri);
+                const res = data.nftUri.includes("ipfs://")
+                  ? await fetch(
+                      `https://ipfs.io/ipfs/${data.nftUri.split("://")[1]}`
+                    )
+                  : await fetch(data.nftUri);
                 const metadata = await res.json();
                 return { imgUri: metadata.image as string, ...data };
               } catch (e: any) {
