@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { chains } from "../constants";
 import { Container } from "./Container";
+import { url, _headers } from "../constants";
 
 export const Tools = () => {
   return (
@@ -17,15 +19,50 @@ export const Tools = () => {
 };
 
 const Form = () => {
+  const [txHash, setHash] = useState("");
+  const [depChain, setDepChain] = useState(chains[0].name);
+  const [destChain, setDestChain] = useState(chains[0].name);
+  const [validError, setValidError] = useState(false);
+
+  const sendIssue = async () => {
+    if (!txHash) return setValidError(true);
+    const res = await fetch(`${url}reportIssue`, {
+      headers: _headers,
+      method: "POST",
+      body: JSON.stringify({
+        txHash,
+        depChain,
+        destChain,
+      }),
+    });
+    console.log(res);
+    console.log(await res.json());
+  };
+
   return (
     <form>
       <label className="block  space-y-2">
         <span>Tx Hash:</span>
-        <input type="text" className="w-full border-gray-200 rounded" />
+        <div className={`inputWrap ${validError ? "failValid" : ""}`}>
+          <input
+            type="text"
+            value={txHash}
+            className={`w-full border-gray-200 rounded`}
+            onChange={(e) => {
+              setValidError(false);
+              setHash(e.target.value);
+            }}
+          />
+          <span className="inputError">Invalid Hash</span>
+        </div>
       </label>
       <label className="block mt-5 space-y-2">
         <span>Departure Chain:</span>
-        <select className="w-full border-gray-200  rounded">
+        <select
+          value={depChain}
+          className="w-full border-gray-200  rounded"
+          onChange={(e) => setDepChain(e.target.value)}
+        >
           {chains.map((chain) => (
             <option key={chain.name}>{chain.name}</option>
           ))}
@@ -33,15 +70,22 @@ const Form = () => {
       </label>
       <label className="block mt-5 space-y-2">
         <span>Destination Chain:</span>
-        <select className="w-full border-gray-200  rounded">
+        <select
+          className="w-full border-gray-200  rounded"
+          value={destChain}
+          onChange={(e) => setDestChain(e.target.value)}
+        >
           {chains.map((chain) => (
             <option key={chain.name}>{chain.name}</option>
           ))}
         </select>
       </label>
       <button
-        type="submit"
         className="block mt-5 w-full p-2 text-center text-white rounded-md bg-[#297EFE]"
+        onClick={(e) => {
+          e.preventDefault();
+          sendIssue();
+        }}
       >
         Send
       </button>

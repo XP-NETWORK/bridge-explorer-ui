@@ -19,16 +19,16 @@ export const Explorer = () => {
     <div>
       <Navbar />
       <ExplorerCards />
+      <Dashboard />
       <EventsProvider>
         <SearchBar />
-        <Dashboard/>
+
         <BreadCrumbs
           onChange={(value: string) => setTab(value)}
           tabs={tabs}
           selecedTab={tab}
         />
         <TabsNavigator tab={tab} />
-      
       </EventsProvider>
       <Footer />
     </div>

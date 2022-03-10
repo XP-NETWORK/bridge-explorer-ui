@@ -21,7 +21,6 @@ import scrollUp from "../assets/img/collapse.svg";
 import { NoEventsRow } from "./elements/NoEventsRow";
 import { ImgOrFail } from "./elements/ImgOrFail";
 
-
 export interface IEvent {
   id: string;
   chainName: string;
@@ -76,9 +75,10 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
       return () => window.removeEventListener("scroll", scrollHandler);
     }
   }, [eventsContext?.events]);
+  console.log(eventsContext?.events);
 
   return (
-    <>  
+    <>
       <Container className="mt-5 px-0 sm:px-4 overflow-x-auto tableWrapper">
         <img
           src={scrollUp}
@@ -116,10 +116,12 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                   <TableData className="sticky left-0 text-center max-w-[62px] bg-white imgTableData">
                     <ReactTooltip effect="solid" backgroundColor="#575151" />
                     {event?.status === "Completed" || event?.imgUri ? (
-
-                      <ImgOrFail className="rounded-lg" src={event?.imgUri || ImgBroken} width={38}
-                      height={38}/>
-        
+                      <ImgOrFail
+                        className="rounded-lg"
+                        src={event?.imgUri || ImgBroken}
+                        width={38}
+                        height={38}
+                      />
                     ) : (
                       <div className="lds-ellipsis">
                         <div></div>
@@ -186,11 +188,13 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                     </Link>
                   </TableData>
                   <TableData>
-                    <span  data-tip={moment(event?.createdAt).format("YYYY/MM/DD H:mm")}>
-                    {moment(event?.createdAt).fromNow() || 
-                      "N/A"}
+                    <span
+                      data-tip={moment(event?.createdAt).format(
+                        "YYYY/MM/DD H:mm"
+                      )}
+                    >
+                      {moment(event?.createdAt).fromNow() || "N/A"}
                     </span>
-                   
                   </TableData>
                   <TableData>
                     <Status status={event.status} />
