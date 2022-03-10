@@ -162,9 +162,17 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
-          <span className="text-[#222222]">{`${moment(
+          <span className="text-[#222222]">{`${moment(event?.createdAt)
+            .fromNow()
+            .replace("a ", "1 ")
+            .replace("an ", "1 ")
+            .replace("hour ", "hr ")
+            .replace("hours", "hrs")
+            .replace("minute ", "min ")
+            .replace("second ", "sec ")
+            .replace("seconds ", "secs ")} (${new Date(
             event?.createdAt
-          ).fromNow()} (${new Date(event?.createdAt).toUTCString()})`}</span>
+          ).toUTCString()})`}</span>
         </p>
       </div>
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
