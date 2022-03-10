@@ -43,6 +43,11 @@ export const addressExplorers: any = {
   "12": "https://explorer.harmony.one/address/",
 };
 
+export const _headers = {
+  Accept: "*",
+  "Content-Type": "application/json",
+};
+
 export const chains = [
   {
     name: "AURORA",

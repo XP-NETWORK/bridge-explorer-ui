@@ -5,6 +5,7 @@ import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
 import { SearchBar } from "../components/SearchBar";
 import { EventsProvider } from "../context/Events";
+import { Dashboard } from "./Dashboard";
 
 import {
   BreadCrumbs,
@@ -18,15 +19,16 @@ export const Explorer = () => {
     <div>
       <Navbar />
       <ExplorerCards />
+      <Dashboard />
       <EventsProvider>
         <SearchBar />
+
         <BreadCrumbs
           onChange={(value: string) => setTab(value)}
           tabs={tabs}
           selecedTab={tab}
         />
         <TabsNavigator tab={tab} />
-      
       </EventsProvider>
       <Footer />
     </div>

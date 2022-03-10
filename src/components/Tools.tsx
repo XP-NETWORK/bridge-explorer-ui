@@ -1,6 +1,7 @@
-import { FC, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import { chains } from "../constants";
 import { Container } from "./Container";
+import { url, _headers } from "../constants";
 
 export const Tools = () => {
   return (
@@ -18,38 +19,59 @@ export const Tools = () => {
 };
 
 const Form = () => {
-  const [txHash, setTxHash] = useState("");
-  const [fromChain, setFromChain] = useState("");
-  const [toChain, setToChain] = useState("");
+  const [txHash, setHash] = useState("");
+  const [depChain, setDepChain] = useState(chains[0].name);
+  const [destChain, setDestChain] = useState(chains[0].name);
+  const [validError, setValidError] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const sendIssue = async () => {
+    if (!txHash) return setValidError(true);
+    const res = await fetch(`${url}reportIssue`, {
+      headers: _headers,
+      method: "POST",
+      body: JSON.stringify({
+        txHash,
+        depChain,
+        destChain,
+      }),
+    });
+    console.log(res);
+    console.log(await res.json());
+  };
+
+  const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(txHash, fromChain, toChain);
-    // TODO: send tx to server
+    sendIssue();
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div className="block  space-y-2">
         <span>Tx Hash:</span>
-        <input
-          value={txHash}
-          onChange={(e) => setTxHash(e.currentTarget.value)}
-          type="text"
-          className="bg-white w-full focus:outline-none select-none border rounded px-4 py-2"
-        />
+        <div className={`inputWrap ${validError ? "failValid" : ""}`}>
+          <input
+            type="text"
+            value={txHash}
+            className="bg-white flex justify-between items-center focus:outline-none w-full select-none border rounded px-4 py-2"
+            onChange={(e) => {
+              setValidError(false);
+              setHash(e.target.value);
+            }}
+          />
+          <span className="inputError">Invalid Hash</span>
+        </div>
       </div>
-      <div className="block mt-5 space-y-2">
+      <label className="block mt-5 space-y-2">
+        <span>Departure Chain:</span>
+        <Dropdown setSelectedChain={setDepChain} />
+      </label>
+      <label className="block mt-5 space-y-2">
         <span>Destination Chain:</span>
-        <Dropdown setSelectedChain={setFromChain} />
-      </div>
-      <div className="block mt-5 space-y-2">
-        <span>Destination Chain:</span>
-        <Dropdown setSelectedChain={setToChain} />
-      </div>
+        <Dropdown setSelectedChain={setDestChain} />
+      </label>
       <button
-        type="submit"
         className="block mt-5 w-full p-2 text-center text-white rounded-md bg-[#297EFE]"
+        type="submit"
       >
         Send
       </button>
