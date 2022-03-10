@@ -81,7 +81,9 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
-          <span>{event?.fromChainName || "N/A"}</span>
+          <span className="text-[#222222]">
+            {event?.fromChainName || "N/A"}
+          </span>
         </p>
       </div>
       <div
@@ -93,7 +95,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
-          <span>{event?.toChainName || "N/A"}</span>
+          <span className="text-[#222222]">{event?.toChainName || "N/A"}</span>
         </p>
       </div>
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
@@ -158,9 +160,9 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
-          <span>{`${moment(event?.createdAt).fromNow()} (${new Date(
+          <span className="text-[#222222]">{`${moment(
             event?.createdAt
-          ).toUTCString()})`}</span>
+          ).fromNow()} (${new Date(event?.createdAt).toUTCString()})`}</span>
         </p>
       </div>
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
@@ -170,7 +172,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
-          <span>
+          <span className="text-[#222222]">
             {event?.txFees && Number(ethers.utils.formatEther(event.txFees))}{" "}
             {event?.fromChain && currency[event.fromChain]}
           </span>
