@@ -61,14 +61,14 @@ const Form = () => {
           <span className="inputError">Invalid Hash</span>
         </div>
       </div>
-      <label className="block mt-5 space-y-2">
+      <div className="block mt-5 space-y-2">
         <span>Departure Chain:</span>
         <Dropdown setSelectedChain={setDepChain} />
-      </label>
-      <label className="block mt-5 space-y-2">
+      </div>
+      <div className="block mt-5 space-y-2">
         <span>Destination Chain:</span>
         <Dropdown setSelectedChain={setDestChain} />
-      </label>
+      </div>
       <button
         className="block mt-5 w-full p-2 text-center text-white rounded-md bg-[#297EFE]"
         type="submit"
@@ -86,42 +86,51 @@ const Dropdown: FC<{
   const [_selectedChain, _setSelectedChain] = useState("");
 
   return (
-    <div className="relative">
-      <h1
-        className="bg-white flex justify-between items-center select-none border rounded px-4 py-2"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <span>{_selectedChain.length ? _selectedChain : "Select Chain"}</span>
-        <svg
-          width="8"
-          height="4"
-          viewBox="0 0 8 4"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+    <>
+      {/* backdrop */}
+      <div
+        className={` ${
+          isOpen ? "fixed" : "hidden"
+        } top-0 left-0 w-full h-full z-10`}
+        onClick={() => setIsOpen(false)}
+      />
+      <div className="relative">
+        <h1
+          className="bg-white flex justify-between items-center select-none border rounded px-4 py-2"
+          onClick={() => setIsOpen(!isOpen)}
         >
-          <path d="M0 -3.49691e-07L4 4L8 0L0 -3.49691e-07Z" fill="#62718A" />
-        </svg>
-      </h1>
-      <ul
-        className={`${
-          isOpen || "hidden"
-        } z-10 rounded absolute w-full py-2 bg-white shadow max-h-72 overflow-y-scroll`}
-      >
-        {chains.map((chain) => (
-          <li
-            onClick={(e) => {
-              _setSelectedChain(e.currentTarget.innerText);
-              setSelectedChain(e.currentTarget.innerText);
-              setIsOpen(false);
-            }}
-            className="py-2 px-4 select-none cursor-pointer hover:bg-slate-100"
-            key={chain.name}
+          <span>{_selectedChain.length ? _selectedChain : "Select Chain"}</span>
+          <svg
+            width="8"
+            height="4"
+            viewBox="0 0 8 4"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            {chain.name}
-          </li>
-        ))}
-      </ul>
-    </div>
+            <path d="M0 -3.49691e-07L4 4L8 0L0 -3.49691e-07Z" fill="#62718A" />
+          </svg>
+        </h1>
+        <ul
+          className={`${
+            isOpen || "hidden"
+          } z-10 rounded absolute w-full py-2 bg-white shadow max-h-72 overflow-y-scroll`}
+        >
+          {chains.map((chain) => (
+            <li
+              onClick={(e) => {
+                _setSelectedChain(e.currentTarget.innerText);
+                setSelectedChain(e.currentTarget.innerText);
+                setIsOpen(false);
+              }}
+              className="py-2 px-4 select-none cursor-pointer hover:bg-slate-100"
+              key={chain.name}
+            >
+              {chain.name}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 
