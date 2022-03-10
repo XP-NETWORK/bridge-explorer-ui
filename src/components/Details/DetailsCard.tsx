@@ -67,7 +67,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
   }, [data]);
 
   return (
-    <div className="text-[#222222] sm:border p-1 sm:p-5 md:p-6 rounded-xl detailsCard">
+    <div className="text-[#222222] overflow-hidden sm:border p-1 sm:p-5 md:p-6 rounded-xl detailsCard">
       <h1 className="text-base font-medium">Sent Item {}</h1>
       <hr className="mb-5 mt-3" />
 
@@ -157,7 +157,9 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
             >
               NFT Name:
             </div>
-            <div className="font-medium w-32">{dataLoad ? "" : event.name}</div>
+            <div className="break font-medium w-full">
+              {dataLoad ? "" : event.name}
+            </div>
           </div>
           <div className="flex w-full loadedWrapper">
             <div
