@@ -8,6 +8,7 @@ import useIsMobile from "../../hooks/isMobile";
 import { useMemo } from "react";
 import { txExplorers, addressExplorers, currency } from "../../constants";
 import { ethers } from "ethers";
+import ClockIcon from "../../assets/icons/clock.svg";
 
 const DetailsList = ({ data, copyProps }: DetailsCard) => {
   const { loading: dataLoad, event } = data;
@@ -162,6 +163,9 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
+          <span className="mr-1">
+            <img src={ClockIcon} alt="clock icon" />
+          </span>
           <span className="text-[#222222]">{`${moment(event?.createdAt)
             .fromNow()
             .replace("a ", "1 ")
