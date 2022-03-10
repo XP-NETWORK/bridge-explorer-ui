@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import { chains } from "../constants";
 import { Container } from "./Container";
 import { url, _headers } from "../constants";
@@ -6,8 +6,8 @@ import { url, _headers } from "../constants";
 export const Tools = () => {
   return (
     <Container>
-      <div className="grid grid-cols-6 mt-5 gap-10">
-        <div className="col-span-2">
+      <div className="grid grid-cols-1 md:grid-cols-6 mt-5 gap-10">
+        <div className="col-span-4 md:col-span-2">
           <Form />
         </div>
         <div className="col-span-4">
@@ -39,15 +39,20 @@ const Form = () => {
     console.log(await res.json());
   };
 
+  const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    sendIssue();
+  };
+
   return (
-    <form>
-      <label className="block  space-y-2">
+    <form onSubmit={handleSubmit}>
+      <div className="block  space-y-2">
         <span>Tx Hash:</span>
         <div className={`inputWrap ${validError ? "failValid" : ""}`}>
           <input
             type="text"
             value={txHash}
-            className={`w-full border-gray-200 rounded`}
+            className="bg-white flex justify-between items-center focus:outline-none w-full select-none border rounded px-4 py-2"
             onChange={(e) => {
               setValidError(false);
               setHash(e.target.value);
@@ -55,41 +60,68 @@ const Form = () => {
           />
           <span className="inputError">Invalid Hash</span>
         </div>
-      </label>
+      </div>
       <label className="block mt-5 space-y-2">
         <span>Departure Chain:</span>
-        <select
-          value={depChain}
-          className="w-full border-gray-200  rounded"
-          onChange={(e) => setDepChain(e.target.value)}
-        >
-          {chains.map((chain) => (
-            <option key={chain.name}>{chain.name}</option>
-          ))}
-        </select>
+        <Dropdown setSelectedChain={setDepChain} />
       </label>
       <label className="block mt-5 space-y-2">
         <span>Destination Chain:</span>
-        <select
-          className="w-full border-gray-200  rounded"
-          value={destChain}
-          onChange={(e) => setDestChain(e.target.value)}
-        >
-          {chains.map((chain) => (
-            <option key={chain.name}>{chain.name}</option>
-          ))}
-        </select>
+        <Dropdown setSelectedChain={setDestChain} />
       </label>
       <button
         className="block mt-5 w-full p-2 text-center text-white rounded-md bg-[#297EFE]"
-        onClick={(e) => {
-          e.preventDefault();
-          sendIssue();
-        }}
+        type="submit"
       >
         Send
       </button>
     </form>
+  );
+};
+
+const Dropdown: FC<{
+  setSelectedChain: React.Dispatch<React.SetStateAction<string>>;
+}> = ({ setSelectedChain }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [_selectedChain, _setSelectedChain] = useState("");
+
+  return (
+    <div className="relative">
+      <h1
+        className="bg-white flex justify-between items-center select-none border rounded px-4 py-2"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span>{_selectedChain.length ? _selectedChain : "Select Chain"}</span>
+        <svg
+          width="8"
+          height="4"
+          viewBox="0 0 8 4"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M0 -3.49691e-07L4 4L8 0L0 -3.49691e-07Z" fill="#62718A" />
+        </svg>
+      </h1>
+      <ul
+        className={`${
+          isOpen || "hidden"
+        } z-10 rounded absolute w-full py-2 bg-white shadow max-h-72 overflow-y-scroll`}
+      >
+        {chains.map((chain) => (
+          <li
+            onClick={(e) => {
+              _setSelectedChain(e.currentTarget.innerText);
+              setSelectedChain(e.currentTarget.innerText);
+              setIsOpen(false);
+            }}
+            className="py-2 px-4 select-none cursor-pointer hover:bg-slate-100"
+            key={chain.name}
+          >
+            {chain.name}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
