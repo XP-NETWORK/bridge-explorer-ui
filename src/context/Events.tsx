@@ -12,6 +12,8 @@ import { url } from "../constants";
 
 import { withContainer } from "./ServcieProvder";
 
+import {loadImages, fetchNtf} from '../components/Details/helpers'
+
 interface IEventsContext {
   events: IEvent[];
   status: string;
@@ -50,20 +52,17 @@ export const EventsProvider: FC = withContainer(
             updated.actionId + updated.tokenId + event.fromHash
         );
         try {
-          const res = await fetch(updated.nftUri);
-          const metadata = await res.json();
-          const updatedEvent = { imgUri: metadata.image as string, ...updated };
+          const metadata = await fetchNtf(updated)
           setEvents([
             ...events.slice(0, idx),
-            updatedEvent,
+            { imgUri: metadata.image as string, ...updated },
             ...events.slice(idx + 1),
           ]);
         } catch (e: any) {
           console.log(e, "img fetch error");
-          const updatedEvent = { imgUri: "", ...updated };
           setEvents([
             ...events.slice(0, idx),
-            updatedEvent,
+            { imgUri: "", ...updated },
             ...events.slice(idx + 1),
           ]); //updateEvent
         }
@@ -80,21 +79,7 @@ export const EventsProvider: FC = withContainer(
         fetch(`${url}?chainName=` + chainName)
           .then((res) => res.json())
           .then(async (data: IEvent[]) => {
-            const newEvents = data.map(async (data) => {
-              const res = data.nftUri.includes("ipfs://")
-                ? await fetch(
-                    `https://ipfs.io/ipfs/${data.nftUri.split("://")[1]}`
-                  )
-                : await fetch(data.nftUri);
-              const metadata = await res.json();
-              return {
-                imgUri: /^ipfs:\/\//.test(metadata.image)
-                  ? `https://ipfs.io/ipfs/${metadata.image.split("ipfs://")[1]}`
-                  : (metadata.image as string),
-                ...data,
-              };
-            });
-            setEvents(await Promise.all(newEvents));
+            await loadImages(data, setEvents);
           })
           .then(() => setIsLoading(false));
       } else if (status.length && chainName.length === 0) {
@@ -103,22 +88,8 @@ export const EventsProvider: FC = withContainer(
         fetch(`${url}?status=Pending`)
           .then((res) => res.json())
           .then(async (data: IEvent[]) => {
-            const newEvents = data.map(async (data) => {
-              const res = data.nftUri.includes("ipfs://")
-                ? await fetch(
-                    `https://ipfs.io/ipfs/${data.nftUri.split("://")[1]}`
-                  )
-                : await fetch(data.nftUri);
-              const metadata = await res.json();
-              return {
-                imgUri: /^ipfs:\/\//.test(metadata.image)
-                  ? `https://ipfs.io/ipfs/${metadata.image.split("ipfs://")[1]}`
-                  : (metadata.image as string),
-                ...data,
-              };
-            });
-            setEvents(await Promise.all(newEvents));
-            console.log(await Promise.all(newEvents), "new events");
+            await loadImages(data, setEvents);
+            //console.log(await Promise.all(newEvents), "new events");
           })
           .then(() => setIsLoading(false));
       } else if (chainName.length && status.length > 0) {
@@ -126,21 +97,7 @@ export const EventsProvider: FC = withContainer(
         fetch(`${url}?pendingSearch=` + chainName)
           .then((res) => res.json())
           .then(async (data: IEvent[]) => {
-            const newEvents = data.map(async (data) => {
-              const res = data.nftUri.includes("ipfs://")
-                ? await fetch(
-                    `https://ipfs.io/ipfs/${data.nftUri.split("://")[1]}`
-                  )
-                : await fetch(data.nftUri);
-              const metadata = await res.json();
-              return {
-                imgUri: /^ipfs:\/\//.test(metadata.image)
-                  ? `https://ipfs.io/ipfs/${metadata.image.split("ipfs://")[1]}`
-                  : (metadata.image as string),
-                ...data,
-              };
-            });
-            setEvents(await Promise.all(newEvents));
+            await loadImages(data, setEvents);
           })
           .then(() => setIsLoading(false));
       } else {
@@ -148,29 +105,7 @@ export const EventsProvider: FC = withContainer(
         fetch(`${url}`)
           .then((res) => res.json())
           .then(async (data: IEvent[]) => {
-            const newEvents = data.map(async (data) => {
-              try {
-                const res = data.nftUri.includes("ipfs://")
-                  ? await fetch(
-                      `https://ipfs.io/ipfs/${data.nftUri.split("://")[1]}`
-                    )
-                  : await fetch(data.nftUri);
-                const metadata = await res.json();
-
-                return {
-                  imgUri: /^ipfs:\/\//.test(metadata.image)
-                    ? `https://ipfs.io/ipfs/${
-                        metadata.image.split("ipfs://")[1]
-                      }`
-                    : (metadata.image as string),
-                  ...data,
-                };
-              } catch (e: any) {
-                console.log(e);
-                return { imgUri: "", ...data };
-              }
-            });
-            setEvents(await Promise.all(newEvents));
+              await loadImages(data, setEvents)
           })
           .then(() => setIsLoading(false));
       }
