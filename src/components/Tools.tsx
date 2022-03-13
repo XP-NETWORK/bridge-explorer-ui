@@ -145,7 +145,7 @@ const Dropdown: FC<{
           className="bg-white flex justify-between group items-center select-none border rounded px-4 py-2"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <span>{_selectedChain.length ? _selectedChain : "Select Chain"}</span>
+          <span className="h-6">{_selectedChain.length ? _selectedChain : ""}</span>
           <svg
             className={isOpen ? "rotate-180" : "rotate-0"}
             width="8"
@@ -160,7 +160,7 @@ const Dropdown: FC<{
         <ul
           className={`${
             isOpen || "hidden"
-          } z-10 rounded absolute w-full py-2 bg-white shadow max-h-52 overflow-y-scroll`}
+          } z-10 rounded absolute w-full py-2 bg-white shadow-[0_0px_10px_0px_rgba(0,0,0,0.2)] max-h-52 overflow-y-scroll`}
         >
           {chains.map((chain) => (
             <li
