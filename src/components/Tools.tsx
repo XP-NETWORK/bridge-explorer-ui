@@ -82,7 +82,7 @@ const Form = () => {
   return (
     <form onSubmit={handleSubmit} className="issueForm">
       <div className="block  space-y-2">
-        <span>Tx Hash:</span>
+        <span className="text-sm">Tx Hash:</span>
         <div className={`inputWrap ${validError ? "failValid" : ""}`}>
           <input
             type="text"
@@ -99,11 +99,11 @@ const Form = () => {
         </div>
       </div>
       <div className="block mt-5 space-y-2">
-        <span>Departure Chain:</span>
+        <span className="text-sm">Departure Chain:</span>
         <Dropdown setSelectedChain={setDepChain} />
       </div>
       <div className="block mt-5 space-y-2">
-        <span>Destination Chain:</span>
+        <span className="text-sm">Destination Chain:</span>
         <Dropdown setSelectedChain={setDestChain} />
       </div>
       <div
