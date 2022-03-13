@@ -87,7 +87,7 @@ const Form = () => {
           <input
             type="text"
             value={txHash}
-            className="bg-white flex justify-between items-center focus:outline-none w-full select-none border rounded px-4 py-2"
+            className="bg-white h-7 flex justify-between items-center focus:outline-none w-full select-none border rounded px-4 py-2"
             onChange={(e) => {
               setValidError(false);
               setSuccess(false);
@@ -145,7 +145,7 @@ const Dropdown: FC<{
           className="bg-white flex justify-between group items-center select-none border rounded px-4 py-2"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <span className="h-6">{_selectedChain.length ? _selectedChain : ""}</span>
+          <span className="h-7 flex items-center">{_selectedChain.length ? _selectedChain : ""}</span>
           <svg
             className={isOpen ? "rotate-180" : "rotate-0"}
             width="8"
