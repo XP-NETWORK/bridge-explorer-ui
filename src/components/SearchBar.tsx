@@ -16,7 +16,7 @@ export const SearchBar = () => {
   return (
     <Container className="mt-8">
       <form
-        className="flex border px-4 py-2 bg-white rounded"
+        className="flex px-4 py-2 bg-white rounded shadow-[0_1px_15px_0px_#2F303214]"
         onSubmit={(e) => {
           e.preventDefault();
         }}

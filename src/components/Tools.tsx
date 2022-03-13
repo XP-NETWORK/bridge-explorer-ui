@@ -160,7 +160,7 @@ const Dropdown: FC<{
         <ul
           className={`${
             isOpen || "hidden"
-          } z-10 rounded absolute w-full py-2 bg-white shadow-[0_0px_10px_0px_rgba(0,0,0,0.2)] max-h-52 overflow-y-scroll`}
+          } z-10 rounded absolute w-full py-2 bg-white shadow-[0_1px_15px_0px_#2F303214] max-h-52 overflow-y-scroll`}
         >
           {chains.map((chain) => (
             <li
