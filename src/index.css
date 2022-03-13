@@ -134,6 +134,20 @@ body {
   margin-top: 20px;
 }
 
+.ageHeader {
+  display: flex;
+  align-items: center;
+}
+
+.ageHeader img {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.ageHeader img.rotated {
+  transform: rotate(180deg);
+}
+
 @keyframes ping {
   75%,
   100% {

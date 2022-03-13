@@ -6,12 +6,12 @@ import { url, _headers } from "../constants";
 export const Tools = () => {
   return (
     <Container>
-      <div className="grid grid-cols-1 md:grid-cols-6 mt-5 gap-10">
-        <div className="col-span-4 md:col-span-2">
-          <Form />
-        </div>
-        <div className="col-span-4">
+      <div className="grid grid-cols-1 md:grid-cols-6 mt-5 gap-10 md:mb-44">
+        <div className="col-span-4 md:order-2">
           <Card />
+        </div>
+        <div className="col-span-4 md:order-1 md:col-span-2">
+          <Form />
         </div>
       </div>
     </Container>
@@ -160,7 +160,7 @@ const Dropdown: FC<{
         <ul
           className={`${
             isOpen || "hidden"
-          } z-10 rounded absolute w-full py-2 bg-white shadow max-h-72 overflow-y-scroll`}
+          } z-10 rounded absolute w-full py-2 bg-white shadow max-h-52 overflow-y-scroll`}
         >
           {chains.map((chain) => (
             <li

@@ -18,10 +18,15 @@ interface IEventsContext {
   events: IEvent[];
   status: string;
   chainName:string;
+  sort: string;
+  paginationPage: number;
+  totalEvents:number;
   setStatus: Dispatch<SetStateAction<string>>;
   setChainName: (chainName: string) => void;
   setEvents: (events: IEvent[]) => void;
-  setIsLoading: (bol: boolean) => void
+  setIsLoading: (bol: boolean) => void;
+  toggleSort: () => void;
+  setPage: (idx:number) => void;
   isLoading: boolean;
 }
 
@@ -32,8 +37,14 @@ export const EventsProvider: FC = withContainer(
     const [chainName, setChainName] = useState("");
     const [status, setStatus] = useState("");
     const [isLoading, setIsLoading] = useState(true);
+    const [sort, setSort] = useState('DESC') 
+    const [paginationPage, setPage] = useState(0)
+    const [totalEvents, setTotal] = useState(0)
 
+    const toggleSort = () => setSort(sort === 'DESC' ? 'ASC':'DESC')
+    
     useEffect(() => {
+      console.log(sort);
       socket.off("incomingEvent");
       socket.off("updateEvent");
       socket.on("incomingEvent", async (event: any) => {
@@ -105,20 +116,21 @@ export const EventsProvider: FC = withContainer(
           .then(() => setIsLoading(false));
       } else {
         console.log("no query");
-        fetch(`${url}`)
+        fetch(`${url}?sort=${sort}&offset=${paginationPage}`)
           .then((res) => res.json())
-          .then(async ({events}: {events: IEvent[]}) => {
+          .then(async ({events, count}: {events: IEvent[], count: number}) => {
               await loadImages(events, setEvents)
+              setTotal(count)
           })
           .then(() => setIsLoading(false));
       }
       console.log("isLoading", isLoading);
       console.log("fetching events", events.length, isLoading);
-    }, [chainName, status]);
+    }, [chainName, status, sort, paginationPage]);
 
     return (
       <EventsContext.Provider
-        value={{ events, status, setStatus, setChainName, isLoading, setEvents, setIsLoading, chainName }}
+        value={{ events, totalEvents, status, setStatus, setChainName, isLoading, setEvents, setIsLoading, chainName, toggleSort, sort, paginationPage, setPage }}
       >
         {children}
       </EventsContext.Provider>

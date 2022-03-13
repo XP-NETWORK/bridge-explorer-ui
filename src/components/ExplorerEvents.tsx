@@ -1,10 +1,8 @@
 import {
   FC,
-  ReactNode,
   useEffect,
   useState,
   useRef,
-  MutableRefObject,
 } from "react";
 import { Link } from "react-router-dom";
 import { Container } from "./Container";
@@ -14,13 +12,14 @@ import { Status } from "./Status";
 import ImgBroken from "../assets/img-broken.png";
 import { LoaderRow } from "./elements/LoaderRow";
 import { ethers } from "ethers";
-import { currency, chains } from "../constants";
+import { currency, chains, chainNoncetoName } from "../constants";
 import ReactTooltip from "react-tooltip";
 import moment from "moment";
 import scrollUp from "../assets/img/collapse.svg";
 import { NoEventsRow } from "./elements/NoEventsRow";
 import { ImgOrFail } from "./elements/ImgOrFail";
 import { getExchangeRates } from "../getExchangeRate";
+import sortIcon from '../assets/img/sort.svg'
 
 import { Paginator } from "./elements/Paginator";
 
@@ -95,7 +94,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
     rates: { [key: string]: { usd: number } },
     chainName: string
   ): number => {
-    const chain = chains.find((chain) => chain.name === chainName);
+    const chain = chains.find((chain) => chain.name.toLowerCase() === chainName.toLowerCase());
     const rate = (chain && rates[chain.id]?.usd) || 1;
 
     return rate;
@@ -123,10 +122,10 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
               <TableHeading>NFT</TableHeading>
               <TableHeading>Tx Value</TableHeading>
               {false && <TableHeading>Tx Hash</TableHeading>}
-              <TableHeading>Tx Type</TableHeading>
               <TableHeading>From</TableHeading>
               <TableHeading>To</TableHeading>
-              <TableHeading>Age</TableHeading>
+              <TableHeading>Method</TableHeading>
+              <TableHeading><span className="ageHeader">Age<img src={sortIcon} className={`${eventsContext?.sort === 'ASC'? 'rotated' : ''}`} onClick={eventsContext!.toggleSort}/></span></TableHeading>
               <TableHeading>Status</TableHeading>
             </tr>
           </thead>
@@ -193,22 +192,18 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                     </TableData>
                   )}
 
-                  <TableData>
-                    <span className="methodDataTable">
-                      {event.type || "N/A"}
-                    </span>
-                  </TableData>
+            
                   <TableData>
                     <div className="flex space-x-1">
                       <img
                         src={
                           chains.find(
-                            (chain) => chain.name === event.fromChainName
+                            (chain) => chain.name.toLowerCase()  === chainNoncetoName[event?.fromChain|| 0 ]?.toLowerCase() 
                           )?.icon
                         }
                         alt=""
                       />
-                      <span>{event.fromChainName || "N/A"} </span>
+                      <span>{chainNoncetoName[event?.fromChain || 0] || "N/A"} </span>
                     </div>
                     <Link
                       className="text-[#235EF5]"
@@ -224,12 +219,12 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                       <img
                         src={
                           chains.find(
-                            (chain) => chain.name === event.toChainName
+                            (chain) => chain.name.toLowerCase() === chainNoncetoName[event?.toChain || 0]?.toLowerCase()
                           )?.icon
                         }
                         alt=""
                       />
-                      <span>{event.toChainName || "N/A"} </span>
+                      <span>{chainNoncetoName[event?.toChain || 0] || "N/A"} </span>
                     </div>
                     <Link
                       className="text-[#235EF5]"
@@ -239,6 +234,11 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                       {event?.toHash?.slice(0, 6)}...
                       {event?.toHash?.slice(-6)}
                     </Link>
+                  </TableData>
+                  <TableData>
+                    <span className="methodDataTable">
+                      {event.type || "N/A"}
+                    </span>
                   </TableData>
                   <TableData>
                     <span
@@ -252,10 +252,12 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                         .replace("a ", "1 ")
                         .replace("an ", "1 ")
                         .replace("hour ", "hr ")
-                        .replace("hours", "hrs")
+                        .replace("few ", "")
+                        .replace("hours", "hrs ")
                         .replace("minute ", "min ")
+                        .replace("minutes", "mins")
                         .replace("second ", "sec ")
-                        .replace("seconds ", "secs ") || "N/A"}
+                        .replace("seconds ", "sec ") || "N/A"}
                     </span>
                   </TableData>
                   <TableData>

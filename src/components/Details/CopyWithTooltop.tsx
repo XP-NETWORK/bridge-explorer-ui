@@ -21,7 +21,7 @@ const CopyWithTooltip = ({
         setTooltipCopy(copyIdx);
       }}
     >
-      <img className="ml-1" src={CopyIcon} alt="copy button" width={12} />
+      <img className="ml-2" src={CopyIcon} alt="copy button" width={12} />
     </button>
   );
 };

@@ -11,6 +11,7 @@ import {
   addressExplorers,
   currency,
   chains,
+  chainNoncetoName,
 } from "../../constants";
 import { ethers } from "ethers";
 import ClockIcon from "../../assets/icons/clock.svg";
@@ -38,7 +39,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
     rates: { [key: string]: { usd: number } },
     chainName: string
   ): number => {
-    const chain = chains.find((chain) => chain.name === chainName);
+    const chain = chains.find((chain) => chain.name.toLowerCase() === chainName.toLowerCase());
     const rate = (chain && rates[chain.id]?.usd) || 1;
 
     return rate;
@@ -108,7 +109,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
           }`}
         >
           <span className="text-[#222222]">
-            {event?.fromChainName || "N/A"}
+            {chainNoncetoName[event?.fromChain || 0] || "N/A"}
           </span>
         </p>
       </div>
@@ -123,7 +124,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
-          <span className="text-[#222222]">{event?.toChainName || "N/A"}</span>
+          <span className="text-[#222222]">{chainNoncetoName[event?.toChain || 0] || "N/A"}</span>
         </p>
       </div>
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
