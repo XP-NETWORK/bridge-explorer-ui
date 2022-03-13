@@ -226,7 +226,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                         }
                         alt=""
                       />
-                      <span>{event.fromChainName || "N/A"} </span>
+                      <span>{event.toChainName || "N/A"} </span>
                     </div>
                     <Link
                       className="text-[#235EF5]"
