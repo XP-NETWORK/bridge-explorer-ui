@@ -48,49 +48,25 @@ export const _headers = {
   "Content-Type": "application/json",
 };
 
+// IDs from coingecko
 export const chains = [
   {
+    id: "aurora-near",
     name: "AURORA",
   },
-  {
-    name: "BSC",
-  },
-  {
-    name: "ETHEREUM",
-  },
-  {
-    name: "VELAS",
-  },
-  {
-    name: "POLYGON",
-  },
-  {
-    name: "AVALANCHE",
-  },
-  {
-    name: "IOTEX",
-  },
-  {
-    name: "FANTOM",
-  },
-  {
-    name: "CELO",
-  },
-  {
-    name: "HARMONY",
-  },
-  {
-    name: "GNOSIS CHAIN",
-  },
-  {
-    name: "FUSE",
-  },
-  {
-    name: "UNIQUE",
-  },
-  {
-    name: "ELROND",
-  },
+  { id: "binancecoin", name: "BSC" },
+  { id: "ethereum", name: "ETHEREUM" },
+  { id: "velas", name: "VELAS" },
+  { id: "matic-network", name: "POLYGON" },
+  { id: "avalanche-2", name: "AVALANCHE" },
+  { id: "iotex", name: "IOTEX" },
+  { id: "fantom", name: "FANTOM" },
+  { id: "celo", name: "CELO" },
+  { id: "harmony", name: "HARMONY" },
+  { id: "gnosis", name: "GNOSIS CHAIN" },
+  { id: "fuse-network-token", name: "FUSE" },
+  { id: "unique-one", name: "UNIQUE" }, // TODO: check if this is correct
+  { id: "elrond-erd-2", name: "ELROND" },
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";

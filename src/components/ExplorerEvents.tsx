@@ -14,12 +14,13 @@ import { Status } from "./Status";
 import ImgBroken from "../assets/img-broken.png";
 import { LoaderRow } from "./elements/LoaderRow";
 import { ethers } from "ethers";
-import { currency } from "../constants";
+import { currency, chains } from "../constants";
 import ReactTooltip from "react-tooltip";
 import moment from "moment";
 import scrollUp from "../assets/img/collapse.svg";
 import { NoEventsRow } from "./elements/NoEventsRow";
 import { ImgOrFail } from "./elements/ImgOrFail";
+import { getExchangeRates } from "../getExchangeRate";
 
 export interface IEvent {
   id: string;
@@ -45,6 +46,12 @@ export interface IEvent {
 
 export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   const eventsContext = useContext(EventsContext);
+  const [exchangeRates, setExchangeRates] = useState<{
+    [key: string]: { usd: number };
+  }>({
+    velas: { usd: 0 },
+    ethereum: { usd: 0 },
+  });
 
   useEffect(() => {
     eventsContext?.setStatus(status);
@@ -75,7 +82,23 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
       return () => window.removeEventListener("scroll", scrollHandler);
     }
   }, [eventsContext?.events]);
-  console.log(eventsContext?.events);
+
+  useEffect(() => {
+    const ids: string[] = chains.map((chain) => chain.id);
+    getExchangeRates(ids).then((rates) => {
+      setExchangeRates(rates);
+    });
+  }, []);
+
+  const getExchangeRate = (
+    rates: { [key: string]: { usd: number } },
+    chainName: string
+  ): number => {
+    const chain = chains.find((chain) => chain.name === chainName);
+    const rate = (chain && rates[chain.id].usd) || 1;
+
+    return rate;
+  };
 
   return (
     <>
@@ -98,7 +121,6 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
               <TableHeading>NFT</TableHeading>
               <TableHeading>Tx Value</TableHeading>
               {false && <TableHeading>Tx Hash</TableHeading>}
-              <TableHeading>Coin</TableHeading>
               <TableHeading>Tx Type</TableHeading>
               <TableHeading>From</TableHeading>
               <TableHeading>To</TableHeading>
@@ -134,17 +156,26 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
 
                   <TableData>
                     <span
-                      className="valueData"
+                      className="valueData "
                       data-tip={ethers.utils.formatEther(event.txFees)}
                     >
-                      {Number(ethers.utils.formatEther(event.txFees))
-                        .toFixed(7)
-                        .toString()}
+                      <span>
+                        {Number(ethers.utils.formatEther(event.txFees))
+                          .toFixed(7)
+                          .toString()}
+                      </span>{" "}
+                      <span>
+                        {event.fromChain && currency[event.fromChain]}
+                      </span>
+                      <br />
+                      <span>
+                        $
+                        {(
+                          getExchangeRate(exchangeRates, event.chainName) *
+                          Number(ethers.utils.formatEther(event.txFees))
+                        ).toFixed(2)}
+                      </span>
                     </span>
-                  </TableData>
-
-                  <TableData>
-                    {event.fromChain && currency[event.fromChain]}
                   </TableData>
 
                   {false && (
