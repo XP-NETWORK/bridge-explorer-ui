@@ -70,9 +70,9 @@ export const EventsProvider: FC = withContainer(
     }, [events]);
 
     useEffect(() => {
-      if (events.length !== events.length) {
+      //if (events.length !== events.length) {
         setIsLoading(true);
-      }
+     // }
       if (chainName.length && status.length === 0) {
         console.log("only chain name");
 
