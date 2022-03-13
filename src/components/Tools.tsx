@@ -184,7 +184,7 @@ const Dropdown: FC<{
 
 const Card = () => {
   return (
-    <div className="bg-white rounded-sm border p-5">
+    <div className="bg-white rounded-lg border p-5">
       <h2 className="font-medium">Keep calm. We are on it!</h2>
       <p className="mt-4">First of all, don't panic.</p>
       <p className="mt-4">Your asset is safe.</p>
