@@ -87,7 +87,7 @@ const Form = () => {
           <input
             type="text"
             value={txHash}
-            className="bg-white h-7 flex justify-between items-center focus:outline-none w-full select-none border rounded px-4 py-2"
+            className="bg-white h-7flex justify-between items-center focus:outline-none w-full select-none border rounded px-4 py-2"
             onChange={(e) => {
               setValidError(false);
               setSuccess(false);
@@ -185,21 +185,21 @@ const Dropdown: FC<{
 const Card = () => {
   return (
     <div className="bg-white rounded-lg border p-5">
-      <h2 className="font-medium">Keep calm. We are on it!</h2>
-      <p className="mt-4">First of all, don't panic.</p>
-      <p className="mt-4">Your asset is safe.</p>
-      <p className="mt-4">
+      <h2 className="font-roboto">Keep calm. We are on it!</h2>
+      <p className="mt-4 text-sm">First of all, don't panic.</p>
+      <p className="mt-4 text-sm">Your asset is safe.</p>
+      <p className="mt-4 text-sm">
         Sometimes you may not see your cross-chain transaction in the XP.NETWORK
         explorer due to unpredictable glitches on different blockchain networks
         and the decentralized nature of XP.NETWORK protocol.
       </p>
-      <p className="mt-4">
+      <p className="mt-4 text-sm">
         If your transaction is not showing up in our explorer,
       </p>
-      <p className="mt-4">
+      <p className="mt-4 text-sm">
         You can use the tool below, and we will register your transaction.
       </p>
-      <p className="mt-4">
+      <p className="mt-4 text-sm">
         Please check your transaction in XP.NETWORK explorer 5 minutes after
         using this tool.
       </p>
