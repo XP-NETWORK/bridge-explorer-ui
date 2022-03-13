@@ -124,7 +124,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
-          <span className="text-[#222222]">{chainNoncetoName[event?.fromChain || 0] || "N/A"}</span>
+          <span className="text-[#222222]">{chainNoncetoName[event?.toChain || 0] || "N/A"}</span>
         </p>
       </div>
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
