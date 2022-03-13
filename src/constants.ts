@@ -48,53 +48,34 @@ export const _headers = {
   "Content-Type": "application/json",
 };
 
+// IDs from coingecko
 export const chains = [
   {
+    id: "aurora-near",
     name: "AURORA",
+    icon: "./assets/icons/aurora.svg",
   },
+  { id: "binancecoin", name: "BSC", icon: "./assets/icons/bsc.svg" },
+  { id: "ethereum", name: "ETHEREUM", icon: "./assets/icons/ethereum.svg" },
+  { id: "velas", name: "VELAS", icon: "./assets/icons/velas.svg" },
+  { id: "matic-network", name: "POLYGON", icon: "./assets/icons/polygon.svg" },
   {
-    name: "BSC",
-  },
-  {
-    name: "ETHEREUM",
-  },
-  {
-    name: "VELAS",
-  },
-  {
-    name: "POLYGON",
-  },
-  {
+    id: "avalanche-2",
     name: "AVALANCHE",
+    icon: "./assets/icons/avalanche.svg",
   },
-  {
-    name: "IOTEX",
-  },
-  {
-    name: "FANTOM",
-  },
-  {
-    name: "CELO",
-  },
-  {
-    name: "HARMONY",
-  },
-  {
-    name: "GNOSIS CHAIN",
-  },
-  {
-    name: "FUSE",
-  },
-  {
-    name: "UNIQUE",
-  },
-  {
-    name: "ELROND",
-  },
+  { id: "iotex", name: "IOTEX", icon: "./assets/icons/iotex.svg" },
+  { id: "fantom", name: "FANTOM", icon: "./assets/icons/fantom.svg" },
+  // { id: "celo", name: "CELO", icon: "./assets/icons/celo.svg" },
+  { id: "harmony", name: "HARMONY", icon: "./assets/icons/harmony.svg" },
+  { id: "gnosis", name: "GNOSIS CHAIN", icon: "./assets/icons/gnosis.svg" },
+  { id: "fuse-network-token", name: "FUSE", icon: "./assets/icons/fuse.svg" },
+  // { id: "unique-one", name: "UNIQUE", icon: "./assets/icons/unique.svg" }, // TODO: check if this is correct
+  { id: "elrond-erd-2", name: "ELROND", icon: "./assets/icons/elrond.svg" },
 ];
 
-//export const url = "https://dev-explorer-api.herokuapp.com/";
-//export const socketUrl = "wss://dev-explorer-api.herokuapp.com";
+export const url = "https://dev-explorer-api.herokuapp.com/";
+export const socketUrl = "wss://dev-explorer-api.herokuapp.com";
 
-export const url = "http://localhost:3100/";
-export const socketUrl = "ws://localhost:3100";
+//export const url = "http://localhost:3100/";
+//export const socketUrl = "ws://localhost:3100";

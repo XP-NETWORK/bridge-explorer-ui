@@ -5,19 +5,44 @@ import { Status } from "../Status";
 import moment from "moment";
 import { truncate } from "./helpers";
 import useIsMobile from "../../hooks/isMobile";
-import { useMemo } from "react";
-import { txExplorers, addressExplorers, currency } from "../../constants";
+import { useEffect, useMemo, useState } from "react";
+import {
+  txExplorers,
+  addressExplorers,
+  currency,
+  chains,
+} from "../../constants";
 import { ethers } from "ethers";
 import ClockIcon from "../../assets/icons/clock.svg";
+import { getExchangeRates } from "../../getExchangeRate";
 
 const DetailsList = ({ data, copyProps }: DetailsCard) => {
   const { loading: dataLoad, event } = data;
   const { setTooltipCopy, tooltipCopy, tooltips } = copyProps;
+  const [exchangeRates, setExchangeRates] = useState<{
+    [key: string]: { usd: number };
+  }>({});
 
   const isMobile = useIsMobile();
   const truncateSize = useMemo(() => (isMobile ? 33 : 60), [isMobile]);
 
   console.log(isMobile);
+  useEffect(() => {
+    const ids: string[] = chains.map((chain) => chain.id);
+    getExchangeRates(ids).then((rates) => {
+      setExchangeRates(rates);
+    });
+  }, []);
+
+  const getExchangeRate = (
+    rates: { [key: string]: { usd: number } },
+    chainName: string
+  ): number => {
+    const chain = chains.find((chain) => chain.name === chainName);
+    const rate = (chain && rates[chain.id].usd) || 1;
+
+    return rate;
+  };
 
   return (
     <div className="flex flex-col w-full">
@@ -188,7 +213,13 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
         >
           <span className="text-[#222222]">
             {event?.txFees && Number(ethers.utils.formatEther(event.txFees))}{" "}
-            {event?.fromChain && currency[event.fromChain]}
+            {event?.fromChain && currency[event.fromChain]} ($
+            {event?.fromChain &&
+              (
+                getExchangeRate(exchangeRates, event.chainName) *
+                Number(ethers.utils.formatEther(event.txFees))
+              ).toFixed(2)}
+            )
           </span>
         </p>
       </div>

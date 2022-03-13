@@ -14,12 +14,13 @@ import { Status } from "./Status";
 import ImgBroken from "../assets/img-broken.png";
 import { LoaderRow } from "./elements/LoaderRow";
 import { ethers } from "ethers";
-import { currency } from "../constants";
+import { currency, chains } from "../constants";
 import ReactTooltip from "react-tooltip";
 import moment from "moment";
 import scrollUp from "../assets/img/collapse.svg";
 import { NoEventsRow } from "./elements/NoEventsRow";
 import { ImgOrFail } from "./elements/ImgOrFail";
+import { getExchangeRates } from "../getExchangeRate";
 
 import { Paginator } from "./elements/Paginator";
 
@@ -47,6 +48,9 @@ export interface IEvent {
 
 export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   const eventsContext = useContext(EventsContext);
+  const [exchangeRates, setExchangeRates] = useState<{
+    [key: string]: { usd: number };
+  }>({});
 
   useEffect(() => {
     eventsContext?.setStatus(status);
@@ -77,7 +81,23 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
       return () => window.removeEventListener("scroll", scrollHandler);
     }
   }, [eventsContext?.events]);
-  console.log(eventsContext?.events);
+
+  useEffect(() => {
+    const ids: string[] = chains.map((chain) => chain.id);
+    getExchangeRates(ids).then((rates) => {
+      setExchangeRates(rates);
+    });
+  }, []);
+
+  const getExchangeRate = (
+    rates: { [key: string]: { usd: number } },
+    chainName: string
+  ): number => {
+    const chain = chains.find((chain) => chain.name === chainName);
+    const rate = (chain && rates[chain.id].usd) || 1;
+
+    return rate;
+  };
 
   return (
     <>
@@ -101,7 +121,6 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
               <TableHeading>NFT</TableHeading>
               <TableHeading>Tx Value</TableHeading>
               {false && <TableHeading>Tx Hash</TableHeading>}
-              <TableHeading>Coin</TableHeading>
               <TableHeading>Tx Type</TableHeading>
               <TableHeading>From</TableHeading>
               <TableHeading>To</TableHeading>
@@ -137,17 +156,26 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
 
                   <TableData>
                     <span
-                      className="valueData"
-                      data-tip={ethers.utils.formatEther(event.txFees)}
+                      className="valueData "
+                      data-tip={!isNaN(+event.txFees) && ethers.utils.formatEther(event.txFees)}
                     >
-                      {Number(ethers.utils.formatEther(event.txFees))
-                        .toFixed(7)
-                        .toString()}
+                      <span>
+                        {!isNaN(+event.txFees) && Number(ethers.utils.formatEther(event.txFees))
+                          .toFixed(7)
+                          .toString()}
+                      </span>{" "}
+                      <span>
+                        {event.fromChain && currency[event.fromChain]}
+                      </span>
+                      <br />
+                      <span>
+                        $
+                        {!isNaN(+event.txFees) && (
+                          getExchangeRate(exchangeRates, event.chainName) *
+                          Number(ethers.utils.formatEther(event.txFees))
+                        ).toFixed(2)}
+                      </span>
                     </span>
-                  </TableData>
-
-                  <TableData>
-                    {event.fromChain && currency[event.fromChain]}
                   </TableData>
 
                   {false && (
@@ -169,7 +197,17 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                     </span>
                   </TableData>
                   <TableData>
-                    <div>{event.fromChainName || "N/A"} </div>{" "}
+                    <div className="flex space-x-1">
+                      <img
+                        src={
+                          chains.find(
+                            (chain) => chain.name === event.fromChainName
+                          )?.icon
+                        }
+                        alt=""
+                      />
+                      <span>{event.fromChainName || "N/A"} </span>
+                    </div>
                     <Link
                       className="text-[#235EF5]"
                       key={event.id}
@@ -180,7 +218,17 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                     </Link>
                   </TableData>
                   <TableData>
-                    <div>{event.toChainName || "N/A"}</div>
+                    <div className="flex space-x-1">
+                      <img
+                        src={
+                          chains.find(
+                            (chain) => chain.name === event.toChainName
+                          )?.icon
+                        }
+                        alt=""
+                      />
+                      <span>{event.toChainName || "N/A"} </span>
+                    </div>
                     <Link
                       className="text-[#235EF5]"
                       key={event.id}

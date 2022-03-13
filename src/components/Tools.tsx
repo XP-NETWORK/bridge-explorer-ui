@@ -168,10 +168,11 @@ const Dropdown: FC<{
                 setSelectedChain(e.currentTarget.innerText);
                 setIsOpen(false);
               }}
-              className="py-2 px-4 select-none cursor-pointer hover:bg-slate-100"
+              className="py-2 flex px-4 select-none cursor-pointer hover:bg-slate-100"
               key={chain.name}
             >
-              {chain.name}
+              <img src={chain.icon} alt="chain icon" />
+              <span className="ml-2">{chain.name}</span>
             </li>
           ))}
         </ul>
