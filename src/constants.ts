@@ -43,6 +43,22 @@ export const addressExplorers: any = {
   "12": "https://explorer.harmony.one/address/",
 };
 
+export const chainNoncetoName: any = {
+  "0": "Unknown",
+  "4": "BSC",
+  "19": "Velas",
+  "14": "Gnosis",
+  "2": "Elrond",
+  "20": "IoTeX",
+  "6": "Avalanche",
+  "16": "Fuse",
+  "21": "Aurora",
+  "7": "Polygon",
+  "5": "Ethereum",
+  "8": "Fantom",
+  "12": "Harmony",
+};
+
 export const _headers = {
   Accept: "*",
   "Content-Type": "application/json",

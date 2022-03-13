@@ -14,7 +14,7 @@ import { Status } from "./Status";
 import ImgBroken from "../assets/img-broken.png";
 import { LoaderRow } from "./elements/LoaderRow";
 import { ethers } from "ethers";
-import { currency, chains } from "../constants";
+import { currency, chains, chainNoncetoName } from "../constants";
 import ReactTooltip from "react-tooltip";
 import moment from "moment";
 import scrollUp from "../assets/img/collapse.svg";
@@ -203,12 +203,12 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                       <img
                         src={
                           chains.find(
-                            (chain) => chain.name.toLowerCase()  === event.fromChainName?.toLowerCase() 
+                            (chain) => chain.name.toLowerCase()  === chainNoncetoName[event?.fromChain|| 0 ]?.toLowerCase() 
                           )?.icon
                         }
                         alt=""
                       />
-                      <span>{event.fromChainName || "N/A"} </span>
+                      <span>{chainNoncetoName[event?.fromChain || 0] || "N/A"} </span>
                     </div>
                     <Link
                       className="text-[#235EF5]"
@@ -224,12 +224,12 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                       <img
                         src={
                           chains.find(
-                            (chain) => chain.name.toLowerCase() === event.toChainName?.toLowerCase()
+                            (chain) => chain.name.toLowerCase() === chainNoncetoName[event?.toChain || 0]?.toLowerCase()
                           )?.icon
                         }
                         alt=""
                       />
-                      <span>{event.toChainName || "N/A"} </span>
+                      <span>{chainNoncetoName[event?.toChain || 0] || "N/A"} </span>
                     </div>
                     <Link
                       className="text-[#235EF5]"
