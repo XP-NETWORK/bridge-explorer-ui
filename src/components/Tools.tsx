@@ -142,18 +142,19 @@ const Dropdown: FC<{
       />
       <div className="relative">
         <h1
-          className="bg-white flex justify-between items-center select-none border rounded px-4 py-2"
+          className="bg-white flex justify-between group items-center select-none border rounded px-4 py-2"
           onClick={() => setIsOpen(!isOpen)}
         >
           <span>{_selectedChain.length ? _selectedChain : "Select Chain"}</span>
           <svg
+            className={isOpen ? "rotate-180" : "rotate-0"}
             width="8"
             height="4"
             viewBox="0 0 8 4"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path d="M0 -3.49691e-07L4 4L8 0L0 -3.49691e-07Z" fill="#62718A" />
+            <path d="M0 -3.49691e-07L4 4L8 0L0 -3.49691e-07Z" className={`${!isOpen ? 'fill-[#62718A]' : 'fill-black'} group-hover:fill-black`}  />
           </svg>
         </h1>
         <ul
