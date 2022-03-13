@@ -48,10 +48,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   const eventsContext = useContext(EventsContext);
   const [exchangeRates, setExchangeRates] = useState<{
     [key: string]: { usd: number };
-  }>({
-    velas: { usd: 0 },
-    ethereum: { usd: 0 },
-  });
+  }>({});
 
   useEffect(() => {
     eventsContext?.setStatus(status);
