@@ -45,6 +45,8 @@ useEffect(() => {
 },[ ctx?.chainName])
 
 return <div className="paginatorWraper">
+        <span>Showing {50 * page + 1} - {50 * page + 50} out of {totalTx} Tx</span>
+        <div className="paginatorInnerWrapper">
         <button onClick={() => onClickPage(-page)}>First</button>
          <ReactPaginate
         breakLabel="..."
@@ -54,9 +56,11 @@ return <div className="paginatorWraper">
         pageCount={Math.ceil(total/50)}
         breakClassName={'paginatorItem'}
         pageClassName="paginatorItem"
-        previousLabel={<div className="paginationControlWraper" onClick={() => onClickPage(-1)}><img src={prev}/></div>}
+        previousLabel={<div className="paginationControlWraper" style={{marginRight:'110px'}} onClick={() => onClickPage(-1)}><img src={prev}/></div>}
         //renderOnZeroPageCount={''}
       />
+      <div className="paginatorLabel">Page {page + 1} of {Math.ceil(total/50)}</div>
        <button onClick={() => onClickPage(Math.ceil(total/50) - page - 1)}>Last</button>
+       </div>
 </div>
 })

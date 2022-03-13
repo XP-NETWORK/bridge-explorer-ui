@@ -138,7 +138,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
               eventsContext?.events.map((event: IEvent) => (
                 <tr key={event.id}>
                   <TableData className="sticky left-0 text-center max-w-[62px] bg-white imgTableData">
-                    <ReactTooltip effect="solid" backgroundColor="#575151" />
+                    <ReactTooltip effect="solid"  className="copyTip"/>
                     {event?.status === "Completed" || event?.imgUri ? (
                       <ImgOrFail
                         className="rounded-lg"
@@ -242,6 +242,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                   </TableData>
                   <TableData>
                     <span
+                        className="valueData "
                       data-tip={moment(event?.createdAt).format(
                         "YYYY/MM/DD H:mm"
                       )}

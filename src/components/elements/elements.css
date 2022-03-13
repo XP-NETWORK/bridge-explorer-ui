@@ -312,16 +312,23 @@ ul.chartInfoList li {
 }
 
 .paginatorWraper {
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 8px 0;
   margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.paginatorInnerWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .paginatorItem {
   display: none;
 }
 
-.paginationControlWraper, .paginatorWraper button  {
+.paginationControlWraper, .paginatorWraper button, .paginatorLabel   {
   padding: 8px 15px 8px 15px;
   cursor: pointer;
   display: flex;
@@ -345,6 +352,24 @@ ul.chartInfoList li {
 .paginationControlWraper img {
   margin: auto;
 }
+
+.paginatorLabel {
+  padding: 4px 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ttip {
+    background-color: rgba(0, 0, 0, 1) !important;
+    border-radius: 6px !important;
+}
+
+.ttip::before, .ttip::after {
+  display: none !important;
+}
+
 
 @keyframes gradient {
   0% {
