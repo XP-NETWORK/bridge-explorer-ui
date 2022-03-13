@@ -50,7 +50,9 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   const eventsContext = useContext(EventsContext);
   const [exchangeRates, setExchangeRates] = useState<{
     [key: string]: { usd: number };
-  }>({});
+  }>({
+    velas: { usd: 0 },
+  });
 
   useEffect(() => {
     eventsContext?.setStatus(status);
@@ -94,7 +96,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
     chainName: string
   ): number => {
     const chain = chains.find((chain) => chain.name === chainName);
-    const rate = (chain && rates[chain.id].usd) || 1;
+    const rate = (chain && rates[chain.id]?.usd) || 1;
 
     return rate;
   };
