@@ -87,7 +87,7 @@ const Form = () => {
           <input
             type="text"
             value={txHash}
-            className="bg-white h-7flex justify-between items-center focus:outline-none w-full select-none border rounded px-4 py-2"
+            className="bg-white h-[2.9rem] flex justify-between items-center focus:outline-none w-full select-none border rounded px-4 py-2"
             onChange={(e) => {
               setValidError(false);
               setSuccess(false);
