@@ -53,20 +53,25 @@ export const chains = [
   {
     id: "aurora-near",
     name: "AURORA",
+    icon: "./assets/icons/aurora.svg",
   },
-  { id: "binancecoin", name: "BSC" },
-  { id: "ethereum", name: "ETHEREUM" },
-  { id: "velas", name: "VELAS" },
-  { id: "matic-network", name: "POLYGON" },
-  { id: "avalanche-2", name: "AVALANCHE" },
-  { id: "iotex", name: "IOTEX" },
-  { id: "fantom", name: "FANTOM" },
-  { id: "celo", name: "CELO" },
-  { id: "harmony", name: "HARMONY" },
-  { id: "gnosis", name: "GNOSIS CHAIN" },
-  { id: "fuse-network-token", name: "FUSE" },
-  { id: "unique-one", name: "UNIQUE" }, // TODO: check if this is correct
-  { id: "elrond-erd-2", name: "ELROND" },
+  { id: "binancecoin", name: "BSC", icon: "./assets/icons/bsc.svg" },
+  { id: "ethereum", name: "ETHEREUM", icon: "./assets/icons/ethereum.svg" },
+  { id: "velas", name: "VELAS", icon: "./assets/icons/velas.svg" },
+  { id: "matic-network", name: "POLYGON", icon: "./assets/icons/polygon.svg" },
+  {
+    id: "avalanche-2",
+    name: "AVALANCHE",
+    icon: "./assets/icons/avalanche.svg",
+  },
+  { id: "iotex", name: "IOTEX", icon: "./assets/icons/iotex.svg" },
+  { id: "fantom", name: "FANTOM", icon: "./assets/icons/fantom.svg" },
+  { id: "celo", name: "CELO", icon: "./assets/icons/celo.svg" },
+  { id: "harmony", name: "HARMONY", icon: "./assets/icons/harmony.svg" },
+  { id: "gnosis", name: "GNOSIS CHAIN", icon: "./assets/icons/gnosis.svg" },
+  { id: "fuse-network-token", name: "FUSE", icon: "./assets/icons/fuse.svg" },
+  { id: "unique-one", name: "UNIQUE", icon: "./assets/icons/unique.svg" }, // TODO: check if this is correct
+  { id: "elrond-erd-2", name: "ELROND", icon: "./assets/icons/elrond.svg" },
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";

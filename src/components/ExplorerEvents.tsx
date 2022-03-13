@@ -194,7 +194,17 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                     </span>
                   </TableData>
                   <TableData>
-                    <div>{event.fromChainName || "N/A"} </div>{" "}
+                    <div className="flex space-x-1">
+                      <img
+                        src={
+                          chains.find(
+                            (chain) => chain.name === event.fromChainName
+                          )?.icon
+                        }
+                        alt=""
+                      />
+                      <span>{event.fromChainName || "N/A"} </span>
+                    </div>
                     <Link
                       className="text-[#235EF5]"
                       key={event.id}
@@ -205,7 +215,17 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                     </Link>
                   </TableData>
                   <TableData>
-                    <div>{event.toChainName || "N/A"}</div>
+                    <div className="flex space-x-1">
+                      <img
+                        src={
+                          chains.find(
+                            (chain) => chain.name === event.toChainName
+                          )?.icon
+                        }
+                        alt=""
+                      />
+                      <span>{event.fromChainName || "N/A"} </span>
+                    </div>
                     <Link
                       className="text-[#235EF5]"
                       key={event.id}
