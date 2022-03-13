@@ -82,12 +82,12 @@ const Form = () => {
   return (
     <form onSubmit={handleSubmit} className="issueForm">
       <div className="block  space-y-2">
-        <span>Tx Hash:</span>
+        <span className="text-sm">Tx Hash:</span>
         <div className={`inputWrap ${validError ? "failValid" : ""}`}>
           <input
             type="text"
             value={txHash}
-            className="bg-white flex justify-between items-center focus:outline-none w-full select-none border rounded px-4 py-2"
+            className="bg-white h-[2.9rem] flex justify-between items-center focus:outline-none w-full select-none border rounded px-4 py-2"
             onChange={(e) => {
               setValidError(false);
               setSuccess(false);
@@ -98,12 +98,12 @@ const Form = () => {
           <span className="inputError">Invalid Hash</span>
         </div>
       </div>
-      <div className="block mt-5 space-y-2">
-        <span>Departure Chain:</span>
+      <div className="block mt-4 space-y-2">
+        <span className="text-sm">Departure Chain:</span>
         <Dropdown setSelectedChain={setDepChain} />
       </div>
-      <div className="block mt-5 space-y-2">
-        <span>Destination Chain:</span>
+      <div className="block mt-4 space-y-2">
+        <span className="text-sm">Destination Chain:</span>
         <Dropdown setSelectedChain={setDestChain} />
       </div>
       <div
@@ -113,7 +113,7 @@ const Form = () => {
 
       {!captchaRender && (
         <button
-          className="block mt-5 w-full p-2 text-center text-white rounded-md bg-[#297EFE] hover:bg-[#154EDF]"
+          className="block mt-8 w-full p-2 text-center text-white rounded-md bg-[#297EFE] hover:bg-[#154EDF]"
           type="submit"
         >
           Send
@@ -145,7 +145,7 @@ const Dropdown: FC<{
           className="bg-white flex justify-between group items-center select-none border rounded px-4 py-2"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <span>{_selectedChain.length ? _selectedChain : "Select Chain"}</span>
+          <span className="h-7 flex items-center">{_selectedChain.length ? _selectedChain : ""}</span>
           <svg
             className={isOpen ? "rotate-180" : "rotate-0"}
             width="8"
@@ -160,7 +160,7 @@ const Dropdown: FC<{
         <ul
           className={`${
             isOpen || "hidden"
-          } z-10 rounded absolute w-full py-2 bg-white shadow max-h-52 overflow-y-scroll`}
+          } z-10 rounded absolute w-full py-2 bg-white shadow-[0_1px_15px_0px_#2F303214] max-h-52 no-scrollbar overflow-y-scroll`}
         >
           {chains.map((chain) => (
             <li
@@ -184,22 +184,22 @@ const Dropdown: FC<{
 
 const Card = () => {
   return (
-    <div className="bg-white rounded-sm border p-5">
-      <h2 className="font-medium">Keep calm. We are on it!</h2>
-      <p className="mt-4">First of all, don't panic.</p>
-      <p className="mt-4">Your asset is safe.</p>
-      <p className="mt-4">
+    <div className="bg-white rounded-lg border px-6 py-8">
+      <h2 className="font-roboto">Keep calm. We are on it!</h2>
+      <p className="mt-4 text-sm">First of all, don't panic.</p>
+      <p className="mt-4 text-sm">Your asset is safe.</p>
+      <p className="mt-4 text-sm">
         Sometimes you may not see your cross-chain transaction in the XP.NETWORK
         explorer due to unpredictable glitches on different blockchain networks
         and the decentralized nature of XP.NETWORK protocol.
       </p>
-      <p className="mt-4">
+      <p className="mt-4 text-sm">
         If your transaction is not showing up in our explorer,
       </p>
-      <p className="mt-4">
+      <p className="mt-4 text-sm">
         You can use the tool below, and we will register your transaction.
       </p>
-      <p className="mt-4">
+      <p className="mt-4 text-sm">
         Please check your transaction in XP.NETWORK explorer 5 minutes after
         using this tool.
       </p>

@@ -50,7 +50,7 @@ export const EventDetails = () => {
 
   return (
     <Container>
-      <div className="p-4 bg-white mt-5 sm:rounded-2xl rounded-lg shadow-[0_0px_10px_0px_rgba(0,0,0,0.2)]">
+      <div className="p-4 bg-white mt-5 sm:rounded-2xl rounded-lg shadow-[0_1px_15px_0px_#2F303214]">
         <h1 className="text-base font-medium">Sent Item</h1>
         <hr className="mb-4 mt-2" />
         <div className="flex items-start sm:border sm:p-5 sm:rounded-2xl flex-col sm:flex-row gap-5 sm:">

@@ -9,7 +9,7 @@ interface Props {
 
 export const ExplorerCard: FC<Props> = ({ title, subtitle, icon }) => {
   return (
-    <div className="shadow-[0_0px_10px_0px_rgba(0,0,0,0.2)] relative overflow-hidden rounded-lg font-poppins bg-white w-full p-5 explorerCard">
+    <div className="shadow-[0_1px_15px_0px_#2F303214] relative overflow-hidden rounded-lg font-poppins bg-white w-full p-5 explorerCard">
       <img src={icon} alt="icon" />
       <h1
         className="text-[2rem] font-medium mt-3"

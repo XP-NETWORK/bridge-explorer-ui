@@ -70,7 +70,7 @@ console.log(mockData);
     <div className="lg:max-w-5xl mx-auto px-4 mt-8">
       <div className="chartWrapper">
         <div className="chartVisual">
-          <h3 className="font-medium">Daily Transactions</h3>
+          <h3 className="font-medium text-[#222222]">Daily Transactions</h3>
           <div className="chartMetrics">
             <span>Today Tx: {mockData[mockData.length -1].txNumber}</span>
             <span>Total Tx: {mockData.reduce((acc, cur) => acc += cur.txNumber, 0)}</span>
@@ -81,9 +81,9 @@ console.log(mockData);
         </div>
         {false && <div className="chartRates">
           <div className="periodButtons">
-            <span>Today</span>
-            <span>Last 7 days</span>
-            <span>All period</span>
+            <span className="text-[#222222]">Today</span>
+            <span className="text-[#222222]">Last 7 days</span>
+            <span className="text-[#222222]">All period</span>
           </div>
           <ul className="chartInfoList">
             <li>
