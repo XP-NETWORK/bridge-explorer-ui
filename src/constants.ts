@@ -56,22 +56,22 @@ export const chains = [
     icon: "./assets/icons/aurora.svg",
   },
   { id: "binancecoin", name: "BSC", icon: "./assets/icons/bsc.svg" },
-  { id: "ethereum", name: "ETHEREUM", icon: "./assets/icons/ethereum.svg" },
-  { id: "velas", name: "VELAS", icon: "./assets/icons/velas.svg" },
-  { id: "matic-network", name: "POLYGON", icon: "./assets/icons/polygon.svg" },
+  { id: "ethereum", name: "Ethereum", icon: "./assets/icons/ethereum.svg" },
+  { id: "velas", name: "Velas", icon: "./assets/icons/velas.svg" },
+  { id: "matic-network", name: "Polygon", icon: "./assets/icons/polygon.svg" },
   {
     id: "avalanche-2",
-    name: "AVALANCHE",
+    name: "Avalanche",
     icon: "./assets/icons/avalanche.svg",
   },
-  { id: "iotex", name: "IOTEX", icon: "./assets/icons/iotex.svg" },
-  { id: "fantom", name: "FANTOM", icon: "./assets/icons/fantom.svg" },
-  // { id: "celo", name: "CELO", icon: "./assets/icons/celo.svg" },
-  { id: "harmony", name: "HARMONY", icon: "./assets/icons/harmony.svg" },
-  { id: "gnosis", name: "GNOSIS CHAIN", icon: "./assets/icons/gnosis.svg" },
-  { id: "fuse-network-token", name: "FUSE", icon: "./assets/icons/fuse.svg" },
-  // { id: "unique-one", name: "UNIQUE", icon: "./assets/icons/unique.svg" }, // TODO: check if this is correct
-  { id: "elrond-erd-2", name: "ELROND", icon: "./assets/icons/elrond.svg" },
+  { id: "iotex", name: "Iotex", icon: "./assets/icons/iotex.svg" },
+  { id: "fantom", name: "Fantom", icon: "./assets/icons/fantom.svg" },
+  // { id: "celo", name: "Celo", icon: "./assets/icons/celo.svg" },
+  { id: "harmony", name: "Harmony", icon: "./assets/icons/harmony.svg" },
+  { id: "gnosis", name: "Gnosis", icon: "./assets/icons/gnosis.svg" },
+  { id: "fuse-network-token", name: "Fuse", icon: "./assets/icons/fuse.svg" },
+  // { id: "unique-one", name: "Unique", icon: "./assets/icons/unique.svg" }, // TODO: check if this is correct
+  { id: "elrond-erd-2", name: "Elrond", icon: "./assets/icons/elrond.svg" },
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";

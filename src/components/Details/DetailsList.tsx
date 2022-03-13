@@ -38,7 +38,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
     rates: { [key: string]: { usd: number } },
     chainName: string
   ): number => {
-    const chain = chains.find((chain) => chain.name === chainName);
+    const chain = chains.find((chain) => chain.name.toLowerCase() === chainName.toLowerCase());
     const rate = (chain && rates[chain.id]?.usd) || 1;
 
     return rate;

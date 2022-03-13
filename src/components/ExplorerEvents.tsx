@@ -95,7 +95,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
     rates: { [key: string]: { usd: number } },
     chainName: string
   ): number => {
-    const chain = chains.find((chain) => chain.name === chainName);
+    const chain = chains.find((chain) => chain.name.toLowerCase() === chainName.toLowerCase());
     const rate = (chain && rates[chain.id]?.usd) || 1;
 
     return rate;
@@ -203,7 +203,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                       <img
                         src={
                           chains.find(
-                            (chain) => chain.name === event.fromChainName
+                            (chain) => chain.name.toLowerCase()  === event.fromChainName?.toLowerCase() 
                           )?.icon
                         }
                         alt=""
@@ -224,7 +224,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                       <img
                         src={
                           chains.find(
-                            (chain) => chain.name === event.toChainName
+                            (chain) => chain.name.toLowerCase() === event.toChainName?.toLowerCase()
                           )?.icon
                         }
                         alt=""
