@@ -306,6 +306,46 @@ ul.chartInfoList li {
   visibility: visible;
 }
 
+.paginatorWraper ul, .paginatorWraper {
+  display: flex;
+  align-items: center;
+}
+
+.paginatorWraper {
+  justify-content: flex-end;
+  padding: 8px 0;
+  margin-bottom: 5px;
+}
+
+.paginatorItem {
+  display: none;
+}
+
+.paginationControlWraper, .paginatorWraper button  {
+  padding: 8px 15px 8px 15px;
+  cursor: pointer;
+  display: flex;
+  border: 1px solid var(--grey-borders);
+  background-color: #fff;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #62718A;
+}
+
+.paginatorWraper button {
+  padding: 3.5px 10px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.paginationControlWraper:hover, .paginatorWraper button:hover {
+  background-color: rgb(240, 233, 233);
+}
+
+.paginationControlWraper img {
+  margin: auto;
+}
+
 @keyframes gradient {
   0% {
     background-position: 0% 50%;

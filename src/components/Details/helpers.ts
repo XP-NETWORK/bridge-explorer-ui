@@ -20,7 +20,7 @@ export const truncate = function (fullStr:string | undefined, strLen:number, sep
   };
 
 
-  export const loadImages = async (data: IEvent[], setEvents:Function) => {
+  export const loadImages = async (data: IEvent[], setEvents:(events: IEvent[]) => void  ) => {
 
 
     const newEvents = data.map(async (data:IEvent) => {

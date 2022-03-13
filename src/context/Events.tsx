@@ -17,8 +17,11 @@ import {loadImages, fetchNtf} from '../components/Details/helpers'
 interface IEventsContext {
   events: IEvent[];
   status: string;
+  chainName:string;
   setStatus: Dispatch<SetStateAction<string>>;
   setChainName: (chainName: string) => void;
+  setEvents: (events: IEvent[]) => void;
+  setIsLoading: (bol: boolean) => void
   isLoading: boolean;
 }
 
@@ -78,8 +81,8 @@ export const EventsProvider: FC = withContainer(
 
         fetch(`${url}?chainName=` + chainName)
           .then((res) => res.json())
-          .then(async (data: IEvent[]) => {
-            await loadImages(data, setEvents);
+          .then(async ({events}: {events: IEvent[]}) => {
+            await loadImages(events, setEvents);
           })
           .then(() => setIsLoading(false));
       } else if (status.length && chainName.length === 0) {
@@ -87,8 +90,8 @@ export const EventsProvider: FC = withContainer(
 
         fetch(`${url}?status=Pending`)
           .then((res) => res.json())
-          .then(async (data: IEvent[]) => {
-            await loadImages(data, setEvents);
+          .then(async ({events}: {events: IEvent[]}) => {
+            await loadImages(events, setEvents);
             //console.log(await Promise.all(newEvents), "new events");
           })
           .then(() => setIsLoading(false));
@@ -96,16 +99,16 @@ export const EventsProvider: FC = withContainer(
         console.log("chain name and status");
         fetch(`${url}?pendingSearch=` + chainName)
           .then((res) => res.json())
-          .then(async (data: IEvent[]) => {
-            await loadImages(data, setEvents);
+          .then(async ({events}: {events: IEvent[]}) => {
+            await loadImages(events, setEvents);
           })
           .then(() => setIsLoading(false));
       } else {
         console.log("no query");
         fetch(`${url}`)
           .then((res) => res.json())
-          .then(async (data: IEvent[]) => {
-              await loadImages(data, setEvents)
+          .then(async ({events}: {events: IEvent[]}) => {
+              await loadImages(events, setEvents)
           })
           .then(() => setIsLoading(false));
       }
@@ -115,7 +118,7 @@ export const EventsProvider: FC = withContainer(
 
     return (
       <EventsContext.Provider
-        value={{ events, status, setStatus, setChainName, isLoading }}
+        value={{ events, status, setStatus, setChainName, isLoading, setEvents, setIsLoading, chainName }}
       >
         {children}
       </EventsContext.Provider>

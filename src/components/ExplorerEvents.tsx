@@ -21,6 +21,8 @@ import scrollUp from "../assets/img/collapse.svg";
 import { NoEventsRow } from "./elements/NoEventsRow";
 import { ImgOrFail } from "./elements/ImgOrFail";
 
+import { Paginator } from "./elements/Paginator";
+
 export interface IEvent {
   id: string;
   chainName: string;
@@ -92,6 +94,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
             );
           }}
         />
+        <Paginator/>
         <table className="min-w-full divide-y border-b divide-gray-200 eventsTable">
           <thead className="bg-gray-50 ">
             <tr>

@@ -19,7 +19,7 @@ export const withData = function (Wrapped: React.FC<any>) {
           //console.log(res, 'ds');
           //const metadata = await res.json();
           setEvent({
-            ...data[0],
+            ...data.events[0],
             // name:metadata.name
           });
           setLoading(false);

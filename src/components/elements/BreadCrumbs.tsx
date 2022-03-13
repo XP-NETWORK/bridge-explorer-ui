@@ -2,7 +2,7 @@ import React from "react";
 import { ExplorerEvents } from "../ExplorerEvents";
 import { Tools } from "../Tools";
 import { useContext } from "react";
-
+import { Paginator } from "./Paginator";
 import { EventsContext } from "../../context/Events";
 
 export const tabs = ["View Tx", "Pending Txns", "Tools"];

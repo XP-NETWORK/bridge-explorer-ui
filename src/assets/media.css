@@ -37,8 +37,11 @@
 }
 
 
-
-
+@media screen and (min-width: 1024px) {
+.lg\:max-w-5xl {
+    max-width: 70rem !important;
+}
+}
 
 @media screen and (max-width: 1000px) {
     .scrollTopBtn {

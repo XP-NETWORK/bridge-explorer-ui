@@ -23,7 +23,7 @@ export const txExplorers: any = {
   "16": "https://explorer.fuse.io/tx/",
   "21": "https://explorer.mainnet.aurora.dev/tx/",
   "7": "https://polygonscan.com/tx/",
-  "5": "https://ethplorer.io/tx/",
+  "5": "https://etherscan.io/tx/",
   "8": "https://ftmscan.com/tx/",
   "12": "https://explorer.harmony.one/tx/",
 };
@@ -38,7 +38,7 @@ export const addressExplorers: any = {
   "16": "https://explorer.fuse.io/address/",
   "21": "https://explorer.mainnet.aurora.dev/address/",
   "7": "https://polygonscan.com/address/",
-  "5": "https://ethplorer.io/address/",
+  "5": "https://etherscan.io/address/",
   "8": "https://ftmscan.com/address/",
   "12": "https://explorer.harmony.one/address/",
 };
@@ -93,8 +93,8 @@ export const chains = [
   },
 ];
 
-export const url = "https://dev-explorer-api.herokuapp.com/";
-export const socketUrl = "wss://dev-explorer-api.herokuapp.com";
+//export const url = "https://dev-explorer-api.herokuapp.com/";
+//export const socketUrl = "wss://dev-explorer-api.herokuapp.com";
 
-//export const url = "http://localhost:3100/";
-//export const socketUrl = "ws://localhost:3100";
+export const url = "http://localhost:3100/";
+export const socketUrl = "ws://localhost:3100";

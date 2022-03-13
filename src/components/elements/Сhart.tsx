@@ -49,6 +49,7 @@ console.log(mockData);
     data: mockData,
     xField: 'adate',
     yField: 'txNumber',
+    height:200,
     tooltip: {
       showTitle: false,
       fields: ['txNumber', 'date']
