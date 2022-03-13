@@ -81,7 +81,7 @@ const Form = () => {
 
   return (
     <form onSubmit={handleSubmit} className="issueForm">
-      <div className="block  space-y-1">
+      <div className="block  space-y-2">
         <span className="text-sm">Tx Hash:</span>
         <div className={`inputWrap ${validError ? "failValid" : ""}`}>
           <input
@@ -98,11 +98,11 @@ const Form = () => {
           <span className="inputError">Invalid Hash</span>
         </div>
       </div>
-      <div className="block mt-4 space-y-1">
+      <div className="block mt-4 space-y-2">
         <span className="text-sm">Departure Chain:</span>
         <Dropdown setSelectedChain={setDepChain} />
       </div>
-      <div className="block mt-4 space-y-1">
+      <div className="block mt-4 space-y-2">
         <span className="text-sm">Destination Chain:</span>
         <Dropdown setSelectedChain={setDestChain} />
       </div>
@@ -113,7 +113,7 @@ const Form = () => {
 
       {!captchaRender && (
         <button
-          className="block mt-5 w-full p-2 text-center text-white rounded-md bg-[#297EFE] hover:bg-[#154EDF]"
+          className="block mt-8 w-full p-2 text-center text-white rounded-md bg-[#297EFE] hover:bg-[#154EDF]"
           type="submit"
         >
           Send
@@ -184,7 +184,7 @@ const Dropdown: FC<{
 
 const Card = () => {
   return (
-    <div className="bg-white rounded-lg border p-5">
+    <div className="bg-white rounded-lg border px-6 py-8">
       <h2 className="font-roboto">Keep calm. We are on it!</h2>
       <p className="mt-4 text-sm">First of all, don't panic.</p>
       <p className="mt-4 text-sm">Your asset is safe.</p>
