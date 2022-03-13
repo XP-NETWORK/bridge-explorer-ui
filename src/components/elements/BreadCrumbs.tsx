@@ -44,7 +44,7 @@ export const BreadCrumbs: React.FC<{
         {tabs.map((tab, i) => (
           <div
             key={i + "tab" }
-            className={`breadCrumbTab ${
+            className={`breadCrumbTab text-sm text-[#222222] ${
               selecedTab === tab ? " selectedTab " : ""
             } ${eventsContext?.isLoading? 'nonactive': ''}`}
             onClick={() => onChange(tab)}
