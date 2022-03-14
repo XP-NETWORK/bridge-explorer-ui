@@ -55,3 +55,15 @@ export const truncate = function (fullStr:string | undefined, strLen:number, sep
     : await fetch(data.nftUri);
     return await res.json();
   }
+
+  export const debounce = (cb:Function, delay: number) => {
+
+    let tm : NodeJS.Timeout | undefined = undefined;
+    
+    return (...args:any) => {
+       tm && clearTimeout(tm)
+       tm = setTimeout(() => {
+            cb(...args);
+        }, delay)
+    }
+  }

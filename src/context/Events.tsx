@@ -44,7 +44,7 @@ export const EventsProvider: FC = withContainer(
     const toggleSort = () => setSort(sort === 'DESC' ? 'ASC':'DESC')
     
     useEffect(() => {
-      console.log(sort);
+
       socket.off("incomingEvent");
       socket.off("updateEvent");
       socket.on("incomingEvent", async (event: any) => {

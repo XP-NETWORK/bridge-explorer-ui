@@ -3,14 +3,19 @@ import SearchIcon from "../assets/icons/search.svg";
 import Cross from "../assets/icons/cross.svg";
 import { useContext, useEffect, useState } from "react";
 import { EventsContext } from "../context/Events";
+import { useCallback } from "react";
+
+import { debounce } from "./Details/helpers";
 
 export const SearchBar = () => {
   const [value, setValue] = useState("");
   // @ts-ignore
   const { setChainName } = useContext(EventsContext);
 
+  const debounced = useCallback(debounce(setChainName, 1000), [])
+
   useEffect(() => {
-    setChainName(value);
+    debounced(value);
   }, [value]);
 
   return (
