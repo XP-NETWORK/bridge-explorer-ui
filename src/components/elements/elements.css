@@ -157,7 +157,7 @@ ul.chartInfoList li {
 .nftWrapper {
   position: relative;
   width: 128px !important;
-  height: 128px;
+  /* height: 128px; */
   border-radius: 6px;
   margin-right: 15px;
 }

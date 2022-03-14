@@ -78,10 +78,6 @@
         height: auto;
     }
 
-    .nftWrapper.loadingWrapper {
-        height: 300px;
-    }
-
     .infoTextContainer.longCol {
         padding-left: 1px  !important;
     }
