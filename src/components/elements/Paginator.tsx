@@ -66,8 +66,8 @@ export const Paginator = withContainer(
             pageClassName="paginatorItem"
             previousLabel={
               <div
-                className="paginationControlWraper"
-                style={{ marginRight: "110px" }}
+                className="paginationControlWraper prevControl"
+  
                 onClick={() => onClickPage(-1)}
               >
                 <img src={prev} />

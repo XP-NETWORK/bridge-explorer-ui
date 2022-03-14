@@ -51,6 +51,27 @@
 
 
 @media screen and (max-width: 600px) {
+
+    .leftWrapper {
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        
+    }
+
+    .leftWrapper button {
+     
+    }
+
+    .prevControl {
+        margin-right: 200px;
+    }
+
+    .paginatorInnerWrapper {
+        margin-top: 0;
+        margin-left: 12px;
+    }
+
     .cardsWrapper {
       gap: 0;
       position: relative;
@@ -123,7 +144,7 @@
     }
 
     .paginatorInnerWrapper {
-        margin-top: 20px;
+        
         justify-content: space-between;
     }
 
@@ -133,6 +154,10 @@
 
     .paginatorWraper button {
         display: none;
+    }
+
+    .paginatorWraper .csvBtn {
+        display: flex;
     }
 
     .paginatorWraper {
