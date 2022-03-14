@@ -28,7 +28,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
   const { tooltipCopy } = copyProps;
   const [soundOn, setSoundOn] = useState(false);
   const [hasSound, setHasSound] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const nftVideo = useRef<HTMLVideoElement | null>(null);
 
   const isMobile = useIsMobile();
@@ -47,7 +47,6 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
       Boolean(video?.audioTracks && video?.audioTracks.length)
     );
   };
-
   useEffect(() => {
     if (data) {
       console.log(data, "md");
@@ -72,16 +71,16 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
             }`}
           >
             {metadata?.animation_url ? (
-              <div className="relative rounded-lg overflow-hidden nftImage">
+              <div className="relative rounded-lg overflow-hidden nftImage" >
                 <video
                   ref={nftVideo}
                   poster={metadata?.image}
-                  preload="metadata"
                   className="z-10"
                   playsInline
                   autoPlay
                   muted
                   loop
+                  style={{ display: isLoading ? "none" : "block" }}
                   onLoadStart={() => {
                     setIsLoading(true);
                   }}
@@ -91,6 +90,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
                 >
                   <source src={metadata?.animation_url} type="video/mp4" />
                 </video>
+                {isLoading && <div className="nftWrapper loadingWrapper"></div>}
                 {hasSound && (
                   <button
                     onClick={toggleSound}
