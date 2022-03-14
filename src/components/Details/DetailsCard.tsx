@@ -75,7 +75,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
                 <video
                   ref={nftVideo}
                   poster={metadata?.image}
-                  className="z-10"
+                  className="z-10 aspect-square"
                   playsInline
                   autoPlay
                   muted
@@ -107,7 +107,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
             ) : (
               metadata?.image && (<ImgOrFail
                 alt="nft preview"
-                className={"rounded-lg  nftImage"}
+                className={"rounded-lg  nftImage aspect-square"}
                 src={metadata?.image}
                 width={3}
                 height={3}
