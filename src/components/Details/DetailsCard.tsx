@@ -67,7 +67,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
         <div className="flex flex-col ">
           <div
             className={`nftWrapper aspect-square  ${
-              dataLoad ? "loadingWrapper" : "loadedWrapper"
+              isLoading ? "loadingWrapper" : "loadedWrapper"
             }`}
           >
             {metadata?.animation_url ? (
@@ -90,7 +90,6 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
                 >
                   <source src={metadata?.animation_url} type="video/mp4" />
                 </video>
-                {isLoading && <div className="nftWrapper loadingWrapper aspect-square"></div>}
                 {hasSound && (
                   <button
                     onClick={toggleSound}
@@ -100,6 +99,12 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
                       src={soundOn ? SoundOnIcon : SoundOffIcon}
                       alt="sound button"
                       width={14}
+                      onLoadStart={() => {
+                        setIsLoading(true);
+                      }}
+                      onLoadedData={() => {
+                        setIsLoading(false);
+                      }}
                     />
                   </button>
                 )}
