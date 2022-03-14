@@ -9,6 +9,7 @@ export const ExplorerCards = withContainer(
   ({
     container: {
       appData: { totalTx, totalWallets },
+      fetching
     },
   }) => {
     return (
@@ -17,9 +18,10 @@ export const ExplorerCards = withContainer(
           title={totalTx}
           subtitle="Transactions"
           icon={TransactionsIcon}
+          fetching={fetching}
         />
-        <ExplorerCard title={totalWallets} subtitle="Users" icon={UsersIcon} />
-        <ExplorerCard title="10" subtitle="Chains" icon={ChainsIcon} />
+        <ExplorerCard title={totalWallets} subtitle="Users" icon={UsersIcon}  fetching={fetching}/>
+        <ExplorerCard title="10" subtitle="Chains" icon={ChainsIcon}  fetching={fetching} />
       </Container>
     );
   }

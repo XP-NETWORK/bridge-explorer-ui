@@ -5,7 +5,7 @@ import { Line, Column } from '@ant-design/plots';
 import moment from "moment";
 
 
-export const Chart = withContainer(({dailyData, container: {appData: {totalTx}}}:{dailyData: DailyData[], container: any}) => {
+export const Chart = withContainer(({dailyData, container: {fetching, appData: {totalTx}}}:{dailyData: DailyData[], container: any}) => {
 
   let mockData = [
     {
@@ -75,8 +75,8 @@ console.log(mockData);
         <div className="chartVisual">
           <h3 className="font-medium text-[#222222]">Daily Transactions</h3>
           <div className="chartMetrics">
-            <span>Today Tx: {mockData[mockData.length -1].txNumber}</span>
-            <span>Total Tx: {totalTx}</span>
+            <span>Today Tx: <span className={`${fetching? 'loadingWrapper' : ''}`}>{mockData[mockData.length -1].txNumber}</span></span>
+            <span>Total Tx: <span className={`${fetching? 'loadingWrapper' : ''}`}>{totalTx}</span></span>
           </div>
            <div className="lineWrapper">
               <Column {...config}/>

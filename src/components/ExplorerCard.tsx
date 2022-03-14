@@ -5,15 +5,15 @@ interface Props {
   title: string;
   subtitle: string;
   icon: string;
+  fetching: boolean
 }
 
-export const ExplorerCard: FC<Props> = ({ title, subtitle, icon }) => {
+export const ExplorerCard: FC<Props> = ({ title, subtitle, icon, fetching }) => {
   return (
-    <div className="shadow-[0_1px_15px_0px_#2F303214] relative overflow-hidden rounded-lg font-poppins bg-white w-full p-5 explorerCard">
+    <div className="shadow-[0_1px_15px_0px_#2F303214] relative overflow-hidden rounded-lg font-poppins bg-white w-full p-5 explorerCard ">
       <img src={icon} alt="icon" />
       <h1
-        className="text-[2rem] font-medium mt-3"
-        style={{ visibility: title ? "visible" : "hidden" }}
+        className={`text-[2rem] font-medium mt-3 ${!fetching ? '' : 'loadingWrapper'}`}
       >
         {title}
       </h1>

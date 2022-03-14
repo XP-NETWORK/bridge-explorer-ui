@@ -90,8 +90,8 @@ export const chains = [
   { id: "elrond-erd-2", name: "Elrond", icon: "./assets/icons/elrond.svg" },
 ];
 
-//export const url = "https://dev-explorer-api.herokuapp.com/";
-//export const socketUrl = "wss://dev-explorer-api.herokuapp.com";
+export const url = "https://dev-explorer-api.herokuapp.com/";
+export const socketUrl = "wss://dev-explorer-api.herokuapp.com";
 
-export const url = "http://localhost:3100/";
-export const socketUrl = "ws://localhost:3100";
+//export const url = "http://localhost:3100/";
+//export const socketUrl = "ws://localhost:3100";
