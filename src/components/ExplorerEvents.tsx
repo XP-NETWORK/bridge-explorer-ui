@@ -135,7 +135,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
             ) : // if events length is 0 after 2 seconds, show loader
             eventsContext?.events.length ? (
               eventsContext?.events.map((event: IEvent) => (
-                <tr key={event.id}>
+                <tr key={event.id} /*onClick={() => window.open(`/tx/${event.fromHash}`, '_self')}*/>
                   <TableData className="sticky left-0 text-center max-w-[62px] bg-white imgTableData">
                     <ReactTooltip effect="solid"  className="copyTip"/>
                     {event?.status === "Completed" || event?.imgUri ? (
@@ -178,20 +178,6 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                       </span>
                     </span>
                   </TableData>
-
-                  {false && (
-                    <TableData>
-                      <Link
-                        className="text-[#235EF5]"
-                        key={event.id}
-                        to={`/tx/${event.fromHash}`}
-                      >
-                        {event.fromHash.slice(0, 6)}...
-                        {event.fromHash.slice(-6)}
-                      </Link>
-                    </TableData>
-                  )}
-
             
                   <TableData>
                     <div className="flex space-x-1">

@@ -49,6 +49,10 @@
 
 @media screen and (max-width: 600px) {
 
+    .paginatorWraper {
+        flex-direction: column;
+    }
+
     .loaderWrap {
         max-width: 100vw;
     }

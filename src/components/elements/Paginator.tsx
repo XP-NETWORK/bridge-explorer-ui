@@ -42,7 +42,7 @@ return <div className="paginatorWraper">
         pageCount={Math.ceil(total/50)}
         breakClassName={'paginatorItem'}
         pageClassName="paginatorItem"
-        previousLabel={<div className="paginationControlWraper" style={{marginRight:'110px'}} onClick={() => onClickPage(-1)}><img src={prev}/></div>}
+        previousLabel={<div className="paginationControlWraper prevControl"  onClick={() => onClickPage(-1)}><img src={prev}/></div>}
         //renderOnZeroPageCount={''}
       />
       <div className="paginatorLabel">Page {page + 1} of {Math.ceil(total/50)}</div>

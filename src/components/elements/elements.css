@@ -336,6 +336,10 @@ ul.chartInfoList li {
   display: none;
 }
 
+.prevControl {
+  margin-right: 110px;
+}
+
 .paginationControlWraper, .paginatorWraper button, .paginatorLabel   {
   padding: 8px 15px 8px 15px;
   cursor: pointer;

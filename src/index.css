@@ -199,6 +199,8 @@ body {
   transform: rotate(180deg);
 }
 
+
+
 @keyframes ping {
   75%,
   100% {

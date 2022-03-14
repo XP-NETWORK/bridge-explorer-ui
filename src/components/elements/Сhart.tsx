@@ -2,6 +2,7 @@ import * as React from "react";
 import { DailyData } from "../../pages/Dashboard";
 import { withContainer } from '../../context/ServcieProvder';
 import { Line, Column } from '@ant-design/plots';
+import moment from "moment";
 
 
 export const Chart = withContainer(({dailyData, container: {appData: {totalTx}}}:{dailyData: DailyData[], container: any}) => {
@@ -55,10 +56,12 @@ console.log(mockData);
       fields: ['txNumber', 'date']
     },
     xAxis: {
+
      label: {
       formatter: (text:string) => {
-        //const dataObj = new Date(+text).toISOString()
-        return null//dataObj.split('T')[0]
+        
+        if (+text ===  +moment('03/03/2022').startOf('day')) return  moment('03/03/2022').format("MMM Do YY");
+        return  +moment().startOf('day') === +text ? moment().format("MMM Do YY") : null //moment(+text).date()//dataObj.split('T')[0]
       }
      }
     },
