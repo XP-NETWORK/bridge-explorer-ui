@@ -90,28 +90,31 @@ export const EventsProvider: FC = withContainer(
       if (chainName.length && status.length === 0) {
         console.log("only chain name");
 
-        fetch(`${url}?chainName=` + chainName)
+        fetch(`${url}?chainName=` + chainName + `&sort=${sort}&offset=${paginationPage}`)
           .then((res) => res.json())
-          .then(async ({events}: {events: IEvent[]}) => {
+          .then(async ({events, count}: {events: IEvent[], count: number}) => {
             await loadImages(events, setEvents);
+            setTotal(count)
           })
           .then(() => setIsLoading(false));
       } else if (status.length && chainName.length === 0) {
         console.log("only status");
 
-        fetch(`${url}?status=Pending`)
+        fetch(`${url}?status=Pending` + `&sort=${sort}&offset=${paginationPage}`)
           .then((res) => res.json())
-          .then(async ({events}: {events: IEvent[]}) => {
+          .then(async ({events, count}: {events: IEvent[], count: number}) => {
             await loadImages(events, setEvents);
+            setTotal(count)
             //console.log(await Promise.all(newEvents), "new events");
           })
           .then(() => setIsLoading(false));
       } else if (chainName.length && status.length > 0) {
         console.log("chain name and status");
-        fetch(`${url}?pendingSearch=` + chainName)
+        fetch(`${url}?pendingSearch=` + chainName + `&sort=${sort}&offset=${paginationPage}`)
           .then((res) => res.json())
-          .then(async ({events}: {events: IEvent[]}) => {
+          .then(async ({events, count}: {events: IEvent[], count: number}) => {
             await loadImages(events, setEvents);
+            setTotal(count)
           })
           .then(() => setIsLoading(false));
       } else {
