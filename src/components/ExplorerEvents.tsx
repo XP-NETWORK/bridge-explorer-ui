@@ -1,9 +1,4 @@
-import {
-  FC,
-  useEffect,
-  useState,
-  useRef,
-} from "react";
+import { FC, useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Container } from "./Container";
 import { useContext } from "react";
@@ -19,9 +14,11 @@ import scrollUp from "../assets/img/collapse.svg";
 import { NoEventsRow } from "./elements/NoEventsRow";
 import { ImgOrFail } from "./elements/ImgOrFail";
 import { getExchangeRates } from "../getExchangeRate";
-import sortIcon from '../assets/img/sort.svg'
+import sortIcon from "../assets/img/sort.svg";
+import { truncate } from "./Details/helpers";
 
 import { Paginator } from "./elements/Paginator";
+import { ErrorStatus } from "./elements/ErrorStatus";
 
 export interface IEvent {
   id: string;
@@ -94,7 +91,9 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
     rates: { [key: string]: { usd: number } },
     chainName: string
   ): number => {
-    const chain = chains.find((chain) => chain.name.toLowerCase() === chainName.toLowerCase());
+    const chain = chains.find(
+      (chain) => chain.name.toLowerCase() === chainName.toLowerCase()
+    );
     const rate = (chain && rates[chain.id]?.usd) || 1;
 
     return rate;
@@ -115,7 +114,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
             );
           }}
         />
-        <Paginator/>
+        <Paginator />
         <table className="min-w-full divide-y border-b divide-gray-200 eventsTable">
           <thead className="bg-gray-50 ">
             <tr>
@@ -125,7 +124,18 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
               <TableHeading>From</TableHeading>
               <TableHeading>To</TableHeading>
               <TableHeading>Method</TableHeading>
-              <TableHeading><span className="ageHeader">Age<img src={sortIcon} className={`${eventsContext?.sort === 'ASC'? 'rotated' : ''}`} onClick={eventsContext!.toggleSort}/></span></TableHeading>
+              <TableHeading>
+                <span className="ageHeader">
+                  Age
+                  <img
+                    src={sortIcon}
+                    className={`${
+                      eventsContext?.sort === "ASC" ? "rotated" : ""
+                    }`}
+                    onClick={eventsContext!.toggleSort}
+                  />
+                </span>
+              </TableHeading>
               <TableHeading>Status</TableHeading>
             </tr>
           </thead>
@@ -137,7 +147,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
               eventsContext?.events.map((event: IEvent) => (
                 <tr key={event.id}>
                   <TableData className="sticky left-0 text-center max-w-[62px] bg-white imgTableData">
-                    <ReactTooltip effect="solid"  className="copyTip"/>
+                    <ReactTooltip effect="solid" className="copyTip" />
                     {event?.status === "Completed" || event?.imgUri ? (
                       <ImgOrFail
                         className="rounded-lg"
@@ -157,13 +167,17 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
 
                   <TableData>
                     <span
-                      className="valueData "
-                      data-tip={!isNaN(+event.txFees) && ethers.utils.formatEther(event.txFees)}
+                      className=""
+                      data-tip={
+                        !isNaN(+event.txFees) &&
+                        ethers.utils.formatEther(event.txFees)
+                      }
                     >
                       <span>
-                        {!isNaN(+event.txFees) && Number(ethers.utils.formatEther(event.txFees))
-                          .toFixed(7)
-                          .toString()}
+                        {!isNaN(+event.txFees) &&
+                          Number(ethers.utils.formatEther(event.txFees))
+                            .toFixed(7)
+                            .toString()}
                       </span>{" "}
                       <span>
                         {event.fromChain && currency[event.fromChain]}
@@ -171,10 +185,11 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                       <br />
                       <span>
                         $
-                        {!isNaN(+event.txFees) && (
-                          getExchangeRate(exchangeRates, event.chainName) *
-                          Number(ethers.utils.formatEther(event.txFees))
-                        ).toFixed(2)}
+                        {!isNaN(+event.txFees) &&
+                          (
+                            getExchangeRate(exchangeRates, event.chainName) *
+                            Number(ethers.utils.formatEther(event.txFees))
+                          ).toFixed(2)}
                       </span>
                     </span>
                   </TableData>
@@ -192,47 +207,56 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                     </TableData>
                   )}
 
-            
                   <TableData>
-                    <div className="flex space-x-1">
+                    <div className="flex space-x-1 mb-1">
                       <img
                         src={
                           chains.find(
-                            (chain) => chain.name.toLowerCase()  === chainNoncetoName[event?.fromChain|| 0 ]?.toLowerCase() 
+                            (chain) =>
+                              chain.name.toLowerCase() ===
+                              chainNoncetoName[
+                                event?.fromChain || 0
+                              ]?.toLowerCase()
                           )?.icon
                         }
                         alt=""
                       />
-                      <span>{chainNoncetoName[event?.fromChain || 0] || "N/A"} </span>
+                      <span>
+                        {chainNoncetoName[event?.fromChain || 0] || "N/A"}{" "}
+                      </span>
                     </div>
                     <Link
                       className="text-[#235EF5]"
                       key={event.id}
                       to={`/tx/${event.fromHash}`}
                     >
-                      {event.fromHash.slice(0, 6)}...
-                      {event.fromHash.slice(-6)}
+                      {truncate(event.fromHash, 15)}
                     </Link>
                   </TableData>
                   <TableData>
-                    <div className="flex space-x-1">
+                    <div className="flex space-x-1 mb-1">
                       <img
                         src={
                           chains.find(
-                            (chain) => chain.name.toLowerCase() === chainNoncetoName[event?.toChain || 0]?.toLowerCase()
+                            (chain) =>
+                              chain.name.toLowerCase() ===
+                              chainNoncetoName[
+                                event?.toChain || 0
+                              ]?.toLowerCase()
                           )?.icon
                         }
                         alt=""
                       />
-                      <span>{chainNoncetoName[event?.toChain || 0] || "N/A"} </span>
+                      <span>
+                        {chainNoncetoName[event?.toChain || 0] || "N/A"}
+                      </span>
                     </div>
                     <Link
                       className="text-[#235EF5]"
                       key={event.id}
                       to={`/tx/${event.fromHash}`}
                     >
-                      {event?.toHash?.slice(0, 6)}...
-                      {event?.toHash?.slice(-6)}
+                      {truncate(event.toHash, 15) || <ErrorStatus />}
                     </Link>
                   </TableData>
                   <TableData>
@@ -242,7 +266,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                   </TableData>
                   <TableData>
                     <span
-                        className="valueData "
+                      className="valueData "
                       data-tip={moment(event?.createdAt).format(
                         "YYYY/MM/DD H:mm"
                       )}
