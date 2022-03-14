@@ -6,6 +6,7 @@ import { Navbar } from "../components/Navbar";
 import { SearchBar } from "../components/SearchBar";
 import { EventsProvider } from "../context/Events";
 import { Dashboard } from "./Dashboard";
+import { useLocation } from "react-router";
 
 import {
   BreadCrumbs,
@@ -14,7 +15,11 @@ import {
 } from "../components/elements/BreadCrumbs";
 
 export const Explorer = () => {
-  const [tab, setTab] = useState(tabs[0]);
+  const loc = useLocation();
+  console.log(loc);
+  const [tab, setTab] = useState(tabs.find(tab => tab.route === loc.pathname.replace('/', ''))?.name);
+
+
   return (
     <div>
       <Navbar />
@@ -26,9 +31,9 @@ export const Explorer = () => {
         <BreadCrumbs
           onChange={(value: string) => setTab(value)}
           tabs={tabs}
-          selecedTab={tab}
+          selecedTab={tab || tabs[0].name}
         />
-        <TabsNavigator tab={tab} />
+        <TabsNavigator />
       </EventsProvider>
       <Footer />
     </div>

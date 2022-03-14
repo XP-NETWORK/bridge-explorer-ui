@@ -1,37 +1,27 @@
 import React from "react";
+import { Routes, Route, Link } from "react-router-dom";
 import { ExplorerEvents } from "../ExplorerEvents";
 import { Tools } from "../Tools";
 import { useContext } from "react";
 import { Paginator } from "./Paginator";
 import { EventsContext } from "../../context/Events";
 
-export const tabs = ["View Tx", "Pending Txns", "Tools"];
+export const tabs = [{name: "View Tx", route: ''}, {name: "Pending Txns", route: 'pending'}, {name:"Tools", route: 'tools'}];
 
-export const TabsNavigator = ({ tab }: { tab: string }) => {
+export const TabsNavigator = () => {
 
-  
+ return <Routes>
+          <Route path="" element={<ExplorerEvents />} />
+          <Route path="pending" element={ <ExplorerEvents status="Pending" />} />
+          <Route path="tools" element={ <Tools />} />
+        </Routes>
+    
 
-  switch (tab) {
-    case "View Tx": {
-      return <ExplorerEvents />;
-    }
-
-    case "Pending Txns": {
-      return <ExplorerEvents status="Pending" />;
-    }
-
-    case "Tools": {
-      return <Tools />;
-    }
-
-    default:
-      return <ExplorerEvents />;
-  }
 };
 
 export const BreadCrumbs: React.FC<{
   onChange: Function;
-  tabs: string[];
+  tabs: {name: string, route: string}[];
   selecedTab: string;
 }> = ({ onChange, tabs, selecedTab }) => {
 
@@ -42,15 +32,16 @@ export const BreadCrumbs: React.FC<{
     <div className="lg:max-w-5xl mx-auto px-4 mt-8">
       <div className="breadCrumbs">
         {tabs.map((tab, i) => (
+          <Link to={tab.route}>
           <div
             key={i + "tab" }
             className={`breadCrumbTab text-sm text-[#222222] ${
-              selecedTab === tab ? " selectedTab " : ""
+              selecedTab === tab.name ? " selectedTab " : ""
             } ${eventsContext?.isLoading? 'nonactive': ''}`}
-            onClick={() => onChange(tab)}
+            onClick={() => onChange(tab.name)}
           >
-            {tab}
-          </div>
+            {tab.name}
+          </div></Link>
         ))}
       </div>
     </div>
