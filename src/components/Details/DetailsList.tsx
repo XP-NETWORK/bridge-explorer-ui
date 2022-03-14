@@ -199,6 +199,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
             .replace("hour ", "hr ")
             .replace("hours", "hrs")
             .replace("minute ", "min ")
+            .replace("minutes ", "mins ")
             .replace("second ", "sec ")
             .replace("seconds ", "secs ")} (${new Date(
             event?.createdAt
