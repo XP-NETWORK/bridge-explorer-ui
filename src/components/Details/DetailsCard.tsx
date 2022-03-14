@@ -8,6 +8,7 @@ import { txExplorers } from "../../constants";
 import SoundOnIcon from "../../assets/icons/sound-on.svg";
 import SoundOffIcon from "../../assets/icons/sound-off.svg";
 import { ImgOrFail } from "../elements/ImgOrFail";
+import { LoaderRow } from "../elements/LoaderRow";
 
 export interface DetailsCard {
   data: {
@@ -27,6 +28,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
   const { tooltipCopy } = copyProps;
   const [soundOn, setSoundOn] = useState(false);
   const [hasSound, setHasSound] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const nftVideo = useRef<HTMLVideoElement | null>(null);
 
   const isMobile = useIsMobile();
@@ -38,35 +40,24 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
     setSoundOn(!soundOn);
   };
 
-  const videoHandler = () => {
-    nftVideo.current?.click();
-    nftVideo.current?.play();
-
-    if ("WebkitAppearance" in document.documentElement.style) {
-      // @ts-ignore
-      setHasSound(nftVideo.current?.webkitAudioDecodedByteCount > 0);
-      // @ts-ignore
-    } else if (nftVideo.current?.mozHasAudio) {
-      // @ts-ignore
-      setHasSound(true);
-    }
-    console.log(nftVideo.current);
-    if (hasSound) {
-      console.log("audio track detected");
-    } else {
-      console.log("audio track not detected");
-    }
+  const hasAudio = (video: any) => {
+    return (
+      video?.mozHasAudio ||
+      Boolean(video?.webkitAudioDecodedByteCount) ||
+      Boolean(video?.audioTracks && video?.audioTracks.length)
+    );
   };
 
   useEffect(() => {
     if (data) {
       console.log(data, "md");
       console.log(nftVideo);
-      nftVideo?.current?.addEventListener("loadeddata", videoHandler);
+      // nftVideo?.current?.addEventListener("loadeddata", videoHandler);
+      // console.log(hasAudio(nftVideo));
+      setHasSound(hasAudio(nftVideo?.current));
+      nftVideo?.current?.play();
     }
-    return () =>
-      nftVideo?.current?.removeEventListener("loadeddata", videoHandler);
-  }, [data]);
+  }, [isLoading]);
 
   return (
     <div className="text-[#222222] overflow-hidden sm:border p-1 sm:p-5 md:p-6 rounded-xl detailsCard">
@@ -80,44 +71,47 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
               dataLoad ? "loadingWrapper" : "loadedWrapper"
             }`}
           >
-            {!dataLoad && metadata && (
-              <>
-                {metadata?.animation_url ? (
-                  <div className="relative rounded-lg overflow-hidden nftImage">
-                    <video
-                      ref={nftVideo}
-                      poster={metadata?.image}
-                      className="z-10"
-                      autoPlay
-                      playsInline
-                      muted
-                      loop
-                    >
-                      <source src={metadata?.animation_url} type="video/mp4" />
-                    </video>
-                    {hasSound && (
-                      <button
-                        onClick={toggleSound}
-                        className="absolute z-20 h-7 w-7 flex items-center justify-center top-2 right-2 bg-white rounded-full"
-                      >
-                        <img
-                          src={soundOn ? SoundOnIcon : SoundOffIcon}
-                          alt="sound button"
-                          width={14}
-                        />
-                      </button>
-                    )}
-                  </div>
-                ) : (
-                  <ImgOrFail
-                    alt="nft preview"
-                    className={"rounded-lg  nftImage"}
-                    src={metadata?.image}
-                    width={3}
-                    height={3}
-                  />
+            {metadata?.animation_url ? (
+              <div className="relative rounded-lg overflow-hidden nftImage">
+                <video
+                  ref={nftVideo}
+                  poster={metadata?.image}
+                  preload="metadata"
+                  className="z-10"
+                  playsInline
+                  autoPlay
+                  muted
+                  loop
+                  onLoadStart={() => {
+                    setIsLoading(true);
+                  }}
+                  onLoadedData={() => {
+                    setIsLoading(false);
+                  }}
+                >
+                  <source src={metadata?.animation_url} type="video/mp4" />
+                </video>
+                {hasSound && (
+                  <button
+                    onClick={toggleSound}
+                    className="absolute z-20 h-7 w-7 flex items-center justify-center top-2 right-2 bg-white rounded-full"
+                  >
+                    <img
+                      src={soundOn ? SoundOnIcon : SoundOffIcon}
+                      alt="sound button"
+                      width={14}
+                    />
+                  </button>
                 )}
-              </>
+              </div>
+            ) : (
+              <ImgOrFail
+                alt="nft preview"
+                className={"rounded-lg  nftImage"}
+                src={metadata?.image}
+                width={3}
+                height={3}
+              />
             )}
           </div>
         </div>
