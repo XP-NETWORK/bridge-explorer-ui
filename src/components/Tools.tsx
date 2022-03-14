@@ -2,6 +2,10 @@ import { ChangeEvent, FC, useState, useEffect, useMemo } from "react";
 import { chains } from "../constants";
 import { Container } from "./Container";
 import { url, _headers } from "../constants";
+import successIcon from '../assets/img/success.svg'
+import closeIcon from '../assets/img/close.svg'
+import warnIcon from '../assets/img/warning.svg'
+import warnSmall from '../assets/img/warnSmall.svg'
 
 export const Tools = () => {
   return (
@@ -20,17 +24,19 @@ export const Tools = () => {
 
 const Form = () => {
   const [txHash, setHash] = useState("");
-  const [depChain, setDepChain] = useState(chains[0].name);
-  const [destChain, setDestChain] = useState(chains[0].name);
-  const [validError, setValidError] = useState(false);
+  const [depChain, setDepChain] = useState('');
+  const [destChain, setDestChain] = useState('');
+  const [validError, setValidError] = useState('');
+  const [depValidError, setDepFail] = useState(false);
+  const [desValidError, setDesFail] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [errorStatus, setError] = useState('');
+  const [errorStatus, setError] = useState(false);
   const [captchaRender, setCaptchaRender] = useState(false);
   
 
 
   const captchaHandler = async (token: string) => {
-   
+    try {
       const res = await fetch(`${url}reportIssue`, {
         headers: _headers,
         method: "POST",
@@ -46,13 +52,16 @@ const Form = () => {
         
         if (message === "Hash not found") {
      
-          setValidError(true);
+          setValidError('Invalid Tx hash');
         } else if (message === "Success") {
          
           setSuccess(true);
+          setHash('');
+          setDepChain('');
+          setDestChain('');
         }
       } else {
-        setError((await res.json()).message)
+        setError(true)
       }
 
       setCaptchaRender(false);
@@ -61,10 +70,17 @@ const Form = () => {
         const newContainer = document.createElement('div')
         newContainer.id = 'captchaContainer'
         document.querySelector('#root form.issueForm')?.appendChild(newContainer);
+    } catch(e) {
+
+    }
     }
 
   const sendIssue =  () => {
-    if (!txHash) return setValidError(true);
+    let error = false;
+    if (!txHash)  {setValidError('Paste Tx Hash'); error = true}
+    if (!depChain)  {setDepFail(true); error = true}
+    if (!destChain)  {setDesFail(true);error = true}
+    if (error) return;
     setCaptchaRender(true);
         // @ts-ignore
       window?.grecaptcha.render("captchaContainer", {
@@ -81,30 +97,39 @@ const Form = () => {
 
   return (
     <form onSubmit={handleSubmit} className="issueForm">
-      <div className="block  space-y-2">
+      <div className="block space-y-2 mb-8">
         <span className="text-sm">Tx Hash:</span>
         <div className={`inputWrap ${validError ? "failValid" : ""}`}>
           <input
             type="text"
             value={txHash}
+            onBlur={() => !txHash && setValidError('Paste Tx Hash')}
             className="bg-white h-[2.9rem] flex justify-between items-center focus:outline-none w-full select-none border rounded px-4 py-2"
             onChange={(e) => {
-              setValidError(false);
+              setValidError('');
               setSuccess(false);
-              setError('');
+              setError(false);
               setHash(e.target.value);
             }}
           />
-          <span className="inputError">Invalid Hash</span>
+          {validError && <span className="inputError"><img src={warnSmall} alt="small" /><span>{validError}</span></span>}
         </div>
       </div>
-      <div className="block mt-4 space-y-2">
+      <div className={`block mb-5 space-y-2  ${depValidError ? "failValid" : ""}`} >
         <span className="text-sm">Departure Chain:</span>
-        <Dropdown setSelectedChain={setDepChain} />
+        <Dropdown setSelectedChain={(val) => {
+          setDepFail(false);
+          setDepChain(val)}} />
+      {depValidError &&  <span className="inputError"><img src={warnSmall} alt="small" /><span>Select Departure Chain</span></span>}
       </div>
-      <div className="block mt-4 space-y-2">
+
+      <div className={`block space-y-2  ${desValidError ? "failValid" : ""}`}>
         <span className="text-sm">Destination Chain:</span>
-        <Dropdown setSelectedChain={setDestChain} />
+        <Dropdown setSelectedChain={(val) => {
+          setDesFail(false);
+          setDestChain(val)
+        }} />
+      { desValidError && <span className="inputError"><img src={warnSmall} alt="small" /><span>Select Destination Chain</span></span>}
       </div>
       <div
         id="captchaContainer"
@@ -119,8 +144,8 @@ const Form = () => {
           Send
         </button>
       )}
-      {success && <span className="formSuccess">Report has been sent</span>}
-      {errorStatus && <span className="formFail">{errorStatus}</span>}
+      {success && <div className="formSuccess"><img src={successIcon} alt="success" /><span>Done! You successfully sent your request.</span> <pre>|</pre> <img onClick={() => setSuccess(false)} src={closeIcon} alt="close" /></div>}
+      {errorStatus && <span className="formFail"><img src={warnIcon} alt="warning" /><span>Uh oh... Something went wrong! Please try again.</span> <pre>|</pre> <img onClick={() => setError(false)} src={closeIcon} alt="close" /></span>}
     </form>
   );
 };

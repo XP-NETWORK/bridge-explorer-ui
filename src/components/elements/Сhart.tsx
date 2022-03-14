@@ -1,10 +1,10 @@
 import * as React from "react";
 import { DailyData } from "../../pages/Dashboard";
-
+import { withContainer } from '../../context/ServcieProvder';
 import { Line, Column } from '@ant-design/plots';
 
 
-export const Chart = ({dailyData}:{dailyData: DailyData[]}) => {
+export const Chart = withContainer(({dailyData, container: {appData: {totalTx}}}:{dailyData: DailyData[], container: any}) => {
 
   let mockData = [
     {
@@ -73,7 +73,7 @@ console.log(mockData);
           <h3 className="font-medium text-[#222222]">Daily Transactions</h3>
           <div className="chartMetrics">
             <span>Today Tx: {mockData[mockData.length -1].txNumber}</span>
-            <span>Total Tx: {mockData.reduce((acc, cur) => acc += cur.txNumber, 0)}</span>
+            <span>Total Tx: {totalTx}</span>
           </div>
            <div className="lineWrapper">
               <Column {...config}/>
@@ -111,4 +111,4 @@ console.log(mockData);
       </div>
     </div>
   );
-};
+});

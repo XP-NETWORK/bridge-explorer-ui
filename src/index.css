@@ -131,9 +131,48 @@ body {
   margin-left: -10px;
 }
 
-.formSuccess {
-  color: #04B200;
-  font-size: 12px;
+.formSuccess,.formFail {
+  display: flex;
+  align-items: center;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: fixed;
+  padding: 14px 18px;
+  background-color: #0CC13F;
+  color: #fff;
+  font-size: 14px;
+  font-family: 'Inter';
+  border-radius: 6px;
+}
+
+.formFail {
+  background-color: #FB5632;
+}
+
+.formFail span {
+  font-size: 14px;
+  color: #fff;
+}
+
+.formSuccess img, .formFail img {
+    margin-right: 0;
+    margin-left: 12px;
+    cursor: pointer;
+}
+
+.formSuccess img:first-child, .formFail img:first-child{
+  margin-left: 0;
+  margin-right: 16px;
+  cursor: default;
+}
+
+
+
+.formSuccess pre,  .formFail pre {
+  color: #f7f7f9;
+  margin-left: 10px;
+  opacity: .7;
 }
 
 .formFail {

@@ -297,7 +297,15 @@ ul.chartInfoList li {
 }
 
 .inputError {
-  visibility: hidden;
+  display: flex;
+  align-items: center;
+
+  margin-top: 8px;
+
+}
+
+.inputError img {
+  margin-right: 7px;
 }
 
 .failValid .inputError {
