@@ -49,28 +49,8 @@ export const EventsProvider: FC = withContainer(
       socket.off("updateEvent");
       socket.on("incomingEvent", async (event: any) => {
         try {
-          //const res = await fetch(event.nftUri);
-          //const metadata = await res.json();
           const incoming = { imgUri: "", ...event };
           setEvents([incoming, ...events]);
-          /*setTimeout(() => {
-            const idx = events.findIndex(
-              (oldEvent: IEvent) =>
-              oldEvent.actionId + oldEvent.tokenId + oldEvent.fromHash ===
-              event.actionId + event.actionId + event.fromHash
-            );
-            if (events[idx].status === "Pending") {
-            const erroredEvent: IEvent = {
-              ...events[idx],
-              status: 'Error'
-            }
-            setEvents([
-              ...events.slice(0, idx),
-              erroredEvent,
-              ...events.slice(idx + 1),
-            ]);
-          }
-          }, 1000 * 1 * 60)*/
         } catch (e: any) {
           console.log(e);
           const incoming = { imgUri: "", ...event };
@@ -80,8 +60,8 @@ export const EventsProvider: FC = withContainer(
       socket.on("updateEvent", async (updated: any) => {
         const idx = events.findIndex(
           (event) =>
-            event.actionId + event.fromChain === //event.tokenId + event.fromHash ===
-            updated.actionId + updated.fromChain
+            event.fromChain + event.actionId  === 
+            updated.fromChain + updated.actionId 
         );
         try {
           const metadata = await fetchNtf(updated)
@@ -102,9 +82,7 @@ export const EventsProvider: FC = withContainer(
     }, [events]);
 
     useEffect(() => {
-      //if (events.length !== events.length) {
         setIsLoading(true);
-     // }
       if (chainName.length && status.length === 0) {
         console.log("only chain name");
 
