@@ -45,44 +45,55 @@ export const Paginator = withContainer(
           Showing {50 * page + 1} - {50 * page + 50} out of {totalTx} Tx
         </span>
         <div className="leftWrapper">
-        <CSVButton />
-        <div className="paginatorInnerWrapper">
           {/* <CSVButton /> */}
-          <button onClick={() => onClickPage(-page)} className={`${ctx?.isLoading? 'nonactive': ''}`}>First</button>
-          <ReactPaginate
-            breakLabel="..."
-            nextLabel={
-              <div
-                className={`paginationControlWraper ${ctx?.isLoading? 'nonactive': ''}`}
-                onClick={() => onClickPage(1)}
-              >
-                <img src={next} />
-              </div>
-            }
-            onPageChange={() => {}}
-            pageRangeDisplayed={0}
-            pageCount={Math.ceil(total / 50)}
-            breakClassName={"paginatorItem"}
-            pageClassName="paginatorItem"
-            previousLabel={
-              <div
-                className={`paginationControlWraper prevControl ${ctx?.isLoading? 'nonactive': ''}`}
-  
-                onClick={() => onClickPage(-1)}
-              >
-                <img src={prev} />
-              </div>
-            }
-            //renderOnZeroPageCount={''}
-          />
-          <div className="paginatorLabel">
-            Page {page + 1} of {Math.ceil(total / 50)}
+          <div className="paginatorInnerWrapper">
+            {/* <CSVButton /> */}
+            <button
+              onClick={() => onClickPage(-page)}
+              className={`${ctx?.isLoading ? "nonactive" : ""}`}
+            >
+              First
+            </button>
+            <ReactPaginate
+              breakLabel="..."
+              nextLabel={
+                <div
+                  className={`paginationControlWraper ${
+                    ctx?.isLoading ? "nonactive" : ""
+                  }`}
+                  onClick={() => onClickPage(1)}
+                >
+                  <img src={next} />
+                </div>
+              }
+              onPageChange={() => {}}
+              pageRangeDisplayed={0}
+              pageCount={Math.ceil(total / 50)}
+              breakClassName={"paginatorItem"}
+              pageClassName="paginatorItem"
+              previousLabel={
+                <div
+                  className={`paginationControlWraper prevControl ${
+                    ctx?.isLoading ? "nonactive" : ""
+                  }`}
+                  onClick={() => onClickPage(-1)}
+                >
+                  <img src={prev} />
+                </div>
+              }
+              //renderOnZeroPageCount={''}
+            />
+            <div className="paginatorLabel">
+              Page {page + 1} of {Math.ceil(total / 50)}
+            </div>
+            <button
+              onClick={() => onClickPage(Math.ceil(total / 50) - page - 1)}
+              className={`${ctx?.isLoading ? "nonactive" : ""}`}
+            >
+              Last
+            </button>
           </div>
-          <button onClick={() => onClickPage(Math.ceil(total / 50) - page - 1)} className={`${ctx?.isLoading? 'nonactive': ''}`}>
-            Last
-          </button>
         </div>
-      </div>
       </div>
     );
   }
