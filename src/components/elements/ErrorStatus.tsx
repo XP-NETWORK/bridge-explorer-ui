@@ -4,7 +4,7 @@ import ReactTooltip from "react-tooltip";
 export const ErrorStatus = () => {
   return (
     <span
-      data-tip="<span className='text-left'>Transaction failed.<br>
+      data-tip="<span className='text-left'>Transaction failed.</br>
       Use tools tab above for details.</span>"
       data-place="right"
       data-html="true"

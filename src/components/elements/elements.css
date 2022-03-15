@@ -412,6 +412,12 @@ ul.chartInfoList li {
 }
 
 
+.errorTip {
+ display: flex !important;
+ flex-direction: column !important;
+ align-items: flex-start !important;
+}
+
 
 @keyframes gradient {
   0% {
