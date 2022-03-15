@@ -45,8 +45,6 @@ export const Paginator = withContainer(
           Showing {50 * page + 1} - {50 * page + 50} out of {totalTx} Tx
         </span>
         <div className="leftWrapper">
-        <CSVButton />
-        <div className="paginatorInnerWrapper">
           {/* <CSVButton /> */}
           <button onClick={() => onClickPage(-page)} className={`${ctx?.isLoading? 'nonactive': ''}`}>First</button>
           <ReactPaginate
@@ -82,7 +80,6 @@ export const Paginator = withContainer(
             Last
           </button>
         </div>
-      </div>
       </div>
     );
   }
