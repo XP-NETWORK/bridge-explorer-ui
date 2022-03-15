@@ -32,7 +32,7 @@ export interface IEvent {
   actionId: string;
   txFees: string;
   tokenId?: string;
-  status: "Completed" | "Pending";
+  status: "Completed" | "Pending" | "Error";
   fromHash: string;
   toHash?: string;
   senderAddress: string;

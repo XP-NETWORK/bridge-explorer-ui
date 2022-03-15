@@ -53,6 +53,24 @@ export const EventsProvider: FC = withContainer(
           //const metadata = await res.json();
           const incoming = { imgUri: "", ...event };
           setEvents([incoming, ...events]);
+          /*setTimeout(() => {
+            const idx = events.findIndex(
+              (oldEvent: IEvent) =>
+              oldEvent.actionId + oldEvent.tokenId + oldEvent.fromHash ===
+              event.actionId + event.actionId + event.fromHash
+            );
+            if (events[idx].status === "Pending") {
+            const erroredEvent: IEvent = {
+              ...events[idx],
+              status: 'Error'
+            }
+            setEvents([
+              ...events.slice(0, idx),
+              erroredEvent,
+              ...events.slice(idx + 1),
+            ]);
+          }
+          }, 1000 * 1 * 60)*/
         } catch (e: any) {
           console.log(e);
           const incoming = { imgUri: "", ...event };
@@ -62,8 +80,8 @@ export const EventsProvider: FC = withContainer(
       socket.on("updateEvent", async (updated: any) => {
         const idx = events.findIndex(
           (event) =>
-            event.actionId + event.tokenId + updated.fromHash ===
-            updated.actionId + updated.tokenId + event.fromHash
+            event.actionId + event.fromChain === //event.tokenId + event.fromHash ===
+            updated.actionId + updated.fromChain
         );
         try {
           const metadata = await fetchNtf(updated)
