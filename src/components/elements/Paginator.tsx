@@ -48,12 +48,12 @@ export const Paginator = withContainer(
         <CSVButton />
         <div className="paginatorInnerWrapper">
           {/* <CSVButton /> */}
-          <button onClick={() => onClickPage(-page)}>First</button>
+          <button onClick={() => onClickPage(-page)} className={`${ctx?.isLoading? 'nonactive': ''}`}>First</button>
           <ReactPaginate
             breakLabel="..."
             nextLabel={
               <div
-                className="paginationControlWraper"
+                className={`paginationControlWraper ${ctx?.isLoading? 'nonactive': ''}`}
                 onClick={() => onClickPage(1)}
               >
                 <img src={next} />
@@ -66,7 +66,7 @@ export const Paginator = withContainer(
             pageClassName="paginatorItem"
             previousLabel={
               <div
-                className="paginationControlWraper prevControl"
+                className={`paginationControlWraper prevControl ${ctx?.isLoading? 'nonactive': ''}`}
   
                 onClick={() => onClickPage(-1)}
               >
@@ -78,7 +78,7 @@ export const Paginator = withContainer(
           <div className="paginatorLabel">
             Page {page + 1} of {Math.ceil(total / 50)}
           </div>
-          <button onClick={() => onClickPage(Math.ceil(total / 50) - page - 1)}>
+          <button onClick={() => onClickPage(Math.ceil(total / 50) - page - 1)} className={`${ctx?.isLoading? 'nonactive': ''}`}>
             Last
           </button>
         </div>

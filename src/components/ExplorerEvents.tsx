@@ -99,6 +99,8 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
     return rate;
   };
 
+
+
   return (
     <>
       <Container className="mt-5 px-0 sm:px-4 overflow-x-auto tableWrapper">
@@ -144,10 +146,12 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
               <LoaderRow />
             ) : // if events length is 0 after 2 seconds, show loader
             eventsContext?.events.length ? (
-              eventsContext?.events.map((event: IEvent) => (
-                <tr key={event.id} /*onClick={() => window.open(`/tx/${event.fromHash}`, '_self')}*/>
-                  <TableData className="sticky left-0 text-center max-w-[62px] bg-white imgTableData">
-                    <ReactTooltip effect="solid" className="copyTip" />
+              eventsContext?.events.map((event: IEvent) => {
+                const dollarValue = !isNaN(+event.txFees) && getExchangeRate(exchangeRates, event.chainName) * Number(ethers.utils.formatEther(event.txFees));
+                
+               return (<tr key={event.id} /*onClick={() => window.open(`/tx/${event.fromHash}`, '_self')}*/>
+                  <TableData className={`sticky left-0 text-center max-w-[62px] bg-white imgTableData ${/^((?!chrome|android).)*safari/i.test(navigator.userAgent)? 'safariHack' : 'sitckyBottomLine'}`}>
+                    <ReactTooltip effect="solid" className="copyTip" multiline/>
                     {event?.status === "Completed" || event?.imgUri ? (
                       <ImgOrFail
                         className="rounded-lg"
@@ -168,10 +172,12 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                   <TableData>
                     <span
                       className=""
-                      data-tip={
-                        !isNaN(+event.txFees) &&
-                        ethers.utils.formatEther(event.txFees)
-                      }
+                      
+                      data-tip={`
+                        ${!isNaN(+event.txFees) &&
+                        ethers.utils.formatEther(event.txFees)} ${event.fromChain && currency[event.fromChain]} <br>
+                          ${dollarValue} $
+                      `}
                     >
                       <span>
                         {!isNaN(+event.txFees) &&
@@ -185,11 +191,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                       <br />
                       <span>
                         $
-                        {!isNaN(+event.txFees) &&
-                          (
-                            getExchangeRate(exchangeRates, event.chainName) *
-                            Number(ethers.utils.formatEther(event.txFees))
-                          ).toFixed(2)}
+                        {dollarValue && dollarValue.toFixed(2)}
                       </span>
                     </span>
                   </TableData>
@@ -275,7 +277,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                     <Status status={event.status} />
                   </TableData>
                 </tr>
-              ))
+              )})
             ) : (
               <NoEventsRow />
             )}
