@@ -418,6 +418,11 @@ ul.chartInfoList li {
  align-items: flex-start !important;
 }
 
+.tableWrapper .lds-ellipsis.addressLoader {
+  width: initial;
+  height: initial;
+}
+
 
 @keyframes gradient {
   0% {

@@ -19,6 +19,7 @@ import { truncate } from "./Details/helpers";
 
 import { Paginator } from "./elements/Paginator";
 import { ErrorStatus } from "./elements/ErrorStatus";
+import { Loader } from "./elements/Loader";
 
 export interface IEvent {
   id: string;
@@ -160,12 +161,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                         height={38}
                       />
                     ) : (
-                      <div className="lds-ellipsis">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                      </div>
+                      <Loader />
                     )}
                   </TableData>
 
@@ -240,13 +236,15 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                         {chainNoncetoName[event?.toChain || 0] || "N/A"}
                       </span>
                     </div>
+                    {event?.status === "Completed" ? 
                     <Link
-                      className="text-[#235EF5]"
-                      key={event.id}
-                      to={`/tx/${event.fromHash}`}
-                    >
-                      {truncate(event.toHash, 15) || <ErrorStatus />}
+                    className="text-[#235EF5]"
+                    key={event.id}
+                    to={`/tx/${event.fromHash}`}
+                  >
+                   { truncate(event.toHash, 15) }
                     </Link>
+                    : event?.status === "Pending" ? <Loader className='addressLoader'/> :  <ErrorStatus />}
                   </TableData>
                   <TableData>
                     <span className="methodDataTable">
