@@ -1,6 +1,80 @@
-export const CSVButton = () => {
+
+import withModal from "../../context/withModal";
+import DatePicker from "react-datepicker";
+import moment from "moment";
+import { compose } from "../Details/helpers";
+import "react-datepicker/dist/react-datepicker.css";
+import { useState } from "react";
+import { useContext } from "react";
+import { EventsContext } from "../../context/Events";
+
+import { url } from "../../constants";
+
+const DownloadCSV = () => {
+
+  const [startDate, setStart] = useState(moment().subtract(1, 'month').toDate())
+  const [endDate, setEnd] = useState(new Date())
+  const [captchaRender, setCaptchaRender] = useState(false);
+
+
+  const ctx = useContext(EventsContext)
+  console.log(ctx, 'ccc');
+
+  const onSetStart = (date:Date) => {
+      if (!moment(date).isAfter(endDate)) {
+        setStart(date)
+      }
+  }
+
+  const onSetEnd = (date:Date) => {
+    if (!moment(date).isBefore(startDate)) {
+      setEnd(date)
+    }
+  }
+
+  const onClickDownload = async () => {
+
+      setCaptchaRender(true);
+       // @ts-ignore
+      window?.grecaptcha.render("CSVCaptchaContainer", {
+        // @ts-ignore
+        sitekey: window.SITE_KEY_CAPTCHA,
+        callback: async function  (token:string) {
+          const res = await fetch(`${url}csv?startDate=${startDate}&endDate=${endDate}&searchQuery=${ctx?.chainName}&token=${token}`)
+          //console.log(await res.json());
+            if (res && res.ok) {
+        
+              const blob = await res.blob()
+              const link = document.createElement("a");
+              link.href = URL.createObjectURL(blob);
+              //link.download = res.headers.get('fileName');
+              link.click();
+          }
+
+
+          setCaptchaRender(false);
+
+        },
+      });
+
+     
+  }
+
+  return <>
+      <p className="modalText">Export transactions starting from</p>
+  <div className="CSVwrapper">
+      <DatePicker selected={startDate}  onChange={(date:Date) => onSetStart(date)} className="datePick"/>
+      <span>To</span>
+      <DatePicker selected={endDate}  onChange={(date:Date) => onSetEnd(date)}  className="datePick"/>
+  </div>
+  {!captchaRender && <button className="csvBtn" onClick={onClickDownload}>Download</button>}
+  <div id="CSVCaptchaContainer"  style={{ display: captchaRender ? "block" : "none" }}></div>
+  </>
+}
+
+const CSVButton =  ({openModal}: {openModal?: () => void}) => {
   return (
-    <button className="bg-[#235EF51A] text-[#235EF5] csvBtn">
+    <button className="bg-[#235EF51A] text-[#235EF5] csvBtn" onClick={openModal}>
       <svg
         width="16"
         height="14"
@@ -17,3 +91,6 @@ export const CSVButton = () => {
     </button>
   );
 };
+
+
+export default compose(withModal(DownloadCSV))(CSVButton)

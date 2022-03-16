@@ -67,3 +67,9 @@ export const truncate = function (fullStr:string | undefined, strLen:number, sep
         }, delay)
     }
   }
+
+  export const compose =
+  (...funcs: Function[]) =>
+  (comp: React.FC<any>) => {
+    return funcs.reduceRight((wrapped, func) => func(wrapped), comp);
+  };
