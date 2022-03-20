@@ -147,7 +147,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                 <TableHeading>Status</TableHeading>
               </tr>
             </thead>
-            <tbody className=" divide-y  overflow-x-scroll">
+            <tbody className=" divide-y   overflow-x-scroll">
               {eventsContext?.isLoading ? (
                 <LoaderRow />
               ) : // if events length is 0 after 2 seconds, show loader
