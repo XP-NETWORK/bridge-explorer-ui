@@ -3,6 +3,7 @@ import { DailyData } from "../../pages/Dashboard";
 import { withContainer } from '../../context/ServcieProvder';
 import { Line, Column } from '@ant-design/plots';
 import moment from "moment";
+import { Loader } from "./Loader";
 
 
 export const Chart = withContainer(({dailyData, container: {fetching, appData: {totalTx}}}:{dailyData: DailyData[], container: any}) => {
@@ -75,8 +76,8 @@ console.log(mockData);
         <div className="chartVisual">
           <h3 className="font-medium text-[#222222]">Daily Transactions</h3>
           <div className="chartMetrics">
-            <span>Today Tx: <span className={`${fetching? 'loadingWrapper' : ''}`}>{mockData[mockData.length -1].txNumber}</span></span>
-            <span>Total Tx: <span className={`${fetching? 'loadingWrapper' : ''}`}>{totalTx}</span></span>
+            <span>Today Tx: <span>{fetching? <Loader /> :mockData[mockData.length -1].txNumber}</span></span>
+            <span>Total Tx: <span>{fetching? <Loader/> :totalTx}</span></span>
           </div>
            <div className="lineWrapper">
               <Column {...config}/>

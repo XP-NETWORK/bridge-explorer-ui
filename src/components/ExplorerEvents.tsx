@@ -293,7 +293,10 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                           .replace("mute ", "min ")
                           .replace("mutes ", "mins ")
                           .replace("second", " sec ")
-                          .replace("seconds", " secs ") || "N/A"}
+                          .replace("seconds", " secs ")
+                          .replace(' s ', ' ')}
+
+                          
                       </span>
                     </TableData>
                     <TableData>

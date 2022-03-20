@@ -33,6 +33,10 @@
   font-family: Inter, sans-serif;
 }
 
+.chartVisual .chartMetrics span .lds-ellipsis {
+  height: 18px;
+}
+
 .chartVisual h3 {
   margin-bottom: 12px;
   font-family: Poppins, sans-serif;
@@ -357,11 +361,17 @@ ul.chartInfoList li {
   padding: 3.5px 10px;
   margin-right: 5px;
   margin-left: 5px;
+  transition: all .5s ease;
 }
 
 .paginationControlWraper:hover,
 .paginatorWraper .button:hover {
-  background-color: rgb(240, 233, 233);
+  background-color: #235EF5;
+  color: #fff;
+}
+
+.paginationControlWraper:hover img {
+    filter: brightness(400%);
 }
 
 .paginationControlWraper img {

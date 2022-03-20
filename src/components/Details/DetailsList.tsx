@@ -198,14 +198,19 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
           </span>
           <span className="text-[#222222]">{`${moment(event?.createdAt)
             .fromNow()
+            .replace("in", "")
             .replace("a ", "1 ")
             .replace("an ", "1 ")
             .replace("hour ", "hr ")
-            .replace("hours", "hrs")
+            .replace("few ", "")
+            .replace("hours", "hrs ")
             .replace("minute ", "min ")
-            .replace("minutes ", "mins ")
-            .replace("second ", "sec ")
-            .replace("seconds ", "secs ")} (${new Date(
+            .replace("minutes", "mins ")
+            .replace("mute ", "min ")
+            .replace("mutes ", "mins ")
+            .replace("second", " sec ")
+            .replace("seconds", " secs ").replace(' s ', ' ')
+            } (${new Date(
             event?.createdAt
           ).toUTCString()})`}</span>
         </p>

@@ -36,8 +36,8 @@ export const withData = function (Wrapped: React.FC<any>) {
       )
         .then((res) => res.json())
         .then((metadata) => {
-          metadata.image = /^ipfs:\/\//.test(metadata.image)
-            ? `https://ipfs.io/ipfs/${metadata.image.split("ipfs://")[1]}`
+          metadata.image = /^ipfs:\/\//.test(metadata.image || metadata.displayUri)
+            ? `https://ipfs.io/ipfs/${(metadata.image || metadata.displayUri).split("ipfs://")[1]}`
             : metadata.image;
           setMetadata(metadata);
         });

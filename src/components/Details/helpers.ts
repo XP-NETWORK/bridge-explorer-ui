@@ -28,6 +28,18 @@ export const truncate = function (fullStr:string | undefined, strLen:number, sep
       try {
        
         const metadata = await fetchNtf(data)
+
+        if (metadata.displayUri) {
+          return {
+            imgUri: /^ipfs:\/\//.test(metadata.displayUri)
+              ? `https://ipfs.io/ipfs/${
+                metadata.displayUri.split("ipfs://")[1]
+                }`
+              : (metadata.displayUri as string),
+            ...data,
+          };
+        }
+
         return {
           imgUri: /^ipfs:\/\//.test(metadata.image)
             ? `https://ipfs.io/ipfs/${
