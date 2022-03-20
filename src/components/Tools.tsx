@@ -115,7 +115,7 @@ const Form = () => {
           {validError && <span className="inputError"><img src={warnSmall} alt="small" /><span>{validError}</span></span>}
         </div>
       </div>
-      <div className={`block mb-5 space-y-1  ${depValidError ? "failValid" : ""}`} >
+      <div className={`block mb-4 space-y-1  ${depValidError ? "failValid" : ""}`} >
         <span className="text-sm">Departure Chain:</span>
         <Dropdown setSelectedChain={(val) => {
           setDepFail(false);
