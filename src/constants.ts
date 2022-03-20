@@ -72,7 +72,7 @@ export const _headers = {
 export const chains = [
   {
     id: "aurora-near",
-    name: "AURORA",
+    name: "Aurora",
     icon: "./assets/icons/aurora.svg",
   },
   { id: "binancecoin", name: "BSC", icon: "./assets/icons/bsc.svg" },

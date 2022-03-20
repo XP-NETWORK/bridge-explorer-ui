@@ -208,7 +208,7 @@ ul.chartInfoList li {
 
 .detailsListRow {
   align-items: center;
-  padding-left: 15px;
+  /* padding-left: 15px; */
 }
 
 .detailsListRow .loadingWrapper {
@@ -301,7 +301,6 @@ ul.chartInfoList li {
   align-items: center;
 
   margin-top: 8px;
-
 }
 
 .inputError img {
@@ -314,7 +313,8 @@ ul.chartInfoList li {
   visibility: visible;
 }
 
-.paginatorWraper ul, .paginatorWraper {
+.paginatorWraper ul,
+.paginatorWraper {
   display: flex;
   align-items: center;
 }
@@ -340,7 +340,9 @@ ul.chartInfoList li {
   margin-right: 110px;
 }
 
-.paginationControlWraper, .paginatorWraper button, .paginatorLabel   {
+.paginationControlWraper,
+.paginatorWraper .button,
+.paginatorLabel {
   padding: 8px 15px 8px 15px;
   cursor: pointer;
   display: flex;
@@ -348,16 +350,17 @@ ul.chartInfoList li {
   background-color: #fff;
   border-radius: 4px;
   font-size: 14px;
-  color: #62718A;
+  color: #62718a;
 }
 
-.paginatorWraper button {
+.paginatorWraper .button {
   padding: 3.5px 10px;
   margin-right: 5px;
   margin-left: 5px;
 }
 
-.paginationControlWraper:hover, .paginatorWraper button:hover {
+.paginationControlWraper:hover,
+.paginatorWraper .button:hover {
   background-color: rgb(240, 233, 233);
 }
 
@@ -374,48 +377,47 @@ ul.chartInfoList li {
 }
 
 .ttip {
-    background-color: rgba(0, 0, 0, 1) !important;
-    border-radius: 6px !important;
+  background-color: rgba(0, 0, 0, 1) !important;
+  border-radius: 6px !important;
 }
 
-.ttip::before, .ttip::after {
+.ttip::before,
+.ttip::after {
   display: none !important;
 }
 
-.leftWrapper  {
+.leftWrapper {
   display: flex;
 }
 
 .csvBtn {
   display: flex;
   align-items: center;
-  color: #235EF5;
+  color: #235ef5;
   background: rgba(35, 94, 245, 0.1) !important;
   border-radius: 4px;
   border: 0 !important;
   margin-right: 1px;
 }
 .csvBtn span {
-  color: #235EF5;
+  color: #235ef5;
 }
 
-.csvBtn svg{
+.csvBtn svg {
   margin-right: 5px;
-  stroke: #235EF5;
+  stroke: #235ef5;
 }
 
-
-
-.explorerCard .loadingWrapper, .chartMetrics  .loadingWrapper{
-    width: 100px;
-    color: transparent;
+.explorerCard .loadingWrapper,
+.chartMetrics .loadingWrapper {
+  width: 100px;
+  color: transparent;
 }
-
 
 .errorTip {
- display: flex !important;
- flex-direction: column !important;
- align-items: flex-start !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
 }
 
 .tableWrapper .lds-ellipsis.addressLoader {
@@ -436,17 +438,15 @@ ul.chartInfoList li {
 }
 
 img.closeModal {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    color: black;
-    font-size: 15px;
-    cursor: pointer;
-    z-index: 999;
-    filter: brightness(15%);
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: black;
+  font-size: 15px;
+  cursor: pointer;
+  z-index: 999;
+  filter: brightness(15%);
 }
-  
-
 
 .overlay {
   position: fixed;
@@ -462,8 +462,7 @@ img.closeModal {
 .CSVwrapper {
   display: flex;
   align-items: center;
-  justify-content: space-between; 
-  
+  justify-content: space-between;
 }
 
 .CSVwrapper span {
@@ -483,8 +482,8 @@ input.datePick {
   border-radius: 4px;
 }
 
-
-input.datePick:focus, input.datePick:active {
+input.datePick:focus,
+input.datePick:active {
   border: 1px solid var(--grey-borders);
   outline: none;
   box-shadow: none;
@@ -498,7 +497,6 @@ input.datePick:focus, input.datePick:active {
 .CSVwrapper {
   margin-bottom: 12px;
 }
-
 
 @keyframes gradient {
   0% {
