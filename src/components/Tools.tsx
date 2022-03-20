@@ -10,7 +10,7 @@ import warnSmall from '../assets/img/warnSmall.svg'
 export const Tools = () => {
   return (
     <Container>
-      <div className="grid grid-cols-1 md:grid-cols-6 mt-5 gap-10 md:mb-44">
+      <div className="grid grid-cols-1 md:grid-cols-6 mt-5 gap-10 mb-44">
         <div className="col-span-4 md:order-2">
           <Card />
         </div>
