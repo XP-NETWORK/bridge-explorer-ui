@@ -13,7 +13,7 @@ export const ExplorerCards = withContainer(
     },
   }) => {
     return (
-      <Container className="flex flex-col md:flex-row gap-4 mt-8 cardsWrapper rounded-md overflow-hidden">
+      <Container className="flex flex-col md:flex-row gap-4 mt-4 md:mt-8 cardsWrapper rounded-md overflow-hidden">
         <ExplorerCard
           title={totalTx}
           subtitle="Transactions"

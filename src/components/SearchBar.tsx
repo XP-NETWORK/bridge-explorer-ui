@@ -12,14 +12,14 @@ export const SearchBar = () => {
   // @ts-ignore
   const { setChainName } = useContext(EventsContext);
 
-  const debounced = useCallback(debounce(setChainName, 1000), [])
+  const debounced = useCallback(debounce(setChainName, 1000), []);
 
   useEffect(() => {
     debounced(value);
   }, [value]);
 
   return (
-    <Container className="mt-8">
+    <Container className="mt-4 md:mt-8">
       <form
         className="flex px-4 py-2 bg-white rounded shadow-[0_1px_15px_0px_#2F303214]"
         onSubmit={(e) => {
@@ -33,7 +33,10 @@ export const SearchBar = () => {
           onChange={(e) => setValue(e.target.value)}
           value={value}
         />
-        <div className="clearWrapper" style={{display: value? 'flex': 'none'}}>
+        <div
+          className="clearWrapper"
+          style={{ display: value ? "flex" : "none" }}
+        >
           <img
             src={Cross}
             alt="cross"
