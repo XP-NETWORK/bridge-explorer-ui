@@ -209,7 +209,7 @@ const Dropdown: FC<{
 
 const Card = () => {
   return (
-    <div className="bg-white rounded-lg border p-8">
+    <div className="bg-white text-[#000000D9] rounded-lg border p-8">
       <h2 className="font-roboto">Keep calm. We are on it!</h2>
       <p className="mt-5 text-sm">First of all, don't panic. Your asset is safe.</p>
       <p className="mt-5 text-sm">
