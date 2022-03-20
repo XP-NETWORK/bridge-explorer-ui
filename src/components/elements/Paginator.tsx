@@ -40,7 +40,7 @@ export const Paginator = withContainer(
     }, [ctx?.chainName]);
 
     return (
-      <div className="paginatorWraper">
+      <div className="paginatorWraper mt-3">
         <span>
           Showing {50 * page + 1} - {50 * page + 50} out of {totalTx} Tx
         </span>
