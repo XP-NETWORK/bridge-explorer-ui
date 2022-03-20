@@ -39,7 +39,9 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
     rates: { [key: string]: { usd: number } },
     chainName: string
   ): number => {
-    const chain = chains.find((chain) => chain.name.toLowerCase() === chainName.toLowerCase());
+    const chain = chains.find(
+      (chain) => chain.name.toLowerCase() === chainName.toLowerCase()
+    );
     const rate = (chain && rates[chain.id]?.usd) || 1;
 
     return rate;
@@ -124,7 +126,9 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
-          <span className="text-[#222222]">{chainNoncetoName[event?.toChain || 0] || "N/A"}</span>
+          <span className="text-[#222222]">
+            {chainNoncetoName[event?.toChain || 0] || "N/A"}
+          </span>
         </p>
       </div>
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
