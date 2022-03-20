@@ -117,7 +117,7 @@ const Form = () => {
       </div>
       <div className={`block mb-4 space-y-1  ${depValidError ? "failValid" : ""}`} >
         <span className="text-sm">Departure Chain:</span>
-        <Dropdown _chains={chains.filter(chain => chain.name !== destChain)} setSelectedChain={(val) => {
+        <Dropdown value={depChain} _chains={chains.filter(chain => chain.name !== destChain)} setSelectedChain={(val) => {
           setDepFail(false);
           setDepChain(val)}} />
       {depValidError &&  <span className="inputError"><img src={warnSmall} alt="small" /><span>Select Departure Chain</span></span>}
@@ -125,7 +125,7 @@ const Form = () => {
 
       <div className={`block space-y-1  ${desValidError ? "failValid" : ""}`}>
         <span className="text-sm">Destination Chain:</span>
-        <Dropdown _chains={chains.filter(chain => chain.name !== depChain)} setSelectedChain={(val) => {
+        <Dropdown value={destChain} _chains={chains.filter(chain => chain.name !== depChain)} setSelectedChain={(val) => {
           setDesFail(false);
           setDestChain(val)
         }} />
@@ -152,15 +152,15 @@ const Form = () => {
 
 const Dropdown: FC<{
   setSelectedChain: React.Dispatch<React.SetStateAction<string>>;
+  value: string;
   _chains: {
     id: string;
     name: string;
     icon: string;
 }[]
 
-}> = ({ setSelectedChain, _chains }) => {
+}> = ({ setSelectedChain,value, _chains }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [_selectedChain, _setSelectedChain] = useState("");
 
   return (
     <>
@@ -176,7 +176,7 @@ const Dropdown: FC<{
           className="bg-white flex justify-between group items-center select-none border rounded px-4 py-2"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <span className="h-7 flex items-center">{_selectedChain.length ? _selectedChain : ""}</span>
+          <span className="h-7 flex items-center">{value.length ? value : ""}</span>
           <svg
             className={isOpen ? "rotate-180" : "rotate-0"}
             width="8"
@@ -196,7 +196,6 @@ const Dropdown: FC<{
           {_chains.map((chain) => (
             <li
               onClick={(e) => {
-                _setSelectedChain(e.currentTarget.innerText);
                 setSelectedChain(e.currentTarget.innerText);
                 setIsOpen(false);
               }}
