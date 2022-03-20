@@ -97,7 +97,7 @@ const Form = () => {
 
   return (
     <form onSubmit={handleSubmit} className="issueForm">
-      <div className="block space-y-2 mb-8">
+      <div className="block space-y-1 mb-8">
         <span className="text-sm">Tx Hash:</span>
         <div className={`inputWrap ${validError ? "failValid" : ""}`}>
           <input
@@ -115,7 +115,7 @@ const Form = () => {
           {validError && <span className="inputError"><img src={warnSmall} alt="small" /><span>{validError}</span></span>}
         </div>
       </div>
-      <div className={`block mb-5 space-y-2  ${depValidError ? "failValid" : ""}`} >
+      <div className={`block mb-5 space-y-1  ${depValidError ? "failValid" : ""}`} >
         <span className="text-sm">Departure Chain:</span>
         <Dropdown setSelectedChain={(val) => {
           setDepFail(false);
@@ -123,7 +123,7 @@ const Form = () => {
       {depValidError &&  <span className="inputError"><img src={warnSmall} alt="small" /><span>Select Departure Chain</span></span>}
       </div>
 
-      <div className={`block space-y-2  ${desValidError ? "failValid" : ""}`}>
+      <div className={`block space-y-1  ${desValidError ? "failValid" : ""}`}>
         <span className="text-sm">Destination Chain:</span>
         <Dropdown setSelectedChain={(val) => {
           setDesFail(false);
@@ -138,7 +138,7 @@ const Form = () => {
 
       {!captchaRender && (
         <button
-          className="block mt-8 w-full p-2 text-center text-white rounded-md bg-[#297EFE] hover:bg-[#154EDF]"
+          className="block mt-4 w-full p-2 text-center text-white rounded-md bg-[#297EFE] hover:bg-[#154EDF]"
           type="submit"
         >
           Send
@@ -209,22 +209,18 @@ const Dropdown: FC<{
 
 const Card = () => {
   return (
-    <div className="bg-white rounded-lg border px-6 py-8">
+    <div className="bg-white rounded-lg border p-8">
       <h2 className="font-roboto">Keep calm. We are on it!</h2>
-      <p className="mt-4 text-sm">First of all, don't panic.</p>
-      <p className="mt-4 text-sm">Your asset is safe.</p>
-      <p className="mt-4 text-sm">
+      <p className="mt-5 text-sm">First of all, don't panic. Your asset is safe.</p>
+      <p className="mt-5 text-sm">
         Sometimes you may not see your cross-chain transaction in the XP.NETWORK
         explorer due to unpredictable glitches on different blockchain networks
         and the decentralized nature of XP.NETWORK protocol.
       </p>
-      <p className="mt-4 text-sm">
-        If your transaction is not showing up in our explorer,
+      <p className="mt-5 text-sm">
+        If your transaction is not showing up in our explorer, You can use the tool below, and we will register your transaction.
       </p>
-      <p className="mt-4 text-sm">
-        You can use the tool below, and we will register your transaction.
-      </p>
-      <p className="mt-4 text-sm">
+      <p className="mt-5 text-sm">
         Please check your transaction in XP.NETWORK explorer 5 minutes after
         using this tool.
       </p>
