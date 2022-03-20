@@ -189,7 +189,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
         <div className="text-[#222222] font-medium w-32">Date:</div>
         <p
-          className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${
+          className={`md:pl-14  md:w-fit ${
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
@@ -213,7 +213,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
         <div className="text-[#222222] font-medium w-32">Transaction Fee:</div>
         <p
-          className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${
+          className={`md:pl-14  md:w-fit ${
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
