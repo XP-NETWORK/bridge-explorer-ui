@@ -341,7 +341,7 @@ ul.chartInfoList li {
 }
 
 .paginationControlWraper,
-.paginatorWraper button,
+.paginatorWraper .button,
 .paginatorLabel {
   padding: 8px 15px 8px 15px;
   cursor: pointer;
@@ -353,14 +353,14 @@ ul.chartInfoList li {
   color: #62718a;
 }
 
-.paginatorWraper button {
+.paginatorWraper .button {
   padding: 3.5px 10px;
   margin-right: 5px;
   margin-left: 5px;
 }
 
 .paginationControlWraper:hover,
-.paginatorWraper button:hover {
+.paginatorWraper .button:hover {
   background-color: rgb(240, 233, 233);
 }
 

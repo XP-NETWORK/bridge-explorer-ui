@@ -8,7 +8,7 @@ import { useContext, useState, useEffect } from "react";
 import { EventsContext } from "../../context/Events";
 import { url } from "../../constants";
 import { loadImages } from "../Details/helpers";
-import  CSVButton  from "./CSVButton";
+import CSVButton from "./CSVButton";
 
 export const Paginator = withContainer(
   ({
@@ -44,12 +44,12 @@ export const Paginator = withContainer(
         <span>
           Showing {50 * page + 1} - {50 * page + 50} out of {totalTx} Tx
         </span>
-        <div className="leftWrapper">
-          { <CSVButton /> }
+        <div className="leftWrapper flex-row-reverse md:flex-row w-full md:w-fit">
+          {<CSVButton />}
           <div className="paginatorInnerWrapper">
             <button
               onClick={() => onClickPage(-page)}
-              className={`${ctx?.isLoading ? "nonactive" : ""}`}
+              className={`button ${ctx?.isLoading ? "nonactive" : ""}`}
             >
               First
             </button>
@@ -87,7 +87,7 @@ export const Paginator = withContainer(
             </div>
             <button
               onClick={() => onClickPage(Math.ceil(total / 50) - page - 1)}
-              className={`${ctx?.isLoading ? "nonactive" : ""}`}
+              className={`button ${ctx?.isLoading ? "nonactive" : ""}`}
             >
               Last
             </button>
