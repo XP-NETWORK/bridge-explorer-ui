@@ -17,17 +17,18 @@ import {
 export const Explorer = () => {
   const loc = useLocation();
   console.log(loc);
-  const [tab, setTab] = useState(tabs.find(tab => tab.route === loc.pathname.replace('/', ''))?.name);
-
+  const [tab, setTab] = useState(
+    tabs.find((tab) => tab.route === loc.pathname.replace("/", ""))?.name
+  );
 
   return (
     <div>
       <Navbar />
       <ExplorerCards />
-      
+
       <EventsProvider>
-        <SearchBar />
         <Dashboard />
+        <SearchBar />
         <BreadCrumbs
           onChange={(value: string) => setTab(value)}
           tabs={tabs}
