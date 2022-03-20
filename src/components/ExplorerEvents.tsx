@@ -327,7 +327,7 @@ export const TableHeading: FC<{ className?: string }> = ({
   <th
     scope="col"
     className={
-      "px-3 py-3 text-left max-w-xs text-sm font-medium text-[#222222] tracking-wider " +
+      "px-3 py-3 whitespace-nowrap text-left max-w-xs text-sm font-medium text-[#222222] tracking-wider " +
       className
     }
   >
