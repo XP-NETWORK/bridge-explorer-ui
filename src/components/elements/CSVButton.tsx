@@ -62,13 +62,13 @@ const DownloadCSV = () => {
         <DatePicker
           selected={startDate}
           onChange={(date: Date) => onSetStart(date)}
-          className="datePick"
+          className="datePick w-full min-w-[292px]"
         />
         <span>To</span>
         <DatePicker
           selected={endDate}
           onChange={(date: Date) => onSetEnd(date)}
-          className="datePick"
+          className="datePick w-full min-w-[292px]"
         />
       </div>
       {!captchaRender && (
