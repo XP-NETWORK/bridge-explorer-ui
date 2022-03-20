@@ -121,7 +121,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
             }}
           />
 
-          <table className="min-w-full divide-y border-b divide-gray-200 eventsTable">
+          <table className="min-w-full divide-y border-b eventsTable">
             <thead className="bg-gray-50 ">
               <tr>
                 <TableHeading className="sticky left-0 bg-gray-50 ">
@@ -147,7 +147,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                 <TableHeading>Status</TableHeading>
               </tr>
             </thead>
-            <tbody className=" divide-y  divide-gray-200 overflow-x-scroll">
+            <tbody className=" divide-y  overflow-x-scroll">
               {eventsContext?.isLoading ? (
                 <LoaderRow />
               ) : // if events length is 0 after 2 seconds, show loader
