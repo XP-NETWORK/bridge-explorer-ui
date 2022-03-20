@@ -58,7 +58,7 @@ const DownloadCSV = () => {
   return (
     <>
       <p className="modalText">Export transactions starting from</p>
-      <div className="CSVwrapper">
+      <div className="CSVwrapper flex-col md:flex-row gap-2">
         <DatePicker
           selected={startDate}
           onChange={(date: Date) => onSetStart(date)}
@@ -72,7 +72,7 @@ const DownloadCSV = () => {
         />
       </div>
       {!captchaRender && (
-        <button className="csvBtn" onClick={onClickDownload}>
+        <button className="csvBtn w-full md:w-fit" onClick={onClickDownload}>
           Download
         </button>
       )}
