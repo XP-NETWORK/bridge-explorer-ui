@@ -1,5 +1,5 @@
 import { FC, useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Container } from "./Container";
 import { useContext } from "react";
 import { EventsContext } from "../context/Events";
@@ -44,6 +44,7 @@ export interface IEvent {
 }
 
 export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
+  const navigate = useNavigate();
   const eventsContext = useContext(EventsContext);
   const [exchangeRates, setExchangeRates] = useState<{
     [key: string]: { usd: number };
@@ -142,7 +143,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
               <TableHeading>Status</TableHeading>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y  divide-gray-200 overflow-x-scroll">
+          <tbody className=" divide-y  divide-gray-200 overflow-x-scroll">
             {eventsContext?.isLoading ? (
               <LoaderRow />
             ) : // if events length is 0 after 2 seconds, show loader
@@ -155,12 +156,12 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
 
                 return (
                   <tr
-                    key={
-                      event.id
-                    } /*onClick={() => window.open(`/tx/${event.fromHash}`, '_self')}*/
+                    key={event.id}
+                    onClick={() => navigate(`/tx/${event.fromHash}`)}
+                    className="bg-white group hover:bg-transparent"
                   >
                     <TableData
-                      className={`sticky left-0 text-center max-w-[62px] bg-white imgTableData ${
+                      className={`sticky left-0 text-center bg-white group-hover:bg-[#F7F7F9] imgTableData ${
                         /^((?!chrome|android).)*safari/i.test(
                           navigator.userAgent
                         )
@@ -187,7 +188,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
 
                     <TableData>
                       <span
-                        className=""
+                        className="cursor-default"
                         data-tip={`
                         ${
                           !isNaN(+event.txFees) &&
@@ -206,7 +207,9 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                           {event.fromChain && currency[event.fromChain]}
                         </span>
                         <br />
-                        <span>${dollarValue && dollarValue.toFixed(2)}</span>
+                        <span className="text-xs">
+                          ${dollarValue && dollarValue.toFixed(2)}
+                        </span>
                       </span>
                     </TableData>
 
@@ -229,7 +232,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                         </span>
                       </div>
                       <Link
-                        className="text-[#235EF5]"
+                        className="text-[#235EF5] text-xs"
                         key={event.id}
                         to={`/tx/${event.fromHash}`}
                       >
@@ -256,7 +259,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                       </div>
                       {event?.status === "Completed" ? (
                         <Link
-                          className="text-[#235EF5]"
+                          className="text-[#235EF5] text-xs"
                           key={event.id}
                           to={`/tx/${event.fromHash}`}
                         >
