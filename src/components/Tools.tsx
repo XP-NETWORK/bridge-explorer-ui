@@ -117,7 +117,7 @@ const Form = () => {
       </div>
       <div className={`block mb-4 space-y-1  ${depValidError ? "failValid" : ""}`} >
         <span className="text-sm">Departure Chain:</span>
-        <Dropdown setSelectedChain={(val) => {
+        <Dropdown _chains={chains.filter(chain => chain.name !== destChain)} setSelectedChain={(val) => {
           setDepFail(false);
           setDepChain(val)}} />
       {depValidError &&  <span className="inputError"><img src={warnSmall} alt="small" /><span>Select Departure Chain</span></span>}
@@ -125,7 +125,7 @@ const Form = () => {
 
       <div className={`block space-y-1  ${desValidError ? "failValid" : ""}`}>
         <span className="text-sm">Destination Chain:</span>
-        <Dropdown setSelectedChain={(val) => {
+        <Dropdown _chains={chains.filter(chain => chain.name !== depChain)} setSelectedChain={(val) => {
           setDesFail(false);
           setDestChain(val)
         }} />
@@ -152,7 +152,13 @@ const Form = () => {
 
 const Dropdown: FC<{
   setSelectedChain: React.Dispatch<React.SetStateAction<string>>;
-}> = ({ setSelectedChain }) => {
+  _chains: {
+    id: string;
+    name: string;
+    icon: string;
+}[]
+
+}> = ({ setSelectedChain, _chains }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [_selectedChain, _setSelectedChain] = useState("");
 
@@ -187,7 +193,7 @@ const Dropdown: FC<{
             isOpen || "hidden"
           } z-10 mt-1 dropdown-scrollbar rounded absolute w-full py-2 bg-white shadow-[0_1px_15px_0px_#2F303214] max-h-52 no-scrollbar overflow-y-scroll`}
         >
-          {chains.map((chain) => (
+          {_chains.map((chain) => (
             <li
               onClick={(e) => {
                 _setSelectedChain(e.currentTarget.innerText);
