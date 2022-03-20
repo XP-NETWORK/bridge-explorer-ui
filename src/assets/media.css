@@ -145,8 +145,8 @@
   .paginatorWraper {
     flex-direction: column;
     align-items: flex-start;
-    padding-left: 16px;
-    padding-right: 16px;
+    /* padding-left: 16px;
+    padding-right: 16px; */
     position: sticky;
     left: 0;
   }
