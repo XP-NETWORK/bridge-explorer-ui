@@ -10,7 +10,7 @@ import warnSmall from '../assets/img/warnSmall.svg'
 export const Tools = () => {
   return (
     <Container>
-      <div className="grid grid-cols-1 md:grid-cols-6 mt-5 gap-10 md:mb-44">
+      <div className="grid grid-cols-1 md:grid-cols-6 mt-5 gap-10 mb-44">
         <div className="col-span-4 md:order-2">
           <Card />
         </div>
@@ -97,7 +97,7 @@ const Form = () => {
 
   return (
     <form onSubmit={handleSubmit} className="issueForm">
-      <div className="block space-y-2 mb-8">
+      <div className="block space-y-1 mb-8">
         <span className="text-sm">Tx Hash:</span>
         <div className={`inputWrap ${validError ? "failValid" : ""}`}>
           <input
@@ -115,17 +115,17 @@ const Form = () => {
           {validError && <span className="inputError"><img src={warnSmall} alt="small" /><span>{validError}</span></span>}
         </div>
       </div>
-      <div className={`block mb-5 space-y-2  ${depValidError ? "failValid" : ""}`} >
+      <div className={`block mb-4 space-y-1  ${depValidError ? "failValid" : ""}`} >
         <span className="text-sm">Departure Chain:</span>
-        <Dropdown setSelectedChain={(val) => {
+        <Dropdown value={depChain} _chains={chains.filter(chain => chain.name !== destChain)} setSelectedChain={(val) => {
           setDepFail(false);
           setDepChain(val)}} />
       {depValidError &&  <span className="inputError"><img src={warnSmall} alt="small" /><span>Select Departure Chain</span></span>}
       </div>
 
-      <div className={`block space-y-2  ${desValidError ? "failValid" : ""}`}>
+      <div className={`block space-y-1  ${desValidError ? "failValid" : ""}`}>
         <span className="text-sm">Destination Chain:</span>
-        <Dropdown setSelectedChain={(val) => {
+        <Dropdown value={destChain} _chains={chains.filter(chain => chain.name !== depChain)} setSelectedChain={(val) => {
           setDesFail(false);
           setDestChain(val)
         }} />
@@ -138,7 +138,7 @@ const Form = () => {
 
       {!captchaRender && (
         <button
-          className="block mt-8 w-full p-2 text-center text-white rounded-md bg-[#297EFE] hover:bg-[#154EDF]"
+          className="block mt-4 w-full p-2 text-center text-white rounded-md bg-[#297EFE] hover:bg-[#154EDF]"
           type="submit"
         >
           Send
@@ -152,9 +152,15 @@ const Form = () => {
 
 const Dropdown: FC<{
   setSelectedChain: React.Dispatch<React.SetStateAction<string>>;
-}> = ({ setSelectedChain }) => {
+  value: string;
+  _chains: {
+    id: string;
+    name: string;
+    icon: string;
+}[]
+
+}> = ({ setSelectedChain,value, _chains }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [_selectedChain, _setSelectedChain] = useState("");
 
   return (
     <>
@@ -170,7 +176,7 @@ const Dropdown: FC<{
           className="bg-white flex justify-between group items-center select-none border rounded px-4 py-2"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <span className="h-7 flex items-center">{_selectedChain.length ? _selectedChain : ""}</span>
+          <span className="h-7 flex items-center">{value.length ? value : ""}</span>
           <svg
             className={isOpen ? "rotate-180" : "rotate-0"}
             width="8"
@@ -187,10 +193,9 @@ const Dropdown: FC<{
             isOpen || "hidden"
           } z-10 mt-1 dropdown-scrollbar rounded absolute w-full py-2 bg-white shadow-[0_1px_15px_0px_#2F303214] max-h-52 no-scrollbar overflow-y-scroll`}
         >
-          {chains.map((chain) => (
+          {_chains.map((chain) => (
             <li
               onClick={(e) => {
-                _setSelectedChain(e.currentTarget.innerText);
                 setSelectedChain(e.currentTarget.innerText);
                 setIsOpen(false);
               }}
@@ -209,22 +214,18 @@ const Dropdown: FC<{
 
 const Card = () => {
   return (
-    <div className="bg-white rounded-lg border px-6 py-8">
+    <div className="bg-white text-[#000000D9] rounded-lg border p-8">
       <h2 className="font-roboto">Keep calm. We are on it!</h2>
-      <p className="mt-4 text-sm">First of all, don't panic.</p>
-      <p className="mt-4 text-sm">Your asset is safe.</p>
-      <p className="mt-4 text-sm">
+      <p className="mt-5 text-sm">First of all, don't panic. Your asset is safe.</p>
+      <p className="mt-5 text-sm">
         Sometimes you may not see your cross-chain transaction in the XP.NETWORK
         explorer due to unpredictable glitches on different blockchain networks
         and the decentralized nature of XP.NETWORK protocol.
       </p>
-      <p className="mt-4 text-sm">
-        If your transaction is not showing up in our explorer,
+      <p className="mt-5 text-sm">
+        If your transaction is not showing up in our explorer, You can use the tool below, and we will register your transaction.
       </p>
-      <p className="mt-4 text-sm">
-        You can use the tool below, and we will register your transaction.
-      </p>
-      <p className="mt-4 text-sm">
+      <p className="mt-5 text-sm">
         Please check your transaction in XP.NETWORK explorer 5 minutes after
         using this tool.
       </p>

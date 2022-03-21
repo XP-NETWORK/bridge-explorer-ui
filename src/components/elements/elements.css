@@ -264,7 +264,7 @@ ul.chartInfoList li {
 }
 
 .methodDataTable {
-  background-color: rgb(236, 230, 230);
+  background-color: #eeeef2;
   border-radius: 20px;
   font-size: 13px;
   padding: 5px 8px;
@@ -376,6 +376,7 @@ ul.chartInfoList li {
 
 .paginationControlWraper img {
   margin: auto;
+  transform: scale(.85);
 }
 
 .paginatorLabel {

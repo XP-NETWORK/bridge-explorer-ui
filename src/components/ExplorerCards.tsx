@@ -9,19 +9,29 @@ export const ExplorerCards = withContainer(
   ({
     container: {
       appData: { totalTx, totalWallets },
-      fetching
+      fetching,
     },
   }) => {
     return (
-      <Container className="flex flex-col md:flex-row gap-4 mt-8 cardsWrapper">
+      <Container className="flex flex-col md:flex-row gap-4 mt-4 md:mt-8 cardsWrapper rounded-md overflow-hidden">
         <ExplorerCard
           title={totalTx}
           subtitle="Transactions"
           icon={TransactionsIcon}
           fetching={fetching}
         />
-        <ExplorerCard title={totalWallets} subtitle="Users" icon={UsersIcon}  fetching={fetching}/>
-        <ExplorerCard title="10" subtitle="Chains" icon={ChainsIcon}  fetching={fetching} />
+        <ExplorerCard
+          title={totalWallets}
+          subtitle="Users"
+          icon={UsersIcon}
+          fetching={fetching}
+        />
+        <ExplorerCard
+          title="10"
+          subtitle="Chains"
+          icon={ChainsIcon}
+          fetching={fetching}
+        />
       </Container>
     );
   }
