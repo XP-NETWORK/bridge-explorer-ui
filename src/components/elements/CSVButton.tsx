@@ -9,7 +9,7 @@ import { EventsContext } from "../../context/Events";
 
 import { url } from "../../constants";
 
-const DownloadCSV = ({ onClose }: { onClose: () => boolean }) => {
+const DownloadCSV = () => {
   const [startDate, setStart] = useState(
     moment().subtract(1, "month").toDate()
   );
