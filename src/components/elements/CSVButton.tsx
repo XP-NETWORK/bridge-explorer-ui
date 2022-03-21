@@ -6,14 +6,16 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import { useContext } from "react";
 import { EventsContext } from "../../context/Events";
-
+import close from '../../assets/img/close.svg'
+import calendar from '../../assets/img/calendar.svg'
 import { url } from "../../constants";
 
 const DownloadCSV = ({ onClose }: { onClose: () => boolean }) => {
-  const [startDate, setStart] = useState(
-    moment().subtract(1, "month").toDate()
+  const [startDate, setStart] = useState<Date | ''>(
+    ''//moment().subtract(1, "month").toDate()
   );
-  const [endDate, setEnd] = useState(new Date());
+  const [isSettingDate, setIsSetting] = useState([false, false])
+  const [endDate, setEnd] = useState<Date | ''>('');
   const [captchaRender, setCaptchaRender] = useState(false);
 
   const ctx = useContext(EventsContext);
@@ -32,6 +34,7 @@ const DownloadCSV = ({ onClose }: { onClose: () => boolean }) => {
   };
 
   const onClickDownload = async () => {
+    if (!startDate || !endDate) return
     setCaptchaRender(true);
     // @ts-ignore
     window?.grecaptcha.render("CSVCaptchaContainer", {
@@ -56,9 +59,11 @@ const DownloadCSV = ({ onClose }: { onClose: () => boolean }) => {
   };
 
   return (
-    <>
+    <> 
+
+      <h2>Export transactions sheet</h2> 
+      <div className="divider"></div>
       <p className="modalText">
-        Export transactions starting from
         <span>
           {onClose && (
             <img
@@ -72,21 +77,29 @@ const DownloadCSV = ({ onClose }: { onClose: () => boolean }) => {
       </p>
       <div className="CSVwrapper flex-col md:flex-row gap-2">
         <DatePicker
-          selected={startDate}
+          {...(startDate ? {selected : startDate} : {})}
+          {...(!isSettingDate[0] ? {value:"Start date"} : {})}
           onChange={(date: Date) => onSetStart(date)}
-          className="datePick w-full min-w-[292px]"
+          onInputClick={() => setIsSetting([true, isSettingDate[1]])}
+          className="datePick w-full"
         />
-        <span>To</span>
+        <span>-</span>
         <DatePicker
-          selected={endDate}
+          {...(endDate ? {selected : endDate} : {})}
+          {...(!isSettingDate[1] ? {value:"End date"} : {})}
           onChange={(date: Date) => onSetEnd(date)}
-          className="datePick w-full min-w-[292px]"
+          onInputClick={() => setIsSetting([isSettingDate[0], true])}
+          className="datePick w-full"
         />
+        <img src={calendar} alt="calendar" />
       </div>
       {!captchaRender && (
-        <button className="csvBtn w-full md:w-fit" onClick={onClickDownload}>
-          Download
+        <div style={{textAlign:'right'}}>
+          <button className="csvBtn w-full md:w-fit" onClick={onClickDownload}>
+          Export .CSV
         </button>
+        </div>
+        
       )}
       <div
         id="CSVCaptchaContainer"

@@ -57,11 +57,19 @@ export const Chart = withContainer(
       xField: "adate",
       yField: "txNumber",
       height: 200,
+      
       tooltip: {
         showTitle: false,
         fields: ["txNumber", "date"],
       },
+      yAxis: {
+        grid: null
+      },
       xAxis: {
+        tickLine: {
+          length: 0
+        },
+        
         label: {
           formatter: (text: string) => {
             if (+text === +moment("03/03/2022").startOf("day"))

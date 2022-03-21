@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../components/elements/modal";
 
-const withModal = (modalScernario: () => JSX.Element) => (Wrapped:React.FC) => (props:any) => {
+const withModal = (modalScernario: (props: any) => JSX.Element) => (Wrapped:React.FC) => (props:any) => {
   const [state, setState] = useState({
     opened: false,
     afrerModalCb: null,

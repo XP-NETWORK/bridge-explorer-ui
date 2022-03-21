@@ -59,9 +59,6 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
 
   let scrollBtn = useRef<any>(null);
 
-  useEffect(() => {
-    console.log(eventsContext?.isLoading, "isLoading");
-  }, [eventsContext?.isLoading]);
 
   const scrollHandler = function () {
     if (
@@ -153,7 +150,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
               ) : // if events length is 0 after 2 seconds, show loader
               eventsContext?.events.length ? (
                 eventsContext?.events.map((event: IEvent) => {
-                  console.log(event.txFees);
+   
                   const dollarValue =
                     !isNaN(+event.txFees) &&
                     getExchangeRate(exchangeRates, event.chainName) *
