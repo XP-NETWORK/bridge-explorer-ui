@@ -27,8 +27,8 @@ export const Explorer = () => {
       <ExplorerCards />
 
       <EventsProvider>
-        <Dashboard />
         <SearchBar />
+        <Dashboard />
         <BreadCrumbs
           onChange={(value: string) => setTab(value)}
           tabs={tabs}
