@@ -13,6 +13,7 @@ import {
   TabsNavigator,
   tabs,
 } from "../components/elements/BreadCrumbs";
+import { Title } from "../components/Title";
 
 export const Explorer = () => {
   const loc = useLocation();
@@ -24,10 +25,12 @@ export const Explorer = () => {
   return (
     <div>
       <Navbar />
-      <ExplorerCards />
 
+      <Title />
       <EventsProvider>
         <SearchBar />
+        <ExplorerCards />
+
         <Dashboard />
         <BreadCrumbs
           onChange={(value: string) => setTab(value)}
