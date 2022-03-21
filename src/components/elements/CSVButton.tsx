@@ -57,19 +57,7 @@ const DownloadCSV = () => {
 
   return (
     <>
-      <p className="modalText">
-        Export transactions starting from
-        <span>
-          {onClose && (
-            <img
-              src={close}
-              className="closeModal"
-              alt="close"
-              onClick={onClose}
-            />
-          )}
-        </span>
-      </p>
+      <p className="modalText">Export transactions starting from</p>
       <div className="CSVwrapper flex-col md:flex-row gap-2">
         <DatePicker
           selected={startDate}
