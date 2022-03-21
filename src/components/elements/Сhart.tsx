@@ -65,9 +65,9 @@ export const Chart = withContainer(
         label: {
           formatter: (text: string) => {
             if (+text === +moment("03/03/2022").startOf("day"))
-              return moment("03/03/2022").format("MMM Do YY");
+              return moment("03/03/2022").format("D MMM YYYY");
             return +moment().startOf("day") === +text
-              ? moment().format("MMM Do YY")
+              ? moment().format("D MMM YYYY")
               : null; //moment(+text).date()//dataObj.split('T')[0]
           },
         },

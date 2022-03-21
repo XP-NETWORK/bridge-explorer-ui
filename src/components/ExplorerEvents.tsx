@@ -16,7 +16,7 @@ import { ImgOrFail } from "./elements/ImgOrFail";
 import { getExchangeRates } from "../getExchangeRate";
 import sortIcon from "../assets/img/sort.svg";
 import { truncate } from "./Details/helpers";
-
+import BigNumber from "bignumber.js";
 import { Paginator } from "./elements/Paginator";
 import { ErrorStatus } from "./elements/ErrorStatus";
 import { Loader } from "./elements/Loader";
@@ -153,6 +153,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
               ) : // if events length is 0 after 2 seconds, show loader
               eventsContext?.events.length ? (
                 eventsContext?.events.map((event: IEvent) => {
+                  console.log(event.txFees);
                   const dollarValue =
                     !isNaN(+event.txFees) &&
                     getExchangeRate(exchangeRates, event.chainName) *
