@@ -9,7 +9,7 @@ import { EventsContext } from "../../context/Events";
 
 import { url } from "../../constants";
 
-const DownloadCSV = () => {
+const DownloadCSV = ({ onClose }: { onClose: () => boolean }) => {
   const [startDate, setStart] = useState(
     moment().subtract(1, "month").toDate()
   );
@@ -57,7 +57,19 @@ const DownloadCSV = () => {
 
   return (
     <>
-      <p className="modalText">Export transactions starting from</p>
+      <p className="modalText">
+        Export transactions starting from
+        <span>
+          {onClose && (
+            <img
+              src={close}
+              className="closeModal"
+              alt="close"
+              onClick={onClose}
+            />
+          )}
+        </span>
+      </p>
       <div className="CSVwrapper flex-col md:flex-row gap-2">
         <DatePicker
           selected={startDate}

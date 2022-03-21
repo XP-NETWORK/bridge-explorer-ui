@@ -75,7 +75,7 @@ export const Chart = withContainer(
     };
 
     return (
-      <div className="lg:max-w-5xl mx-auto px-4 mt-4 md:mt-8">
+      <div className="lg:max-w-5xl mx-auto px-4 mt-3 md:mt-6">
         <div className="chartWrapper">
           <div className="chartVisual">
             <h3 className="font-medium text-[#222222]">Daily Transactions</h3>
@@ -83,14 +83,15 @@ export const Chart = withContainer(
               <span>
                 Today Tx:{" "}
                 <span>
-                  {fetching? <Loader /> : mockData[mockData.length - 1].txNumber}
+                  {fetching ? (
+                    <Loader />
+                  ) : (
+                    mockData[mockData.length - 1].txNumber
+                  )}
                 </span>
               </span>
               <span>
-                Total Tx:{" "}
-                <span >
-                {fetching? <Loader /> :totalTx}
-                </span>
+                Total Tx: <span>{fetching ? <Loader /> : totalTx}</span>
               </span>
             </div>
             <div className="lineWrapper">

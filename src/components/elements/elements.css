@@ -361,22 +361,22 @@ ul.chartInfoList li {
   padding: 3.5px 10px;
   margin-right: 5px;
   margin-left: 5px;
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 }
 
 .paginationControlWraper:hover,
 .paginatorWraper .button:hover {
-  background-color: #235EF5;
+  background-color: #235ef5;
   color: #fff;
 }
 
 .paginationControlWraper:hover img {
-    filter: brightness(400%);
+  filter: brightness(400%);
 }
 
 .paginationControlWraper img {
   margin: auto;
-  transform: scale(.85);
+  transform: scale(0.85);
 }
 
 .paginatorLabel {
@@ -465,7 +465,6 @@ img.closeModal {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--overlay);
   opacity: 0.4;
   z-index: 1000;
 }

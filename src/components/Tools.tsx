@@ -96,8 +96,8 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="issueForm">
-      <div className="block space-y-1 mb-8">
+    <form onSubmit={handleSubmit} className="issueForm -mt-1">
+      <div className="block space-y-1 mb-9">
         <span className="text-sm">Tx Hash:</span>
         <div className={`inputWrap ${validError ? "failValid" : ""}`}>
           <input
@@ -138,7 +138,7 @@ const Form = () => {
 
       {!captchaRender && (
         <button
-          className="block mt-4 w-full p-2 text-center text-white rounded-md bg-[#297EFE] hover:bg-[#154EDF]"
+          className="block mt-6 w-full p-2 text-center text-white rounded-md bg-[#297EFE] hover:bg-[#154EDF]"
           type="submit"
         >
           Send
