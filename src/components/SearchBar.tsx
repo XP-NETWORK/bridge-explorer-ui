@@ -21,7 +21,7 @@ export const SearchBar = () => {
   return (
     <Container className="mt-6">
       <form
-        className="flex max-w-2xl leading-9 mx-auto px-4 py-2 bg-white rounded shadow-[0_1px_15px_0px_#2F303214]"
+        className="flex max-w-[635px] leading-9 mx-auto px-4 py-2 bg-white rounded shadow-[0_1px_15px_0px_#2F303214]"
         onSubmit={(e) => {
           e.preventDefault();
         }}
