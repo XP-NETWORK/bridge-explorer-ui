@@ -130,8 +130,9 @@
     display: none;
   }
   .paginatorLabel {
-    width: 100px;
+    width: 110px;
     left: 50%;
+    padding-left: 17px;
   }
 
   .paginatorInnerWrapper {
@@ -253,17 +254,6 @@
     width: 24%;
   }
 
-  /*.tableWrapper tbody tr{
-        border-bottom: 1.4px solid rgb(236, 229, 229) !important;
-    }
-
-    /*.tableWrapper tbody tr .sticky {
-        border-bottom: 1.3px solid rgb(236, 229, 229) !important;
-    }*/
-
-  /* .tableWrapper tbody tr .sticky {
-        border-bottom: .9px solid rgb(236, 229, 229) !important;
-    }*/
 
    .sitckyBottomLine {
     border-bottom: 1px solid rgb(236, 229, 229) !important;

@@ -89,7 +89,7 @@ const DownloadCSV = ({ onClose }: { onClose: () => boolean }) => {
           {...(!isSettingDate[1] ? {value:"End date"} : {})}
           onChange={(date: Date) => onSetEnd(date)}
           onInputClick={() => setIsSetting([isSettingDate[0], true])}
-          className="datePick w-full"
+          className="datePick w-full endDatePick"
         />
         <img src={calendar} alt="calendar" />
       </div>
