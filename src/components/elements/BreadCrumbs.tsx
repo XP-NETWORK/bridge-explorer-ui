@@ -32,7 +32,7 @@ export const BreadCrumbs: React.FC<{
     <div className="lg:max-w-5xl mx-auto px-4 mt-8">
       <div className="breadCrumbs">
         {tabs.map((tab, i) => (
-          <Link to={tab.route}>
+          <Link to={tab.route} key={i + "key"}>
           <div
             key={i + "tab" }
             className={`breadCrumbTab text-sm text-[#222222] ${

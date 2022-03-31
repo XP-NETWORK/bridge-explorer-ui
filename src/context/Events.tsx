@@ -64,7 +64,7 @@ export const EventsProvider: FC = withContainer(
             updated.fromChain + updated.actionId 
         );
         try {
-          const metadata = await fetchNtf(updated)
+          const metadata = await fetchNtf(updated);
           setEvents([
             ...events.slice(0, idx),
             { imgUri: metadata.image as string, ...updated },

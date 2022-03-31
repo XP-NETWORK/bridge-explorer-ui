@@ -242,7 +242,7 @@ ul.chartInfoList li {
   padding: 3px 0 !important;
 }
 
-.detailsListRow p {
+.detailsListRow p, .detailsListRow .statusBar {
   align-items: center;
   display: flex;
   margin-left: 60px;
@@ -398,7 +398,7 @@ ul.chartInfoList li {
 }
 
 .paginatorLabel {
-  padding: 4px 10px;
+  padding: 3.5px 10px;
   position: absolute;
   left: 50%;
   top: 50%;

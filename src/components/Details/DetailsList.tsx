@@ -49,7 +49,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
 
   return (
     <div className="flex flex-col w-full">
-      <div
+    {false &&  <div
         className="flex items-start justify-start gap-2 border-b py-4 detailsListRow"
         style={{ display: "none" }}
       >
@@ -76,7 +76,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
           </span>
         </p>
       </div>
-
+}
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
         <div className="text-[#222222] font-medium w-32">Destination Hash:</div>
         <p
@@ -237,13 +237,13 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
 
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
         <div className="text-[#222222] font-medium w-32">Status:</div>
-        <p
-          className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${
+        <div
+          className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit statusBar${
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
           <Status status={event?.status} />
-        </p>
+        </div>
       </div>
     </div>
   );

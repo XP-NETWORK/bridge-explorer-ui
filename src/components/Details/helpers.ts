@@ -29,7 +29,7 @@ export const truncate = function (fullStr:string | undefined, strLen:number, sep
        
         const metadata = await fetchNtf(data)
 
-        if (metadata.displayUri) {
+        /*if (metadata.displayUri) {
           return {
             imgUri: /^ipfs:\/\//.test(metadata.displayUri)
               ? `https://ipfs.io/ipfs/${
@@ -38,14 +38,10 @@ export const truncate = function (fullStr:string | undefined, strLen:number, sep
               : (metadata.displayUri as string),
             ...data,
           };
-        }
+        }*/
 
         return {
-          imgUri: /^ipfs:\/\//.test(metadata.image)
-            ? `https://ipfs.io/ipfs/${
-                metadata.image.split("ipfs://")[1]
-              }`
-            : (metadata.image as string),
+          imgUri: (metadata.image as string),
           ...data,
         };
       } catch (e: any) {
@@ -65,7 +61,22 @@ export const truncate = function (fullStr:string | undefined, strLen:number, sep
         `https://ipfs.io/ipfs/${data.nftUri.split("://")[1]}`
       )
     : await fetch(data.nftUri);
-    return await res.json();
+
+
+    const metadata = await res.json();
+
+    if (metadata.displayUri) {
+      return {
+        image: /^ipfs:\/\//.test(metadata.displayUri)
+          ? `https://ipfs.io/ipfs/${
+            metadata.displayUri.split("ipfs://")[1]
+            }`
+          : (metadata.displayUri as string),
+        ...metadata,
+      };
+    }
+
+    return metadata
   }
 
   export const debounce = (cb:Function, delay: number) => {
