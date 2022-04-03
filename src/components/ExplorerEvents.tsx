@@ -283,21 +283,21 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                             "YYYY/MM/DD H:mm"
                           )}
                         >
-                          {moment(event?.createdAt)
+                          {moment(event.createdAt)
                             .fromNow()
                             .replace("in", "")
+                            .replace("a few ", "3 ")
+                            .replace("few ", "")
                             .replace("a ", "1 ")
                             .replace("an ", "1 ")
                             .replace("hours ", "hrs ")
                             .replace("hour ", "hr ")
-                            .replace("a few ", "10")
-                            .replace("few ", "")
                             .replace("minutes ", "mins ")
                             .replace("minute ", "min ")
                             .replace("mutes ", "mins ")
                             .replace("mute ", "min ")
-                            .replace("second ", "sec ")
-                            .replace("seconds ", "secs ")}
+                            .replace("seconds ", "secs ")
+                            .replace("second ", "sec ")}
                         </span>
                       </TableData>
                       <TableData>
