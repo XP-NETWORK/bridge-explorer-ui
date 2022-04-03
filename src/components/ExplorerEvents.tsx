@@ -59,7 +59,6 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
 
   let scrollBtn = useRef<any>(null);
 
-
   const scrollHandler = function () {
     if (
       window.innerHeight + window.scrollY >=
@@ -150,7 +149,6 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
               ) : // if events length is 0 after 2 seconds, show loader
               eventsContext?.events.length ? (
                 eventsContext?.events.map((event: IEvent) => {
-   
                   const dollarValue =
                     !isNaN(+event.txFees) &&
                     getExchangeRate(exchangeRates, event.chainName) *
@@ -286,20 +284,20 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                           )}
                         >
                           {moment(event?.createdAt)
-                             .fromNow()
-                             .replace("in", "")
-                             .replace("a ", "1 ")
-                             .replace("an ", "1 ")
-                             .replace("hour ", "hr ")
-                             .replace("few ", "")
-                             .replace("hours", "hrs ")
-                             .replace("minute ", "min ")
-                             .replace("minutes", "mins ")
-                             .replace("mute ", "min ")
-                             .replace("mutes ", "mins ")
-                             .replace("second", " sec ")
-                             .replace("seconds", " secs ")
-                             .replace(' s ', ' ')}
+                            .fromNow()
+                            .replace("in", "")
+                            .replace("a ", "1 ")
+                            .replace("an ", "1 ")
+                            .replace("hours ", "hrs ")
+                            .replace("hour ", "hr ")
+                            .replace("a few ", "10")
+                            .replace("few ", "")
+                            .replace("minutes ", "mins ")
+                            .replace("minute ", "min ")
+                            .replace("mutes ", "mins ")
+                            .replace("mute ", "min ")
+                            .replace("second ", "sec ")
+                            .replace("seconds ", "secs ")}
                         </span>
                       </TableData>
                       <TableData>
