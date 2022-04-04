@@ -196,7 +196,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
           <span className="mr-1">
             <img src={ClockIcon} alt="clock icon" />
           </span>
-          <span className="text-[#222222]">{`${moment(event.createdAt)
+          <span className="text-[#222222]">{`${moment(event?.createdAt)
             .fromNow()
             .replace("in", "")
             .replace("a few ", "3 ")
