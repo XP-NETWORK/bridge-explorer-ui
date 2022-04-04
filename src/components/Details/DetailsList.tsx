@@ -196,21 +196,21 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
           <span className="mr-1">
             <img src={ClockIcon} alt="clock icon" />
           </span>
-          <span className="text-[#222222]">{`${moment(event?.createdAt)
+          <span className="text-[#222222]">{`${moment(event.createdAt)
             .fromNow()
             .replace("in", "")
-            .replace("a ", "1 ")
-            .replace("an ", "1 ")
-            .replace("hour ", "hr ")
+            .replace("a few ", "3 ")
             .replace("few ", "")
-            .replace("hours", "hrs ")
+            .replace("an ", "1 ")
+            .replace("a ", "1 ")
+            .replace("hours ", "hrs ")
+            .replace("hour ", "hr ")
+            .replace("minutes ", "mins ")
             .replace("minute ", "min ")
-            .replace("minutes", "mins ")
-            .replace("mute ", "min ")
             .replace("mutes ", "mins ")
-            .replace("second", " sec ")
-            .replace("seconds", " secs ").replace(' s ', ' ')
-            } (${new Date(
+            .replace("mute ", "min ")
+            .replace("seconds ", "secs ")
+            .replace("second ", "sec ")} (${new Date(
             event?.createdAt
           ).toUTCString()})`}</span>
         </p>
