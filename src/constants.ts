@@ -12,6 +12,7 @@ export const currency: any = {
   "8": "FTM",
   "12": "ONE",
   "18": "TEZ",
+  "23": "GT",
 };
 
 export const txExplorers: any = {
@@ -28,6 +29,7 @@ export const txExplorers: any = {
   "8": "https://ftmscan.com/tx/",
   "12": "https://explorer.harmony.one/tx/",
   "18": "https://tezblock.io/transaction/",
+  "23": "https://gatescan.org/tx/",
 };
 
 export const addressExplorers: any = {
@@ -44,6 +46,7 @@ export const addressExplorers: any = {
   "8": "https://ftmscan.com/address/",
   "12": "https://explorer.harmony.one/address/",
   "18": "https://tezblock.io/account/",
+  "23": "https://gatescan.org/address/",
 };
 
 export const chainNoncetoName: any = {
@@ -61,6 +64,7 @@ export const chainNoncetoName: any = {
   "8": "Fantom",
   "12": "Harmony",
   "18": "Tezos",
+  "23": "GateChain",
 };
 
 export const _headers = {
@@ -93,6 +97,7 @@ export const chains = [
   // { id: "unique-one", name: "Unique", icon: "./assets/icons/unique.svg" }, // TODO: check if this is correct
   { id: "elrond-erd-2", name: "Elrond", icon: "./assets/icons/elrond.svg" },
   { id: "tezos", name: "Tezos", icon: "./assets/icons/tezos.svg" },
+  { id: "gatechain-wormhole", name: "GateChain", icon: "./assets/icons/GateChain.svg" },
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";
