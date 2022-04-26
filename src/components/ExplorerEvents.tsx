@@ -225,7 +225,8 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                                   ]?.toLowerCase()
                               )?.icon
                             }
-                            alt=""
+                            alt="chainIcon"
+                            className="chainIcon"
                           />
                           <span>
                             {chainNoncetoName[event?.fromChain || 0] || "N/A"}{" "}
@@ -251,7 +252,8 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                                   ]?.toLowerCase()
                               )?.icon
                             }
-                            alt=""
+                            alt="chainIcon"
+                            className="chainIcon"
                           />
                           <span>
                             {chainNoncetoName[event?.toChain || 0] || "N/A"}

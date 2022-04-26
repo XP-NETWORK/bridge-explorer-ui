@@ -206,7 +206,10 @@ body {
   transform: rotate(180deg);
 }
 
-
+.chainIcon {
+  width: 22px;
+  height: 22px;
+}
 
 @keyframes ping {
   75%,
