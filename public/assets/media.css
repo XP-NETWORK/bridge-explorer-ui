@@ -1,0 +1,172 @@
+
+
+
+@media screen and (max-width: 1800px) {
+
+    .scrollTopBtn {
+        right: 14%;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+
+    .scrollTopBtn {
+        right: 11%;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+
+    .scrollTopBtn {
+        right: 7%;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+
+    .scrollTopBtn {
+        right: 3%;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+
+    .scrollTopBtn {
+        right: 0%;
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 1000px) {
+    .scrollTopBtn {
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+
+    .paginatorWraper {
+        flex-direction: column;
+    }
+
+    .loaderWrap {
+        max-width: 100vw;
+    }
+
+    .desktopOnly {
+        display: none;
+    }
+
+    .mobileOnly {
+        display: block;
+    }
+
+    .detailsListRow {
+        flex-direction: column;
+        align-items: flex-start;
+    } 
+
+    .detailsListRow p{
+        margin-left: 0;
+    }
+
+    .nftWrapper {
+        width: 100% !important;
+        height: auto;
+    }
+
+    .infoTextContainer.longCol {
+        padding-left: 1px  !important;
+    }
+
+    .infoTextContainer.longCol .loadedWrapper{
+        flex-direction: column;
+        border-bottom: .5px solid var(--grey-borders);
+        padding-bottom: 12px;
+    }
+
+
+    .infoTextContainer.longCol .mobileOnly{
+        margin-bottom: 0;
+        border-bottom: none;
+    }
+
+    .loadedWrapper > div{
+        font-weight: normal;
+    }
+
+     .loadedWrapper .hashTitle, .mobileOnly.loadedWrapper, .loadedWrapper .boldTxt  {
+        font-weight: 500;
+    }
+
+    
+    
+    .flex.items-start.justify-start.loadedWrapper {
+        padding-bottom: 20px;
+    }
+
+    .loadedWrapper.trxWrapper .mobileOnly{
+        margin-bottom: 10px;
+
+    }
+
+    .copyBtnWrapper a {
+        font-weight: normal;
+
+    }
+
+    .flex.w-full.loadedWrapper {
+        padding-bottom: 16px;
+        padding-top: 0px;
+        padding-left: 12px;
+    }
+    
+    .loadedWrapper.trxWrapper {
+        padding-left: 12px;
+    }
+
+
+    .detailsCard {
+        padding: 0;
+    }
+
+    .infoTextContainer.longCol {
+        margin-left: 0;
+    }
+
+    .detailsListRow {
+        padding-top: 10px;
+    }
+
+    .flex.items-start.justify-start.gap-2.border-b.py-4.detailsListRow {
+        padding-top: 14px;
+        padding-bottom: 12px;
+    }
+
+    .explorerCard {
+        padding-left: 35px;
+    }
+
+    .dotsImg {
+        width: 24%;
+    }
+
+      .tableWrapper tbody tr{
+        border-bottom: 1px solid rgba(0, 0, 0, .1) !important;
+    }
+
+    .tableWrapper tbody tr .sticky {
+        border-bottom: 1.4px solid rgba(0, 0, 0, .1) !important;
+    }
+    
+
+    .copyTip.copied {
+     
+
+      }
+      
+}

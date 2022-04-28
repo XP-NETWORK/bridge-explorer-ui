@@ -26,6 +26,8 @@ export const App = () => {
     totalWallets: 0
   })
 
+  const [fetching, setFetching] = useState(true)
+
   useEffect(() => {
     (async () => {
       try {
@@ -37,16 +39,18 @@ export const App = () => {
             totalWallets: metrics.totalWallets
           })
         }
+      setFetching(false)
       } catch (e) {
+        console.log(false);
         console.log(e, 'get metrics route');
       }
     })()
   }, [])
 
   return (
-    <ServiceProvider value={{socket, appData}}>
+    <ServiceProvider value={{socket, appData, fetching}}>
         <Routes>
-          <Route path="/" element={<Explorer />} />
+          <Route  path="/*" element={<Explorer />} />
           <Route path="/tx/:fromHash" element={<Event />} />
           <Route path="/network" element={<Network />} />
           <Route path="/dashboard" element={<Dashboard />} />

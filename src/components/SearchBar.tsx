@@ -3,20 +3,25 @@ import SearchIcon from "../assets/icons/search.svg";
 import Cross from "../assets/icons/cross.svg";
 import { useContext, useEffect, useState } from "react";
 import { EventsContext } from "../context/Events";
+import { useCallback } from "react";
+
+import { debounce } from "./Details/helpers";
 
 export const SearchBar = () => {
   const [value, setValue] = useState("");
   // @ts-ignore
   const { setChainName } = useContext(EventsContext);
 
+  const debounced = useCallback(debounce(setChainName, 1000), []);
+
   useEffect(() => {
-    setChainName(value);
+    debounced(value);
   }, [value]);
 
   return (
-    <Container className="mt-8">
+    <Container className="mt-6">
       <form
-        className="flex border px-4 py-2 bg-white rounded"
+        className="flex max-w-[635px] leading-9 mx-auto px-4 py-2 bg-white rounded shadow-[0_1px_15px_0px_#2F303214]"
         onSubmit={(e) => {
           e.preventDefault();
         }}
@@ -28,7 +33,10 @@ export const SearchBar = () => {
           onChange={(e) => setValue(e.target.value)}
           value={value}
         />
-        <div className="clearWrapper">
+        <div
+          className="clearWrapper"
+          style={{ display: value ? "flex" : "none" }}
+        >
           <img
             src={Cross}
             alt="cross"

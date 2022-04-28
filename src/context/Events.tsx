@@ -12,90 +12,127 @@ import { url } from "../constants";
 
 import { withContainer } from "./ServcieProvder";
 
-
+import {loadImages, fetchNtf} from '../components/Details/helpers'
 
 interface IEventsContext {
   events: IEvent[];
+  status: string;
+  chainName:string;
+  sort: string;
+  paginationPage: number;
+  totalEvents:number;
+  setStatus: Dispatch<SetStateAction<string>>;
   setChainName: (chainName: string) => void;
+  setEvents: (events: IEvent[]) => void;
+  setIsLoading: (bol: boolean) => void;
+  toggleSort: () => void;
+  setPage: (idx:number) => void;
+  isLoading: boolean;
 }
 
 export const EventsContext = createContext<IEventsContext | null>(null);
-export const EventsProvider: FC = withContainer(({ children, container: {socket} }) => {
-  const [events, setEvents] = useState<IEvent[]>([]);
-  const [chainName, setChainName] = useState("");
+export const EventsProvider: FC = withContainer(
+  ({ children, container: { socket } }) => {
+    const [events, setEvents] = useState<IEvent[]>([]);
+    const [chainName, setChainName] = useState("");
+    const [status, setStatus] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
+    const [sort, setSort] = useState('DESC') 
+    const [paginationPage, setPage] = useState(0)
+    const [totalEvents, setTotal] = useState(0)
 
-  useEffect(() => {
+    const toggleSort = () => setSort(sort === 'DESC' ? 'ASC':'DESC')
     
-  }, []);
+    useEffect(() => {
 
-  useEffect(() => {
-    socket.off("incomingEvent");
-    socket.off("updateEvent");
-    socket.on("incomingEvent", async (event: any) => {
-      console.log(event, 'incoming');
-      try {
-        //const res = await fetch(event.nftUri);
-        //const metadata = await res.json();
-        const incoming = { imgUri:'', ...event };
-        console.log(events, "on event===");
-        setEvents([incoming, ...events]);
-      } catch (e: any) {
-        console.log(e);
-        const incoming = { imgUri: "", ...event };
-        setEvents([incoming, ...events]); //updateEvent
+      socket.off("incomingEvent");
+      socket.off("updateEvent");
+      socket.on("incomingEvent", async (event: any) => {
+        try {
+          const incoming = { imgUri: "", ...event };
+          setEvents([incoming, ...events]);
+        } catch (e: any) {
+          console.log(e);
+          const incoming = { imgUri: "", ...event };
+          setEvents([incoming, ...events]); //updateEvent
+        }
+      });
+      socket.on("updateEvent", async (updated: any) => {
+        const idx = events.findIndex(
+          (event) =>
+            event.fromChain + event.actionId  === 
+            updated.fromChain + updated.actionId 
+        );
+        try {
+          const metadata = await fetchNtf(updated);
+          setEvents([
+            ...events.slice(0, idx),
+            { imgUri: metadata.image as string, ...updated },
+            ...events.slice(idx + 1),
+          ]);
+        } catch (e: any) {
+          console.log(e, "img fetch error");
+          setEvents([
+            ...events.slice(0, idx),
+            { imgUri: "", ...updated },
+            ...events.slice(idx + 1),
+          ]); //updateEvent
+        }
+      });
+    }, [events]);
+
+    useEffect(() => {
+        setIsLoading(true);
+      if (chainName.length && status.length === 0) {
+        console.log("only chain name");
+
+        fetch(`${url}?chainName=` + chainName + `&sort=${sort}&offset=${paginationPage}`)
+          .then((res) => res.json())
+          .then(async ({events, count}: {events: IEvent[], count: number}) => {
+            await loadImages(events, setEvents);
+            setTotal(count)
+          })
+          .then(() => setIsLoading(false));
+      } else if (status.length && chainName.length === 0) {
+        console.log("only status");
+
+        fetch(`${url}?status=Pending` + `&sort=${sort}&offset=${paginationPage}`)
+          .then((res) => res.json())
+          .then(async ({events, count}: {events: IEvent[], count: number}) => {
+            await loadImages(events, setEvents);
+            setTotal(count)
+            //console.log(await Promise.all(newEvents), "new events");
+          })
+          .then(() => setIsLoading(false));
+      } else if (chainName.length && status.length > 0) {
+        console.log("chain name and status");
+        fetch(`${url}?pendingSearch=` + chainName + `&sort=${sort}&offset=${paginationPage}`)
+          .then((res) => res.json())
+          .then(async ({events, count}: {events: IEvent[], count: number}) => {
+            await loadImages(events, setEvents);
+            setTotal(count)
+          })
+          .then(() => setIsLoading(false));
+      } else {
+        console.log("no query");
+        fetch(`${url}?sort=${sort}&offset=${paginationPage}`)
+          .then((res) => res.json())
+          .then(async ({events, count}: {events: IEvent[], count: number}) => {
+              await loadImages(events, setEvents)
+              setTotal(count)
+          })
+          .then(() => setIsLoading(false));
       }
-    });
-    socket.on("updateEvent", async (updated: any) => {
-      console.log(updated ,'updated');
-      const idx = events.findIndex((event) => event.actionId + event.tokenId + updated.fromHash === updated.actionId + updated.tokenId + event.fromHash);
-      try {
-        const res = await fetch(updated.nftUri);
-        const metadata = await res.json();
-        const updatedEvent = {imgUri: metadata.image as string, ...updated}
-        setEvents([...events.slice(0, idx), updatedEvent, ...events.slice(idx + 1)]);
-      } catch (e: any) {
-        console.log(e,'img fetch error');
-        const updatedEvent = { imgUri: "", ...updated };
-        setEvents([...events.slice(0, idx), updatedEvent, ...events.slice(idx + 1)]); //updateEvent
-      }
-    });
-  }, [events]);
+      console.log("isLoading", isLoading);
+      console.log("fetching events", events.length, isLoading);
+    }, [chainName, status, sort, paginationPage]);
 
-  useEffect(() => {
-    if (chainName.length) {
-      fetch(`${url}?chainName=` + chainName)
-        .then((res) => res.json())
-        .then(async (data: IEvent[]) => {
-          const newEvents = data.map(async (data) => {
-            const res = await fetch(data.nftUri);
-            const metadata = await res.json();
-            return { imgUri: metadata.image as string, ...data };
-          });
-          setEvents(await Promise.all(newEvents));
-        });
-    } else {
-      fetch(`${url}`)
-        .then((res) => res.json())
-        .then(async (data: IEvent[]) => {
-          const newEvents = data.map(async (data) => {
-            try {
-              console.log(data.nftUri);
-              const res = await fetch(data.nftUri);
-              const metadata = await res.json();
-              return { imgUri: metadata.image as string, ...data };
-            } catch (e: any) {
-              console.log(e);
-              return { imgUri: "", ...data };
-            }
-          });
-          setEvents(await Promise.all(newEvents));
-        });
-    }
-  }, [chainName]);
-
-  return (
-    <EventsContext.Provider value={{ events, setChainName }}>
-      {children}
-    </EventsContext.Provider>
-  );
-});
+    return (
+      <EventsContext.Provider
+        value={{ events, totalEvents, status, setStatus, setChainName, isLoading, setEvents, setIsLoading, chainName, toggleSort, sort, paginationPage, setPage }}
+      >
+        {children}
+      </EventsContext.Provider>
+    );
+  }
+);

@@ -19,12 +19,10 @@ export const EventDetails = () => {
   useEffect(() => {
     new ClipboardJS(".copy-btn");
 
-    console.log(params.fromHash);
     fetch(`https://dev-explorer-api.herokuapp.com/?fromHash=${params.fromHash}`) //https://dev-explorer-api.herokuapp.com
       .then((res) => res.json())
       .then((data) => {
         setEvent(data[0]);
-        console.log(data[0]);
       });
   }, []);
 
@@ -34,8 +32,6 @@ export const EventDetails = () => {
       .then((res) => res.json())
       .then((metadata) => {
         setMetadata(metadata);
-
-        console.log(metadata);
       });
   }, [event]);
 
@@ -43,7 +39,6 @@ export const EventDetails = () => {
 
   useEffect(() => {
     if (tooltipCopy) {
-      console.log(tooltipCopy);
       ReactTooltip.rebuild();
       ReactTooltip.show(tooltips.current[tooltipCopy]);
       setTimeout(() => setTooltipCopy(null), 500);
@@ -55,7 +50,7 @@ export const EventDetails = () => {
 
   return (
     <Container>
-      <div className="p-4 bg-white mt-5 sm:rounded-2xl rounded-lg shadow-[0_0px_10px_0px_rgba(0,0,0,0.2)]">
+      <div className="p-4 bg-white mt-5 sm:rounded-2xl rounded-lg shadow-[0_1px_15px_0px_#2F303214]">
         <h1 className="text-base font-medium">Sent Item</h1>
         <hr className="mb-4 mt-2" />
         <div className="flex items-start sm:border sm:p-5 sm:rounded-2xl flex-col sm:flex-row gap-5 sm:">

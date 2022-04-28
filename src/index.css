@@ -4,6 +4,24 @@
 @tailwind components;
 @tailwind utilities;
 
+.dropdown-scrollbar {
+  overflow: overlay;
+}
+
+.dropdown-scrollbar::-webkit-scrollbar {
+  @apply w-1 bg-transparent;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-[#E0E0E3] rounded-md;
+}
+
 .active {
   @apply border-red-600;
 }
@@ -14,7 +32,7 @@ body {
   --accent-blue: #235ef5;
   --grey-borders: #d9d9d9;
   --neutral-background: #f7f7f9;
-  --green: #04B200;
+  --green: #04b200;
 }
 
 .mobileOnly {
@@ -52,8 +70,8 @@ body {
 }
 
 .copyTip {
-  border-radius: 6px !important;
-  background: #1d1c1c !important;
+  border-radius: 5px !important;
+  background: rgba(0, 0, 0, 0.9);
   padding: 5px 6px !important;
 }
 
@@ -70,7 +88,7 @@ body {
   position: absolute !important;
   left: 12px !important;
   top: 40% !important;
-  transform: translateY(-50%) !important;
+  transform: translateY(-60%) !important;
   width: 18px !important;
   height: 18px !important;
   background: url("./assets/icons/check.svg") center no-repeat !important;
@@ -119,6 +137,92 @@ body {
   margin-left: -10px;
 }
 
+.formSuccess,
+.formFail {
+  display: flex;
+  align-items: center;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: fixed;
+  padding: 14px 18px;
+  background-color: #0cc13f;
+  color: #fff;
+  font-size: 14px;
+  font-family: "Inter";
+  border-radius: 6px;
+}
+
+.formFail {
+  background-color: #fb5632;
+}
+
+.formFail span {
+  font-size: 14px;
+  color: #fff;
+}
+
+.formSuccess img,
+.formFail img {
+  margin-right: 0;
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+.formSuccess img:first-child,
+.formFail img:first-child {
+  margin-left: 0;
+  margin-right: 16px;
+  cursor: default;
+}
+
+.formSuccess pre,
+.formFail pre {
+  color: #f7f7f9;
+  margin-left: 10px;
+  opacity: 0.7;
+}
+
+.formFail {
+  color: #c93d49;
+  font-size: 12px;
+}
+
+#captchaContainer {
+  margin-top: 20px;
+}
+
+.ageHeader {
+  display: flex;
+  align-items: center;
+}
+
+.ageHeader img {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.ageHeader img.rotated {
+  transform: rotate(180deg);
+}
+
+.chainIcon {
+  width: 22px;
+  height: 22px;
+}
+
+.testnet{
+  position: relative;
+  transform: translateY(20%);
+  font-size: 12px;
+  font-weight: 100;
+  line-height: 140%;
+  padding: 0 2px;
+  background-color: #DB233E;
+  border-radius: 2px;
+  color: white;
+}
+
 @keyframes ping {
   75%,
   100% {
@@ -126,4 +230,3 @@ body {
     opacity: 0;
   }
 }
-

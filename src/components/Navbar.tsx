@@ -14,25 +14,31 @@ export const Navbar = () => {
   }, [isMenuOpen]);
 
   return (
-    <nav className="bg-white shadow-md">
+    <nav className="bg-white shadow-[0_2px_13px_0px_rgba(0,0,0,0.1)]">
       <Container className="relative flex-shrink  flex flex-col sm:flex-row gap-y-4 justify-between px-4 border-red-400">
         <a target="_blank" href="https://xp.network" className="max-w-fit">
           <img src={logo} alt="logo" height={60} width={192} />
         </a>
         <div
           ref={menu}
-          className="absolute overflow-hidden sm:static right-4 shadow-[0_0px_10px_0px_rgba(0,0,0,0.2)] sm:shadow-none bg-white top-16 z-40 rounded-xl sm:overflow-visible sm:rounded-0 flex sm:flex flex-col justify-between sm:flex-row gap-x-4"
+          className="absolute overflow-hidden sm:static right-4 shadow-[0_1px_15px_0px_#2F303214] sm:shadow-none bg-white top-16 z-40 rounded-xl sm:overflow-visible sm:rounded-0 flex sm:flex flex-col justify-between sm:flex-row gap-x-4"
         >
           <NavItem to="/">Explorer</NavItem>
           <a
-            className="sm:flex p-4 w-full min-w-[14rem] z-20  hover:bg-slate-100 sm:min-w-fit sm:p-0 sm:hover:bg-white  text-[#030303] items-end font-normal tracking-wide hover:tracking-[0.0175em] hover:font-medium text-[15px] sm:pb-2.5 max-w-fit sm:border-t-2 border-transparent"
+            className="sm:flex p-4 w-full min-w-[14rem] z-20  hover:bg-slate-100 sm:min-w-fit sm:p-0 sm:hover:bg-white  text-[#030303] items-end font-medium text-[15px] sm:pb-2.5 max-w-fit sm:border-t-2 border-transparent"
             href="https://bridge.xp.network/"
             target="_blank"
           >
             Bridge
           </a>
-          <NavItem to="/network" className="nonactive">Network</NavItem>
-          <NavItem to="/dashboard" className="nonactive">Dashboard</NavItem>
+          <NavItem to="/network" className="nonactive">
+            Network
+          </NavItem>
+          {false && (
+            <NavItem to="/dashboard" className="">
+              Dashboard
+            </NavItem>
+          )}
         </div>
         <button
           className="absolute right-4 top-7 sm:hidden"
@@ -45,10 +51,14 @@ export const Navbar = () => {
   );
 };
 
-const NavItem: FC<{ to: string, className?:string }> = ({ children, to, className }) => {
+const NavItem: FC<{ to: string; className?: string }> = ({
+  children,
+  to,
+  className,
+}) => {
   return (
     <NavLink
-      className={`sm:flex p-4 w-full min-w-[14rem] z-20 sm:min-w-fit sm:p-0 sm:hover:bg-white  hover:bg-slate-100 text-[#030303] items-end font-normal tracking-wide sm:pb-2.5  hover:tracking-[0.0175em] hover:font-medium text-[15px] max-w-fit sm:border-t-2 border-transparent ${className}`}
+      className={`sm:flex p-4 w-full min-w-[14rem] z-20 sm:min-w-fit sm:p-0 sm:hover:bg-white  hover:bg-slate-100 text-[#030303] items-end font-medium sm:pb-2.5  text-[15px] max-w-fit sm:border-t-2 border-transparent ${className}`}
       to={to}
     >
       {children}

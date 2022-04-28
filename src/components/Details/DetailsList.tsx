@@ -1,103 +1,253 @@
-
-import {DetailsCard} from './DetailsCard'
+import { DetailsCard } from "./DetailsCard";
 import ReactTooltip from "react-tooltip";
-import CopyWithTooltip from './CopyWithTooltop';
+import CopyWithTooltip from "./CopyWithTooltop";
 import { Status } from "../Status";
-import moment from 'moment'
-import { truncate } from './helpers';
-import useIsMobile from '../../hooks/isMobile';
-import { useMemo } from 'react';
-import { txExplorers, addressExplorers } from '../../constants'; 
+import moment from "moment";
+import { truncate } from "./helpers";
+import useIsMobile from "../../hooks/isMobile";
+import { useEffect, useMemo, useState } from "react";
+import {
+  txExplorers,
+  addressExplorers,
+  currency,
+  chains,
+  chainNoncetoName,
+} from "../../constants";
+import { ethers } from "ethers";
+import ClockIcon from "../../assets/icons/clock.svg";
+import { getExchangeRates } from "../../getExchangeRate";
+import {formatFees} from "./helpers"
 
+const DetailsList = ({ data, copyProps }: DetailsCard) => {
+  const { loading: dataLoad, event } = data;
+  const { setTooltipCopy, tooltipCopy, tooltips } = copyProps;
+  const [exchangeRates, setExchangeRates] = useState<{
+    [key: string]: { usd: number };
+  }>({});
 
-const DetailsList = ({data, copyProps } : DetailsCard) => {
+  const isMobile = useIsMobile();
+  const truncateSize = useMemo(() => (isMobile ? 33 : 60), [isMobile]);
 
-    const {loading : dataLoad, event} = data
-    const {setTooltipCopy, tooltipCopy, tooltips} = copyProps
+  console.log(isMobile);
+  useEffect(() => {
+    const ids: string[] = chains.map((chain) => chain.id);
+    getExchangeRates(ids).then((rates) => {
+      setExchangeRates(rates);
+    });
+  }, []);
 
-    const isMobile = useIsMobile()
-    const truncateSize = useMemo(() => isMobile? 33: 60, [isMobile])   
+  const getExchangeRate = (
+    rates: { [key: string]: { usd: number } },
+    chainName: string
+  ): number => {
+    const chain = chains.find(
+      (chain) => chain.name.toLowerCase() === chainName.toLowerCase()
+    );
+    const rate = (chain && rates[chain.id]?.usd) || 1;
 
-    console.log(isMobile);
+    return rate;
+  };
 
-    return <div  className="flex flex-col w-full">
-             <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow" style={{display: 'none'}}>
-            <div className="font-medium w-32">Source Hash:</div>
-            <p
-              // style={{ width: "calc(100% - 6rem)" }}
-              className={`md:pl-14 break-words  md:w-fit  ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}
-            >
-                   <ReactTooltip
-                  effect="solid"
-                  className={`${tooltipCopy ? "copyTip copied" : "copyTip"}`}
-                />
-               {!dataLoad && <CopyWithTooltip copyValue={event?.fromHash} copyProps={copyProps} copyIdx={5}/>}
-              <span className="text-[#235EF5]">{truncate(event?.fromHash, truncateSize) || "N/A"}</span>
-            </p>
-            </div>
-
-            <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
-            <div className="font-medium w-32">Dest Hash:</div>
-            <p className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}>
-              <a href={`${event?.toChain && txExplorers[event?.toChain]}${event?.toHash}`} target="_blank" rel="noreferrer" className="text-[#235EF5]">{truncate(event?.toHash, truncateSize) || "N/A"}</a>
-            {!dataLoad && <CopyWithTooltip copyValue={event?.fromChainName} copyProps={copyProps} copyIdx={6}/>}
-            </p>
-          
-          </div>
-          <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
-            <div className="font-medium w-32">Source Chain:</div>
-            <p className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}>
-              <span>{event?.fromChainName || "N/A"}</span>
-            </p>
-          </div>
-          <div className={`flex items-start justify-start gap-2 border-b py-4 detailsListRow`}>
-            <div className="font-medium w-32">Dest Chain:</div>
-            <p className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}>
-              <span>{event?.toChainName || "N/A"}</span>
-            </p>
-          </div>
-          <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
-            <div className="font-medium w-32">From:</div>
-
-                <p className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}>
-              
-                  <span className="text-[#235EF5]">
-                    <a target="_blank" rel="noreferrer"    href={`${event?.fromChain && addressExplorers[event?.fromChain]}${
-                        event?.senderAddress
-                      }`}>{truncate(event?.senderAddress, truncateSize) || "N/A"}</a>
-                  </span>
-                  {!dataLoad && <CopyWithTooltip copyValue={event?.senderAddress}  copyProps={copyProps} copyIdx={7}/>}
-                </p>
-
-          </div>
-          <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
-            <div className="font-medium w-32">To:</div>
-            <p className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}>
-            <a target="_blank" rel="noreferrer" href={`${event?.toChain && addressExplorers[event?.toChain]}${event?.targetAddress}`}>
-                  <span className="text-[#235EF5]">
-                    {truncate(event?.targetAddress, truncateSize) || "N/A"}
-                  </span>
-              </a>
-              {!dataLoad && <CopyWithTooltip copyValue={event?.targetAddress} copyProps={copyProps} copyIdx={8}/>}
-            </p>
-            
-          </div>
-          <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
-            <div className="font-medium w-32">Date:</div>
-            <p className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}>
-              <span>
-                {moment(event?.createdAt).format("YYYY/MM/DD H:mm") ?? "N/A"}
-              </span>
-            </p>
-          </div>
-
-          <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
-            <div className="font-medium w-32">Status:</div>
-            <p className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${dataLoad? 'loadingWrapper' : 'loadedWrapper'}`}>
-              <Status status={event?.status} />
-            </p>
-          </div>
-    </div>
+  return (
+    <div className="flex flex-col w-full">
+    {false &&  <div
+        className="flex items-start justify-start gap-2 border-b py-4 detailsListRow"
+        style={{ display: "none" }}
+      >
+        <div className="text-[#222222] font-medium w-32">Source Hash:</div>
+        <p
+          // style={{ width: "calc(100% - 6rem)" }}
+          className={`md:pl-14 break-words  md:w-fit  ${
+            dataLoad ? "loadingWrapper" : "loadedWrapper"
+          }`}
+        >
+          <ReactTooltip
+            effect="solid"
+            className={`${tooltipCopy ? "copyTip copied" : "copyTip"}`}
+          />
+          {!dataLoad && (
+            <CopyWithTooltip
+              copyValue={event?.fromHash}
+              copyProps={copyProps}
+              copyIdx={5}
+            />
+          )}
+          <span className="text-[#235EF5]">
+            {truncate(event?.fromHash, truncateSize) || "N/A"}
+          </span>
+        </p>
+      </div>
 }
- 
-export default DetailsList
+      <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
+        <div className="text-[#222222] font-medium w-32">Destination Hash:</div>
+        <p
+          className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${
+            dataLoad ? "loadingWrapper" : "loadedWrapper"
+          }`}
+        >
+          <a
+            href={`${event?.toChain && txExplorers[event?.toChain]}${
+              event?.toHash
+            }`}
+            target="_blank"
+            rel="noreferrer"
+            className={`text-[#235EF5] ${event?.toHash ? "" : "nonactive "}`}
+          >
+            {truncate(event?.toHash, truncateSize) || "N/A"}
+          </a>
+          {!dataLoad && event?.toHash && (
+            <CopyWithTooltip
+              copyValue={event?.toHash}
+              copyProps={copyProps}
+              copyIdx={6}
+            />
+          )}
+        </p>
+      </div>
+      <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
+        <div className="text-[#222222] font-medium w-32">Departure Chain:</div>
+        <p
+          className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${
+            dataLoad ? "loadingWrapper" : "loadedWrapper"
+          }`}
+        >
+          <span className="text-[#222222]">
+            {chainNoncetoName[event?.fromChain || 0] || "N/A"}
+          </span>
+        </p>
+      </div>
+      <div
+        className={`flex items-start justify-start gap-2 border-b py-4 detailsListRow`}
+      >
+        <div className="text-[#222222] font-medium w-32">
+          Destination Chain:
+        </div>
+        <p
+          className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${
+            dataLoad ? "loadingWrapper" : "loadedWrapper"
+          }`}
+        >
+          <span className="text-[#222222]">
+            {chainNoncetoName[event?.toChain || 0] || "N/A"}
+          </span>
+        </p>
+      </div>
+      <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
+        <div className="text-[#222222] font-medium w-32">From:</div>
+
+        <p
+          className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${
+            dataLoad ? "loadingWrapper" : "loadedWrapper"
+          }`}
+        >
+          <span className="text-[#235EF5]">
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href={`${event?.fromChain && addressExplorers[event?.fromChain]}${
+                event?.senderAddress
+              }`}
+            >
+              {truncate(event?.senderAddress, truncateSize) || "N/A"}
+            </a>
+          </span>
+          {!dataLoad && (
+            <CopyWithTooltip
+              copyValue={event?.senderAddress}
+              copyProps={copyProps}
+              copyIdx={7}
+            />
+          )}
+        </p>
+      </div>
+      <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
+        <div className="text-[#222222] font-medium w-32">To:</div>
+        <p
+          className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${
+            dataLoad ? "loadingWrapper" : "loadedWrapper"
+          }`}
+        >
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href={`${event?.toChain && addressExplorers[event?.toChain]}${
+              event?.targetAddress
+            }`}
+          >
+            <span className="text-[#235EF5]">
+              {truncate(event?.targetAddress, truncateSize) || "N/A"}
+            </span>
+          </a>
+          {!dataLoad && (
+            <CopyWithTooltip
+              copyValue={event?.targetAddress}
+              copyProps={copyProps}
+              copyIdx={8}
+            />
+          )}
+        </p>
+      </div>
+      <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
+        <div className="text-[#222222] font-medium w-32">Date:</div>
+        <p
+          className={`md:pl-14  md:w-fit ${
+            dataLoad ? "loadingWrapper" : "loadedWrapper"
+          }`}
+        >
+          <span className="mr-1">
+            <img src={ClockIcon} alt="clock icon" />
+          </span>
+          <span className="text-[#222222]">{`${moment(event?.createdAt)
+            .fromNow()
+            .replace("in", "")
+            .replace("a few ", "3 ")
+            .replace("few ", "")
+            .replace("an ", "1 ")
+            .replace("a ", "1 ")
+            .replace("hours ", "hrs ")
+            .replace("hour ", "hr ")
+            .replace("minutes ", "mins ")
+            .replace("minute ", "min ")
+            .replace("mutes ", "mins ")
+            .replace("mute ", "min ")
+            .replace("seconds ", "secs ")
+            .replace("second ", "sec ")} (${new Date(
+            event?.createdAt
+          ).toUTCString()})`}</span>
+        </p>
+      </div>
+      <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
+        <div className="text-[#222222] font-medium w-32">Transaction Fee:</div>
+        <p
+          className={`md:pl-14  md:w-fit ${
+            dataLoad ? "loadingWrapper" : "loadedWrapper"
+          }`}
+        >
+          <span className="text-[#222222]">
+            {event?.txFees && formatFees(event)}
+            {event?.fromChain && currency[event.fromChain]} ($
+            {event?.fromChain &&
+              (
+                getExchangeRate(exchangeRates, event.chainName) *
+                formatFees(event)
+              ).toFixed(2)}
+            )
+          </span>
+        </p>
+      </div>
+
+      <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
+        <div className="text-[#222222] font-medium w-32">Status:</div>
+        <div
+          className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit statusBar${
+            dataLoad ? "loadingWrapper" : "loadedWrapper"
+          }`}
+        >
+          <Status status={event?.status} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default DetailsList;

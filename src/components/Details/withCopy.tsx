@@ -17,7 +17,7 @@ export const withCopy = function (Wrapped: React.FC<any>) {
         if (tooltipCopy) {
           ReactTooltip.rebuild();
           ReactTooltip.show(tooltips.current[tooltipCopy]);
-          setTimeout(() => setTooltipCopy(null), 800);
+          setTimeout(() => setTooltipCopy(null), 1100);
         } else {
           ReactTooltip.rebuild();
           ReactTooltip.hide();

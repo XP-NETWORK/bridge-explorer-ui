@@ -6,7 +6,7 @@ module.exports = {
       sans: ["Inter", "sans-serif"],
       body: ["Inter", "sans-serif"],
       poppins: ["Poppins", "sans-serif"],
+      roboto: ["Roboto", "sans-serif"],
     },
   },
-  plugins: [],
 };
