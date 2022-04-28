@@ -114,8 +114,8 @@ export const chains = [
   { id: "algorand", name: "Algorand", icon: Algorand, notConvert: true },
 ];
 
-//export const url = "https://testnet-bridge-explorer.herokuapp.com/";
-//export const socketUrl = "wss://testnet-bridge-explorer.herokuapp.com/";
+export const url = "https://testnet-bridge-explorer.herokuapp.com/";
+export const socketUrl = "wss://testnet-bridge-explorer.herokuapp.com/";
 
-export const url = "http://localhost:3100/";
-export const socketUrl = "ws://localhost:3100";
+//export const url = "http://localhost:3100/";
+//export const socketUrl = "ws://localhost:3100";
