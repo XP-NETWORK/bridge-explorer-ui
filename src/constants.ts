@@ -1,5 +1,6 @@
 import GT from './assets/icons/gate.svg'
 import Tron from './assets/chains/tron.svg'
+import Vechain from './assets/chains/Vechain.png'
 
 export const currency: any = {
   "4": "BNB",
@@ -17,6 +18,7 @@ export const currency: any = {
   "18": "TEZ",
   "23": "GT",
   "9": "TRX",
+  "25": "VET",
 };
 
 export const txExplorers: any = {
@@ -34,7 +36,8 @@ export const txExplorers: any = {
   "12": "https://explorer.harmony.one/tx/",
   "18": "https://tezblock.io/transaction/",
   "23": "https://gatescan.org/tx/",
-  "9": "https://tronscan.org/#/transaction/"
+  "9": "https://tronscan.org/#/transaction/",
+  "25": "https://explore.vechain.org/transactions/",
 };
 
 export const addressExplorers: any = {
@@ -52,7 +55,8 @@ export const addressExplorers: any = {
   "12": "https://explorer.harmony.one/address/",
   "18": "https://tezblock.io/account/",
   "23": "https://gatescan.org/address/",
-  "9": "https://tronscan.org/#/address/"
+  "9": "https://tronscan.org/#/address/",
+  "25": "https://explore.vechain.org/accounts/"
 };
 
 export const chainNoncetoName: any = {
@@ -72,6 +76,7 @@ export const chainNoncetoName: any = {
   "18": "Tezos",
   "23": "GateChain",
   "9": "Tron",
+  "25": "Vechain"
 };
 
 export const _headers = {
@@ -106,6 +111,8 @@ export const chains = [
   { id: "tezos", name: "Tezos", icon: "./assets/icons/tezos.svg" },
   { id: "gatechain-wormhole", name: "GateChain", icon: GT },
   { id: "tron", name: "Tron", icon: Tron },
+  { id: "vechain", name: "Vechain", icon: Vechain },
+
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";
