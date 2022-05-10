@@ -1,6 +1,7 @@
 import GT from './assets/icons/gate.svg'
 import Tron from './assets/chains/tron.svg'
 import Vechain from './assets/chains/Vechain.png'
+import Algorand from "./assets/chains/algorand.svg"
 
 export const currency: any = {
   "4": "BNB",
@@ -19,6 +20,8 @@ export const currency: any = {
   "23": "GT",
   "9": "TRX",
   "25": "VET",
+  "15": "ALGOS",
+ 
 };
 
 export const txExplorers: any = {
@@ -38,6 +41,7 @@ export const txExplorers: any = {
   "23": "https://gatescan.org/tx/",
   "9": "https://tronscan.org/#/transaction/",
   "25": "https://explore.vechain.org/transactions/",
+  "15": "https://algoexplorer.io/tx/",
 };
 
 export const addressExplorers: any = {
@@ -56,7 +60,8 @@ export const addressExplorers: any = {
   "18": "https://tezblock.io/account/",
   "23": "https://gatescan.org/address/",
   "9": "https://tronscan.org/#/address/",
-  "25": "https://explore.vechain.org/accounts/"
+  "25": "https://explore.vechain.org/accounts/",
+  "15": "https://algoexplorer.io/address/"
 };
 
 export const chainNoncetoName: any = {
@@ -76,7 +81,8 @@ export const chainNoncetoName: any = {
   "18": "Tezos",
   "23": "GateChain",
   "9": "Tron",
-  "25": "Vechain"
+  "25": "Vechain",
+  "15": "Algorand",
 };
 
 export const _headers = {
@@ -112,6 +118,7 @@ export const chains = [
   { id: "gatechain-wormhole", name: "GateChain", icon: GT },
   { id: "tron", name: "Tron", icon: Tron },
   { id: "vechain", name: "Vechain", icon: Vechain },
+  { id: "algorand", name: "Algorand", icon: Algorand, notConvert: true },
 
 ];
 
