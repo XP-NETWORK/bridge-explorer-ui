@@ -4,5 +4,6 @@ export const getExchangeRates = async (ids: string[]) => {
       ","
     )}&vs_currencies=usd`
   );
+  console.log(await res.json());
   return await res.json();
 };
