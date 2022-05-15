@@ -16,6 +16,7 @@ import {
 import { ethers } from "ethers";
 import ClockIcon from "../../assets/icons/clock.svg";
 import { getExchangeRates } from "../../getExchangeRate";
+import { formatFees } from "./helpers";
 
 const DetailsList = ({ data, copyProps }: DetailsCard) => {
   const { loading: dataLoad, event } = data;
@@ -223,12 +224,12 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
           }`}
         >
           <span className="text-[#222222]">
-            {event?.txFees && Number(ethers.utils.formatEther(event.txFees))}{" "}
+            {event?.txFees && formatFees(event)}{" "}
             {event?.fromChain && currency[event.fromChain]} ($
             {event?.fromChain &&
               (
                 getExchangeRate(exchangeRates, event.chainName) *
-                Number(ethers.utils.formatEther(event.txFees))
+                formatFees(event)
               ).toFixed(2)}
             )
           </span>

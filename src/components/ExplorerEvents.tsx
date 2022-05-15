@@ -16,10 +16,11 @@ import { ImgOrFail } from "./elements/ImgOrFail";
 import { getExchangeRates } from "../getExchangeRate";
 import sortIcon from "../assets/img/sort.svg";
 import { truncate } from "./Details/helpers";
-import BigNumber from "bignumber.js";
 import { Paginator } from "./elements/Paginator";
 import { ErrorStatus } from "./elements/ErrorStatus";
 import { Loader } from "./elements/Loader";
+import { formatFees } from "./Details/helpers";
+
 
 export interface IEvent {
   id: string;
@@ -149,10 +150,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
               ) : // if events length is 0 after 2 seconds, show loader
               eventsContext?.events.length ? (
                 eventsContext?.events.map((event: IEvent) => {
-                  const dollarValue =
-                    !isNaN(+event.txFees) &&
-                    getExchangeRate(exchangeRates, event.chainName) *
-                      Number(ethers.utils.formatEther(event.txFees));
+                  const dollarValue = getExchangeRate(exchangeRates, event.chainName) * formatFees(event)
 
                   return (
                     <tr
@@ -191,15 +189,14 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                           className="cursor-default"
                           data-tip={`
                         ${
-                          !isNaN(+event.txFees) &&
-                          ethers.utils.formatEther(event.txFees)
+                          formatFees(event)
                         } ${event.fromChain && currency[event.fromChain]} <br>
                           ${dollarValue} $
                       `}
                         >
                           <span>
-                            {!isNaN(+event.txFees) &&
-                              Number(ethers.utils.formatEther(event.txFees))
+                          {
+                              formatFees(event)
                                 .toFixed(7)
                                 .toString()}
                           </span>{" "}
