@@ -6,7 +6,6 @@ import { EventsContext } from "../context/Events";
 import { Status } from "./Status";
 import ImgBroken from "../assets/img-broken.png";
 import { LoaderRow } from "./elements/LoaderRow";
-import { ethers } from "ethers";
 import { currency, chains, chainNoncetoName ,txExplorers } from "../constants";
 import ReactTooltip from "react-tooltip";
 import moment from "moment";
@@ -20,6 +19,7 @@ import { Paginator } from "./elements/Paginator";
 import { ErrorStatus } from "./elements/ErrorStatus";
 import { Loader } from "./elements/Loader";
 import { formatFees } from "./Details/helpers";
+import ExplorerLink from "./elements/ExplorerLink";
 
 
 
@@ -230,14 +230,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                             {chainNoncetoName[event?.fromChain || 0] || "N/A"}{" "}
                           </span>
                         </div>
-                        <a
-                          className="text-[#235EF5] text-xs "
-                          key={event.id}
-                          onClick={(e) => e.stopPropagation()}
-                          href={`${event?.fromChain && txExplorers[event?.fromChain]}/${event.fromHash}`}
-                        >
-                          {truncate(event.fromHash, 15)}
-                        </a>
+                       <ExplorerLink hash={event.fromHash!} chain={event.fromChain!}/>
                       </TableData>
                       <TableData>
                         <div className="flex space-x-1 mb-1">
@@ -259,14 +252,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                           </span>
                         </div>
                         {event?.status === "Completed" ? (
-                          <a
-                            className="text-[#235EF5] text-xs"
-                            key={event.id}
-                            onClick={(e) => e.stopPropagation()}
-                            href={`${event?.toHash && txExplorers[event?.toChain]}/${event.toHash}`}
-                          >
-                            {truncate(event.toHash, 15)}
-                          </a>
+                          <ExplorerLink hash={event.toHash!} chain={event.toChain!}/>
                         ) : event?.status === "Pending" ? (
                           <Loader className="addressLoader" />
                         ) : (
