@@ -5,6 +5,12 @@ import "./index.css";
 import "./components/elements/elements.css";
 import "./assets/media.css"
 import { BrowserRouter } from "react-router-dom";
+import './global.d.ts'
+
+
+String.prototype.isIPFS = function () {
+  return this.includes('//ipfs')
+}
 
 
 

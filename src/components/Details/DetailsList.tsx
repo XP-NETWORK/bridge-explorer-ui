@@ -195,7 +195,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
           }`}
         >
           <span className="mr-1">
-            <img src={ClockIcon} alt="clock icon" />
+            <img src={ClockIcon} alt="clock icon" style={{filter: 'brightness(35%)'}}/>
           </span>
           <span className="text-[#222222]">{`${moment(event?.createdAt)
             .fromNow()

@@ -57,7 +57,7 @@ export const loadImages = async (
 
 export const fetchNtf = async (data: IEvent) => {
   try {
-    const res = data.nftUri.includes("ipfs://")
+    const res = data.nftUri.isIPFS()
       ? await fetch(`https://ipfs.io/ipfs/${data.nftUri.split("://")[1]}`)
       : await fetch(data.nftUri);
 
@@ -66,21 +66,20 @@ export const fetchNtf = async (data: IEvent) => {
     // if (metadata.wrapped) {
     //metadata = await fetch(metadata.image).then(res => res.json());
     //}
-
-    /* if (metadata.image.includes("ipfs://")) {
-      const ipfs = await fetch(`https://ipfs.io/ipfs/${metadata.image.split("://")[1].split('/')[0]}`)
-      //@ts-ignore
-      const image = await fetch(ipfs.imageUrl)
-
+////////////////////////////////////////////////
+    if (metadata.image.isIPFS()) {
+      const image = await fetchIPFS(metadata.image)
+      console.log(image,' image');
+  
       return {
         ...metadata,
         image
       }
-    }*/
+    }
 
     if (metadata.displayUri) {
       return {
-        image: /^ipfs:\/\//.test(metadata.displayUri)
+        image: metadata.displayUri.isIPFS()
           ? `https://ipfs.io/ipfs/${metadata.displayUri.split("ipfs://")[1]}`
           : (metadata.displayUri as string),
         ...metadata,
@@ -143,3 +142,18 @@ export const compose =
 
     return Number(ethers.utils.formatEther(event.txFees))
   }
+
+const fetchIPFS = async (ipfsUrl:string) => {
+  try {
+      const ipfs = await (await fetch(`https://ipfs.io/ipfs/${ipfsUrl.split("://")[1].split('/')[0]}`)).json();
+      console.log(ipfs, 'ipfs');
+      if (ipfs.displayUri.isIPFS()) {
+          return 'https://ipfs.io/ipfs/' + ipfs.displayUri.split('ipfs://')[1]
+      } else {
+        return ipfs.displayUri
+      }
+
+  } catch (e) {
+
+  }
+}

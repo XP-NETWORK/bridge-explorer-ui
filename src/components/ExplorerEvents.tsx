@@ -7,7 +7,7 @@ import { Status } from "./Status";
 import ImgBroken from "../assets/img-broken.png";
 import { LoaderRow } from "./elements/LoaderRow";
 import { ethers } from "ethers";
-import { currency, chains, chainNoncetoName } from "../constants";
+import { currency, chains, chainNoncetoName ,txExplorers } from "../constants";
 import ReactTooltip from "react-tooltip";
 import moment from "moment";
 import scrollUp from "../assets/img/collapse.svg";
@@ -20,6 +20,7 @@ import { Paginator } from "./elements/Paginator";
 import { ErrorStatus } from "./elements/ErrorStatus";
 import { Loader } from "./elements/Loader";
 import { formatFees } from "./Details/helpers";
+
 
 
 export interface IEvent {
@@ -156,7 +157,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                     <tr
                       key={event.id}
                       onClick={() => navigate(`/tx/${event.fromHash}`)}
-                      className="bg-white group hover:bg-transparent"
+                      className="bg-white group hover:bg-transparent txRow"
                     >
                       <TableData
                         className={`sticky left-0 text-center bg-white group-hover:bg-[#F7F7F9] imgTableData ${
@@ -229,13 +230,14 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                             {chainNoncetoName[event?.fromChain || 0] || "N/A"}{" "}
                           </span>
                         </div>
-                        <Link
-                          className="text-[#235EF5] text-xs"
+                        <a
+                          className="text-[#235EF5] text-xs "
                           key={event.id}
-                          to={`/tx/${event.fromHash}`}
+                          onClick={(e) => e.stopPropagation()}
+                          href={`${event?.fromChain && txExplorers[event?.fromChain]}/${event.fromHash}`}
                         >
                           {truncate(event.fromHash, 15)}
-                        </Link>
+                        </a>
                       </TableData>
                       <TableData>
                         <div className="flex space-x-1 mb-1">
@@ -257,13 +259,14 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                           </span>
                         </div>
                         {event?.status === "Completed" ? (
-                          <Link
+                          <a
                             className="text-[#235EF5] text-xs"
                             key={event.id}
-                            to={`/tx/${event.fromHash}`}
+                            onClick={(e) => e.stopPropagation()}
+                            href={`${event?.toHash && txExplorers[event?.toChain]}/${event.toHash}`}
                           >
                             {truncate(event.toHash, 15)}
-                          </Link>
+                          </a>
                         ) : event?.status === "Pending" ? (
                           <Loader className="addressLoader" />
                         ) : (

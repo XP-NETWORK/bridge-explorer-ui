@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router";
 import { IEvent } from "../ExplorerEvents";
-
+import { fetchNtf } from "./helpers";
 import { url } from "../../constants";
 
 export const withData = function (Wrapped: React.FC<any>) {
@@ -15,32 +15,18 @@ export const withData = function (Wrapped: React.FC<any>) {
       fetch(`${url}?fromHash=${params.fromHash}`)
         .then((res) => res.json())
         .then(async (data) => {
-          // const res = data[0].nftUri.includes('ipfs://')? await fetch(`https://ipfs.io/ipfs/${data[0].nftUri.split('://')[1]}`) : await fetch(data[0].nftUri);
-          //console.log(res, 'ds');
-          //const metadata = await res.json();
           setEvent({
             ...data.events[0],
-            // name:metadata.name
           });
           setLoading(false);
         });
     }, []);
 
     useEffect(() => {
-      fetch(
-        `${
-          event?.nftUri.includes("ipfs://")
-            ? "https://ipfs.io/ipfs/" + event?.nftUri.split("://")[1]
-            : event?.nftUri
-        }`
-      )
-        .then((res) => res.json())
-        .then((metadata) => {
-          metadata.image = /^ipfs:\/\//.test(metadata.image || metadata.displayUri)
-            ? `https://ipfs.io/ipfs/${(metadata.image || metadata.displayUri).split("ipfs://")[1]}`
-            : metadata.image;
-          setMetadata(metadata);
-        });
+      
+      event && fetchNtf(event).then(md =>  setMetadata(md)) 
+
+  
     }, [event]);
 
     return <Wrapped data={{ event, metadata, loading }} />;
