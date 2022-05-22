@@ -30,21 +30,11 @@ export const loadImages = async (
 ) => {
   const newEvents = data.map(async (data: IEvent) => {
     try {
-      const metadata = await fetchNtf(data);
+      //const metadata = await fetchNtf(data);
 
-      /*if (metadata.displayUri) {
-          return {
-            imgUri: /^ipfs:\/\//.test(metadata.displayUri)
-              ? `https://ipfs.io/ipfs/${
-                metadata.displayUri.split("ipfs://")[1]
-                }`
-              : (metadata.displayUri as string),
-            ...data,
-          };
-        }*/
 
       return {
-        imgUri: metadata.image as string,
+        imgUri: '',//metadata.image as string,
         ...data,
       };
     } catch (e: any) {
@@ -57,17 +47,23 @@ export const loadImages = async (
 
 export const fetchNtf = async (data: IEvent) => {
   try {
+
+    let nakedResult = await tryNakedIFPS(data.nftUri)
+    if (nakedResult) return nakedResult
+
+   
     const res = data.nftUri.isIPFS()
-      ? await fetch(`https://ipfs.io/ipfs/${data.nftUri.split("://")[1]}`)
+      ? await fetch(transformIPFS(data.nftUri))
       : await fetch(data.nftUri);
 
     let metadata = await res.json();
 
-    // if (metadata.wrapped) {
-    //metadata = await fetch(metadata.image).then(res => res.json());
-    //}
-////////////////////////////////////////////////
-    if (metadata.image.isIPFS()) {
+     nakedResult = await tryNakedIFPS(metadata.image)
+    if (nakedResult) return nakedResult
+
+
+
+    if (metadata.image?.isIPFS()) {
       const image = await fetchIPFS(metadata.image)
       console.log(image,' image');
   
@@ -78,9 +74,10 @@ export const fetchNtf = async (data: IEvent) => {
     }
 
     if (metadata.displayUri) {
+
       return {
         image: metadata.displayUri.isIPFS()
-          ? `https://ipfs.io/ipfs/${metadata.displayUri.split("ipfs://")[1]}`
+          ? transformIPFS(metadata.displayUri)
           : (metadata.displayUri as string),
         ...metadata,
       };
@@ -89,14 +86,16 @@ export const fetchNtf = async (data: IEvent) => {
     return metadata;
   } catch (e) {
     //@ts-ignore
+    console.log(e.message);
+    //@ts-ignore
     if (e.message === 'Failed to fetch') {
 
       let image = ''
       const res = await fetch(`https://sheltered-crag-76748.herokuapp.com/${data.nftUri}`);
       let metadata = await res.json();
 
-      if (metadata.image.includes("ipfs://")) {
-         const ipfs = await (await fetch(`https://ipfs.io/ipfs/${metadata.image.split("://")[1].split('/')[0]}`)).json();
+      if (metadata.image.isIPFS()) {
+         const ipfs = await (await fetch(transformIPFS(metadata.image))).json();
          image = ipfs.imageUrl
       } else {
           image = metadata.image
@@ -143,12 +142,28 @@ export const compose =
     return Number(ethers.utils.formatEther(event.txFees))
   }
 
+const tryNakedIFPS = async (url:string) => {
+  if (url[0] === 'Q') {
+ 
+    const res =  await (await fetch('https://ipfs.io/ipfs/' + url)).json()
+    return {
+      ...res,
+      image: 'https://ipfs.io/ipfs/' + res.image
+    }
+  }
+}
+
+
 const fetchIPFS = async (ipfsUrl:string) => {
   try {
-      const ipfs = await (await fetch(`https://ipfs.io/ipfs/${ipfsUrl.split("://")[1].split('/')[0]}`)).json();
-      console.log(ipfs, 'ipfs');
+    
+      const ipfs = await (await fetch(transformIPFS(ipfsUrl))).json();
+      console.log(ipfs.image);
+      if (ipfs.image[0] === 'Q') {
+        return `https://ipfs.io/ipfs/${ipfs.image}`
+      }
       if (ipfs.displayUri.isIPFS()) {
-          return 'https://ipfs.io/ipfs/' + ipfs.displayUri.split('ipfs://')[1]
+          return transformIPFS(ipfs.displayUri)
       } else {
         return ipfs.displayUri
       }
@@ -156,4 +171,10 @@ const fetchIPFS = async (ipfsUrl:string) => {
   } catch (e) {
 
   }
+}
+
+const transformIPFS = (uri:string) => {
+
+  const trs = `https://ipfs.io/ipfs/${uri.split("://")[1].split('/')[0]}`
+  return trs
 }

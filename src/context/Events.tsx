@@ -79,6 +79,11 @@ export const EventsProvider: FC = withContainer(
           ]); //updateEvent
         }
       });
+
+      return () => {
+        socket.off("incomingEvent");
+        socket.off("updateEvent");
+      }
     }, [events]);
 
     useEffect(() => {

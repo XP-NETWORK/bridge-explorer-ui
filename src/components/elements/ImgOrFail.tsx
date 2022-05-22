@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import failImage from '../../assets/img-broken.png'
 
@@ -7,16 +7,26 @@ export const ImgOrFail = ({
     className,
     width,
     alt,
-    height
+    height,
+    setFetching
 } : {
     src: string;
     className:string;
     alt?:string,
     width: number;
-    height: number
+    height: number;
+    setFetching?: any
 }) => {
 
     const [failed, setFailed] = useState(false)
 
-    return <img alt={alt} src={!failed? src: failImage} className={className} width={width} height={height} onError={() => setFailed(true)}/>
+    useEffect(() => {
+        src &&  setFailed(false)
+    },[src])
+
+    return <img alt={alt}  src={!failed? src: failImage} className={className} width={width} height={height} onError={() => setFailed(true)} onLoad={() =>  {
+        if (src) {
+            setFetching(false)
+        }
+    }}/>
 }

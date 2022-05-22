@@ -51,7 +51,7 @@ export const Chart = withContainer(
       idx: i,
     }));
 
-    console.log(mockData);
+
     const config = {
       data: mockData,
       xField: "adate",

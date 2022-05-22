@@ -9,7 +9,7 @@ import './global.d.ts'
 
 
 String.prototype.isIPFS = function () {
-  return this.includes('//ipfs')
+  return this.includes('ipfs://')
 }
 
 

@@ -4,22 +4,20 @@ import { Container } from "./Container";
 import { useContext } from "react";
 import { EventsContext } from "../context/Events";
 import { Status } from "./Status";
-import ImgBroken from "../assets/img-broken.png";
 import { LoaderRow } from "./elements/LoaderRow";
 import { currency, chains, chainNoncetoName ,txExplorers } from "../constants";
 import ReactTooltip from "react-tooltip";
 import moment from "moment";
 import scrollUp from "../assets/img/collapse.svg";
 import { NoEventsRow } from "./elements/NoEventsRow";
-import { ImgOrFail } from "./elements/ImgOrFail";
 import { getExchangeRates } from "../getExchangeRate";
 import sortIcon from "../assets/img/sort.svg";
-import { truncate } from "./Details/helpers";
 import { Paginator } from "./elements/Paginator";
 import { ErrorStatus } from "./elements/ErrorStatus";
 import { Loader } from "./elements/Loader";
 import { formatFees } from "./Details/helpers";
 import ExplorerLink from "./elements/ExplorerLink";
+import { RowNFT } from "./Table/RowNFT";
 
 
 
@@ -62,6 +60,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   let scrollBtn = useRef<any>(null);
 
   const scrollHandler = function () {
+
     if (
       window.innerHeight + window.scrollY >=
       document.body.offsetHeight - 500
@@ -73,6 +72,11 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   };
 
   useEffect(() => {
+
+
+
+
+
     if (eventsContext?.events.length) {
       scrollBtn.current.style.visibility = "visible";
       window.addEventListener("scroll", scrollHandler);
@@ -85,6 +89,11 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
     getExchangeRates(ids).then((rates) => {
       setExchangeRates(rates);
     });
+
+
+
+
+    
   }, []);
 
   const getExchangeRate = (
@@ -150,7 +159,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                 <LoaderRow />
               ) : // if events length is 0 after 2 seconds, show loader
               eventsContext?.events.length ? (
-                eventsContext?.events.map((event: IEvent) => {
+                eventsContext?.events.map((event: IEvent, idx: number) => {
                   const dollarValue = getExchangeRate(exchangeRates, event.chainName) * formatFees(event)
 
                   return (
@@ -173,16 +182,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                           className="copyTip"
                           multiline
                         />
-                        {event?.status === "Completed" || event?.imgUri ? (
-                          <ImgOrFail
-                            className="rounded-lg"
-                            src={event?.imgUri || ImgBroken}
-                            width={38}
-                            height={38}
-                          />
-                        ) : (
-                          <Loader />
-                        )}
+                        <RowNFT event={event} />
                       </TableData>
 
                       <TableData>
