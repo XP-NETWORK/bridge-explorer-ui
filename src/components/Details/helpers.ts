@@ -175,6 +175,10 @@ const fetchIPFS = async (ipfsUrl:string) => {
 
 const transformIPFS = (uri:string) => {
 
+ // const base = `https://ipfs.io/ipfs/${uri.split("://")[1]}`;
+
+  //const trail = uri.includes('.png')? base :
+
   const trs = `https://ipfs.io/ipfs/${uri.split("://")[1].split('/')[0]}`
   return trs
 }
