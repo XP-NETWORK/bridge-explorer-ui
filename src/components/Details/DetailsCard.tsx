@@ -9,6 +9,7 @@ import SoundOnIcon from "../../assets/icons/sound-on.svg";
 import SoundOffIcon from "../../assets/icons/sound-off.svg";
 import { ImgOrFail } from "../elements/ImgOrFail";
 import { LoaderRow } from "../elements/LoaderRow";
+import { extractHash } from "./helpers";
 
 export interface DetailsCard {
   data: {
@@ -71,7 +72,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
             }`}
           >
             {metadata?.animation_url ? (
-              <div className="relative rounded-lg overflow-hidden nftImage" >
+              <div className="relative rounded-lg overflow-hidden nftImage">
                 <video
                   ref={nftVideo}
                   poster={metadata?.image}
@@ -110,13 +111,15 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
                 )}
               </div>
             ) : (
-              metadata?.image && (<ImgOrFail
-                alt="nft preview"
-                className={"rounded-lg  nftImage aspect-square"}
-                src={metadata?.image}
-                width={3}
-                height={3}
-              />)
+              metadata?.image && (
+                <ImgOrFail
+                  alt="nft preview"
+                  className={"rounded-lg  nftImage aspect-square"}
+                  src={metadata?.image}
+                  width={3}
+                  height={3}
+                />
+              )
             )}
           </div>
         </div>
@@ -186,14 +189,14 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
               <div className="mobileOnly boldTxt">Transaction Hash:</div>
               <div className="copyBtnWrapper ">
                 <a
-                  href={`${event?.fromChain && txExplorers[event?.fromChain]}${
-                    event.fromHash
-                  }`}
+                  href={`${
+                    event?.fromChain && txExplorers[event?.fromChain]
+                  }${extractHash(event?.fromHash)}`}
                   target="_blank"
                   rel="noreferrer"
                   className="text-[#222222] w-32 trxHash"
                 >
-                  {truncate(event.fromHash, truncateSize)}
+                  {truncate(extractHash(event?.fromHash), truncateSize)}
                 </a>
                 <div className="copyBtnWrapper">
                   {" "}

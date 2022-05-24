@@ -1,7 +1,7 @@
-import GT from './assets/icons/gate.svg'
-import Tron from './assets/chains/tron.svg'
-import Vechain from './assets/chains/Vechain.png'
-import Algorand from "./assets/chains/algorand.svg"
+import GT from "./assets/icons/gate.svg";
+import Tron from "./assets/chains/tron.svg";
+import Vechain from "./assets/chains/Vechain.png";
+import Algorand from "./assets/chains/algorand.svg";
 
 export const currency: any = {
   "4": "BNB",
@@ -21,7 +21,6 @@ export const currency: any = {
   "9": "TRX",
   "25": "VET",
   "15": "ALGOS",
- 
 };
 
 export const txExplorers: any = {
@@ -61,7 +60,7 @@ export const addressExplorers: any = {
   "23": "https://gatescan.org/address/",
   "9": "https://tronscan.org/#/address/",
   "25": "https://explore.vechain.org/accounts/",
-  "15": "https://algoexplorer.io/address/"
+  "15": "https://algoexplorer.io/address/",
 };
 
 export const chainNoncetoName: any = {
@@ -119,11 +118,10 @@ export const chains = [
   { id: "tron", name: "Tron", icon: Tron },
   { id: "vechain", name: "Vechain", icon: Vechain },
   { id: "algorand", name: "Algorand", icon: Algorand, notConvert: true },
-
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";
 export const socketUrl = "wss://dev-explorer-api.herokuapp.com";
 
 //export const url = "http://localhost:3100/";
-//export const socketUrl = "ws://localhost:3100";
+//xport const socketUrl = "ws://localhost:3100";

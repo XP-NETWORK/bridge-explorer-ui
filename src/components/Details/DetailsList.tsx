@@ -16,7 +16,7 @@ import {
 import { ethers } from "ethers";
 import ClockIcon from "../../assets/icons/clock.svg";
 import { getExchangeRates } from "../../getExchangeRate";
-import { formatFees } from "./helpers";
+import { formatFees, extractHash } from "./helpers";
 
 const DetailsList = ({ data, copyProps }: DetailsCard) => {
   const { loading: dataLoad, event } = data;
@@ -50,34 +50,35 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
 
   return (
     <div className="flex flex-col w-full">
-    {false &&  <div
-        className="flex items-start justify-start gap-2 border-b py-4 detailsListRow"
-        style={{ display: "none" }}
-      >
-        <div className="text-[#222222] font-medium w-32">Source Hash:</div>
-        <p
-          // style={{ width: "calc(100% - 6rem)" }}
-          className={`md:pl-14 break-words  md:w-fit  ${
-            dataLoad ? "loadingWrapper" : "loadedWrapper"
-          }`}
+      {false && (
+        <div
+          className="flex items-start justify-start gap-2 border-b py-4 detailsListRow"
+          style={{ display: "none" }}
         >
-          <ReactTooltip
-            effect="solid"
-            className={`${tooltipCopy ? "copyTip copied" : "copyTip"}`}
-          />
-          {!dataLoad && (
-            <CopyWithTooltip
-              copyValue={event?.fromHash}
-              copyProps={copyProps}
-              copyIdx={5}
+          <div className="text-[#222222] font-medium w-32">Source Hash:</div>
+          <p
+            // style={{ width: "calc(100% - 6rem)" }}
+            className={`md:pl-14 break-words  md:w-fit  ${
+              dataLoad ? "loadingWrapper" : "loadedWrapper"
+            }`}
+          >
+            <ReactTooltip
+              effect="solid"
+              className={`${tooltipCopy ? "copyTip copied" : "copyTip"}`}
             />
-          )}
-          <span className="text-[#235EF5]">
-            {truncate(event?.fromHash, truncateSize) || "N/A"}
-          </span>
-        </p>
-      </div>
-}
+            {!dataLoad && (
+              <CopyWithTooltip
+                copyValue={event?.fromHash}
+                copyProps={copyProps}
+                copyIdx={5}
+              />
+            )}
+            <span className="text-[#235EF5]">
+              {truncate(event?.fromHash, truncateSize) || "N/A"}
+            </span>
+          </p>
+        </div>
+      )}
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
         <div className="text-[#222222] font-medium w-32">Destination Hash:</div>
         <p
@@ -87,13 +88,16 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
         >
           <a
             href={`${event?.toChain && txExplorers[event?.toChain]}${
-              event?.toHash
+              event?.toHash && extractHash(event?.toHash)
             }`}
             target="_blank"
             rel="noreferrer"
             className={`text-[#235EF5] ${event?.toHash ? "" : "nonactive "}`}
           >
-            {truncate(event?.toHash, truncateSize) || "N/A"}
+            {truncate(
+              event?.toHash && extractHash(event?.toHash),
+              truncateSize
+            ) || "N/A"}
           </a>
           {!dataLoad && event?.toHash && (
             <CopyWithTooltip
@@ -195,7 +199,11 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
           }`}
         >
           <span className="mr-1">
-            <img src={ClockIcon} alt="clock icon" style={{filter: 'brightness(35%)'}}/>
+            <img
+              src={ClockIcon}
+              alt="clock icon"
+              style={{ filter: "brightness(35%)" }}
+            />
           </span>
           <span className="text-[#222222]">{`${moment(event?.createdAt)
             .fromNow()

@@ -12,21 +12,21 @@ import { url } from "../constants";
 
 import { withContainer } from "./ServcieProvder";
 
-import {loadImages, fetchNtf} from '../components/Details/helpers'
+import { loadImages, fetchNtf } from "../components/Details/helpers";
 
 interface IEventsContext {
   events: IEvent[];
   status: string;
-  chainName:string;
+  chainName: string;
   sort: string;
   paginationPage: number;
-  totalEvents:number;
+  totalEvents: number;
   setStatus: Dispatch<SetStateAction<string>>;
   setChainName: (chainName: string) => void;
   setEvents: (events: IEvent[]) => void;
   setIsLoading: (bol: boolean) => void;
   toggleSort: () => void;
-  setPage: (idx:number) => void;
+  setPage: (idx: number) => void;
   isLoading: boolean;
 }
 
@@ -37,17 +37,17 @@ export const EventsProvider: FC = withContainer(
     const [chainName, setChainName] = useState("");
     const [status, setStatus] = useState("");
     const [isLoading, setIsLoading] = useState(true);
-    const [sort, setSort] = useState('DESC') 
-    const [paginationPage, setPage] = useState(0)
-    const [totalEvents, setTotal] = useState(0)
+    const [sort, setSort] = useState("DESC");
+    const [paginationPage, setPage] = useState(0);
+    const [totalEvents, setTotal] = useState(0);
 
-    const toggleSort = () => setSort(sort === 'DESC' ? 'ASC':'DESC')
-    
+    const toggleSort = () => setSort(sort === "DESC" ? "ASC" : "DESC");
+
     useEffect(() => {
-
       socket.off("incomingEvent");
       socket.off("updateEvent");
-      socket.on("incomingEvent", async (event: any) => {
+      socket.on("incomingEvent", async (event: IEvent) => {
+        console.log("incoming", event.fromChain, event.actionId);
         try {
           const incoming = { imgUri: "", ...event };
           setEvents([incoming, ...events]);
@@ -57,11 +57,17 @@ export const EventsProvider: FC = withContainer(
           setEvents([incoming, ...events]); //updateEvent
         }
       });
-      socket.on("updateEvent", async (updated: any) => {
+      socket.on("updateEvent", async (updated: IEvent) => {
+        console.log(
+          "incoming",
+          updated.fromChain,
+          updated.actionId,
+          updated.status
+        );
         const idx = events.findIndex(
           (event) =>
-            event.fromChain + event.actionId  === 
-            updated.fromChain + updated.actionId 
+            event.fromChain + event.actionId ===
+            updated.fromChain + updated.actionId
         );
         try {
           const metadata = await fetchNtf(updated);
@@ -83,49 +89,67 @@ export const EventsProvider: FC = withContainer(
       return () => {
         socket.off("incomingEvent");
         socket.off("updateEvent");
-      }
+      };
     }, [events]);
 
     useEffect(() => {
-        setIsLoading(true);
+      setIsLoading(true);
       if (chainName.length && status.length === 0) {
         console.log("only chain name");
 
-        fetch(`${url}?chainName=` + chainName + `&sort=${sort}&offset=${paginationPage}`)
+        fetch(
+          `${url}?chainName=` +
+            chainName +
+            `&sort=${sort}&offset=${paginationPage}`
+        )
           .then((res) => res.json())
-          .then(async ({events, count}: {events: IEvent[], count: number}) => {
-            await loadImages(events, setEvents);
-            setTotal(count)
-          })
+          .then(
+            async ({ events, count }: { events: IEvent[]; count: number }) => {
+              await loadImages(events, setEvents);
+              setTotal(count);
+            }
+          )
           .then(() => setIsLoading(false));
       } else if (status.length && chainName.length === 0) {
         console.log("only status");
 
-        fetch(`${url}?status=Pending` + `&sort=${sort}&offset=${paginationPage}`)
+        fetch(
+          `${url}?status=Pending` + `&sort=${sort}&offset=${paginationPage}`
+        )
           .then((res) => res.json())
-          .then(async ({events, count}: {events: IEvent[], count: number}) => {
-            await loadImages(events, setEvents);
-            setTotal(count)
-            //console.log(await Promise.all(newEvents), "new events");
-          })
+          .then(
+            async ({ events, count }: { events: IEvent[]; count: number }) => {
+              await loadImages(events, setEvents);
+              setTotal(count);
+              //console.log(await Promise.all(newEvents), "new events");
+            }
+          )
           .then(() => setIsLoading(false));
       } else if (chainName.length && status.length > 0) {
         console.log("chain name and status");
-        fetch(`${url}?pendingSearch=` + chainName + `&sort=${sort}&offset=${paginationPage}`)
+        fetch(
+          `${url}?pendingSearch=` +
+            chainName +
+            `&sort=${sort}&offset=${paginationPage}`
+        )
           .then((res) => res.json())
-          .then(async ({events, count}: {events: IEvent[], count: number}) => {
-            await loadImages(events, setEvents);
-            setTotal(count)
-          })
+          .then(
+            async ({ events, count }: { events: IEvent[]; count: number }) => {
+              await loadImages(events, setEvents);
+              setTotal(count);
+            }
+          )
           .then(() => setIsLoading(false));
       } else {
         console.log("no query");
         fetch(`${url}?sort=${sort}&offset=${paginationPage}`)
           .then((res) => res.json())
-          .then(async ({events, count}: {events: IEvent[], count: number}) => {
-              await loadImages(events, setEvents)
-              setTotal(count)
-          })
+          .then(
+            async ({ events, count }: { events: IEvent[]; count: number }) => {
+              await loadImages(events, setEvents);
+              setTotal(count);
+            }
+          )
           .then(() => setIsLoading(false));
       }
       console.log("isLoading", isLoading);
@@ -134,7 +158,21 @@ export const EventsProvider: FC = withContainer(
 
     return (
       <EventsContext.Provider
-        value={{ events, totalEvents, status, setStatus, setChainName, isLoading, setEvents, setIsLoading, chainName, toggleSort, sort, paginationPage, setPage }}
+        value={{
+          events,
+          totalEvents,
+          status,
+          setStatus,
+          setChainName,
+          isLoading,
+          setEvents,
+          setIsLoading,
+          chainName,
+          toggleSort,
+          sort,
+          paginationPage,
+          setPage,
+        }}
       >
         {children}
       </EventsContext.Provider>

@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { EventsContext } from "../context/Events";
 import { Status } from "./Status";
 import { LoaderRow } from "./elements/LoaderRow";
-import { currency, chains, chainNoncetoName ,txExplorers } from "../constants";
+import { currency, chains, chainNoncetoName, txExplorers } from "../constants";
 import ReactTooltip from "react-tooltip";
 import moment from "moment";
 import scrollUp from "../assets/img/collapse.svg";
@@ -18,8 +18,7 @@ import { Loader } from "./elements/Loader";
 import { formatFees } from "./Details/helpers";
 import ExplorerLink from "./elements/ExplorerLink";
 import { RowNFT } from "./Table/RowNFT";
-
-
+import { extractHash } from "./Details/helpers";
 
 export interface IEvent {
   id: string;
@@ -60,7 +59,6 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   let scrollBtn = useRef<any>(null);
 
   const scrollHandler = function () {
-
     if (
       window.innerHeight + window.scrollY >=
       document.body.offsetHeight - 500
@@ -72,11 +70,6 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   };
 
   useEffect(() => {
-
-
-
-
-
     if (eventsContext?.events.length) {
       scrollBtn.current.style.visibility = "visible";
       window.addEventListener("scroll", scrollHandler);
@@ -89,11 +82,6 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
     getExchangeRates(ids).then((rates) => {
       setExchangeRates(rates);
     });
-
-
-
-
-    
   }, []);
 
   const getExchangeRate = (
@@ -160,12 +148,16 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
               ) : // if events length is 0 after 2 seconds, show loader
               eventsContext?.events.length ? (
                 eventsContext?.events.map((event: IEvent, idx: number) => {
-                  const dollarValue = getExchangeRate(exchangeRates, event.chainName) * formatFees(event)
+                  const dollarValue =
+                    getExchangeRate(exchangeRates, event.chainName) *
+                    formatFees(event);
 
                   return (
                     <tr
                       key={event.id}
-                      onClick={() => navigate(`/tx/${event.fromHash}`)}
+                      onClick={() =>
+                        navigate(`/tx/${extractHash(event.fromHash)}`)
+                      }
                       className="bg-white group hover:bg-transparent txRow"
                     >
                       <TableData
@@ -189,18 +181,13 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                         <span
                           className="cursor-default"
                           data-tip={`
-                        ${
-                          formatFees(event)
-                        } ${event.fromChain && currency[event.fromChain]} <br>
+                        ${formatFees(event)} ${
+                            event.fromChain && currency[event.fromChain]
+                          } <br>
                           ${dollarValue} $
                       `}
                         >
-                          <span>
-                          {
-                              formatFees(event)
-                                .toFixed(7)
-                                .toString()}
-                          </span>{" "}
+                          <span>{formatFees(event).toFixed(7).toString()}</span>{" "}
                           <span>
                             {event.fromChain && currency[event.fromChain]}
                           </span>
@@ -230,7 +217,10 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                             {chainNoncetoName[event?.fromChain || 0] || "N/A"}{" "}
                           </span>
                         </div>
-                       <ExplorerLink hash={event.fromHash!} chain={event.fromChain!}/>
+                        <ExplorerLink
+                          hash={extractHash(event.fromHash!)}
+                          chain={event.fromChain!}
+                        />
                       </TableData>
                       <TableData>
                         <div className="flex space-x-1 mb-1">
@@ -252,7 +242,10 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                           </span>
                         </div>
                         {event?.status === "Completed" ? (
-                          <ExplorerLink hash={event.toHash!} chain={event.toChain!}/>
+                          <ExplorerLink
+                            hash={extractHash(event.toHash!)}
+                            chain={event.toChain!}
+                          />
                         ) : event?.status === "Pending" ? (
                           <Loader className="addressLoader" />
                         ) : (
