@@ -130,6 +130,14 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
             <p className="break-words w-[calc(100%-8rem)] md:w-fit infoTextWrap"></p>
           </div>
           <div
+            className={`flex w-full ${
+              dataLoad ? "loadingWrapper" : "loadedWrapper"
+            }`}
+          >
+            <div className="font-medium w-32">Collection Name:</div>
+            <p className="break-words w-[calc(100%-8rem)] md:w-fit infoTextWrap"></p>
+          </div>
+          <div
             className={`flex w-full  ${
               dataLoad ? "loadingWrapper" : "loadedWrapper"
             }`}
@@ -161,9 +169,25 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
               NFT Name:
             </div>
             <div className="break text-[#222222] w-full">
+              {console.log(metadata)}
               {dataLoad ? "" : metadata?.name}
             </div>
           </div>
+
+          <div className="flex w-full loadedWrapper">
+            <div
+              className={`mobileOnly  ${
+                dataLoad ? "loadingWrapper" : "loadedWrapper"
+              }`}
+            >
+              Collection Name:
+            </div>
+            <div className="break text-[#222222] w-full">
+              {dataLoad ? "" : metadata?.name}
+            </div>
+          </div>
+
+
           <div className="flex w-full loadedWrapper">
             <div
               className={`mobileOnly  ${
