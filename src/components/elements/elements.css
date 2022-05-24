@@ -372,7 +372,7 @@ ul.chartInfoList li {
 }
 
 .prevControl {
-  margin-right: 110px;
+  margin-right: 121px;
 }
 
 .paginationControlWraper,
@@ -386,12 +386,14 @@ ul.chartInfoList li {
   border-radius: 4px;
   font-size: 14px;
   color: #62718a;
+  /* margin-right: 5px;
+  margin-left: 5px; */
 }
 
 .paginatorWraper .button {
   padding: 3.5px 10px;
-  margin-right: 5px;
-  margin-left: 5px;
+  margin-right: 6px;
+  margin-left: 6px;
   transition: all 0.5s ease;
 }
 
@@ -411,7 +413,7 @@ ul.chartInfoList li {
 }
 
 .paginatorLabel {
-  padding: 3.5px 10px;
+  padding: 3.8px 10px;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -577,3 +579,4 @@ input.datePick, input.datePick:focus, input.datePick:active {
     background-position: 0% 50%;
   }
 }
+
