@@ -1,6 +1,7 @@
 import { IEvent } from "../ExplorerEvents";
 import { chains } from "../../constants";
 import { ethers } from "ethers";
+import BigNumber from "bignumber.js";
 
 export const truncate = function (
   fullStr: string | undefined,
@@ -133,6 +134,10 @@ export const formatFees = (event: IEvent) => {
   const chain = chains.find(
     (c) => c.name.toLowerCase() === event.fromChainName?.toLowerCase()
   );
+
+  if (event.fromChain === "9") {
+    return Number(new BigNumber(event.txFees).shiftedBy(-6).toString());
+  }
 
   if (chain?.notConvert) return +event.txFees;
 
