@@ -61,7 +61,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
 
   return (
     <div className="text-[#222222] overflow-hidden sm:border p-1 sm:p-5 md:p-6 rounded-xl detailsCard">
-      <h1 className="text-base font-medium">Sent Item {}</h1>
+      <h1 className="text-base font-medium">{metadata?.name}</h1>
       <hr className="mb-5 mt-3" />
 
       <div className="flex flex-col sm:flex-row gap-4">
@@ -129,7 +129,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
               dataLoad ? "loadingWrapper" : "loadedWrapper"
             }`}
           >
-            <div className="font-medium w-32">NFT Name:</div>
+            <div className="font-medium w-32">Collection Name:</div>
             <p className="break-words w-[calc(100%-8rem)] md:w-fit infoTextWrap"></p>
           </div>
           {false && (
@@ -168,14 +168,16 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
           <div className="flex w-full loadedWrapper">
             <div
               className={`mobileOnly  ${
-                dataLoad ? "loadingWrapper" : "loadedWrapper"
+                dataLoad || !metadata ? "loadingWrapper" : "loadedWrapper"
               }`}
             >
-              NFT Name:
+               Collection Name:
             </div>
-            <div className="break text-[#222222] w-full">
+            <div className={`break text-[#222222] w-full ${
+                dataLoad || !metadata ? "loadingWrapper" : "loadedWrapper"
+              }`}>
               {console.log(metadata)}
-              {dataLoad ? "" : metadata?.name}
+              {dataLoad || !metadata? "loading..." : metadata?.nftContract || metadata?.name || 'unknown'}
             </div>
           </div>
 

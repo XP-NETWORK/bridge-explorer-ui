@@ -189,7 +189,7 @@ const Dropdown: FC<{
           </svg>
         </h1>
         <ul
-          className={`${
+          className={`toolsChainList ${
             isOpen || "hidden"
           } z-10 mt-1 dropdown-scrollbar rounded absolute w-full py-2 bg-white shadow-[0_1px_15px_0px_#2F303214] max-h-52 no-scrollbar overflow-y-scroll`}
         >

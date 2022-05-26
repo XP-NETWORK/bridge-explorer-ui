@@ -249,7 +249,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                         ) : event?.status === "Pending" ? (
                           <Loader className="addressLoader" />
                         ) : (
-                          <ErrorStatus />
+                          <Loader className="addressLoader" />
                         )}
                       </TableData>
                       <TableData>

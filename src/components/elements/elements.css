@@ -223,6 +223,10 @@ ul.chartInfoList li {
   padding: 10px 0 0 0;
 }
 
+.DetailsWrapper .loadedWrapper {
+  padding-top: 0;
+}
+
 .nftWrapper.loadingWrapper,
 .nftWrapper.loadedWrapper {
   padding: 0;
@@ -468,6 +472,7 @@ ul.chartInfoList li {
 .tableWrapper .lds-ellipsis.addressLoader {
   width: initial;
   height: initial;
+  bottom: 10px;
 }
 
 .modal {
@@ -566,6 +571,25 @@ input.datePick, input.datePick:focus, input.datePick:active {
 
 .endDatePick {
   margin-left: 12px;
+}
+
+.toolsChainList li {
+  display: flex;
+  align-items: center;
+}
+
+.toolsChainList img {
+  width: 24px;
+  height: 24px;
+}
+
+.statusWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.statusWrapper h1 {
+  padding: 0 5px;
 }
 
 @keyframes gradient {

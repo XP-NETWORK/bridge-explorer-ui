@@ -55,12 +55,22 @@ export const fetchNtf = async (data: IEvent) => {
       : await fetch(data.nftUri);
 
     let metadata = await res.json();
+    console.log(metadata);
 
-    nakedResult = await tryNakedIFPS(metadata.image);
+    if (metadata?.data?.image) {
+      return {
+        ...metadata,
+        image: metadata?.data?.image
+      }
+    }
+
+    nakedResult = await tryNakedIFPS(metadata.image || metadata.displayUri);
     if (nakedResult) return nakedResult;
 
     if (metadata.image?.isIPFS()) {
+
       const image = await fetchIPFS(metadata.image);
+      console.log(image);
 
       return {
         ...metadata,
@@ -157,7 +167,7 @@ const tryNakedIFPS = async (url: string) => {
 const fetchIPFS = async (ipfsUrl: string) => {
   try {
     const ipfs = await (await fetch(transformIPFS(ipfsUrl))).json();
-    console.log(ipfs.image);
+    console.log(ipfs.image, 'd');
     if (ipfs.image[0] === "Q") {
       return `https://ipfs.io/ipfs/${ipfs.image}`;
     }
@@ -174,9 +184,10 @@ const transformIPFS = (uri: string, cut: boolean = true) => {
 
   //const trail = uri.includes('.png')? base :
 
-  if (!cut) {
+  if (!cut || uri.includes('.json')) {
     return `https://ipfs.io/ipfs/${uri.split("://")[1]}`;
   }
+
 
   return `https://ipfs.io/ipfs/${uri.split("://")[1].split("/")[0]}`;
 };
