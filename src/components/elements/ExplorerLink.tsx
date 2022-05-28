@@ -3,7 +3,7 @@ import { txExplorers } from "../../constants";
 import { IEvent } from "../ExplorerEvents";
 
 const ExplorerLink = ({ hash, chain }: { hash: string; chain: string }) => {
-  const splited = hash.split("-");
+  const splited = hash?.split("-");
 
   return (
     <a

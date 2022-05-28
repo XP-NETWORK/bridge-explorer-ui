@@ -134,9 +134,9 @@ export const debounce = (cb: Function, delay: number) => {
 
 export const compose =
   (...funcs: Function[]) =>
-  (comp: React.FC<any>) => {
-    return funcs.reduceRight((wrapped, func) => func(wrapped), comp);
-  };
+    (comp: React.FC<any>) => {
+      return funcs.reduceRight((wrapped, func) => func(wrapped), comp);
+    };
 
 export const formatFees = (event: IEvent) => {
   if (isNaN(+event.txFees)) return 0;
@@ -176,21 +176,22 @@ const fetchIPFS = async (ipfsUrl: string) => {
     } else {
       return ipfs.displayUri;
     }
-  } catch (e) {}
+  } catch (e) { }
 };
 
 const transformIPFS = (uri: string, cut: boolean = true) => {
+  if (!uri) return ''
   // const base = `https://ipfs.io/ipfs/${uri.split("://")[1]}`;
 
   //const trail = uri.includes('.png')? base :
 
-  if (!cut || uri.includes('.json')) {
-    return `https://ipfs.io/ipfs/${uri.split("://")[1]}`;
+  if (!cut || /\.json|\.jpe?g/.test(uri)) {
+    return `https://ipfs.io/ipfs/${uri?.split("://")[1]}`;
   }
 
 
-  return `https://ipfs.io/ipfs/${uri.split("://")[1].split("/")[0]}`;
+  return `https://ipfs.io/ipfs/${uri?.split("://")[1]?.split("/")[0]}`;
 };
 
 export const extractHash = (hash: string) =>
-  hash.split("-")[hash.split("-").length - 1];
+  hash?.split("-")[hash?.split("-")?.length - 1];
