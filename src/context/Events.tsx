@@ -48,6 +48,7 @@ export const EventsProvider: FC = withContainer(
       socket.off("updateEvent");
       socket.on("incomingEvent", async (event: IEvent) => {
         console.log("incoming", event.fromChain, event.actionId);
+        if (chainName) return
         try {
           const incoming = { imgUri: "", ...event };
           setEvents([incoming, ...events]);
@@ -114,7 +115,7 @@ export const EventsProvider: FC = withContainer(
         console.log("only status");
 
         fetch(
-          `${url}?status=Pending` + `&sort=${sort}&offset=${paginationPage}`
+          `${url}?status=Failed` + `&sort=${sort}&offset=${paginationPage}`
         )
           .then((res) => res.json())
           .then(

@@ -6,13 +6,13 @@ import { useContext } from "react";
 import { Paginator } from "./Paginator";
 import { EventsContext } from "../../context/Events";
 
-export const tabs = [{name: "View Tx", route: ''}, {name: "Pending Txns", route: 'pending'}, {name:"Tools", route: 'tools'}];
+export const tabs = [{name: "View Tx", route: ''}, {name: "Processing Txns", route: 'processing'}, {name:"Tools", route: 'tools'}];
 
 export const TabsNavigator = () => {
 
  return <Routes>
           <Route path="" element={<ExplorerEvents />} />
-          <Route path="pending" element={ <ExplorerEvents status="Pending" />} />
+          <Route path="processing" element={ <ExplorerEvents status="Failed" />} />
           <Route path="tools" element={ <Tools />} />
         </Routes>
     
