@@ -55,7 +55,7 @@ export const fetchNtf = async (data: IEvent) => {
       : await fetch(data.nftUri);
 
     let metadata = await res.json();
-    console.log(metadata);
+
 
     if (metadata?.data?.image) {
       return {
@@ -89,8 +89,7 @@ export const fetchNtf = async (data: IEvent) => {
 
     return metadata;
   } catch (e) {
-    //@ts-ignore
-    console.log(e.message);
+ 
     //@ts-ignore
     if (e.message === "Failed to fetch") {
       let image = "";

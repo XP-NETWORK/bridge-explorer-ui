@@ -173,7 +173,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
             >
                Collection Name:
             </div>
-            <div className={`break text-[#222222] w-full ${
+            <div className={`break text-[#222222] w-full mobileCollection ${
                 dataLoad || !metadata ? "loadingWrapper" : "loadedWrapper"
               }`}>
               {console.log(metadata)}

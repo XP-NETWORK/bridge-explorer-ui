@@ -31,9 +31,7 @@ export const Navbar = () => {
           >
             Bridge
           </a>
-          <NavItem to="/network" className="nonactive">
-            Network
-          </NavItem>
+         
           {false && (
             <NavItem to="/dashboard" className="">
               Dashboard

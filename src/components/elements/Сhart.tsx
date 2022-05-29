@@ -57,11 +57,19 @@ export const Chart = withContainer(
       xField: "adate",
       yField: "txNumber",
       height: 200,
+     
+      columnStyle: {
+         
+            fill: '#235EF5',
+
+      
+        },
       
       tooltip: {
         showTitle: false,
         fields: ["txNumber", "date"],
       },
+      
       yAxis: {
         grid: null
       },

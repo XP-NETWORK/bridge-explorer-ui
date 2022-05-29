@@ -21,9 +21,7 @@ export const Footer = () => {
             <FooterLink href="https://xp.network">
               <img src={logo2} className="mb-4" alt="logo" />
             </FooterLink>
-            <FooterLink openInNewTab={false} href="tel:+1 (650) 924-9214">
-              +1 (650) 924-9214
-            </FooterLink>
+           
             <FooterLink openInNewTab={false} href="mailto:contact@xp.network">
               contact@xp.network
             </FooterLink>
@@ -58,6 +56,9 @@ export const Footer = () => {
             <h1 className="font-poppins font-medium text-white">XP.NETWORK</h1>
             <FooterLink href="https://xp.network/team/">Team</FooterLink>
             <FooterLink href="https://blog.xp.network/">Blog</FooterLink>
+            <FooterLink href="https://xp.network/backers/">
+              Backers
+            </FooterLink>
             <FooterLink href="https://drive.google.com/drive/folders/1i8evWmyH_8APiDDO89depEw_8JnDSACK">
               Brand Assets
             </FooterLink>
@@ -86,6 +87,9 @@ export const Footer = () => {
             <FooterLink href="https://www.instagram.com/xp_network/">
               Instagram
             </FooterLink>
+            <FooterLink href="https://www.youtube.com/channel/UC5KGVEkRzZ2XE4A-4XBceqg">
+              Youtube
+            </FooterLink>
           </div>
         </div>
         <hr className="border-zinc-700 my-5" />
@@ -94,7 +98,7 @@ export const Footer = () => {
             A blockchain-agnostic network for building NFT dApps
           </p>
           <p className="text-white text-sm text-opacity-70">
-            © 2021 XP.network Ltd. All Rights Reserved
+            © 2022 XP.NETWORK Ltd. All Rights Reserved
           </p>
         </div>
       </Container>

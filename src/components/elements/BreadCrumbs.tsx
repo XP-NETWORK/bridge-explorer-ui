@@ -26,7 +26,7 @@ export const BreadCrumbs: React.FC<{
 }> = ({ onChange, tabs, selecedTab }) => {
 
   const eventsContext = useContext(EventsContext);
-  console.log(eventsContext, 'ctxz');
+ 
 
   return (
     <div className="lg:max-w-5xl mx-auto px-4 mt-8">

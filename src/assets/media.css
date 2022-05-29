@@ -42,6 +42,10 @@
 
 @media screen and (max-width: 600px) {
 
+  .mobileCollection {
+    border-bottom: none !important;
+  }
+
 
 
   .leftWrapper {
