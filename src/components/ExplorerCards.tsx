@@ -27,7 +27,7 @@ export const ExplorerCards = withContainer(
           fetching={fetching}
         />
         <ExplorerCard
-          title="14"
+          title="16"
           subtitle="Chains"
           icon={ChainsIcon}
           fetching={fetching}
