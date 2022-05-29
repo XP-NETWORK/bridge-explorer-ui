@@ -147,6 +147,7 @@ export const EventsProvider: FC = withContainer(
           .then((res) => res.json())
           .then(
             async ({ events, count }: { events: IEvent[]; count: number }) => {
+              console.log(events);
               await loadImages(events, setEvents);
               setTotal(count);
             }
