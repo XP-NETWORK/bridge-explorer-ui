@@ -114,7 +114,7 @@ export const chains = [
   // { id: "unique-one", name: "Unique", icon: "./assets/icons/unique.svg" }, // TODO: check if this is correct
   { id: "elrond-erd-2", name: "Elrond", icon: "./assets/icons/elrond.svg" },
   { id: "tezos", name: "Tezos", icon: "./assets/icons/tezos.svg" },
-  { id: "gatechain-wormhole", name: "GateChain", icon: GT },
+  { id: "gatechain-token", name: "GateChain", icon: GT },
   { id: "tron", name: "Tron", icon: Tron },
   { id: "vechain", name: "Vechain", icon: Vechain },
   { id: "algorand", name: "Algorand", icon: Algorand, notConvert: true },
