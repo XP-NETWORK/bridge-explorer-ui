@@ -1,10 +1,12 @@
 import { FC, useEffect, useState } from "react";
 import { Container } from "./Container";
 import logo2 from "../assets/img/logo2.svg";
+import sendBtn from "../assets/img/sendEmailBtn.svg";
 import moment from "moment";
 
 export const Footer = () => {
   const [latestCommit, setLatestCommit] = useState("");
+  const [emailInpit, setInput] = useState("")
 
   useEffect(() => {
     fetch("https://xpvitaldata.herokuapp.com/last-commit")
@@ -13,6 +15,15 @@ export const Footer = () => {
         setLatestCommit(data);
       });
   }, []);
+
+  const handeNewsletter = () => {
+   
+        // @ts-ignore
+        window?.grecaptcha.execute();
+
+
+  }
+
   return (
     <footer className="mt-10 bg-zinc-800 py-8" id="footer">
       <Container className="text-white text-sm">
@@ -21,10 +32,32 @@ export const Footer = () => {
             <FooterLink href="https://xp.network">
               <img src={logo2} className="mb-4" alt="logo" />
             </FooterLink>
+
+            <div className="newsLetterWrapper" >
+            <div className="quick_links">
+                   <h4>Stay in the loop</h4>
+                   <p>Subscribe for our newsletters</p>
+             
+              <div className="inputWrapper">
+                        <div className="g-recaptcha"
+                        //@ts-ignore
+                        data-sitekey={window.SITE_KEY_INV_CAPTCH}
+                        data-callback="sendNewsletter"
+                        data-size="invisible">
+                          </div>
+                      <img src={sendBtn} onClick={handeNewsletter}/>
+                      <input type="text" placeholder="Your email address" id="newsLetterInput"  onChange={(e) => setInput(e.target.value)}/>
+              </div>
+            </div>
+
+            </div>
            
             <FooterLink openInNewTab={false} href="mailto:contact@xp.network">
               contact@xp.network
             </FooterLink>
+
+     
+     
           </div>
           <div className="flex flex-col gap-2">
             <h1 className="font-poppins font-medium text-white">Products</h1>

@@ -213,7 +213,90 @@ body {
   height: 22px;
 }
 
+.chartLoaderWrap {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.newsLetterWrapper .inputWrapper {
+  margin-top: 1px;
+  position: relative;
+  display: inline-block;
+}
+
+.newsLetterWrapper .inputWrapper img {
+  position: absolute;
+  right: 8px;
+  transform: translateY(50%);
+  cursor: pointer;
+}
+
+.newsLetterWrapper .inputWrapper img:hover {
+  opacity: 0.7;
+}
+
+.mobileOnly .widget_link {
+  margin-top: 25px;
+}
+
+.newsLetterWrapper input {
+  border-radius: 8px;
+  border: 1px solid#3F3F42;
+  background-color: #2B2B2C;
+  color: #fff;
+  padding: 10px 15px;
+  transition: all 0.3s ease;
+  padding-right: 32px;
+  width: 205px;
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+.newsLetterWrapper input:focus {
+  outline: none;
+}
+
+.newsLetterWrapper h4 {
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.newsLetterWrapper p {
+  color: #FFFFFF;
+  font-size: 14px;
+  margin-top: 10px;
+  opacity: .7;
+}
+
+.newsLetterWrapper input:focus,
+.newsLetterWrapper input:active {
+  border: 1px solid #fff;
+}
+
+input.failedEmail {
+  border-color: rgb(218, 109, 90);
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #2B2B2C inset !important;
+
+}
+
+
+input:-webkit-autofill{
+  -webkit-text-fill-color: rgb(241, 238, 238) !important;
+}
+
+.quick_links p {
+  margin-bottom: 10px;
+}
 
 
 

@@ -8,12 +8,14 @@ import { Loader } from "./Loader";
 export const Chart = withContainer(
   ({
     dailyData,
+    charFetching,
     container: {
       fetching,
       appData: { totalTx },
     },
   }: {
     dailyData: DailyData[];
+    charFetching: Boolean;
     container: any;
   }) => {
     let mockData = [
@@ -113,7 +115,7 @@ export const Chart = withContainer(
               </span>
             </div>
             <div className="lineWrapper">
-              <Column {...config} />
+            {charFetching? <div className="chartLoaderWrap"><Loader /></div>:  <Column {...config} />}
             </div>
           </div>
           {false && (
