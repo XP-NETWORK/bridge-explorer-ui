@@ -6,7 +6,9 @@ import moment from "moment";
 
 export const Footer = () => {
   const [latestCommit, setLatestCommit] = useState("");
-  const [emailInpit, setInput] = useState("")
+  const [emailInput, setInput] = useState("")
+  const [failedEmail, setFailed] = useState(false)
+  
 
   useEffect(() => {
     fetch("https://xpvitaldata.herokuapp.com/last-commit")
@@ -17,11 +19,18 @@ export const Footer = () => {
   }, []);
 
   const handeNewsletter = () => {
-   
-        // @ts-ignore
-        window?.grecaptcha.execute();
+    // @ts-ignore
+    window?.grecaptcha.reset();
+          if (/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(emailInput)) {
+            failedEmail && setFailed(false)
+              // @ts-ignore
+              window.NEWS_EMAIL = emailInput
+              // @ts-ignore
+              window?.grecaptcha.execute();
 
-
+          } else {
+            setFailed(true)
+          }
   }
 
   return (
@@ -38,15 +47,15 @@ export const Footer = () => {
                    <h4>Stay in the loop</h4>
                    <p>Subscribe for our newsletters</p>
              
-              <div className="inputWrapper">
+              <div className="inputWrapper" id ="newsLetterWrap">
                         <div className="g-recaptcha"
                         //@ts-ignore
-                        data-sitekey={window.SITE_KEY_INV_CAPTCH}
+                        data-sitekey={'6LfQOTEgAAAAAL07CQVjXTx8ixN1koilgCPRnzd4'}
                         data-callback="sendNewsletter"
-                        data-size="invisible">
-                          </div>
-                      <img src={sendBtn} onClick={handeNewsletter}/>
-                      <input type="text" placeholder="Your email address" id="newsLetterInput"  onChange={(e) => setInput(e.target.value)}/>
+                        data-size="invisible"/>
+                          
+                      <img src={sendBtn} onClick={handeNewsletter} />
+                      <input className={`${failedEmail? 'failedEmail': ''}`} type="text" placeholder="Your email address" onChange={(e) => setInput(e.target.value)}/>
               </div>
             </div>
 

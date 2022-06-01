@@ -14,19 +14,22 @@ import { withContainer } from "./ServcieProvder";
 
 import { loadImages, fetchNtf } from "../components/Details/helpers";
 
+import { useSelector } from "react-redux";
+import { ReduxState } from "../store";
+
 interface IEventsContext {
   events: IEvent[];
-  status: string;
-  chainName: string;
+  //status: string;
+  //chainName: string;
   sort: string;
-  paginationPage: number;
+  //paginationPage: number;
   totalEvents: number;
-  setStatus: Dispatch<SetStateAction<string>>;
-  setChainName: (chainName: string) => void;
+  //setStatus: Dispatch<SetStateAction<string>>;
+  //setChainName: (chainName: string) => void;
   setEvents: (events: IEvent[]) => void;
   setIsLoading: (bol: boolean) => void;
   toggleSort: () => void;
-  setPage: (idx: number) => void;
+  //setPage: (idx: number) => void;
   isLoading: boolean;
 }
 
@@ -34,12 +37,20 @@ export const EventsContext = createContext<IEventsContext | null>(null);
 export const EventsProvider: FC = withContainer(
   ({ children, container: { socket } }) => {
     const [events, setEvents] = useState<IEvent[]>([]);
-    const [chainName, setChainName] = useState("");
-    const [status, setStatus] = useState("");
+    //const [chainName, setChainName] = useState("");
+    //const [status, setStatus] = useState("");
     const [isLoading, setIsLoading] = useState(true);
     const [sort, setSort] = useState("DESC");
-    const [paginationPage, setPage] = useState(0);
+    //const [paginationPage, setPage] = useState(0);
     const [totalEvents, setTotal] = useState(0);
+
+    const { eventsQueryString, statusFilter, paginationPage } = useSelector(
+      (state: ReduxState) => ({
+        paginationPage: state.global.page,
+        eventsQueryString: state.global.eventsQueryString,
+        statusFilter: state.global.statusFilter
+      })
+    );
 
     const toggleSort = () => setSort(sort === "DESC" ? "ASC" : "DESC");
 
@@ -48,7 +59,7 @@ export const EventsProvider: FC = withContainer(
       socket.off("updateEvent");
       socket.on("incomingEvent", async (event: IEvent) => {
         console.log("incoming", event.fromChain, event.actionId);
-        if (chainName) return
+        if (eventsQueryString) return;
         try {
           const incoming = { imgUri: "", ...event };
           setEvents([incoming, ...events]);
@@ -95,12 +106,12 @@ export const EventsProvider: FC = withContainer(
 
     useEffect(() => {
       setIsLoading(true);
-      if (chainName.length && status.length === 0) {
+      if (eventsQueryString.length && !statusFilter) {
         console.log("only chain name");
 
         fetch(
           `${url}?chainName=` +
-            chainName +
+            eventsQueryString +
             `&sort=${sort}&offset=${paginationPage}`
         )
           .then((res) => res.json())
@@ -111,12 +122,10 @@ export const EventsProvider: FC = withContainer(
             }
           )
           .then(() => setIsLoading(false));
-      } else if (status.length && chainName.length === 0) {
+      } else if (statusFilter && !eventsQueryString) {
         console.log("only status");
 
-        fetch(
-          `${url}?status=Failed` + `&sort=${sort}&offset=${paginationPage}`
-        )
+        fetch(`${url}?status=Failed` + `&sort=${sort}&offset=${paginationPage}`)
           .then((res) => res.json())
           .then(
             async ({ events, count }: { events: IEvent[]; count: number }) => {
@@ -126,11 +135,11 @@ export const EventsProvider: FC = withContainer(
             }
           )
           .then(() => setIsLoading(false));
-      } else if (chainName.length && status.length > 0) {
-        console.log("chain name and status");
+      } else if (eventsQueryString && statusFilter) {
+        console.log("queryString and status");
         fetch(
           `${url}?pendingSearch=` +
-            chainName +
+            eventsQueryString +
             `&sort=${sort}&offset=${paginationPage}`
         )
           .then((res) => res.json())
@@ -156,24 +165,22 @@ export const EventsProvider: FC = withContainer(
       }
       console.log("isLoading", isLoading);
       console.log("fetching events", events.length, isLoading);
-    }, [chainName, status, sort, paginationPage]);
+    }, [eventsQueryString, statusFilter, sort, paginationPage]);
 
     return (
       <EventsContext.Provider
         value={{
           events,
           totalEvents,
-          status,
-          setStatus,
-          setChainName,
+          //status,
+          //setStatus,
+          //setChainName,
           isLoading,
           setEvents,
           setIsLoading,
-          chainName,
+          //chainName,
           toggleSort,
           sort,
-          paginationPage,
-          setPage,
         }}
       >
         {children}

@@ -35,53 +35,53 @@
 
 
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.png" />
+
+    <script>
+           
  
-    <script
-      type="text/javascript"
-      async
-      defer
-      src="https://www.google.com/recaptcha/api.js"
-    ></script>
+      window.SITE_KEY_CAPTCHA = "6LeZLsseAAAAAL1P7An5_2GkIy-BZvd-kK3duuWa";
+      window.SITE_KEY_INV_CAPTCHA = "6LfQOTEgAAAAAL07CQVjXTx8ixN1koilgCPRnzd4";
+      window.NEWS_EMAIL = ''
+     
+      function sendNewsletter(token) {
+     
+       document.getElementById('newsLetterWrap')?.remove();
+     
+       document.querySelector('.newsLetterWrapper .quick_links p').innerHTML = 'Stay tuned for future updates.';
+      
+     
+        return;
+     
+        fetch('https://xpnetwork-staging.herokuapp.com/subscriber', {
+            method: 'post',
+            headers: {
+                  Accept: "*",
+                  "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: window.NEWS_EMAIL,
+              token
+            })
+        }).then(res => {
+         document.getElementById('newsLetterWrap')?.remove();
+     
+         document.querySelector('.newsLetterWrapper .quick_links p').innerHTML = 'Stay tuned for future updates.'
+        })
+      }
+
+
+      window.sendNewsletter = sendNewsletter;
+      
+      </script>
+ 
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <title>XP.NETWORK | Bridge Explorer</title>
   </head>
   <body>
-    <script type="text/javascript">
-           
+
  
- window.SITE_KEY_CAPTCHA = "6LeZLsseAAAAAL1P7An5_2GkIy-BZvd-kK3duuWa";
- window.SITE_KEY_INV_CAPTCHA = "6LfQOTEgAAAAAL07CQVjXTx8ixN1koilgCPRnzd4";
- window.NEWS_EMAIL = ''
 
- function sendNewsletter(token) {
-
-   console.log(token);
-   console.log(window.NEWS_EMAIL);
-
-   document.getElementById('#newsLetterInput').parentNode.style.display = 'none';
-
-   document.querySelector('.newsLetterWrapper .quick_links p').innerHTML = 'Stay tuned for future updates.'
-
-   return;
-
-   fetch('https://xpnetwork-staging.herokuapp.com/subscriber', {
-       method: 'post',
-       headers: {
-             Accept: "*",
-             "Content-Type": "application/json",
-       },
-       body: JSON.stringify({
-         email: window.NEWS_EMAIL,
-         token
-       })
-   }).then(res => {
-     document.getElementById('#newsLetterInput').parentNode.style.display = 'none';
-
-     document.querySelector('.newsLetterWrapper .quick_links p').innerHTML = 'Stay tuned for future updates.'
-   })
- }
-</script>
-    </script>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <div id="portal"></div>

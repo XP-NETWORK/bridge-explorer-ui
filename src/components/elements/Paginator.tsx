@@ -10,16 +10,32 @@ import { url } from "../../constants";
 import { loadImages } from "../Details/helpers";
 import CSVButton from "./CSVButton";
 
+import { useSelector, useDispatch } from "react-redux";
+import { setPage } from "../../store/global";
+import { ReduxState } from "../../store";
+import { usePrevious } from "../../hooks/previous";
+
 export const Paginator = withContainer(
   ({
     container: {
       appData: { totalTx, totalWallets },
     },
   }) => {
+    const disptach = useDispatch();
+
     const ctx = useContext(EventsContext);
 
     const total = ctx?.totalEvents || totalTx;
-    const page = ctx?.paginationPage || 0;
+    const { eventsQueryString, page, statusFilter } = useSelector(
+      (state: ReduxState) => ({
+        page: state.global.page,
+        eventsQueryString: state.global.eventsQueryString,
+        statusFilter: state.global.statusFilter
+      })
+    ); //ctx?.paginationPage || 0;
+
+    const previousQuery = usePrevious(eventsQueryString);
+    const previousStatus = usePrevious(statusFilter);
 
     const onClickPage = async (idx: number) => {
       //console.log(idx);
@@ -31,13 +47,20 @@ export const Paginator = withContainer(
           : page;
 
       if (page !== newPage) {
-        ctx?.setPage(newPage);
+        disptach(setPage(newPage));
+        //ctx?.setPage(newPage);
       }
     };
 
+   
+
     useEffect(() => {
-      ctx?.setPage(0);
-    }, [ctx?.chainName]);
+
+      if (previousQuery === undefined || previousStatus === undefined) return
+
+        (previousQuery !== eventsQueryString || previousStatus !== statusFilter) && disptach(setPage(0));
+
+    }, [eventsQueryString, statusFilter]);
 
     return (
       <div className="paginatorWraper mt-3">

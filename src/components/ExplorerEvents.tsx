@@ -19,6 +19,9 @@ import { formatFees } from "./Details/helpers";
 import ExplorerLink from "./elements/ExplorerLink";
 import { RowNFT } from "./Table/RowNFT";
 import { extractHash } from "./Details/helpers";
+import { useDispatch, useSelector} from 'react-redux'
+
+import { setStatusFilter } from "../store/global";
 
 export interface IEvent {
   id: string;
@@ -51,9 +54,10 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
     velas: { usd: 0 },
   });
 
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    eventsContext?.setStatus(status);
-    console.log(eventsContext?.events, status);
+    dispatch(setStatusFilter(status));
   }, [status]);
 
   let scrollBtn = useRef<any>(null);

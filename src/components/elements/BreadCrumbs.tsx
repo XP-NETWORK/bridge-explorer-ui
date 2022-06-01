@@ -11,7 +11,7 @@ export const tabs = [{name: "View Tx", route: ''}, {name: "Processing Txns", rou
 export const TabsNavigator = () => {
 
  return <Routes>
-          <Route path="" element={<ExplorerEvents />} />
+          <Route path="" element={<ExplorerEvents status=""/>} />
           <Route path="processing" element={ <ExplorerEvents status="Failed" />} />
           <Route path="tools" element={ <Tools />} />
         </Routes>

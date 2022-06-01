@@ -4,11 +4,11 @@ import moment from "moment";
 import { compose } from "../Details/helpers";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
-import { useContext } from "react";
-import { EventsContext } from "../../context/Events";
 import close from "../../assets/img/close.svg";
 import calendar from "../../assets/img/calendar.svg";
 import { url } from "../../constants";
+import {useSelector} from 'react-redux'
+import { ReduxState } from "../../store";
 
 const DownloadCSV = ({ onClose }: { onClose: () => boolean }) => {
   const [startDate, setStart] = useState<Date | "">(
@@ -18,8 +18,7 @@ const DownloadCSV = ({ onClose }: { onClose: () => boolean }) => {
   const [endDate, setEnd] = useState<Date | "">("");
   const [captchaRender, setCaptchaRender] = useState(false);
 
-  const ctx = useContext(EventsContext);
-  console.log(ctx, "ccc");
+  const {eventsQueryString} = useSelector((state: ReduxState) => ({page: state.global.page, eventsQueryString: state.global.eventsQueryString}))
 
   const onSetStart = (date: Date) => {
     if (!moment(date).isAfter(endDate)) {
@@ -42,7 +41,7 @@ const DownloadCSV = ({ onClose }: { onClose: () => boolean }) => {
       sitekey: window.SITE_KEY_CAPTCHA,
       callback: async function (token: string) {
         const res = await fetch(
-          `${url}csv?startDate=${startDate}&endDate=${endDate}&searchQuery=${ctx?.chainName}&token=${token}`
+          `${url}csv?startDate=${startDate}&endDate=${endDate}&searchQuery=${eventsQueryString}&token=${token}`
         );
         //console.log(await res.json());
         if (res && res.ok) {

@@ -1,18 +1,21 @@
 import { Container } from "./Container";
 import SearchIcon from "../assets/icons/search.svg";
 import Cross from "../assets/icons/cross.svg";
-import { useContext, useEffect, useState } from "react";
-import { EventsContext } from "../context/Events";
+import { useEffect, useState } from "react";
+
 import { useCallback } from "react";
 
 import { debounce } from "./Details/helpers";
 
+import { useDispatch } from "react-redux";
+import { setEventsQueryString } from "../store/global";
+
 export const SearchBar = () => {
   const [value, setValue] = useState("");
-  // @ts-ignore
-  const { setChainName } = useContext(EventsContext);
 
-  const debounced = useCallback(debounce(setChainName, 1000), []);
+  const dispatch = useDispatch()
+
+  const debounced = useCallback(debounce((value:string) => dispatch(setEventsQueryString(value)), 1000), []);
 
   useEffect(() => {
     debounced(value);
