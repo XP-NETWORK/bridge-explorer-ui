@@ -97,6 +97,7 @@ export const Footer = () => {
           <div className="flex flex-col gap-2">
             <h1 className="font-poppins font-medium text-white">XP.NETWORK</h1>
             <FooterLink href="https://xp.network/team/">Team</FooterLink>
+            <FooterLink href="https://xp.network/about-us/">About Us</FooterLink>
             <FooterLink href="https://blog.xp.network/">Blog</FooterLink>
             <FooterLink href="https://xp.network/backers/">
               Backers
