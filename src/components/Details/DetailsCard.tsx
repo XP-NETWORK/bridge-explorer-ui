@@ -61,12 +61,13 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
     }
   }, [isLoading,metadata]);
 
-  const checkSexyness = () :any =>{
-    if(metadata){
-    const uri  = metadata.properties.external_url ;
+  const checkSexyness = () :void =>{
+    if(metadata?.properties !== undefined){
+    const uri  = metadata?.properties?.external_url ;
     const isNftSexy = uri.includes("treatdao.com");
     const blurClass =  isNftSexy? "rounded-lg  nftImage aspect-square blur" : "rounded-lg  nftImage aspect-square";
-    setSexyClass(blurClass)}
+    setSexyClass(blurClass)
+  }
   }
 
   return (
