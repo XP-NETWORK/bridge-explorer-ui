@@ -26,7 +26,7 @@ export const ImgOrFail = ({
 
     return <img alt={alt}  src={!failed? src: failImage} className={className} width={width} height={height} onError={() => setFailed(true)} onLoad={() =>  {
         if (src) {
-            setFetching(false)
+            setFetching&& setFetching(false)
         }
     }}/>
 }
