@@ -176,6 +176,10 @@ ul.chartInfoList li {
   display: block;
 }
 
+.blur {
+ filter:blure(1px);
+}
+
 .nftWrapper {
   position: relative;
   width: 128px !important;
