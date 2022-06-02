@@ -10,8 +10,8 @@ export const RowNFT = ({ event }: { event: IEvent }) => {
   const [isVisible, setVisible] = useState(false);
   const [imgUrl, setLoaded] = useState("");
   const [fetching, setFetching] = useState(true);
-  
-
+  const isNftSexy = event.nftUri.includes("treatdao.com")
+const blurClass = isNftSexy? "rounded-lg  blur" : "rounded-lg "
 
 
 
@@ -58,7 +58,7 @@ export const RowNFT = ({ event }: { event: IEvent }) => {
         }`}
       >
         <ImgOrFail
-          className="rounded-lg"
+          className={blurClass} 
           setFetching={setFetching}
           src={imgUrl}
           width={38}
