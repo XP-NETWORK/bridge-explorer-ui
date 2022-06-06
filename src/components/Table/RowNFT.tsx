@@ -10,8 +10,9 @@ export const RowNFT = ({ event }: { event: IEvent }) => {
   const [isVisible, setVisible] = useState(false);
   const [imgUrl, setLoaded] = useState("");
   const [fetching, setFetching] = useState(true);
-  const isNftSexy = event.nftUri.includes("treatdao.com")
-const blurClass = isNftSexy? "rounded-lg  blur" : "rounded-lg "
+  const isNftSexy = event?.nftUri?.includes("treatdao")
+  const specificTokenId = event?.tokenId === "30517440993403660343476421412" ? true : false
+const blurClass = isNftSexy || specificTokenId? "rounded-lg  blur" : "rounded-lg "
 
 
 
