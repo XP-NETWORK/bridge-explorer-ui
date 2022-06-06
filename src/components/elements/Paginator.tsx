@@ -45,8 +45,7 @@ export const Paginator = withContainer(
           : page + idx <= Math.ceil(total / 50)
           ? page + idx
           : page;
-
-      if (page !== newPage) {
+      if (page !== newPage && newPage <= Math.ceil(total / 50)-1) {
         disptach(setPage(newPage));
         //ctx?.setPage(newPage);
       }
