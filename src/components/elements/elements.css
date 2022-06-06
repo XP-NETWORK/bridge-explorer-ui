@@ -426,6 +426,11 @@ ul.chartInfoList li {
   transform: scale(0.85);
 }
 
+.paginate-disabled {
+  background-color: light-gray;
+  pointer-events:none
+}
+
 .paginatorLabel {
   padding: 3.8px 10px;
   position: absolute;
