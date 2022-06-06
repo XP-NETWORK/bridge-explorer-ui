@@ -177,7 +177,8 @@ ul.chartInfoList li {
 }
 
 .blur {
- filter:blure(1px);
+  -webkit-filter: blur(2px); /* Safari 6.0 - 9.0 */
+  filter: blur(2px);
 }
 
 .nftWrapper {
