@@ -62,9 +62,9 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
   }, [isLoading,metadata]);
 
   const checkSexyness = () :void =>{
-    if(metadata?.properties !== undefined){
-    const uri  = metadata?.properties?.external_url ;
-    const isNftSexy = uri?.includes("treatdao.com");
+    if(metadata !== undefined){
+    const uri  = metadata?.properties?.external_url || metadata?.image ;
+    const isNftSexy = uri?.includes("treatdao");
     const blurClass =  isNftSexy? "rounded-lg  nftImage aspect-square blur" : "rounded-lg  nftImage aspect-square";
     setSexyClass(blurClass)
   }
