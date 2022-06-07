@@ -70,7 +70,7 @@ export const fetchNtf = async (data: IEvent) => {
     if (metadata.image?.isIPFS()) {
 
       const image = await fetchIPFS(metadata.image);
-      console.log(image);
+      // console.log(image);
 
       return {
         ...metadata,
@@ -97,7 +97,7 @@ export const fetchNtf = async (data: IEvent) => {
         `https://sheltered-crag-76748.herokuapp.com/${data.nftUri}`
       );
       let metadata = await res.json();
-      console.log(metadata, "after fail");
+      // console.log(metadata, "after fail");
       if (metadata.image.isIPFS()) {
         //const ipfs = await (await fetch(transformIPFS(metadata.image))).json();
         const ipfs = await (await fetch(transformIPFS(metadata.image))).json();

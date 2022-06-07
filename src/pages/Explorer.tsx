@@ -17,7 +17,7 @@ import { Title } from "../components/Title";
 
 export const Explorer = () => {
   const loc = useLocation();
-  console.log(loc);
+  // console.log(loc);
   const [tab, setTab] = useState(
     tabs.find((tab) => tab.route === loc.pathname.replace("/", ""))?.name
   );

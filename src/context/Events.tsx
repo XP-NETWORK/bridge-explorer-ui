@@ -58,24 +58,24 @@ export const EventsProvider: FC = withContainer(
       socket.off("incomingEvent");
       socket.off("updateEvent");
       socket.on("incomingEvent", async (event: IEvent) => {
-        console.log("incoming", event.fromChain, event.actionId);
+        // console.log("incoming", event.fromChain, event.actionId);
         if (eventsQueryString) return;
         try {
           const incoming = { imgUri: "", ...event };
           setEvents([incoming, ...events]);
         } catch (e: any) {
-          console.log(e);
+          // console.log(e);
           const incoming = { imgUri: "", ...event };
           setEvents([incoming, ...events]); //updateEvent
         }
       });
       socket.on("updateEvent", async (updated: IEvent) => {
-        console.log(
-          "incoming",
-          updated.fromChain,
-          updated.actionId,
-          updated.status
-        );
+        // console.log(
+        //   "incoming",
+        //   updated.fromChain,
+        //   updated.actionId,
+        //   updated.status
+        // );
         const idx = events.findIndex(
           (event) =>
             event.fromChain + event.actionId ===
@@ -89,7 +89,7 @@ export const EventsProvider: FC = withContainer(
             ...events.slice(idx + 1),
           ]);
         } catch (e: any) {
-          console.log(e, "img fetch error");
+          // console.log(e, "img fetch error");
           setEvents([
             ...events.slice(0, idx),
             { imgUri: "", ...updated },
@@ -107,7 +107,7 @@ export const EventsProvider: FC = withContainer(
     useEffect(() => {
       setIsLoading(true);
       if (eventsQueryString.length && !statusFilter) {
-        console.log("only chain name");
+        // console.log("only chain name");
 
         fetch(
           `${url}?chainName=` +
@@ -123,7 +123,7 @@ export const EventsProvider: FC = withContainer(
           )
           .then(() => setIsLoading(false));
       } else if (statusFilter && !eventsQueryString) {
-        console.log("only status");
+        // console.log("only status");
 
         fetch(`${url}?status=Failed` + `&sort=${sort}&offset=${paginationPage}`)
           .then((res) => res.json())
@@ -136,7 +136,7 @@ export const EventsProvider: FC = withContainer(
           )
           .then(() => setIsLoading(false));
       } else if (eventsQueryString && statusFilter) {
-        console.log("queryString and status");
+        // console.log("queryString and status");
         fetch(
           `${url}?pendingSearch=` +
             eventsQueryString +
@@ -151,20 +151,20 @@ export const EventsProvider: FC = withContainer(
           )
           .then(() => setIsLoading(false));
       } else {
-        console.log("no query");
+        // console.log("no query");
         fetch(`${url}?sort=${sort}&offset=${paginationPage}`)
           .then((res) => res.json())
           .then(
             async ({ events, count }: { events: IEvent[]; count: number }) => {
-              console.log(events);
+              // console.log(events);
               await loadImages(events, setEvents);
               setTotal(count);
             }
           )
           .then(() => setIsLoading(false));
       }
-      console.log("isLoading", isLoading);
-      console.log("fetching events", events.length, isLoading);
+      // console.log("isLoading", isLoading);
+      // console.log("fetching events", events.length, isLoading);
     }, [eventsQueryString, statusFilter, sort, paginationPage]);
 
     return (
