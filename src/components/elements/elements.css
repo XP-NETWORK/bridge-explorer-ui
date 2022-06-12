@@ -450,8 +450,8 @@ ul.chartInfoList li {
 }
 
 .paginatorLabel {
-  width:109px;
-  padding: 3.8px 11px 3.8px 11px;
+  width:110px;
+  padding: 3.8px 2px 3.8px 10px;
   position: absolute;
   left: 50%;
   top: 50%;
