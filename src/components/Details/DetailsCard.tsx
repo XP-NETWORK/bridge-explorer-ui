@@ -30,6 +30,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
   const [soundOn, setSoundOn] = useState(false);
   const [hasSound, setHasSound] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [sexyClass, setSexyClass] = useState("rounded-lg  nftImage aspect-square ");
   const nftVideo = useRef<HTMLVideoElement | null>(null);
 
   const isMobile = useIsMobile();
@@ -50,14 +51,24 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
   };
   useEffect(() => {
     if (data) {
-      console.log(data, "md");
-      console.log(nftVideo);
+      // console.log(data, "md");
+      // console.log(nftVideo);
       // nftVideo?.current?.addEventListener("loadeddata", videoHandler);
       // console.log(hasAudio(nftVideo));
       setHasSound(hasAudio(nftVideo?.current));
       nftVideo?.current?.play();
+      checkSexyness()
     }
-  }, [isLoading]);
+  }, [isLoading,metadata]);
+
+  const checkSexyness = () :void =>{
+    if(metadata !== undefined){
+    const uri  = metadata?.properties?.external_url || metadata?.image ;
+    const isNftSexy = uri?.includes("treatdao");
+    const blurClass =  isNftSexy? "rounded-lg  nftImage aspect-square blur" : "rounded-lg  nftImage aspect-square";
+    setSexyClass(blurClass)
+  }
+  }
 
   return (
     <div className="text-[#222222] overflow-hidden sm:border p-1 sm:p-5 md:p-6 rounded-xl detailsCard">
@@ -114,7 +125,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
               metadata?.image && (
                 <ImgOrFail
                   alt="nft preview"
-                  className={"rounded-lg  nftImage aspect-square"}
+                  className={sexyClass}
                   src={metadata?.image}
                   width={3}
                   height={3}
@@ -176,7 +187,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
             <div className={`break text-[#222222] w-full mobileCollection ${
                 dataLoad || !metadata ? "loadingWrapper" : "loadedWrapper"
               }`}>
-              {console.log(metadata)}
+              {/* {console.log(metadata)} */}
               {dataLoad || !metadata? "loading..." : metadata?.nftContract || metadata?.name || 'unknown'}
             </div>
           </div>

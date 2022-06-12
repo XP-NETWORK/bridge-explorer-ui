@@ -4,7 +4,6 @@ import { withContainer } from "../../context/ServcieProvder";
 import { Line, Column } from "@ant-design/plots";
 import moment from "moment";
 import { Loader } from "./Loader";
-
 export const Chart = withContainer(
   ({
     dailyData,
@@ -115,7 +114,7 @@ export const Chart = withContainer(
               </span>
             </div>
             <div className="lineWrapper">
-            {charFetching? <div className="chartLoaderWrap"><Loader /></div>:  <Column {...config} />}
+            { charFetching? <div className="chartLoaderWrap"><span className="super-loader"></span></div>:  <Column {...config} />}
             </div>
           </div>
           {false && (

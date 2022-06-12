@@ -28,7 +28,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
   const isMobile = useIsMobile();
   const truncateSize = useMemo(() => (isMobile ? 33 : 60), [isMobile]);
 
-  console.log(isMobile);
+  // console.log(isMobile);
   useEffect(() => {
     const ids: string[] = chains.map((chain) => chain.id);
     getExchangeRates(ids).then((rates) => {

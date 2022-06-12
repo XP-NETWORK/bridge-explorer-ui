@@ -22,7 +22,7 @@ export const Paginator = withContainer(
     },
   }) => {
     const disptach = useDispatch();
-
+    const [disableCursor ,  setDisableCursor] = useState("")
     const ctx = useContext(EventsContext);
 
     const total = ctx?.totalEvents || totalTx;
@@ -46,7 +46,13 @@ export const Paginator = withContainer(
           ? page + idx
           : page;
 
-      if (page !== newPage) {
+          if( newPage +1 === Math.ceil(total / 50) || newPage  === total / 50){
+            setDisableCursor("paginate-disabled")
+          }else{
+            setDisableCursor("")
+          }
+
+      if (page !== newPage && newPage <= Math.ceil(total / 50)) {
         disptach(setPage(newPage));
         //ctx?.setPage(newPage);
       }
@@ -65,7 +71,7 @@ export const Paginator = withContainer(
     return (
       <div className="paginatorWraper mt-3">
         <span>
-          Showing {50 * page + 1} - {50 * page + 50} out of {totalTx} Txs
+          Showing {50 * page + 1} - {50 * page + 50} out of {ctx?.totalEvents || totalTx} Txs
         </span>
         <div className="leftWrapper flex-row-reverse md:flex-row w-full md:w-fit">
           {<CSVButton />}
@@ -82,7 +88,7 @@ export const Paginator = withContainer(
                 <div
                   className={`paginationControlWraper ${
                     ctx?.isLoading ? "nonactive" : ""
-                  }`}
+                  } ${disableCursor}`}
                   onClick={() => onClickPage(1)}
                 >
                   <img src={next} />
