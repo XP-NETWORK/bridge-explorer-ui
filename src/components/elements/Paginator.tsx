@@ -71,7 +71,7 @@ export const Paginator = withContainer(
     return (
       <div className="paginatorWraper mt-3">
         <span>
-          Showing {50 * page + 1} - {50 * page + 50} out of {ctx?.totalEvents || totalTx} Tx
+          Showing {50 * page + 1} - {50 * page + 50} out of {ctx?.totalEvents || totalTx} Txs
         </span>
         <div className="leftWrapper flex-row-reverse md:flex-row w-full md:w-fit">
           {<CSVButton />}
