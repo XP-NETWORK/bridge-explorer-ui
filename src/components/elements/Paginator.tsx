@@ -113,7 +113,6 @@ export const Paginator = withContainer(
             />
             <div className="paginatorLabel">
               Page {page + 1} of {Math.ceil(total / 50)}
-              {console.log("this" ,  total)}
             </div>
             <button
               onClick={() => onClickPage(Math.ceil(total / 50) - page - 1)}
