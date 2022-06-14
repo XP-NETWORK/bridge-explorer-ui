@@ -25,7 +25,7 @@ export const Paginator = withContainer(
     const [disableCursor ,  setDisableCursor] = useState("")
     const ctx = useContext(EventsContext);
 
-    const total = ctx?.totalEvents || totalTx;
+    const total = ctx?.totalEvents || 1;
     const { eventsQueryString, page, statusFilter } = useSelector(
       (state: ReduxState) => ({
         page: state.global.page,
@@ -113,6 +113,7 @@ export const Paginator = withContainer(
             />
             <div className="paginatorLabel">
               Page {page + 1} of {Math.ceil(total / 50)}
+              {console.log("this" ,  total)}
             </div>
             <button
               onClick={() => onClickPage(Math.ceil(total / 50) - page - 1)}
