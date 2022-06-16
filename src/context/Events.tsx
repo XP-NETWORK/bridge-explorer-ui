@@ -58,7 +58,8 @@ export const EventsProvider: FC = withContainer(
       socket.off("incomingEvent");
       socket.off("updateEvent");
       socket.on("incomingEvent", async (event: IEvent) => {
-        // console.log("incoming", event.fromChain, event.actionId);
+        console.log("Incoming event")
+        console.log(event)
         if (eventsQueryString) return;
         try {
           const incoming = { imgUri: "", ...event };
