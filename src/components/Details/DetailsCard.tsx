@@ -26,6 +26,7 @@ export interface DetailsCard {
 
 const DetailsCard = ({ data, copyProps }: DetailsCard) => {
   const { loading: dataLoad, event, metadata } = data;
+  console.log("Thisd ", data)
   const { tooltipCopy } = copyProps;
   const [soundOn, setSoundOn] = useState(false);
   const [hasSound, setHasSound] = useState(false);
@@ -188,7 +189,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
                 dataLoad || !metadata ? "loadingWrapper" : "loadedWrapper"
               }`}>
               {/* {console.log(metadata)} */}
-              {dataLoad || !metadata? "loading..." : metadata?.nftContract || metadata?.name || 'unknown'}
+              {dataLoad || !metadata? "loading..." : event?.collectionName || metadata?.nftContract || metadata?.name || 'unknown'}
             </div>
           </div>
 
