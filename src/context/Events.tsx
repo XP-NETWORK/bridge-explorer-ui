@@ -71,12 +71,12 @@ export const EventsProvider: FC = withContainer(
         }
       });
       socket.on("updateEvent", async (updated: IEvent) => {
-        // console.log(
-        //   "incoming",
-        //   updated.fromChain,
-        //   updated.actionId,
-        //   updated.status
-        // );
+        console.log(
+          "updateEvent",
+          updated.fromChain,
+          updated.actionId,
+          updated.status
+        );
         const idx = events.findIndex(
           (event) =>
             event.fromChain + event.actionId ===
