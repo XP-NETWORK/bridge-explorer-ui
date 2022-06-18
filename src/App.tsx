@@ -50,7 +50,7 @@ export const App = () => {
   return (
     <ServiceProvider value={{socket, appData, fetching}}>
         <Routes>
-          <Route  path="/*" element={<Explorer />} />
+          <Route path="/*" element={<Explorer />} />
           <Route path="/tx/:fromHash" element={<Event />} />
           <Route path="/network" element={<Network />} />
           <Route path="/dashboard" element={<Dashboard />} />
