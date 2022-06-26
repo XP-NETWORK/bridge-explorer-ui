@@ -43,6 +43,7 @@ export interface IEvent {
   nftUri: string;
   imgUri?: string;
   name: string;
+  contract?: string;
   collectionName?:string;
 }
 
