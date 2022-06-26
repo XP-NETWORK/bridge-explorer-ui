@@ -2,6 +2,7 @@ import { IEvent } from "../ExplorerEvents";
 import { chains } from "../../constants";
 import { ethers } from "ethers";
 import BigNumber from "bignumber.js";
+import axios from "axios";
 
 export const truncate = function (
   fullStr: string | undefined,
@@ -47,6 +48,16 @@ export const loadImages = async (
 
 export const fetchNtf = async (data: IEvent) => {
   try {
+    if (data.tokenId && data.fromChain && data.contract) {
+      const cachRes = await axios(`https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.contract}`)
+
+      if (cachRes && cachRes.data !== 'no NFT with that data was found') {
+        // console.log("CACHE WORKED", data.fromHash)
+        return cachRes.data;
+      }else{
+        // console.log("Didnt Find Data Inside Cache")
+      }
+    }
     let nakedResult = await tryNakedIFPS(data.nftUri);
     if (nakedResult) return nakedResult;
 
@@ -89,7 +100,7 @@ export const fetchNtf = async (data: IEvent) => {
 
     return metadata;
   } catch (e) {
- 
+
     //@ts-ignore
     if (e.message === "Failed to fetch") {
       let image = "";
