@@ -54,7 +54,7 @@ const blurClass = isNftSexy || specificTokenId? "rounded-lg  blurList" : "rounde
       <div
         className={`${
           fetching || event?.status !== "Completed"
-            ? "loadingWrapper rowNftWrapper"
+            ? "rowNftWrapper"
             : ""
         }`}
       >
