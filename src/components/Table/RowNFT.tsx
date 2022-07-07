@@ -14,15 +14,10 @@ export const RowNFT = ({ event }: { event: IEvent }) => {
   const specificTokenId = event?.tokenId === "30517440993403660343476421412" ? true : false
 const blurClass = isNftSexy || specificTokenId? "rounded-lg  blurList" : "rounded-lg "
 
-
-
   const observer = new IntersectionObserver(async (entries) => {
 
     const [entry] = entries;
-
-   
       setVisible(entry.isIntersecting)
-  
   }, {
     root: document.getElementById("#root"),
     threshold: .1,
@@ -30,10 +25,8 @@ const blurClass = isNftSexy || specificTokenId? "rounded-lg  blurList" : "rounde
 
   useEffect(() => {
     nftrow.current && observer.observe(nftrow.current);
-
     return () => console.log('OPULUS');
   }, [nftrow]);
-
 
   useEffect(() => {
     if (isVisible && !imgUrl) {
@@ -45,7 +38,6 @@ const blurClass = isNftSexy || specificTokenId? "rounded-lg  blurList" : "rounde
      }).catch((e) => {
         setFetching(false)
      })
-    
     }
   }, [isVisible])
 
