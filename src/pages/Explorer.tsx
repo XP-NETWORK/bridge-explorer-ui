@@ -32,12 +32,12 @@ export const Explorer = () => {
         <ExplorerCards />
 
         <Dashboard />
-        {/* <BreadCrumbs
-          onChange={(value: string) => setTab(value)}
+        <BreadCrumbs
+          onChange={(value: string) => {setTab(value)}}
           tabs={tabs}
           selecedTab={tab || tabs[0].name}
         />
-        <TabsNavigator /> */}
+        <TabsNavigator />
       </EventsProvider>
       <Footer />
     </div>
