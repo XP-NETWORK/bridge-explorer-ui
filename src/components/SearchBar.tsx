@@ -22,6 +22,11 @@ export const SearchBar = () => {
     navigate(e.target.value)
   }
 
+  const handleClearSearch =()=>{
+    setValue("")
+    navigate("")
+  }
+
   useEffect(() => {
     debounced(value);
   }, [value]);
@@ -50,7 +55,7 @@ export const SearchBar = () => {
             alt="cross"
             width={12}
             className="searchIcon clearSearch"
-            onClick={() => setValue("")}
+            onClick={handleClearSearch}
           />
         </div>
         <img src={SearchIcon} alt="search" className="searchIcon" />
