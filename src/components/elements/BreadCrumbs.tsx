@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { Paginator } from "./Paginator";
 import { EventsContext } from "../../context/Events";
 
-export const tabs = [{name: "View Tx", route: ''}, {name: "Processing Txns", route: 'processing'}, {name:"Tools", route: 'tools'}];
+export const tabs = [{name: "View Txns", route: ''}, {name: "Processing Txns", route: 'processing'}, {name:"Tools", route: 'tools'}];
 
 export const TabsNavigator = () => {
 
