@@ -28,11 +28,15 @@ export const EventDetails = () => {
 
   // TODO: fetch metadata from nftUri
   useEffect(() => {
-    fetch(event?.nftUri!)
+    try{
+      fetch(event?.nftUri!)
       .then((res) => res.json())
       .then((metadata) => {
         setMetadata(metadata);
       });
+    }catch(err){
+      console.log(err)
+    }
   }, [event]);
 
   let tooltips: any = useRef([]);
