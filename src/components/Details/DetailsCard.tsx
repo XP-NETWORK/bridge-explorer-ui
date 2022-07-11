@@ -26,7 +26,7 @@ export interface DetailsCard {
 
 const DetailsCard = ({ data, copyProps }: DetailsCard) => {
   const { loading: dataLoad, event, metadata } = data;
-  console.log("Thisd ", data)
+  // console.log("Thisd ", data)
   const { tooltipCopy } = copyProps;
   const [soundOn, setSoundOn] = useState(false);
   const [hasSound, setHasSound] = useState(false);
@@ -60,7 +60,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
       nftVideo?.current?.play();
       checkSexyness()
     }
-  }, [isLoading,metadata]);
+  }, [isLoading,metadata ,event]);
 
   const checkSexyness = () :void =>{
     if(metadata !== undefined){
@@ -78,11 +78,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
 
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="flex flex-col ">
-          <div
-            className={`nftWrapper aspect-square  ${
-              isLoading ? "loadingWrapper" : "loadedWrapper"
-            }`}
-          >
+          <div className={`nftWrapper aspect-square  ${isLoading ? "loadingWrapper" : "loadedWrapper"}`}>
             {metadata?.animation_url ? (
               <div className="relative rounded-lg overflow-hidden nftImage">
                 <video
@@ -136,11 +132,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
           </div>
         </div>
         <div className="flex flex-col  md:p-5  infoTextContainer desktopOnly">
-          <div
-            className={`flex w-full ${
-              dataLoad ? "loadingWrapper" : "loadedWrapper"
-            }`}
-          >
+          <div className={`flex w-full ${dataLoad ? "loadingWrapper" : "loadedWrapper"}`}>
             <div className="font-medium w-32">Collection Name:</div>
             <p className="break-words w-[calc(100%-8rem)] md:w-fit infoTextWrap"></p>
           </div>
@@ -185,11 +177,9 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
             >
                Collection Name:
             </div>
-            <div className={`break text-[#222222] w-full mobileCollection ${
-                dataLoad || !metadata ? "loadingWrapper" : "loadedWrapper"
-              }`}>
-              {/* {console.log(metadata)} */}
-              {dataLoad || !metadata? "loading..." : event?.collectionName || metadata?.nftContract || metadata?.name || 'unknown'}
+            <div className={`break text-[#222222] w-full mobileCollection ${ !event?.collectionName&& !metadata?.nftContract && !metadata?.name? "loadingWrapper" : "loadedWrapper"}`}>
+            {console.log(event?.collectionName)}
+              {!event?.collectionName && !metadata?.nftContract && !metadata?.name? "loading..." : event?.collectionName || metadata?.nftContract || metadata?.name || 'unknown'}
             </div>
           </div>
 
