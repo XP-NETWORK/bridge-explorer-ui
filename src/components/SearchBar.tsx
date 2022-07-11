@@ -2,20 +2,25 @@ import { Container } from "./Container";
 import SearchIcon from "../assets/icons/search.svg";
 import Cross from "../assets/icons/cross.svg";
 import { useEffect, useState } from "react";
-
 import { useCallback } from "react";
-
 import { debounce } from "./Details/helpers";
-
+import { useLocation } from "react-router";
 import { useDispatch } from "react-redux";
 import { setEventsQueryString } from "../store/global";
+import { useNavigate } from "react-router-dom";
 
 export const SearchBar = () => {
-  const [value, setValue] = useState("");
-
+  const loc = useLocation();
+  const [value, setValue] = useState(loc.pathname.replace("/", ""));
+ const navigate = useNavigate();
   const dispatch = useDispatch()
 
   const debounced = useCallback(debounce((value:string) => dispatch(setEventsQueryString(value)), 1000), []);
+
+  const handleChange =(e:React.ChangeEvent<HTMLInputElement>)=>{
+    setValue(e.target.value)
+    navigate(e.target.value)
+  }
 
   useEffect(() => {
     debounced(value);
@@ -33,7 +38,7 @@ export const SearchBar = () => {
           //type="search"
           placeholder="Search address or chain name"
           className="flex-1 bg-transparent focus:outline-none "
-          onChange={(e) => setValue(e.target.value)}
+          onChange={handleChange}
           value={value}
         />
         <div
