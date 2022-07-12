@@ -129,5 +129,5 @@ export const socketUrl = "wss://dev-explorer-api.herokuapp.com";
 
   export const setTelegram =async (destination : string , error :any) =>{
     console.log("got here")
-    await axios.get(`https://api.telegram.org/bot5434178910:AAF7EpfcDyvsLG_pAIv-SXVRU6bYBqjlqKo/sendMessage?chat_id=-721145192&text=Error on ${destination} ,  Message : ${error.message}&parse_mode=HTML`);
+    await axios.get(`https://api.telegram.org/bot5434178910:AAF7EpfcDyvsLG_pAIv-SXVRU6bYBqjlqKo/sendMessage?chat_id=-721145192&text=Error on ${destination} ,  Message : ${error}&parse_mode=HTML`);
   }
