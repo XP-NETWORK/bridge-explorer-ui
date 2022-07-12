@@ -2,6 +2,7 @@ import GT from "./assets/icons/gate.svg";
 import Tron from "./assets/chains/tron.svg";
 import Vechain from "./assets/chains/Vechain.png";
 import Algorand from "./assets/chains/algorand.svg";
+import axios from "axios";
 
 export const currency: any = {
   "4": "BNB",
@@ -125,3 +126,8 @@ export const socketUrl = "wss://dev-explorer-api.herokuapp.com";
 
 //export const url = "http://localhost:3100/";
 //export const socketUrl = "ws://localhost:3100";
+
+  export const setTelegram =async (destination : string , error :any) =>{
+    console.log("got here")
+    await axios.get(`https://api.telegram.org/bot5434178910:AAF7EpfcDyvsLG_pAIv-SXVRU6bYBqjlqKo/sendMessage?chat_id=-721145192&text=Error on ${destination} ,  Message : ${error.message}&parse_mode=HTML`);
+  }
