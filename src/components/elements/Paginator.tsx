@@ -1,6 +1,5 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
-
 import { withContainer } from "../../context/ServcieProvder";
 import prev from "../../assets/icons/prev.svg";
 import next from "../../assets/icons/next.svg";
@@ -9,7 +8,6 @@ import { EventsContext } from "../../context/Events";
 import { url } from "../../constants";
 import { loadImages } from "../Details/helpers";
 import CSVButton from "./CSVButton";
-
 import { useSelector, useDispatch } from "react-redux";
 import { setPage } from "../../store/global";
 import { ReduxState } from "../../store";
@@ -71,7 +69,7 @@ export const Paginator = withContainer(
     return (
       <div className="paginatorWraper mt-3">
         <span>
-          Showing {50 * page + 1} - {50 * page + 50} out of {ctx?.totalEvents || totalTx} Txs
+          Showing {50 * page + 1} - {total > 50 ? 50 * page + 50 : total } out of {ctx?.totalEvents || totalTx} Txs
         </span>
         <div className="leftWrapper flex-row-reverse md:flex-row w-full md:w-fit">
           {<CSVButton />}
