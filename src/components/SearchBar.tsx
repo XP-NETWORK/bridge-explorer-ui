@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 export const SearchBar = () => {
   const loc = useLocation();
-  const [value, setValue] = useState(loc.pathname.replace("/", ""));
+  const [value, setValue] = useState(loc.pathname.replace("/", "") === "processing"? "" :loc.pathname.replace("/", "") );
  const navigate = useNavigate();
   const dispatch = useDispatch()
 
