@@ -76,7 +76,7 @@ export const EventDetails = () => {
               </div>
             </div>
             <div className="grid items-center sm:grid-cols-8 gap-3 py-3 border-b sm:border-0">
-              <div className="sm:col-span-2 font-medium text-sm">ID:</div>
+              <div className="sm:col-span-2 font-medium text-sm">Token ID:</div>
               <div className="sm:col-span-6 text-sm">
                 {metadata?.id || "N/A"}
               </div>

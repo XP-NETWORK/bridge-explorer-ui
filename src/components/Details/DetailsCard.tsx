@@ -151,7 +151,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
               dataLoad ? "loadingWrapper" : "loadedWrapper"
             }`}
           >
-            <div className="font-medium w-32">ID:</div>
+            <div className="font-medium w-32">Token ID:</div>
             <p className="break-words w-[calc(100%-8rem)] md:w-fit infoTextWrap">
               {""}
             </p>
