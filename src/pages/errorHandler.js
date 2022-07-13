@@ -24,6 +24,20 @@ export class ErrorBoundary extends React.Component {
         <div>
           <h2 margin-bottom="100px" vertical-align="baseline" align="center">
             XP.NETWORK IS CURRENTLY UNDER CONSTRUCTION
+            <br></br>
+            <br></br>
+
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+
           </h2>
         </div>
       );
