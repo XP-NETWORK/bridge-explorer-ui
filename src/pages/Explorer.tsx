@@ -19,20 +19,23 @@ export const Explorer = () => {
   return (
     <div>
       <Navbar />
-      <Title />
       <ErrorBoundary>
+        <Title />
         <EventsProvider>
           <SearchBar />
           <ExplorerCards />
           <Dashboard />
           <BreadCrumbs
-            onChange={(value: string) => {setTab(value)}}
+            onChange={(value: string) => {
+              setTab(value);
+            }}
             tabs={tabs}
-            selecedTab={tab || tabs[0].name}/>
+            selecedTab={tab || tabs[0].name}
+          />
           <TabsNavigator />
         </EventsProvider>
+        <Footer />
       </ErrorBoundary>
-      <Footer />
     </div>
   );
 };

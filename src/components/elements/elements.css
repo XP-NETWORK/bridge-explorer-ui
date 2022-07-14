@@ -638,3 +638,21 @@ input.datePick, input.datePick:focus, input.datePick:active {
   }
 }
 
+.ErrorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ErrorImage {
+  flex-basis: 40%
+}
+
+.ErrorText {
+  padding-left: 30px;
+  /* padding-bottom: 110px; */
+}
