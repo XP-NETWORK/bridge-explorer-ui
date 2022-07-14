@@ -1,6 +1,7 @@
 import React from "react";
 import { setTelegram } from "../constants";
 import systemError from "../assets/img/systemError.png";
+import { Tools } from "../components/Tools";
 
 export class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -22,18 +23,22 @@ export class ErrorBoundary extends React.Component {
       setTelegram("errorHandler.js", this.state.errorInfo.componentStack);
       // Error path
       return (
-        <div class="ErrorContainer">
-        <div class="ErrorImage">
-          <img src={systemError}/>
+        <div className="cont">
+          <div class="ErrorContainer">
+            <div class="ErrorImage">
+              <img src={systemError} />
+            </div>
+            <div class="ErrorText">
+              <h1>OUCH!</h1>
+              <p>System Error.</p>
+            </div>
+          </div>
+          <div className="ErrorToolsContainer">
+            <Tools />
+          </div>
         </div>
-        <div class="ErrorText">
-          <h1>OUCH!</h1>
-          <p>System Error.</p>
-        </div>
-      </div>
       );
     }
-    // Normally, just render children
     return this.props.children;
   }
 }

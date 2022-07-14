@@ -638,14 +638,35 @@ input.datePick, input.datePick:focus, input.datePick:active {
   }
 }
 
+@media screen and (max-width: 600px) {
+  .ErrorContainer {
+    visibility: hidden;
+    clear: both;
+    float: left;
+    margin: 10px auto 5px 20px;
+    width: 28%;
+    display: none;
+  }
+}
+
+.cont{
+  flex-direction: column;
+}
+
 .ErrorContainer {
+  /* flex-direction: column; */
   display: flex;
   align-items: center;
   justify-content: center;
-  position: fixed;
-  top: 40%;
+  position: absolute;
+  bottom: 38%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.ErrorToolsContainer{
+  flex-direction: column;
+  margin-top: 23%;
 }
 
 .ErrorImage {
