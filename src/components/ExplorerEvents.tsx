@@ -216,7 +216,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                                   ]?.toLowerCase()
                               )?.icon
                             }
-                            alt="chainIcon"
+                            alt=""
                             className="chainIcon"
                           />
                           <span>
@@ -240,7 +240,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                                   ]?.toLowerCase()
                               )?.icon
                             }
-                            alt="chainIcon"
+                            alt=""
                             className="chainIcon"
                           />
                           <span>
