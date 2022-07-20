@@ -97,10 +97,9 @@ const Form = () => {
 
   return (
     <form onSubmit={handleSubmit} className="bg-white issueForm -mt-1 p-10">
-      <div className="block space-y-1 mb-9">
-      <h2 className="font-roboto mb-3 ">Keep calm, We are on it!</h2>
-      <h5 className="mt-5 mb-5 text-sm">Use the tool below to register your transaction.
-      </h5><br/>
+      <h2 className="font-roboto">Keep calm, your asset is safe!</h2>
+      <h5 className="mt-4 mb-5 text-sm">Use the tool below to register your transaction.</h5>
+      <div className="block mb-9 space-y-1">
         <span className="text-sm mt-5">Tx Hash:</span>
         <div className={`inputWrap ${validError ? "failValid" : ""}`}>
           <input
@@ -125,7 +124,6 @@ const Form = () => {
           setDepChain(val)}} />
       {depValidError &&  <span className="inputError"><img src={warnSmall} alt="small" /><span>Select Departure Chain</span></span>}
       </div>
-
       <div className={`block space-y-1  ${desValidError ? "failValid" : ""}`}>
         <span className="text-sm">Destination Chain:</span>
         <Dropdown value={destChain} _chains={chains.filter(chain => chain.name !== depChain)} setSelectedChain={(val) => {
@@ -144,7 +142,7 @@ const Form = () => {
           className="block mt-6 w-full p-2 text-center text-white rounded-md bg-[#297EFE] hover:bg-[#154EDF]"
           type="submit"
         >
-          Send
+          Register transaction
         </button>
       )}
       {success && <div className="formSuccess"><img src={successIcon} alt="success" /><span>Done! You successfully sent your request.</span> <pre>|</pre> <img onClick={() => setSuccess(false)} src={closeIcon} alt="close" /></div>}
