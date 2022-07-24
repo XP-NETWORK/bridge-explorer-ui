@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 export const SearchBar: React.FC<{
   mode: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({mode}) => {
+}> = ({ mode }) => {
   const loc = useLocation();
   const [value, setValue] = useState(
     loc.pathname.replace("/", "") === "processing" ? "" : loc.pathname.replace("/", "")
@@ -25,21 +25,33 @@ export const SearchBar: React.FC<{
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.target.value === "" ?  mode(false) : mode(true)
+    e.target.value === "" ? handleClearSearch() : mode(true);
     setValue(e.target.value);
     navigate(e.target.value);
   };
 
   const handleClearSearch = () => {
-    mode(false)
+    mode(false);
     setValue("");
-    navigate("");
+    navigate("/");
   };
 
   useEffect(() => {
     debounced(value);
-    value ? mode(true) : mode(false)
+    value ? mode(true) : handleClearSearch();
   }, [value]);
+
+  // useEffect(() => {
+  //   window.addEventListener("beforeunload", alertUser);
+  //   return () => {
+  //     window.removeEventListener("beforeunload", alertUser);
+  //   };
+  // }, []);
+  // const alertUser = (e: any) => {
+  //   // e.preventDefault();
+  //   // e.returnValue = "";
+  //   handleClearSearch()
+  // };
 
   return (
     <Container className="mt-6">
