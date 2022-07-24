@@ -15,6 +15,7 @@ export const Explorer = () => {
   const [tab, setTab] = useState(
     tabs.find((tab) => tab.route === loc.pathname.replace("/", ""))?.name
   );
+  const [searchingMode, setSearchingMode] = useState(false);
 
   return (
     <div>
@@ -22,9 +23,15 @@ export const Explorer = () => {
       <ErrorBoundary>
         <Title />
         <EventsProvider>
-          <SearchBar />
-          <ExplorerCards />
-          <Dashboard />
+          <SearchBar mode={setSearchingMode} />
+          {!searchingMode ? (
+            <span>
+            <ExplorerCards />
+            <Dashboard />
+            </span>
+          ) : (
+            ""
+          )}
           <BreadCrumbs
             onChange={(value: string) => {
               setTab(value);

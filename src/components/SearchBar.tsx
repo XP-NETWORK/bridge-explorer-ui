@@ -9,7 +9,9 @@ import { useDispatch } from "react-redux";
 import { setEventsQueryString } from "../store/global";
 import { useNavigate } from "react-router-dom";
 
-export const SearchBar = () => {
+export const SearchBar: React.FC<{
+  mode: React.Dispatch<React.SetStateAction<boolean>>;
+}> = ({mode}) => {
   const loc = useLocation();
   const [value, setValue] = useState(loc.pathname.replace("/", "") === "processing"? "" :loc.pathname.replace("/", "") );
  const navigate = useNavigate();
@@ -17,15 +19,17 @@ export const SearchBar = () => {
 
   const debounced = useCallback(debounce((value:string) => dispatch(setEventsQueryString(value)), 1000), []);
 
-  const handleChange =(e:React.ChangeEvent<HTMLInputElement>)=>{
-    setValue(e.target.value)
-    navigate(e.target.value)
-  }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.target.value === "" ?  mode(false) : mode(true)
+    setValue(e.target.value);
+    navigate(e.target.value);
+  };
 
-  const handleClearSearch =()=>{
-    setValue("")
-    navigate("")
-  }
+  const handleClearSearch = () => {
+    mode(false)
+    setValue("");
+    navigate("");
+  };
 
   useEffect(() => {
     debounced(value);
