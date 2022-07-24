@@ -38,6 +38,7 @@ export const SearchBar: React.FC<{
 
   useEffect(() => {
     debounced(value);
+    value ? mode(true) : mode(false)
   }, [value]);
 
   return (
