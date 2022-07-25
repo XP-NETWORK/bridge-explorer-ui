@@ -97,11 +97,11 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   };
 
   const navigateTo = (e: any, event: IEvent) => {
-    console.log(e.target.tagName.toLowerCase())
-    if(e.target.tagName.toLowerCase() === 'img'){
-     return;
+    console.log(e.target.tagName.toLowerCase());
+    if (e.target.tagName.toLowerCase() === "img") {
+      return;
     }
-    navigate(`/tx/${extractHash(event.fromHash)}`)
+    navigate(`/tx/${extractHash(event.fromHash)}`);
   };
 
   return (
@@ -156,7 +156,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                     <tr
                       key={event.id}
                       className="bg-white group hover:bg-transparent txRow"
-                      onClick={(e)=>navigateTo(e,event )}
+                      onClick={(e) => navigateTo(e, event)}
                     >
                       <a href={`/tx/${extractHash(event.fromHash)}`} target="_blank">
                         <TableData
