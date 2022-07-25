@@ -12,7 +12,7 @@ export const RowNFT = ({ event }: { event: IEvent }) => {
   const [fetching, setFetching] = useState(true);
   const isNftSexy = event?.nftUri?.includes("treatdao")
   const specificTokenId = event?.tokenId === "30517440993403660343476421412" ? true : false
-const blurClass = isNftSexy || specificTokenId? "rounded-lg  blurList" : "rounded-lg "
+  const blurClass = isNftSexy || specificTokenId? "rounded-lg  blurList" : "rounded-lg "
 
   const observer = new IntersectionObserver(async (entries) => {
 
@@ -53,10 +53,10 @@ const blurClass = isNftSexy || specificTokenId? "rounded-lg  blurList" : "rounde
         <ImgOrFail
           className={blurClass} 
           setFetching={setFetching}
-          src={imgUrl}
+          src={imgUrl || event?.nftUri}
           width={38}
           height={38}
-          alt={"nftImg"}
+          alt={""}
         />
       </div>
     </div>
