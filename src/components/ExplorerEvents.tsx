@@ -55,7 +55,6 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   }>({
     velas: { usd: 0 },
   });
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -148,7 +147,6 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                   return (
                     <tr
                       key={event.id}
-                      onClick={() => navigate(`/tx/${extractHash(event.fromHash)}`)}
                       className="bg-white group hover:bg-transparent txRow"
                     >
                       <a href={`/tx/${extractHash(event.fromHash)}`} target="_blank">
@@ -163,7 +161,9 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                           <RowNFT event={event} />
                         </TableData>
                       </a>
+                      
                       <TableData>
+                      <Link to={`/tx/${extractHash(event.fromHash)}`}>
                         <span
                           className="cursor-default"
                           data-tip={`
@@ -176,6 +176,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                           <br />
                           <span className="text-xs">${dollarValue && dollarValue.toFixed(2)}</span>
                         </span>
+                        </Link>
                       </TableData>
 
                       <TableData>
