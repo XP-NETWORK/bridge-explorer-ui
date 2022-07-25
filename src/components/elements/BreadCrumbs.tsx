@@ -15,8 +15,6 @@ export const TabsNavigator = () => {
           <Route path="processing" element={ <ExplorerEvents status="Failed" />} />
           <Route path="tools" element={ <Tools />} />
         </Routes>
-    
-
 };
 
 export const BreadCrumbs: React.FC<{
