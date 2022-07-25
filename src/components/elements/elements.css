@@ -638,7 +638,29 @@ input.datePick, input.datePick:focus, input.datePick:active {
   }
 }
 
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 1000px) {
+  .ErrorContainer {
+    visibility: hidden;
+    clear: both;
+    float: left;
+    margin: 10px auto 5px 20px;
+    width: 28%;
+    display: none;
+  }
+} */
+@media screen and (max-width: 1500px) {
+  .ErrorContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-30%, -30%);
+ }
+}
+
+@media screen and (max-width: 1000px) {
   .ErrorContainer {
     visibility: hidden;
     clear: both;
