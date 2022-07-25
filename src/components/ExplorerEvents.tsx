@@ -96,6 +96,14 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
     return rate;
   };
 
+  const navigateTo = (e: any, event: IEvent) => {
+    console.log(e.target.tagName.toLowerCase())
+    if(e.target.tagName.toLowerCase() === 'img'){
+     return;
+    }
+    navigate(`/tx/${extractHash(event.fromHash)}`)
+  };
+
   return (
     <>
       <div>
@@ -148,6 +156,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                     <tr
                       key={event.id}
                       className="bg-white group hover:bg-transparent txRow"
+                      onClick={(e)=>navigateTo(e,event )}
                     >
                       <a href={`/tx/${extractHash(event.fromHash)}`} target="_blank">
                         <TableData
@@ -161,9 +170,8 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                           <RowNFT event={event} />
                         </TableData>
                       </a>
-                      
+
                       <TableData>
-                      <Link to={`/tx/${extractHash(event.fromHash)}`}>
                         <span
                           className="cursor-default"
                           data-tip={`
@@ -176,7 +184,6 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                           <br />
                           <span className="text-xs">${dollarValue && dollarValue.toFixed(2)}</span>
                         </span>
-                        </Link>
                       </TableData>
 
                       <TableData>
