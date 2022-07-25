@@ -228,6 +228,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                           chain={event.fromChain!}
                         />
                       </TableData>
+
                       <TableData>
                         <div className="flex space-x-1 mb-1">
                           <img
@@ -258,11 +259,13 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                           <Loader className="addressLoader" />
                         )}
                       </TableData>
+
                       <TableData>
                         <span className="methodDataTable">
                           {event.type || "N/A"}
                         </span>
                       </TableData>
+
                       <TableData>
                         <span
                           className="valueData "
@@ -287,6 +290,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                             .replace("second ", "sec ")}
                         </span>
                       </TableData>
+                      
                       <TableData>
                         <Status status={event.status} />
                       </TableData>
