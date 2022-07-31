@@ -43,13 +43,7 @@ export const RowNFT = ({ event }: { event: IEvent }) => {
 
   return (
     <div className="nftRow" ref={nftrow}>
-      <div
-        className={`${
-          fetching || event?.status !== "Completed"
-            ? "loadingWrapper rowNftWrapper"
-            : ""
-        }`}
-      >
+      <div className={`${fetching ? "loadingWrapper rowNftWrapper": ""}`}>
         <ImgOrFail
           className={blurClass} 
           setFetching={setFetching}
