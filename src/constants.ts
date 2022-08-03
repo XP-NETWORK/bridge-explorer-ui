@@ -123,7 +123,7 @@ export const chains = [
   { id: "tron", name: "Tron", icon: Tron },
   { id: "vechain", name: "Vechain", icon: Vechain },
   { id: "algorand", name: "Algorand", icon: Algorand, notConvert: true },
-  { id: "godwoken", name: "Godwoken", icon: "./assets/icons/godwoken.svg" },
+  { id: "nervos-network", name: "Godwoken", icon: "./assets/icons/godwoken.svg" },
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";
