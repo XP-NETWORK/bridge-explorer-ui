@@ -22,6 +22,7 @@ export const currency: any = {
   "9": "TRX",
   "25": "VET",
   "15": "ALGOS",
+  "22":"CKB"
 };
 
 export const txExplorers: any = {
@@ -42,6 +43,7 @@ export const txExplorers: any = {
   "9": "https://tronscan.org/#/transaction/",
   "25": "https://explore.vechain.org/transactions/",
   "15": "https://algoexplorer.io/tx/",
+  "22": "https://v1.gwscan.com/tx/"
 };
 
 export const addressExplorers: any = {
@@ -62,6 +64,7 @@ export const addressExplorers: any = {
   "9": "https://tronscan.org/#/address/",
   "25": "https://explore.vechain.org/accounts/",
   "15": "https://algoexplorer.io/address/",
+  "22": "https://v1.gwscan.com/tx/"
 };
 
 export const chainNoncetoName: any = {
@@ -83,7 +86,7 @@ export const chainNoncetoName: any = {
   "9": "Tron",
   "25": "Vechain",
   "15": "Algorand",
-  "22":"Godwoken"
+  "22": "Godwoken"
 };
 
 export const _headers = {
@@ -129,7 +132,7 @@ export const socketUrl = "wss://dev-explorer-api.herokuapp.com";
 //export const url = "http://localhost:3100/";
 //export const socketUrl = "ws://localhost:3100";
 
-  export const setTelegram =async (destination : string , error :any) =>{
-    console.log("got here")
-    await axios.get(`https://api.telegram.org/bot5434178910:AAF7EpfcDyvsLG_pAIv-SXVRU6bYBqjlqKo/sendMessage?chat_id=-721145192&text=Error on ${destination} ,  Message : ${error}&parse_mode=HTML`);
-  }
+export const setTelegram = async (destination: string, error: any) => {
+  console.log("got here")
+  await axios.get(`https://api.telegram.org/bot5434178910:AAF7EpfcDyvsLG_pAIv-SXVRU6bYBqjlqKo/sendMessage?chat_id=-721145192&text=Error on ${destination} ,  Message : ${error}&parse_mode=HTML`);
+}
