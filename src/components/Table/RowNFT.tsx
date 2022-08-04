@@ -26,7 +26,6 @@ export const RowNFT = ({ event }: { event: IEvent }) => {
 
   useEffect(() => {
     if (isVisible && !imgUrl) {
-      if (!event.nftUri) return  setFetching(false)
       fetchNtf(event).then(metadata => {
         if (metadata.image) {
           return setLoaded(metadata.image)
