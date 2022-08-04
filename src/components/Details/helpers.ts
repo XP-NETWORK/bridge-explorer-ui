@@ -32,7 +32,7 @@ export const loadImages = async (
 ) => {
   const newEvents = data.map(async (data: IEvent) => {
     try {
-      //const metadata = await fetchNtf(data);
+      // const metadata = await fetchNtf(data);
 
       return {
         imgUri: "", //metadata.image as string,
@@ -50,84 +50,83 @@ export const fetchNtf = async (data: IEvent) => {
   try {
     if (data.tokenId && data.fromChain && data.contract) {
       const cachRes = await axios(`https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.contract}`)
-
       if (cachRes && cachRes.data !== 'no NFT with that data was found') {
-        // console.log("CACHE WORKED", data.fromHash)
+        console.log("CACHE WORKED", data.fromHash, `https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.contract}`)
         return cachRes.data;
-      }else{
-        // console.log("Didnt Find Data Inside Cache")
-      }
-    }
-    let nakedResult = await tryNakedIFPS(data.nftUri);
-    if (nakedResult) return nakedResult;
-
-    const res = data.nftUri.isIPFS()
-      ? await fetch(transformIPFS(data.nftUri))
-      : await fetch(data.nftUri);
-
-    let metadata = await res.json();
-
-
-    if (metadata?.data?.image) {
-      return {
-        ...metadata,
-        image: metadata?.data?.image
-      }
-    }
-
-    nakedResult = await tryNakedIFPS(metadata.image || metadata.displayUri);
-    if (nakedResult) return nakedResult;
-
-    if (metadata.image?.isIPFS()) {
-
-      const image = await fetchIPFS(metadata.image);
-      // console.log(image);
-
-      return {
-        ...metadata,
-        image: image ? image : transformIPFS(metadata.image, false),
-      };
-    }
-
-    if (metadata.displayUri) {
-      return {
-        image: metadata.displayUri.isIPFS()
-          ? transformIPFS(metadata.displayUri)
-          : (metadata.displayUri as string),
-        ...metadata,
-      };
-    }
-
-    return metadata;
-  } catch (e) {
-
-    //@ts-ignore
-    if (e.message === "Failed to fetch") {
-      let image = "";
-      const res = await fetch(
-        `https://sheltered-crag-76748.herokuapp.com/${data.nftUri}`
-      );
-      let metadata = await res.json();
-      // console.log(metadata, "after fail");
-      if (metadata.image.isIPFS()) {
-        //const ipfs = await (await fetch(transformIPFS(metadata.image))).json();
-        const ipfs = await (await fetch(transformIPFS(metadata.image))).json();
-        /*image = ipfs.headers.get("content-type")?.includes("image")
-          ? metadata.image
-          : (await ipfs.json()).imageUrl;*/
-
-        image = ipfs.imageUrl;
       } else {
-        image = metadata.image;
+        console.log("Didnt Find Data Inside Cache", data.fromHash)
       }
-
-      //const image = await fetch(`https://sheltered-crag-76748.herokuapp.com/${ipfs.imageUrl}`);
-
-      return {
-        ...metadata,
-        image,
-      };
     }
+    // let nakedResult = await tryNakedIFPS(data.nftUri);
+    // if (nakedResult) return nakedResult;
+
+    // const res = data.nftUri.isIPFS()
+    //   ? await fetch(transformIPFS(data.nftUri))
+    //   : await fetch(data.nftUri);
+
+    // let metadata = await res.json();
+
+
+    // if (metadata?.data?.image) {
+    //   return {
+    //     ...metadata,
+    //     image: metadata?.data?.image
+    //   }
+    // }
+
+    // nakedResult = await tryNakedIFPS(metadata.image || metadata.displayUri);
+    // if (nakedResult) return nakedResult;
+
+    // if (metadata.image?.isIPFS()) {
+
+    //   const image = await fetchIPFS(metadata.image);
+    //   // console.log(image);
+
+    //   return {
+    //     ...metadata,
+    //     image: image ? image : transformIPFS(metadata.image, false),
+    //   };
+    // }
+
+    // if (metadata.displayUri) {
+    //   return {
+    //     image: metadata.displayUri.isIPFS()
+    //       ? transformIPFS(metadata.displayUri)
+    //       : (metadata.displayUri as string),
+    //     ...metadata,
+    //   };
+    // }
+
+    // return metadata;
+  } catch (e: any) {
+    console.log(e?.meesage)
+    //@ts-ignore
+    // if (e.message === "Failed to fetch") {
+    //   let image = "";
+    //   const res = await fetch(
+    //     `https://sheltered-crag-76748.herokuapp.com/${data.nftUri}`
+    //   );
+    //   let metadata = await res.json();
+    //   // console.log(metadata, "after fail");
+    //   if (metadata.image.isIPFS()) {
+    //     //const ipfs = await (await fetch(transformIPFS(metadata.image))).json();
+    //     const ipfs = await (await fetch(transformIPFS(metadata.image))).json();
+    //     /*image = ipfs.headers.get("content-type")?.includes("image")
+    //       ? metadata.image
+    //       : (await ipfs.json()).imageUrl;*/
+
+    //     image = ipfs.imageUrl;
+    //   } else {
+    //     image = metadata.image;
+    //   }
+
+    //   //const image = await fetch(`https://sheltered-crag-76748.herokuapp.com/${ipfs.imageUrl}`);
+
+    //   return {
+    //     ...metadata,
+    //     image,
+    //   };
+    // }
   }
 };
 
@@ -164,44 +163,44 @@ export const formatFees = (event: IEvent) => {
   return Number(ethers.utils.formatEther(event.txFees));
 };
 
-const tryNakedIFPS = async (url: string) => {
-  if (url[0] === "Q") {
-    const res = await (await fetch("https://ipfs.io/ipfs/" + url)).json();
-    return {
-      ...res,
-      image: "https://ipfs.io/ipfs/" + res.image,
-    };
-  }
-};
+// const tryNakedIFPS = async (url: string) => {
+//   if (url[0] === "Q") {
+//     const res = await (await fetch("https://ipfs.io/ipfs/" + url)).json();
+//     return {
+//       ...res,
+//       image: "https://ipfs.io/ipfs/" + res.image,
+//     };
+//   }
+// };
 
-const fetchIPFS = async (ipfsUrl: string) => {
-  try {
-    const ipfs = await (await fetch(transformIPFS(ipfsUrl))).json();
-    console.log(ipfs.image, 'd');
-    if (ipfs.image[0] === "Q") {
-      return `https://ipfs.io/ipfs/${ipfs.image}`;
-    }
-    if (ipfs.displayUri.isIPFS()) {
-      return transformIPFS(ipfs.displayUri);
-    } else {
-      return ipfs.displayUri;
-    }
-  } catch (e) { }
-};
+// const fetchIPFS = async (ipfsUrl: string) => {
+//   try {
+//     const ipfs = await (await fetch(transformIPFS(ipfsUrl))).json();
+//     console.log(ipfs.image, 'd');
+//     if (ipfs.image[0] === "Q") {
+//       return `https://ipfs.io/ipfs/${ipfs.image}`;
+//     }
+//     if (ipfs.displayUri.isIPFS()) {
+//       return transformIPFS(ipfs.displayUri);
+//     } else {
+//       return ipfs.displayUri;
+//     }
+//   } catch (e) { }
+// };
 
-const transformIPFS = (uri: string, cut: boolean = true) => {
-  if (!uri) return ''
-  // const base = `https://ipfs.io/ipfs/${uri.split("://")[1]}`;
+// const transformIPFS = (uri: string, cut: boolean = true) => {
+//   if (!uri) return ''
+//   // const base = `https://ipfs.io/ipfs/${uri.split("://")[1]}`;
 
-  //const trail = uri.includes('.png')? base :
+//   //const trail = uri.includes('.png')? base :
 
-  if (!cut || /\.json|\.jpe?g/.test(uri)) {
-    return `https://ipfs.io/ipfs/${uri?.split("://")[1]}`;
-  }
+//   if (!cut || /\.json|\.jpe?g/.test(uri)) {
+//     return `https://ipfs.io/ipfs/${uri?.split("://")[1]}`;
+//   }
 
 
-  return `https://ipfs.io/ipfs/${uri?.split("://")[1]?.split("/")[0]}`;
-};
+//   return `https://ipfs.io/ipfs/${uri?.split("://")[1]?.split("/")[0]}`;
+// };
 
 export const extractHash = (hash: string) =>
   hash?.split("-")[hash?.split("-")?.length - 1];

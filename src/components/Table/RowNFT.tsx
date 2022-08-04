@@ -47,7 +47,7 @@ export const RowNFT = ({ event }: { event: IEvent }) => {
         <ImgOrFail
           className={blurClass} 
           setFetching={setFetching}
-          src={imgUrl || event?.nftUri}
+          src={imgUrl}
           width={38}
           height={38}
           alt={""}
