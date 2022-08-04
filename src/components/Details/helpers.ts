@@ -49,13 +49,15 @@ export const loadImages = async (
 export const fetchNtf = async (data: IEvent) => {
   try {
     if (data.tokenId && data.fromChain && data.contract) {
-      const cachRes = await axios(`https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.contract}`)
+      const cachRes = await axios(`https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.contract ? data.contract : ""}`)
       if (cachRes && cachRes.data !== 'no NFT with that data was found') {
         console.log("CACHE WORKED", data.fromHash, `https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.contract}`)
         return cachRes.data;
       } else {
         console.log("Didnt Find Data Inside Cache", data.fromHash)
       }
+    }else{
+      console.log("some data is missing:" , data?.fromHash)
     }
     // let nakedResult = await tryNakedIFPS(data.nftUri);
     // if (nakedResult) return nakedResult;
@@ -99,6 +101,7 @@ export const fetchNtf = async (data: IEvent) => {
 
     // return metadata;
   } catch (e: any) {
+    console.log(data.fromHash)
     console.log(e?.meesage)
     //@ts-ignore
     // if (e.message === "Failed to fetch") {
