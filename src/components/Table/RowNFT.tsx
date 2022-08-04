@@ -14,11 +14,7 @@ export const RowNFT = ({ event }: { event: IEvent }) => {
   const specificTokenId = event?.tokenId === "30517440993403660343476421412" ? true : false
   const blurClass = isNftSexy || specificTokenId? "rounded-lg  blurList" : "rounded-lg "
 
-  const observer = new IntersectionObserver(async (entries) => {
-
-    const [entry] = entries;
-      setVisible(entry.isIntersecting)
-  }, {
+  const observer = new IntersectionObserver(async (entries) => {const [entry] = entries; setVisible(entry.isIntersecting)}, {
     root: document.getElementById("#root"),
     threshold: .1,
   });
