@@ -119,11 +119,11 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
                 )}
               </div>
             ) : (
-             ( metadata?.image || event?.nftUri) && (
+             ( metadata?.image) && (
                 <ImgOrFail
                   alt="nft preview"
                   className={sexyClass}
-                  src={metadata?.image || event?.nftUri}
+                  src={metadata?.image}
                   width={3}
                   height={3}
                 />
