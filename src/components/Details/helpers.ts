@@ -3,6 +3,7 @@ import { chains } from "../../constants";
 import { ethers } from "ethers";
 import BigNumber from "bignumber.js";
 import axios from "axios";
+const {nftGeneralParser} = require('nft-parser/dist/src/index')
 
 export const truncate = function (
   fullStr: string | undefined,
