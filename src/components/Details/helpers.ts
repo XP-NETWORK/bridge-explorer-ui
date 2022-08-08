@@ -51,7 +51,7 @@ export const fetchNtf = async (data: IEvent) => {
   console.log(data)
   try {
     let cachRes;
-    if (data.type && data.type === "Transfer" && data.tokenId && data.fromChain && data.contract) {
+    if (data.type && data.type === "Transfer" && data.tokenId && data.fromChain) {
       cachRes = await axios(`https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.contract ? data.contract : ""}`)
 
       if (cachRes && cachRes.data !== 'no NFT with that data was found') {
@@ -61,8 +61,8 @@ export const fetchNtf = async (data: IEvent) => {
         console.log("Didnt Find Data Inside Cache", data.fromHash)
       }
 
-    } else if (data.type && data.type !== "Transfer" && data.originalTokenId && data.originalChainNonce && data.originalContract) {
-      cachRes = await axios(`https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.originalTokenId}&chainId=${data.originalChainNonce}&contract=${data.originalContract? data.originalContract : ""}`)
+    } else if (data.type && data.type !== "Transfer" && data.originalTokenId && data.originalChainNonce) {
+      cachRes = await axios(`https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.originalTokenId}&chainId=${data.originalChainNonce}&contract=${data.originalContract ? data.originalContract : ""}`)
       if (cachRes && cachRes.data !== 'no NFT with that data was found') {
         console.log("CACHE WORKED", data.fromHash, `https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.contract}`)
         return cachRes.data;
