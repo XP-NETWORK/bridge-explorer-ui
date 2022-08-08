@@ -3,7 +3,7 @@ import { chains } from "../../constants";
 import { ethers } from "ethers";
 import BigNumber from "bignumber.js";
 import axios from "axios";
-const {nftGeneralParser} = require('nft-parser/dist/src/index')
+
 
 export const truncate = function (
   fullStr: string | undefined,
@@ -48,17 +48,27 @@ export const loadImages = async (
 };
 
 export const fetchNtf = async (data: IEvent) => {
+  console.log(data)
   try {
-    if (data.tokenId && data.fromChain && data.contract) {
-      const cachRes = await axios(`https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.contract ? data.contract : ""}`)
+    let cachRes;
+    if (data.type && data.type === "Transfer" && data.tokenId && data.fromChain && data.contract) {
+      cachRes = await axios(`https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.contract ? data.contract : ""}`)
+
       if (cachRes && cachRes.data !== 'no NFT with that data was found') {
         console.log("CACHE WORKED", data.fromHash, `https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.contract}`)
         return cachRes.data;
       } else {
         console.log("Didnt Find Data Inside Cache", data.fromHash)
       }
-    }else{
-      console.log("some data is missing:" , data?.fromHash)
+
+    } else if (data.type && data.type !== "Transfer" && data.originalTokenId && data.originalChainNonce && data.originalContract) {
+      cachRes = await axios(`https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.originalTokenId}&chainId=${data.originalChainNonce}&contract=${data.originalContract? data.originalContract : ""}`)
+      if (cachRes && cachRes.data !== 'no NFT with that data was found') {
+        console.log("CACHE WORKED", data.fromHash, `https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.contract}`)
+        return cachRes.data;
+      } else {
+        console.log("Didnt Find Data Inside Cache", data.fromHash)
+      }
     }
     // let nakedResult = await tryNakedIFPS(data.nftUri);
     // if (nakedResult) return nakedResult;
