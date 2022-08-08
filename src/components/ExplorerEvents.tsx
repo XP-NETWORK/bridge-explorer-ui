@@ -45,6 +45,9 @@ export interface IEvent {
   name: string;
   contract?: string;
   collectionName?: string;
+  originalChainNonce?:string,
+  originalContract?:string,
+  originalTokenId?:string
 }
 
 export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
