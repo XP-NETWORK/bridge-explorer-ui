@@ -48,101 +48,119 @@ export const loadImages = async (
 };
 
 export const fetchNtf = async (data: IEvent) => {
-  console.log(data)
   try {
-    let cachRes;
-    if (data.type && data.type === "Transfer" && data.tokenId && data.fromChain) {
-      cachRes = await axios(`https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.fromChain === "2" ? "" : data.contract ? data.contract : ""}`)
+    const { type, fromHash, tokenId, fromChain, contract, originalTokenId, originalChainNonce, originalContract } = data;
+    let url = ""
 
-      if (cachRes && cachRes.data !== 'no NFT with that data was found') {
-        console.log("CACHE WORKED", data.fromHash, `https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.fromChain === "2" ? "" : data.contract ? data.contract : ""}`)
-        return cachRes.data;
-      } else {
-        console.log("Didnt Find Data Inside Cache", data.fromHash)
-      }
+    switch (type) {
+      case "Transfer":
+        if (tokenId && fromChain) {
+          url = `https://nft-cache.herokuapp.com/nft/data/?tokenId=${tokenId}&chainId=${fromChain}&contract=${fromChain === "2" ? "" : contract ? contract : ""}`
+          break;
+        }
+        break;
 
-    } else if (data.type && data.type !== "Transfer" && data.originalTokenId && data.originalChainNonce) {
-      cachRes = await axios(`https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.originalTokenId}&chainId=${data.originalChainNonce}&contract=${data.originalChainNonce === "2" ? "" : data.originalContract ? data.originalContract : ""}`)
-      if (cachRes && cachRes.data !== 'no NFT with that data was found') {
-        console.log("CACHE WORKED", data.fromHash, `https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.originalChainNonce === "2" ? "" : data.originalContract ? data.originalContract : ""}`)
-        return cachRes.data;
-      } else {
-        console.log("Didnt Find Data Inside Cache", data.fromHash, `https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.originalChainNonce === "2" ? "" : data.originalContract ? data.originalContract : ""}`)
-      }
+      case "Unfreeze":
+        if (originalTokenId && originalChainNonce) {
+          url = `https://nft-cache.herokuapp.com/nft/data/?tokenId=${originalTokenId}&chainId=${originalChainNonce}&contract=${originalChainNonce === "2" ? "" : originalContract ? originalContract : ""}`
+          break;
+        }
+        break;
+
+      default:
+        url = "";
     }
-    // let nakedResult = await tryNakedIFPS(data.nftUri);
-    // if (nakedResult) return nakedResult;
 
-    // const res = data.nftUri.isIPFS()
-    //   ? await fetch(transformIPFS(data.nftUri))
-    //   : await fetch(data.nftUri);
+    const meta = await axios.get(url)
 
-    // let metadata = await res.json();
+    if (meta.data === "no NFT with that data was found") {
+      console.log(type , url , fromHash)
+    } else {
+      return meta.data
+    }
 
-
-    // if (metadata?.data?.image) {
-    //   return {
-    //     ...metadata,
-    //     image: metadata?.data?.image
-    //   }
-    // }
-
-    // nakedResult = await tryNakedIFPS(metadata.image || metadata.displayUri);
-    // if (nakedResult) return nakedResult;
-
-    // if (metadata.image?.isIPFS()) {
-
-    //   const image = await fetchIPFS(metadata.image);
-    //   // console.log(image);
-
-    //   return {
-    //     ...metadata,
-    //     image: image ? image : transformIPFS(metadata.image, false),
-    //   };
-    // }
-
-    // if (metadata.displayUri) {
-    //   return {
-    //     image: metadata.displayUri.isIPFS()
-    //       ? transformIPFS(metadata.displayUri)
-    //       : (metadata.displayUri as string),
-    //     ...metadata,
-    //   };
-    // }
-
-    // return metadata;
-  } catch (e: any) {
-    console.log(data.fromHash)
-    console.log(e?.meesage)
-    //@ts-ignore
-    // if (e.message === "Failed to fetch") {
-    //   let image = "";
-    //   const res = await fetch(
-    //     `https://sheltered-crag-76748.herokuapp.com/${data.nftUri}`
-    //   );
-    //   let metadata = await res.json();
-    //   // console.log(metadata, "after fail");
-    //   if (metadata.image.isIPFS()) {
-    //     //const ipfs = await (await fetch(transformIPFS(metadata.image))).json();
-    //     const ipfs = await (await fetch(transformIPFS(metadata.image))).json();
-    //     /*image = ipfs.headers.get("content-type")?.includes("image")
-    //       ? metadata.image
-    //       : (await ipfs.json()).imageUrl;*/
-
-    //     image = ipfs.imageUrl;
-    //   } else {
-    //     image = metadata.image;
-    //   }
-
-    //   //const image = await fetch(`https://sheltered-crag-76748.herokuapp.com/${ipfs.imageUrl}`);
-
-    //   return {
-    //     ...metadata,
-    //     image,
-    //   };
-    // }
+  } catch (err) {
+    console.log(err)
   }
-};
+}
+
+
+
+
+
+// let nakedResult = await tryNakedIFPS(data.nftUri);
+// if (nakedResult) return nakedResult;
+
+// const res = data.nftUri.isIPFS()
+//   ? await fetch(transformIPFS(data.nftUri))
+//   : await fetch(data.nftUri);
+
+// let metadata = await res.json();
+
+
+// if (metadata?.data?.image) {
+//   return {
+//     ...metadata,
+//     image: metadata?.data?.image
+//   }
+// }
+
+// nakedResult = await tryNakedIFPS(metadata.image || metadata.displayUri);
+// if (nakedResult) return nakedResult;
+
+// if (metadata.image?.isIPFS()) {
+
+//   const image = await fetchIPFS(metadata.image);
+//   // console.log(image);
+
+//   return {
+//     ...metadata,
+//     image: image ? image : transformIPFS(metadata.image, false),
+//   };
+// }
+
+// if (metadata.displayUri) {
+//   return {
+//     image: metadata.displayUri.isIPFS()
+//       ? transformIPFS(metadata.displayUri)
+//       : (metadata.displayUri as string),
+//     ...metadata,
+//   };
+// }
+
+// return metadata;
+// } catch (e: any) {
+//   console.log(data.fromHash)
+//   console.log(e?.meesage)
+//@ts-ignore
+// if (e.message === "Failed to fetch") {
+//   let image = "";
+//   const res = await fetch(
+//     `https://sheltered-crag-76748.herokuapp.com/${data.nftUri}`
+//   );
+//   let metadata = await res.json();
+//   // console.log(metadata, "after fail");
+//   if (metadata.image.isIPFS()) {
+//     //const ipfs = await (await fetch(transformIPFS(metadata.image))).json();
+//     const ipfs = await (await fetch(transformIPFS(metadata.image))).json();
+//     /*image = ipfs.headers.get("content-type")?.includes("image")
+//       ? metadata.image
+//       : (await ipfs.json()).imageUrl;*/
+
+//     image = ipfs.imageUrl;
+//   } else {
+//     image = metadata.image;
+//   }
+
+//   //const image = await fetch(`https://sheltered-crag-76748.herokuapp.com/${ipfs.imageUrl}`);
+
+//   return {
+//     ...metadata,
+//     image,
+//   };
+// }
+// }
+// };
 
 export const debounce = (cb: Function, delay: number) => {
   let tm: NodeJS.Timeout | undefined = undefined;
