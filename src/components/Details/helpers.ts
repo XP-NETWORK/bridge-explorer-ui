@@ -62,12 +62,12 @@ export const fetchNtf = async (data: IEvent) => {
       }
 
     } else if (data.type && data.type !== "Transfer" && data.originalTokenId && data.originalChainNonce) {
-      cachRes = await axios(`https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.originalTokenId}&chainId=${data.originalChainNonce}&contract=${data.fromChain === "2" ? "" : data.originalContract ? data.originalContract : ""}`)
+      cachRes = await axios(`https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.originalTokenId}&chainId=${data.originalChainNonce}&contract=${data.originalChainNonce === "2" ? "" : data.originalContract ? data.originalContract : ""}`)
       if (cachRes && cachRes.data !== 'no NFT with that data was found') {
-        console.log("CACHE WORKED", data.fromHash, `https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.fromChain === "2" ? "" : data.originalContract ? data.originalContract : ""}`)
+        console.log("CACHE WORKED", data.fromHash, `https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.originalChainNonce === "2" ? "" : data.originalContract ? data.originalContract : ""}`)
         return cachRes.data;
       } else {
-        console.log("Didnt Find Data Inside Cache", data.fromHash)
+        console.log("Didnt Find Data Inside Cache", data.fromHash, `https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.originalChainNonce === "2" ? "" : data.originalContract ? data.originalContract : ""}`)
       }
     }
     // let nakedResult = await tryNakedIFPS(data.nftUri);
