@@ -52,19 +52,19 @@ export const fetchNtf = async (data: IEvent) => {
   try {
     let cachRes;
     if (data.type && data.type === "Transfer" && data.tokenId && data.fromChain) {
-      cachRes = await axios(`https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.contract ? data.contract : ""}`)
+      cachRes = await axios(`https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.fromChain === "2" ? "" : data.contract ? data.contract : ""}`)
 
       if (cachRes && cachRes.data !== 'no NFT with that data was found') {
-        console.log("CACHE WORKED", data.fromHash, `https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.contract}`)
+        console.log("CACHE WORKED", data.fromHash, `https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.fromChain === "2" ? "" : data.contract ? data.contract : ""}`)
         return cachRes.data;
       } else {
         console.log("Didnt Find Data Inside Cache", data.fromHash)
       }
 
     } else if (data.type && data.type !== "Transfer" && data.originalTokenId && data.originalChainNonce) {
-      cachRes = await axios(`https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.originalTokenId}&chainId=${data.originalChainNonce}&contract=${data.originalContract ? data.originalContract : ""}`)
+      cachRes = await axios(`https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.originalTokenId}&chainId=${data.originalChainNonce}&contract=${data.fromChain === "2" ? "" : data.originalContract ? data.originalContract : ""}`)
       if (cachRes && cachRes.data !== 'no NFT with that data was found') {
-        console.log("CACHE WORKED", data.fromHash, `https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.contract}`)
+        console.log("CACHE WORKED", data.fromHash, `https://nft-cache.herokuapp.com/nft/data/?tokenId=${data.tokenId}&chainId=${data.fromChain}&contract=${data.fromChain === "2" ? "" : data.originalContract ? data.originalContract : ""}`)
         return cachRes.data;
       } else {
         console.log("Didnt Find Data Inside Cache", data.fromHash)
