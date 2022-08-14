@@ -21,7 +21,7 @@ import { RowNFT } from "./Table/RowNFT";
 import { extractHash } from "./Details/helpers";
 import { useDispatch, useSelector } from "react-redux";
 import { ChainSwitch } from "./elements/chainSwitch";
-import {  ChainListBox} from "../components/ChainModal/ChainListBox"
+import { ChainListBox } from "../components/ChainModal/ChainListBox";
 
 import { setStatusFilter } from "../store/global";
 
@@ -110,16 +110,15 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   return (
     <>
       <div>
+        <ChainListBox />
         <Container>
           <Paginator />
           <div className="line"></div>
         </Container>
-        <Container className="mt-5 px-0 md:px-4 overflow-x-auto ChainSwitch">
-          {/* @ts-ignore  */}
-          <ChainSwitch assignment={"to"} />
-          {/* @ts-ignore  */}
+        <Container className="mt-2 px-0 md:px-4 chainSwitch">
           <ChainSwitch assignment={"from"} />
-          <ChainListBox />
+          <ChainSwitch assignment={"to"} />
+          <span className="nothing"></span>
         </Container>
         <Container className="mt-5 px-0 md:px-4 overflow-x-auto tableWrapper">
           <img

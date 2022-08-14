@@ -327,6 +327,10 @@ ul.chartInfoList li {
   height: 38px;
 }
 
+.chainSwitch{
+  display: flex;
+}
+
 .scrollTopBtn {
   visibility: hidden;
   position: fixed;
