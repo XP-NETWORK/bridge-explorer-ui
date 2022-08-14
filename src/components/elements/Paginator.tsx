@@ -20,35 +20,28 @@ export const Paginator = withContainer(
     },
   }) => {
     const disptach = useDispatch();
-    const [disableCursor ,  setDisableCursor] = useState("")
+    const [disableCursor, setDisableCursor] = useState("");
     const ctx = useContext(EventsContext);
 
     const total = ctx?.totalEvents || 1;
-    const { eventsQueryString, page, statusFilter } = useSelector(
-      (state: ReduxState) => ({
-        page: state.global.page,
-        eventsQueryString: state.global.eventsQueryString,
-        statusFilter: state.global.statusFilter
-      })
-    ); //ctx?.paginationPage || 0;
+    const { eventsQueryString, page, statusFilter } = useSelector((state: ReduxState) => ({
+      page: state.global.page,
+      eventsQueryString: state.global.eventsQueryString,
+      statusFilter: state.global.statusFilter,
+    })); //ctx?.paginationPage || 0;
 
     const previousQuery = usePrevious(eventsQueryString);
     const previousStatus = usePrevious(statusFilter);
 
     const onClickPage = async (idx: number) => {
       //console.log(idx);
-      const newPage =
-        page + idx < 0
-          ? 0
-          : page + idx <= Math.ceil(total / 50)
-          ? page + idx
-          : page;
+      const newPage = page + idx < 0 ? 0 : page + idx <= Math.ceil(total / 50) ? page + idx : page;
 
-          if( newPage +1 === Math.ceil(total / 50) || newPage  === total / 50){
-            setDisableCursor("paginate-disabled")
-          }else{
-            setDisableCursor("")
-          }
+      if (newPage + 1 === Math.ceil(total / 50) || newPage === total / 50) {
+        setDisableCursor("paginate-disabled");
+      } else {
+        setDisableCursor("");
+      }
 
       if (page !== newPage && newPage <= Math.ceil(total / 50)) {
         disptach(setPage(newPage));
@@ -56,30 +49,32 @@ export const Paginator = withContainer(
       }
     };
 
-   
-
     useEffect(() => {
+      if (previousQuery === undefined || previousStatus === undefined) return;
 
-      if (previousQuery === undefined || previousStatus === undefined) return
-
-        (previousQuery !== eventsQueryString || previousStatus !== statusFilter) && disptach(setPage(0));
-
+      (previousQuery !== eventsQueryString || previousStatus !== statusFilter) &&
+        disptach(setPage(0));
     }, [eventsQueryString, statusFilter]);
 
     return (
       <div className="paginatorWraper mt-3">
-        <span>
-          Showing {50 * page + 1} - {total > 50 ? 50 * page + 50 : total } out of {ctx?.totalEvents || totalTx} Txs
-        </span>
-        <div className="leftWrapper flex-row-reverse md:flex-row w-full md:w-fit">
-          {<CSVButton />}
+        <span>Transactions</span>
+        <div className="leftWrapper flex-row-reverse md:initial md:w-fit">
+          {/* {<CSVButton />} */}
+
           <div className="paginatorInnerWrapper">
+            <span>
+              {50 * page + 1} - {total > 50 ? 50 * page + 50 : total} of{" "}
+              {ctx?.totalEvents || totalTx}
+            </span>
+
             <button
               onClick={() => onClickPage(-page)}
               className={`button ${ctx?.isLoading ? "nonactive" : ""}`}
             >
               First
             </button>
+            
             <ReactPaginate
               breakLabel="..."
               nextLabel={

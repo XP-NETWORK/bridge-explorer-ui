@@ -20,6 +20,8 @@ import ExplorerLink from "./elements/ExplorerLink";
 import { RowNFT } from "./Table/RowNFT";
 import { extractHash } from "./Details/helpers";
 import { useDispatch, useSelector } from "react-redux";
+import { ChainSwitch } from "./elements/chainSwitch";
+import {  ChainListBox} from "../components/ChainModal/ChainListBox"
 
 import { setStatusFilter } from "../store/global";
 
@@ -45,17 +47,15 @@ export interface IEvent {
   name: string;
   contract?: string;
   collectionName?: string;
-  originalChainNonce?:string,
-  originalContract?:string,
-  originalTokenId?:string
+  originalChainNonce?: string;
+  originalContract?: string;
+  originalTokenId?: string;
 }
 
 export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   const navigate = useNavigate();
   const eventsContext = useContext(EventsContext);
-  const [exchangeRates, setExchangeRates] = useState<{
-    [key: string]: { usd: number };
-  }>({
+  const [exchangeRates, setExchangeRates] = useState<{ [key: string]: { usd: number } }>({
     velas: { usd: 0 },
   });
   const dispatch = useDispatch();
@@ -112,6 +112,14 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
       <div>
         <Container>
           <Paginator />
+          <div className="line"></div>
+        </Container>
+        <Container className="mt-5 px-0 md:px-4 overflow-x-auto ChainSwitch">
+          {/* @ts-ignore  */}
+          <ChainSwitch assignment={"to"} />
+          {/* @ts-ignore  */}
+          <ChainSwitch assignment={"from"} />
+          <ChainListBox />
         </Container>
         <Container className="mt-5 px-0 md:px-4 overflow-x-auto tableWrapper">
           <img

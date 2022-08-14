@@ -1,0 +1,41 @@
+.chain-switch{
+    width: 9%;
+    display: flex;
+    align-items: center;
+    height: 34px;
+    background: #F7F8F9;
+    color: #14161A;
+    border: 1px solid white;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
+    gap: 6px;
+    padding: 6px;
+    border-radius:5px;
+    box-shadow: 0px 4px 24px rgba(180, 185, 199, 0.25);
+    cursor: pointer;
+}
+.arrow-down {
+    position: relative;
+    text-align: right;
+    width: 10px;
+    height: 10px;
+    background-image: url("../../assets/icons/arrow-down.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    /* margin-left: 16px;
+    margin-right: 9px; */
+}
+.chain-switch:hover .arrow-down::before{
+    position: absolute;
+    top: 0; 
+    content: "";
+    /* width: 9%;
+    height: 10px; */
+    background-image: url("../../assets/icons/arrow-down-hovered.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}

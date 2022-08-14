@@ -6,6 +6,7 @@ import {Network} from "./pages/Network";
 import { ServiceProvider } from "../src/context/ServcieProvder";
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
+import "./components/ChainModal/Chain.css"
 
 import { socketUrl, url } from "./constants";
 
