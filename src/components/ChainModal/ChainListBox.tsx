@@ -75,7 +75,7 @@ export const ChainListBox = () => {
               fromChains.map((chain) => {
                 const { image, text, key } = chain;
                 return (
-                  <li className="nftChainItem">
+                  <li className="nftChainItem" onClick={()=>chainSelectHandler(chain)}>
                     <img className="modalSelectOptionsImage" src={image.src} alt={text} />
                     <div className="modalSelectOptionsText">
                       {text === "xDai" ? "Gnosis" : text}
@@ -87,7 +87,7 @@ export const ChainListBox = () => {
               toChains.map((chain) => {
                 const { image, text, key } = chain;
                 return (
-                  <li className="nftChainItem">
+                  <li className="nftChainItem" onClick={()=>chainSelectHandler(chain)} >
                     <img className="modalSelectOptionsImage" src={image.src} alt={text} />
                     <div className="modalSelectOptionsText">
                       {text === "xDai" ? "Gnosis" : text}
