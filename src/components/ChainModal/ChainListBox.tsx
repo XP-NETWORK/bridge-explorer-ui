@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { chains } from "../../values.js";
 import {
   setChainModal,
-  setDepartureOrDestination,
-  setTo,
   setFrom,
+  setTo,
+  setDepartureOrDestination,
   setSwitchDestination,
   setTemporaryFrom,
 } from "../../store/global";
@@ -36,8 +36,13 @@ export const ChainListBox = () => {
     dispatch(setSwitchDestination(false));
   };
 
-  const chainSelectHandler = async (chain: any) => {
+  const chainSelectHandlerFrom = async (chain: any) => {
     console.log(chain);
+    dispatch(setFrom(chain.text));
+  };
+  const chainSelectHandlerFromTo = async (chain: any) => {
+    console.log(chain);
+    dispatch(setTo(chain.text));
   };
 
   useEffect(() => {
@@ -55,7 +60,7 @@ export const ChainListBox = () => {
       .sort((a, b) => a.order - b.order);
     let sorted = [...withNew, ...noComingNoMaintenance, ...withMaintenance, ...withComing];
     setToChains(sorted);
-  }, [from, departureOrDestination]);
+  }, [from, departureOrDestination , to]);
 
   return (
     <Modal animation={false} show={show} onHide={handleClose} className="ChainModal">
@@ -75,7 +80,7 @@ export const ChainListBox = () => {
               fromChains.map((chain) => {
                 const { image, text, key } = chain;
                 return (
-                  <li className="nftChainItem" onClick={()=>chainSelectHandler(chain)}>
+                  <li className="nftChainItem" onClick={()=>chainSelectHandlerFrom(chain)}>
                     <img className="modalSelectOptionsImage" src={image.src} alt={text} />
                     <div className="modalSelectOptionsText">
                       {text === "xDai" ? "Gnosis" : text}
@@ -87,7 +92,7 @@ export const ChainListBox = () => {
               toChains.map((chain) => {
                 const { image, text, key } = chain;
                 return (
-                  <li className="nftChainItem" onClick={()=>chainSelectHandler(chain)} >
+                  <li className="nftChainItem" onClick={()=>chainSelectHandlerFromTo(chain)} >
                     <img className="modalSelectOptionsImage" src={image.src} alt={text} />
                     <div className="modalSelectOptionsText">
                       {text === "xDai" ? "Gnosis" : text}
