@@ -86,7 +86,8 @@ export const chainNoncetoName: any = {
   "9": "Tron",
   "25": "Vechain",
   "15": "Algorand",
-  "22": "Godwoken"
+  "22": "Godwoken",
+  "24": "Secret"
 };
 
 export const _headers = {
