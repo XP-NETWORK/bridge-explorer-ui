@@ -3,7 +3,7 @@ import axios from "axios";
 import { IEvent } from "../components/ExplorerEvents";
 
 class CacheService {
-  service = "http://localhost:3030"; //"https://nft-cache.herokuapp.com";//http://localhost:3030
+  service = "https://nft-cache.herokuapp.com"; //"https://nft-cache.herokuapp.com";//http://localhost:3030
 
   getParams(event: IEvent) {
     const {
