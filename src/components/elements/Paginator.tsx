@@ -79,7 +79,7 @@ export const Paginator = withContainer(
               breakLabel="..."
               nextLabel={
                 <div
-                  className={`paginationControlWraper ${
+                  className={`paginationControlWraper margin-left ${
                     ctx?.isLoading ? "nonactive" : ""
                   } ${disableCursor}`}
                   onClick={() => onClickPage(1)}
@@ -94,7 +94,7 @@ export const Paginator = withContainer(
               pageClassName="paginatorItem"
               previousLabel={
                 <div
-                  className={`paginationControlWraper prevControl ${
+                  className={`paginationControlWraper prevControl  ${
                     ctx?.isLoading ? "nonactive" : ""
                   }`}
                   onClick={() => onClickPage(-1)}
@@ -105,7 +105,9 @@ export const Paginator = withContainer(
               //renderOnZeroPageCount={''}
             />
             <div className="paginatorLabel">
-              Page {page + 1} of {Math.ceil(total / 50)}
+            <p style={{textAlign: "center" , margin:"auto"}}>
+                Page {page + 1} of {Math.ceil(total / 50)}
+              </p>
             </div>
             <button
               onClick={() => onClickPage(Math.ceil(total / 50) - page - 1)}

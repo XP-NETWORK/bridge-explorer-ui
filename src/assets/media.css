@@ -138,9 +138,8 @@
     display: none;
   }
   .paginatorLabel {
-    width: 110px;
-    left: 66%;
-    padding-left: 17px;
+    width: 130px;
+    left: 50%;
   }
 
   .paginatorInnerWrapper {
@@ -275,7 +274,7 @@
   .paginatorLabel{
       display: flex;
       height: 30px;
-      padding-right: 0px;
+      margin: auto;
       box-sizing: border-box;
       font-size: 13px;
       text-align: center;

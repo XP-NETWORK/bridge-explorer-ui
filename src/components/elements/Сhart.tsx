@@ -54,6 +54,29 @@ export const Chart = withContainer(
 
 
     const config = {
+            // scrollbar: {
+      //   // type: "vertical",
+
+      //   // width: 120,
+
+      //   height: 8,
+
+      //   // padding: [1,1,1,1],
+
+      //   categorySize: 30,
+
+      //   animate: true,
+
+      //   // style: {
+      //   //   trackColor: "red",
+
+      //   //   thumbColor: "green",
+
+      //   //   thumbHighlightColor: "yellow",
+
+      //   //   lineCap: "assdcvsddf",
+      //   // },
+      // },
       data: mockData,
       xField: "adate",
       yField: "txNumber",

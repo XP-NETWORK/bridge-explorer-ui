@@ -2,6 +2,8 @@ import GT from "./assets/icons/gate.svg";
 import Tron from "./assets/chains/tron.svg";
 import Vechain from "./assets/chains/Vechain.png";
 import Algorand from "./assets/chains/algorand.svg";
+import Secret from "./assets/icons/secret.svg";
+
 import axios from "axios";
 
 export const currency: any = {
@@ -86,7 +88,8 @@ export const chainNoncetoName: any = {
   "9": "Tron",
   "25": "Vechain",
   "15": "Algorand",
-  "22": "Godwoken"
+  "22": "Godwoken",
+  "24": "Secret"
 };
 
 export const _headers = {
@@ -124,6 +127,7 @@ export const chains = [
   { id: "vechain", name: "Vechain", icon: Vechain },
   { id: "algorand", name: "Algorand", icon: Algorand, notConvert: true },
   { id: "nervos-network", name: "Godwoken", icon: "./assets/icons/godwoken.svg" },
+  { id: "Secret", name: "Secret", icon: Secret },
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";
