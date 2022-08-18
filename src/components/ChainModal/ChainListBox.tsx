@@ -8,6 +8,7 @@ import {
   setDepartureOrDestination,
   setSwitchDestination,
   setTemporaryFrom,
+  setEventsQueryString
 } from "../../store/global";
 // import {Chain} from "./Chain";
 // import "bootstrap/dist/css/bootstrap.min.css";
@@ -39,10 +40,13 @@ export const ChainListBox = () => {
   const chainSelectHandlerFrom = async (chain: any) => {
     console.log(chain);
     dispatch(setFrom(chain.text));
+    dispatch(setEventsQueryString(chain.text));
+    handleClose()
   };
-  const chainSelectHandlerFromTo = async (chain: any) => {
+  const chainSelectHandlerTo = async (chain: any) => {
     console.log(chain);
     dispatch(setTo(chain.text));
+    handleClose()
   };
 
   useEffect(() => {
@@ -92,7 +96,7 @@ export const ChainListBox = () => {
               toChains.map((chain) => {
                 const { image, text, key } = chain;
                 return (
-                  <li className="nftChainItem" onClick={()=>chainSelectHandlerFromTo(chain)} >
+                  <li className="nftChainItem" onClick={()=>chainSelectHandlerTo(chain)} >
                     <img className="modalSelectOptionsImage" src={image.src} alt={text} />
                     <div className="modalSelectOptionsText">
                       {text === "xDai" ? "Gnosis" : text}
