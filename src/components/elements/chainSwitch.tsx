@@ -19,6 +19,11 @@ export const ChainSwitch = ({ assignment }: { assignment: any }): any => {
     dispatch(setChainModal(true));
   };
 
+  const handleToChainSwitch = () => {
+    dispatch(setDepartureOrDestination("destination"));
+    dispatch(setChainModal(true));
+  };
+
   const show = () => {
     switch (assignment) {
       case "from":
@@ -32,7 +37,7 @@ export const ChainSwitch = ({ assignment }: { assignment: any }): any => {
         );
       case "to":
         return (
-          <div onClick={handleSwitchChain} className="chain-switch-to">
+          <div onClick={handleToChainSwitch} className="chain-switch-to">
             <div className="nameWrapper">
               <span className="name"> {to === "xDai" ? "Gnosis" : to}</span>
               <div className="arrow-down"></div>
