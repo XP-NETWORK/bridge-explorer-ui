@@ -50,7 +50,6 @@ export const loadImages = async (
 };
 
 export const fetchNtf = async (data: IEvent) => {
-  console.log(data);
   try {
     const meta = await cacheService.get(data);
 

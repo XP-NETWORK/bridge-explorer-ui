@@ -3,7 +3,7 @@ import axios from "axios";
 import { IEvent } from "../components/ExplorerEvents";
 
 class CacheService {
-  service = "https://nft-cache.herokuapp.com"; //"https://nft-cache.herokuapp.com";
+  service = "http://localhost:3030"; //"https://nft-cache.herokuapp.com";//http://localhost:3030
 
   getParams(event: IEvent) {
     const {
@@ -66,16 +66,15 @@ class CacheService {
       };
     } else {
       if (/(wnfts\.xp\.network|nft\.xp\.network)/.test(nftUri)) {
+        console.log("here");
         const res = await axios(nftUri);
 
         const wrapped = res.data?.wrapped;
 
         collectionIdent = wrapped?.contract;
         uri = wrapped?.original_uri;
-        native = {
-          ...wrapped,
-          chainId: wrapped?.origin,
-        };
+        origin = wrapped?.origin;
+        native = wrapped;
       } else {
         uri = nftUri;
         origin = chain;
