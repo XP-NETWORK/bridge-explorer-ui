@@ -2,8 +2,10 @@ import { IEvent } from "../ExplorerEvents";
 import { chains } from "../../constants";
 import { ethers } from "ethers";
 import BigNumber from "bignumber.js";
-import axios from "axios";
 
+import CacheService from "../../services/cacheService";
+
+const cacheService = CacheService();
 
 export const truncate = function (
   fullStr: string | undefined,
@@ -48,45 +50,19 @@ export const loadImages = async (
 };
 
 export const fetchNtf = async (data: IEvent) => {
+  console.log(data);
   try {
-    const { type, fromHash, tokenId, fromChain, contract, originalTokenId, originalChainNonce, originalContract } = data;
-    let url = ""
+    const meta = await cacheService.get(data);
 
-    switch (type) {
-      case "Transfer":
-        if (tokenId && fromChain) {
-          url = `https://nft-cache.herokuapp.com/nft/data/?tokenId=${tokenId}&chainId=${fromChain}&contract=${fromChain === "2" ? "" : contract ? contract : ""}`
-          break;
-        }
-        break;
-
-      case "Unfreeze":
-        if (originalTokenId && originalChainNonce) {
-          url = `https://nft-cache.herokuapp.com/nft/data/?tokenId=${originalTokenId}&chainId=${originalChainNonce}&contract=${originalChainNonce === "2" ? "" : originalContract ? originalContract : ""}`
-          break;
-        }
-        break;
-
-      default:
-        url = "";
-    }
-
-    const meta = await axios.get(url)
-
-    if (meta.data === "no NFT with that data was found") {
-      console.log(type , url , fromHash)
+    if (meta === "no NFT with that data was found") {
+      return await cacheService.add(data);
     } else {
-      return meta.data
+      return meta;
     }
-
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
-}
-
-
-
-
+};
 
 // let nakedResult = await tryNakedIFPS(data.nftUri);
 // if (nakedResult) return nakedResult;
@@ -96,7 +72,6 @@ export const fetchNtf = async (data: IEvent) => {
 //   : await fetch(data.nftUri);
 
 // let metadata = await res.json();
-
 
 // if (metadata?.data?.image) {
 //   return {
@@ -175,9 +150,9 @@ export const debounce = (cb: Function, delay: number) => {
 
 export const compose =
   (...funcs: Function[]) =>
-    (comp: React.FC<any>) => {
-      return funcs.reduceRight((wrapped, func) => func(wrapped), comp);
-    };
+  (comp: React.FC<any>) => {
+    return funcs.reduceRight((wrapped, func) => func(wrapped), comp);
+  };
 
 export const formatFees = (event: IEvent) => {
   if (isNaN(+event.txFees)) return 0;
@@ -229,7 +204,6 @@ export const formatFees = (event: IEvent) => {
 //   if (!cut || /\.json|\.jpe?g/.test(uri)) {
 //     return `https://ipfs.io/ipfs/${uri?.split("://")[1]}`;
 //   }
-
 
 //   return `https://ipfs.io/ipfs/${uri?.split("://")[1]?.split("/")[0]}`;
 // };

@@ -23,10 +23,7 @@ export const withData = function (Wrapped: React.FC<any>) {
     }, []);
 
     useEffect(() => {
-      
-      event && fetchNtf(event).then(md =>  setMetadata(md)) 
-
-  
+      event && fetchNtf(event).then((md) => setMetadata(md));
     }, [event]);
 
     return <Wrapped data={{ event, metadata, loading }} />;
