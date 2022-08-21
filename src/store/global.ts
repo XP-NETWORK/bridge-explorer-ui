@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 export interface Global {
   page: number;
-  eventsQueryString: string;
+  eventsQueryString: any;
   statusFilter: '' | 'Failed';
   showChainModal: boolean,
   departureOrDestination: any,
@@ -14,13 +14,13 @@ export interface Global {
 
 export const initialState: Global = {
   page: 0,
-  eventsQueryString: '',
+  eventsQueryString: "",
   statusFilter: "",
   showChainModal: false,
   departureOrDestination: "departure",
   switchDestination: "",
-  temporaryFrom: "",
-  temporaryTo: "",
+  temporaryFrom: undefined,
+  temporaryTo: undefined,
   to: "To",
   from: "From"
 };

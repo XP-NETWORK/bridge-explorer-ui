@@ -8,7 +8,7 @@ import {
   setDepartureOrDestination,
   setSwitchDestination,
   setTemporaryFrom,
-  setEventsQueryString
+  setEventsQueryString,
 } from "../../store/global";
 // import {Chain} from "./Chain";
 // import "bootstrap/dist/css/bootstrap.min.css";
@@ -30,6 +30,8 @@ export const ChainListBox = () => {
   const show = useSelector((state: ReduxState) => state.global.showChainModal);
   const [fromChains, setFromChains] = useState(chains);
   const [toChains, setToChains] = useState(chains);
+  const [selectedFrom, setSelectedFrom] = useState(undefined);
+  const [selectedTo, setSelectedTo] = useState(undefined);
 
   const handleClose = () => {
     dispatch(setChainModal(false));
@@ -38,15 +40,16 @@ export const ChainListBox = () => {
   };
 
   const chainSelectHandlerFrom = async (chain: any) => {
-    console.log(chain);
     dispatch(setFrom(chain.text));
-    dispatch(setEventsQueryString(chain.text));
-    handleClose()
+    dispatch(setEventsQueryString({ fromChainName: chain.text, toChainName: selectedTo }));
+    setSelectedFrom(chain.text);
+    handleClose();
   };
   const chainSelectHandlerTo = async (chain: any) => {
-    console.log(chain);
     dispatch(setTo(chain.text));
-    handleClose()
+    dispatch(setEventsQueryString({ fromChainName: selectedFrom, toChainName: chain.text }));
+    setSelectedTo(chain.text);
+    handleClose();
   };
 
   useEffect(() => {
@@ -64,7 +67,7 @@ export const ChainListBox = () => {
       .sort((a, b) => a.order - b.order);
     let sorted = [...withNew, ...noComingNoMaintenance, ...withMaintenance, ...withComing];
     setToChains(sorted);
-  }, [from, departureOrDestination , to]);
+  }, [from, departureOrDestination, to]);
 
   return (
     <Modal animation={false} show={show} onHide={handleClose} className="ChainModal">
@@ -84,7 +87,7 @@ export const ChainListBox = () => {
               fromChains.map((chain) => {
                 const { image, text, key } = chain;
                 return (
-                  <li className="nftChainItem" onClick={()=>chainSelectHandlerFrom(chain)}>
+                  <li className="nftChainItem" onClick={() => chainSelectHandlerFrom(chain)}>
                     <img className="modalSelectOptionsImage" src={image.src} alt={text} />
                     <div className="modalSelectOptionsText">
                       {text === "xDai" ? "Gnosis" : text}
@@ -96,7 +99,7 @@ export const ChainListBox = () => {
               toChains.map((chain) => {
                 const { image, text, key } = chain;
                 return (
-                  <li className="nftChainItem" onClick={()=>chainSelectHandlerTo(chain)} >
+                  <li className="nftChainItem" onClick={() => chainSelectHandlerTo(chain)}>
                     <img className="modalSelectOptionsImage" src={image.src} alt={text} />
                     <div className="modalSelectOptionsText">
                       {text === "xDai" ? "Gnosis" : text}
