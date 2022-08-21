@@ -59,7 +59,6 @@ export const Paginator = withContainer(
     return (
       <div className="paginatorWraper mt-3">
         <span>Transactions</span>
-        <div className="leftWrapper flex-row-reverse md:initial md:w-fit">
           {/* {<CSVButton />} */}
 
           <div className="paginatorInnerWrapper">
@@ -76,10 +75,10 @@ export const Paginator = withContainer(
             </button>
             
             <ReactPaginate
-              breakLabel="..."
+              breakLabel={<span >Page {page + 1} of {Math.ceil(total / 50)}</span>}
               nextLabel={
                 <div
-                  className={`paginationControlWraper margin-left ${
+                  className={`paginationControlWraper  ${
                     ctx?.isLoading ? "nonactive" : ""
                   } ${disableCursor}`}
                   onClick={() => onClickPage(1)}
@@ -89,12 +88,12 @@ export const Paginator = withContainer(
               }
               onPageChange={() => {}}
               pageRangeDisplayed={0}
-              pageCount={Math.ceil(total / 50)}
-              breakClassName={"paginatorItem"}
+              pageCount={15}
+              breakClassName={"paginatorLabel"}
               pageClassName="paginatorItem"
               previousLabel={
                 <div
-                  className={`paginationControlWraper prevControl  ${
+                  className={`paginationControlWraper ${
                     ctx?.isLoading ? "nonactive" : ""
                   }`}
                   onClick={() => onClickPage(-1)}
@@ -104,11 +103,6 @@ export const Paginator = withContainer(
               }
               //renderOnZeroPageCount={''}
             />
-            <div className="paginatorLabel">
-            <p style={{textAlign: "center" , margin:"auto"}}>
-                Page {page + 1} of {Math.ceil(total / 50)}
-              </p>
-            </div>
             <button
               onClick={() => onClickPage(Math.ceil(total / 50) - page - 1)}
               className={`button ${ctx?.isLoading ? "nonactive" : ""}`}
@@ -116,7 +110,6 @@ export const Paginator = withContainer(
               Last
             </button>
           </div>
-        </div>
       </div>
     );
   }
