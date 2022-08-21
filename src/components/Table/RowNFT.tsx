@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
 import { ImgOrFail } from "../elements/ImgOrFail";
 import { IEvent } from "../ExplorerEvents";
 import ImgBroken from "../../assets/img-broken.png";
@@ -10,37 +16,48 @@ export const RowNFT = ({ event }: { event: IEvent }) => {
   const [isVisible, setVisible] = useState(false);
   const [imgUrl, setLoaded] = useState("");
   const [fetching, setFetching] = useState(true);
-  const isNftSexy = event?.nftUri?.includes("treatdao")
-  const specificTokenId = event?.tokenId === "30517440993403660343476421412" ? true : false
-  const blurClass = isNftSexy || specificTokenId? "rounded-lg  blurList" : "rounded-lg "
+  const isNftSexy = event?.nftUri?.includes("treatdao");
+  const specificTokenId =
+    event?.tokenId === "30517440993403660343476421412" ? true : false;
+  const blurClass =
+    isNftSexy || specificTokenId ? "rounded-lg  blurList" : "rounded-lg ";
 
-  const observer = new IntersectionObserver(async (entries) => {const [entry] = entries; setVisible(entry.isIntersecting)}, {
-    root: document.getElementById("#root"),
-    threshold: .1,
-  });
+  const observer = new IntersectionObserver(
+    async (entries) => {
+      const [entry] = entries;
+      setVisible(entry.isIntersecting);
+    },
+    {
+      root: document.getElementById("#root"),
+      threshold: 0.1,
+    }
+  );
 
   useEffect(() => {
     nftrow.current && observer.observe(nftrow.current);
-    return () => console.log('OPULUS');
+    return () => console.log("OPULUS");
   }, [nftrow]);
 
   useEffect(() => {
     if (isVisible && !imgUrl) {
-      fetchNtf(event).then(metadata => {
-        if (metadata.image) {
-          return setLoaded(metadata.image)
-        }
-     }).catch((e) => {
-        setFetching(false)
-     })
+      console.log(event.tokenId, "ev");
+      fetchNtf(event)
+        .then((metadata) => {
+          if (metadata.image) {
+            return setLoaded(metadata.image);
+          }
+        })
+        .catch((e) => {
+          setFetching(false);
+        });
     }
-  }, [isVisible])
+  }, [isVisible]);
 
   return (
     <div className="nftRow" ref={nftrow}>
-      <div className={`${fetching ? "loadingWrapper rowNftWrapper": ""}`}>
+      <div className={`${fetching ? "loadingWrapper rowNftWrapper" : ""}`}>
         <ImgOrFail
-          className={blurClass} 
+          className={blurClass}
           setFetching={setFetching}
           src={imgUrl}
           width={38}

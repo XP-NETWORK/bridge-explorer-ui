@@ -50,6 +50,7 @@ export interface IEvent {
   originalChainNonce?: string;
   originalContract?: string;
   originalTokenId?: string;
+  originalUri?: string;
 }
 
 export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
@@ -67,7 +68,10 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   let scrollBtn = useRef<any>(null);
 
   const scrollHandler = function () {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
+    if (
+      window.innerHeight + window.scrollY >=
+      document.body.offsetHeight - 500
+    ) {
       scrollBtn.current.style.bottom = "500px";
     } else {
       scrollBtn.current.style.bottom = "30px";
@@ -93,7 +97,9 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
     rates: { [key: string]: { usd: number } },
     chainName: string
   ): number => {
-    const chain = chains.find((chain) => chain.name.toLowerCase() === chainName.toLowerCase());
+    const chain = chains.find(
+      (chain) => chain.name.toLowerCase() === chainName.toLowerCase()
+    );
     const rate = (chain && rates[chain.id]?.usd) || 1;
 
     return rate;
@@ -127,14 +133,19 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
             className="scrollTopBtn"
             ref={scrollBtn}
             onClick={(e) => {
-              setTimeout(() => window.scrollTo({ top: 10, behavior: "smooth" }), 100);
+              setTimeout(
+                () => window.scrollTo({ top: 10, behavior: "smooth" }),
+                100
+              );
             }}
           />
 
           <table className="min-w-full divide-y border-b eventsTable">
             <thead className="bg-gray-50 ">
               <tr>
-                <TableHeading className="sticky left-0 bg-gray-50 ">NFT</TableHeading>
+                <TableHeading className="sticky left-0 bg-gray-50 ">
+                  NFT
+                </TableHeading>
                 <TableHeading>Tx Value</TableHeading>
                 {false && <TableHeading>Tx Hash</TableHeading>}
                 <TableHeading>From</TableHeading>
@@ -145,7 +156,9 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                     Age
                     <img
                       src={sortIcon}
-                      className={`${eventsContext?.sort === "ASC" ? "rotated" : ""}`}
+                      className={`${
+                        eventsContext?.sort === "ASC" ? "rotated" : ""
+                      }`}
                       onClick={eventsContext!.toggleSort}
                     />
                   </span>
@@ -160,7 +173,8 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
               eventsContext?.events.length ? (
                 eventsContext?.events.map((event: IEvent, idx: number) => {
                   const dollarValue =
-                    getExchangeRate(exchangeRates, event.chainName) * formatFees(event);
+                    getExchangeRate(exchangeRates, event.chainName) *
+                    formatFees(event);
 
                   return (
                     <tr
@@ -168,15 +182,24 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                       className="bg-white group hover:bg-transparent txRow"
                       onClick={(e) => navigateTo(e, event)}
                     >
-                      <a href={`/tx/${extractHash(event.fromHash)}`} target="_blank">
+                      <a
+                        href={`/tx/${extractHash(event.fromHash)}`}
+                        target="_blank"
+                      >
                         <TableData
                           className={`sticky left-0 text-center bg-white group-hover:bg-[#F7F7F9] imgTableData ${
-                            /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
+                            /^((?!chrome|android).)*safari/i.test(
+                              navigator.userAgent
+                            )
                               ? "safariHack"
                               : "sitckyBottomLine"
                           }`}
                         >
-                          <ReactTooltip effect="solid" className="copyTip" multiline />
+                          <ReactTooltip
+                            effect="solid"
+                            className="copyTip"
+                            multiline
+                          />
                           <RowNFT event={event} />
                         </TableData>
                       </a>
@@ -185,14 +208,20 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                         <span
                           className="cursor-default"
                           data-tip={`
-                        ${formatFees(event)} ${event.fromChain && currency[event.fromChain]} <br>
+                        ${formatFees(event)} ${
+                            event.fromChain && currency[event.fromChain]
+                          } <br>
                           ${dollarValue} $
                       `}
                         >
                           <span>{formatFees(event).toFixed(7).toString()}</span>{" "}
-                          <span>{event.fromChain && currency[event.fromChain]}</span>
+                          <span>
+                            {event.fromChain && currency[event.fromChain]}
+                          </span>
                           <br />
-                          <span className="text-xs">${dollarValue && dollarValue.toFixed(2)}</span>
+                          <span className="text-xs">
+                            ${dollarValue && dollarValue.toFixed(2)}
+                          </span>
                         </span>
                       </TableData>
 
@@ -203,13 +232,17 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                               chains.find(
                                 (chain) =>
                                   chain.name.toLowerCase() ===
-                                  chainNoncetoName[event?.fromChain || 0]?.toLowerCase()
+                                  chainNoncetoName[
+                                    event?.fromChain || 0
+                                  ]?.toLowerCase()
                               )?.icon
                             }
                             alt=""
                             className="chainIcon"
                           />
-                          <span>{chainNoncetoName[event?.fromChain || 0] || "N/A"} </span>
+                          <span>
+                            {chainNoncetoName[event?.fromChain || 0] || "N/A"}{" "}
+                          </span>
                         </div>
                         <ExplorerLink
                           hash={extractHash(event.fromHash!)}
@@ -224,16 +257,23 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                               chains.find(
                                 (chain) =>
                                   chain.name.toLowerCase() ===
-                                  chainNoncetoName[event?.toChain || 0]?.toLowerCase()
+                                  chainNoncetoName[
+                                    event?.toChain || 0
+                                  ]?.toLowerCase()
                               )?.icon
                             }
                             alt=""
                             className="chainIcon"
                           />
-                          <span>{chainNoncetoName[event?.toChain || 0] || "N/A"}</span>
+                          <span>
+                            {chainNoncetoName[event?.toChain || 0] || "N/A"}
+                          </span>
                         </div>
                         {event?.status === "Completed" ? (
-                          <ExplorerLink hash={extractHash(event.toHash!)} chain={event.toChain!} />
+                          <ExplorerLink
+                            hash={extractHash(event.toHash!)}
+                            chain={event.toChain!}
+                          />
                         ) : event?.status === "Pending" ? (
                           <Loader className="addressLoader" />
                         ) : (
@@ -242,13 +282,17 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                       </TableData>
 
                       <TableData>
-                        <span className="methodDataTable">{event.type || "N/A"}</span>
+                        <span className="methodDataTable">
+                          {event.type || "N/A"}
+                        </span>
                       </TableData>
 
                       <TableData>
                         <span
                           className="valueData "
-                          data-tip={moment(event?.createdAt).format("YYYY/MM/DD H:mm")}
+                          data-tip={moment(event?.createdAt).format(
+                            "YYYY/MM/DD H:mm"
+                          )}
                         >
                           {moment(event.createdAt)
                             .fromNow()
@@ -285,7 +329,10 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   );
 };
 
-export const TableHeading: FC<{ className?: string }> = ({ children, className }) => (
+export const TableHeading: FC<{ className?: string }> = ({
+  children,
+  className,
+}) => (
   <th
     scope="col"
     className={
@@ -297,10 +344,14 @@ export const TableHeading: FC<{ className?: string }> = ({ children, className }
   </th>
 );
 
-export const TableData: FC<{ className?: string }> = ({ children, className }) => (
+export const TableData: FC<{ className?: string }> = ({
+  children,
+  className,
+}) => (
   <td
     className={
-      "px-3 py-4 min-w-[62px] border-0 whitespace-nowrap text-sm text-[#222222] " + className
+      "px-3 py-4 min-w-[62px] border-0 whitespace-nowrap text-sm text-[#222222] " +
+      className
     }
   >
     {children}
