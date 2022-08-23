@@ -50,7 +50,9 @@
     border-bottom: none !important;
   }
 
-
+.previous{
+  margin-left: 8px;
+}
 
   .leftWrapper {
     justify-content: space-between;
@@ -139,7 +141,7 @@
   }
   .paginatorLabel {
     width: 130px;
-    left: 50%;
+    /* left: 50%; */
   }
 
   .paginatorInnerWrapper {
