@@ -22,6 +22,7 @@ import { extractHash } from "./Details/helpers";
 import { useDispatch, useSelector } from "react-redux";
 import { ChainSwitch } from "./elements/chainSwitch";
 import { ChainListBox } from "../components/ChainModal/ChainListBox";
+import DropDown from "./elements/DropDown";
 
 import { setStatusFilter } from "../store/global";
 
@@ -124,6 +125,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
         <Container className="mt-2 px-0 md:px-4 chainSwitch">
           <ChainSwitch assignment={"from"} />
           <ChainSwitch assignment={"to"} />
+          <DropDown />
           <span className="nothing"></span>
         </Container>
         <Container className="mt-5 px-0 md:px-4 overflow-x-auto tableWrapper">
