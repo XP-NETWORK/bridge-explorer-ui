@@ -98,8 +98,10 @@ export const EventsProvider: FC = withContainer(({ children, container: { socket
         .then(() => setIsLoading(false));
     } else if ((eventsQueryString.fromChainName || eventsQueryString.toChainName) && !statusFilter) {
       console.log("only eventsQueryString.fromChainName");
-      console.log(eventsQueryString.fromChainName);
-      fetch(`${url}api?${eventsQueryString.fromChainName ?`fromChainName=`+ eventsQueryString.fromChainName.toUpperCase() : " "}${eventsQueryString.toChainName ?`&toChainName=` +  eventsQueryString.toChainName.toUpperCase() : " "}`)
+      console.log(eventsQueryString.fromChainName, eventsQueryString.toChainName);
+
+      fetch(`${url}api?${eventsQueryString.fromChainName?`fromChainName=`+ eventsQueryString.fromChainName.toUpperCase() : ""}${eventsQueryString.toChainName ? `&toChainName=` + eventsQueryString.toChainName.toUpperCase() : ""}`)
+
         .then((res) => res.json())
         .then(async ({ events, count }: { events: IEvent[]; count: number }) => {
           await loadImages(events, setEvents);
