@@ -24,7 +24,8 @@ export const currency: any = {
   "9": "TRX",
   "25": "VET",
   "15": "ALGOS",
-  "22":"CKB"
+  "22": "CKB",
+  "24": "SCRT"
 };
 
 export const txExplorers: any = {
@@ -45,7 +46,8 @@ export const txExplorers: any = {
   "9": "https://tronscan.org/#/transaction/",
   "25": "https://explore.vechain.org/transactions/",
   "15": "https://algoexplorer.io/tx/",
-  "22": "https://v1.gwscan.com/tx/"
+  "22": "https://v1.gwscan.com/tx/",
+  "24": "https://atomscan.com/secret-network/transactions/"
 };
 
 export const addressExplorers: any = {
@@ -66,7 +68,8 @@ export const addressExplorers: any = {
   "9": "https://tronscan.org/#/address/",
   "25": "https://explore.vechain.org/accounts/",
   "15": "https://algoexplorer.io/address/",
-  "22": "https://v1.gwscan.com/tx/"
+  "22": "https://v1.gwscan.com/tx/",
+  "24": `https://atomscan.com/secret-network/accounts/`
 };
 
 export const chainNoncetoName: any = {
@@ -127,7 +130,7 @@ export const chains = [
   { id: "vechain", name: "Vechain", icon: Vechain },
   { id: "algorand", name: "Algorand", icon: Algorand, notConvert: true },
   { id: "nervos-network", name: "Godwoken", icon: "./assets/icons/godwoken.svg" },
-  { id: "Secret", name: "Secret", icon: Secret },
+  { id: "secret", name: "Secret", icon: Secret },
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";
