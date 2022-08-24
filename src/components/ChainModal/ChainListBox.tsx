@@ -18,6 +18,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { ReduxState } from "../../store";
 import "./Chain.css";
+import "./Modal.css"
 
 export const ChainListBox = () => {
   const dispatch = useDispatch();
