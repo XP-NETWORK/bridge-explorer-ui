@@ -24,7 +24,8 @@ export const currency: any = {
   "9": "TRX",
   "25": "VET",
   "15": "ALGOS",
-  "22": "CKB"
+  "22": "CKB",
+  "24": "SCRT"
 };
 
 export const txExplorers: any = {
@@ -129,7 +130,7 @@ export const chains = [
   { id: "vechain", name: "Vechain", icon: Vechain },
   { id: "algorand", name: "Algorand", icon: Algorand, notConvert: true },
   { id: "nervos-network", name: "Godwoken", icon: "./assets/icons/godwoken.svg" },
-  { id: "Secret", name: "Secret", icon: Secret },
+  { id: "secret", name: "Secret", icon: Secret },
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";
