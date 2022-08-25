@@ -73,6 +73,7 @@ export const Footer = () => {
             <FooterLink href="https://bridge.xp.network/">
               Cross-Chain NFT Bridge
             </FooterLink>
+            <FooterLink href="https://widget.xp.network/?widget=true&wsettings=true#">Bridge Widget</FooterLink>
             <FooterLink href="https://xp.network/api/">XPJS API</FooterLink>
           </div>
           <div className="flex flex-col gap-2">
@@ -98,6 +99,7 @@ export const Footer = () => {
             <h1 className="font-poppins font-medium text-white">XP.NETWORK</h1>
             <FooterLink href="https://xp.network/team/">Team</FooterLink>
             <FooterLink href="https://xp.network/about-us/">About Us</FooterLink>
+            <FooterLink href="https://xp.network/events/">News & Events</FooterLink>
             <FooterLink href="https://blog.xp.network/">Blog</FooterLink>
             <FooterLink href="https://xp.network/backers/">
               Backers
