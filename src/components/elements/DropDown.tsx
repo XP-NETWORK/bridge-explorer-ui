@@ -16,9 +16,8 @@ export const DropDown = () => {
         </div>
         <div className='dropDown'>
           <DropdownButton id="dropdown-basic-button" title="All Types"  size="sm"   variant=''>
-            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            <Dropdown.Item href="#/action-1">Transfer</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">Unfreeze</Dropdown.Item>
           </DropdownButton>
         </div>
       </div>

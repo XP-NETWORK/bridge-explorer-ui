@@ -72,7 +72,7 @@ export const ChainListBox = () => {
 
   return (
     <Modal animation={false} show={show} onHide={handleClose} className="ChainModal">
-      <Modal.Header className="text-left">
+      <Modal.Header>
         <Modal.Title>
           {`Select ${departureOrDestination === "destination" ? "destination" : "departure"} chain`}
         </Modal.Title>
@@ -89,7 +89,7 @@ export const ChainListBox = () => {
                 const { image, text, key } = chain;
                 return (
                   <li className="nftChainItem" onClick={() => chainSelectHandlerFrom(chain)}>
-                    <img className="modalSelectOptionsImage" src={image.src} alt={text} />
+                    <img className="modalSelectOptionsImage" src={image.src} alt="" />
                     <div className="modalSelectOptionsText">
                       {text === "xDai" ? "Gnosis" : text}
                     </div>
@@ -101,7 +101,7 @@ export const ChainListBox = () => {
                 const { image, text, key } = chain;
                 return (
                   <li className="nftChainItem" onClick={() => chainSelectHandlerTo(chain)}>
-                    <img className="modalSelectOptionsImage" src={image.src} alt={text} />
+                    <img className="modalSelectOptionsImage" src={image.src} alt="" />
                     <div className="modalSelectOptionsText">
                       {text === "xDai" ? "Gnosis" : text}
                     </div>
