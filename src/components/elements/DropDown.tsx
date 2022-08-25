@@ -1,19 +1,28 @@
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import "./DropDown.css"
 
-function DropDown() {
+
+
+export const DropDown = () => {
   return (
-    <Dropdown as={ButtonGroup}>
-      <Button variant="success">Split Button</Button>
+    <div className='dropDownContainer'>
+      <div className='dropDownWrapper'>
+        <div className='dropDownTitle'>
+          <p> Tx Type</p>
+        </div>
+        <div className='dropDown'>
+          <DropdownButton id="dropdown-basic-button" title="All Types"  size="sm"   variant=''>
+            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+          </DropdownButton>
+        </div>
+      </div>
+    </div >
 
-      <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
-
-      <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Unwrap</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Wrap</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
   );
 }
-export default DropDown;

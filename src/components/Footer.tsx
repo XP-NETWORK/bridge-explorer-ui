@@ -137,9 +137,9 @@ export const Footer = () => {
         </div>
         <hr className="border-zinc-700 my-5" />
         <div className="text-[.85rem] gap-y-8 justify-between">
-          <p className="text-white text-opacity-50 text-xs mb-8">
+          {/* <p className="text-white text-opacity-50 text-xs mb-8">
             A blockchain-agnostic network for building NFT dApps
-          </p>
+          </p> */}
           <p className="text-white text-sm text-opacity-70">
             © 2022 XP.NETWORK Ltd. All Rights Reserved
           </p>

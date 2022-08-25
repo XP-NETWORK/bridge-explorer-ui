@@ -389,8 +389,9 @@ span.chainArrow:hover {
 }
 
 .modal-backdrop {
-    background: #1d212a;
-    opacity: 0.9;
+    /* background: #1d212a;
+    opacity: 0.9; */
+    display: none !important;
 }
 
 .modal-header {

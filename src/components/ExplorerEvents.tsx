@@ -22,7 +22,7 @@ import { extractHash } from "./Details/helpers";
 import { useDispatch, useSelector } from "react-redux";
 import { ChainSwitch } from "./elements/chainSwitch";
 import { ChainListBox } from "../components/ChainModal/ChainListBox";
-import DropDown from "./elements/DropDown";
+import { DropDown } from "./elements/DropDown";
 
 import { setStatusFilter } from "../store/global";
 
@@ -128,7 +128,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
           <DropDown />
           <span className="nothing"></span>
         </Container>
-        <Container className="mt-5 px-0 md:px-4 overflow-x-auto tableWrapper">
+        <Container className="mt-4 px-0 md:px-4 overflow-x-auto tableWrapper">
           <img
             src={scrollUp}
             alt="scrollUp"
@@ -158,9 +158,8 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                     Age
                     <img
                       src={sortIcon}
-                      className={`${
-                        eventsContext?.sort === "ASC" ? "rotated" : ""
-                      }`}
+                      className={`${eventsContext?.sort === "ASC" ? "rotated" : ""
+                        }`}
                       onClick={eventsContext!.toggleSort}
                     />
                   </span>
@@ -172,157 +171,155 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
               {eventsContext?.isLoading ? (
                 <LoaderRow />
               ) : // if events length is 0 after 2 seconds, show loader
-              eventsContext?.events.length ? (
-                eventsContext?.events.map((event: IEvent, idx: number) => {
-                  const dollarValue =
-                    getExchangeRate(exchangeRates, event.chainName) *
-                    formatFees(event);
+                eventsContext?.events.length ? (
+                  eventsContext?.events.map((event: IEvent, idx: number) => {
+                    const dollarValue =
+                      getExchangeRate(exchangeRates, event.chainName) *
+                      formatFees(event);
 
-                  return (
-                    <tr
-                      key={event.id}
-                      className="bg-white group hover:bg-transparent txRow"
-                      onClick={(e) => navigateTo(e, event)}
-                    >
-                      <a
-                        href={`/tx/${extractHash(event.fromHash)}`}
-                        target="_blank"
+                    return (
+                      <tr
+                        key={event.id}
+                        className="bg-white group hover:bg-transparent txRow"
+                        onClick={(e) => navigateTo(e, event)}
                       >
-                        <TableData
-                          className={`sticky left-0 text-center bg-white group-hover:bg-[#F7F7F9] imgTableData ${
-                            /^((?!chrome|android).)*safari/i.test(
+                        <a
+                          href={`/tx/${extractHash(event.fromHash)}`}
+                          target="_blank"
+                        >
+                          <TableData
+                            className={`sticky left-0 text-center bg-white group-hover:bg-[#F7F7F9] imgTableData ${/^((?!chrome|android).)*safari/i.test(
                               navigator.userAgent
                             )
-                              ? "safariHack"
-                              : "sitckyBottomLine"
-                          }`}
-                        >
-                          <ReactTooltip
-                            effect="solid"
-                            className="copyTip"
-                            multiline
-                          />
-                          <RowNFT event={event} />
-                        </TableData>
-                      </a>
+                                ? "safariHack"
+                                : "sitckyBottomLine"
+                              }`}
+                          >
+                            <ReactTooltip
+                              effect="solid"
+                              className="copyTip"
+                              multiline
+                            />
+                            <RowNFT event={event} />
+                          </TableData>
+                        </a>
 
-                      <TableData>
-                        <span
-                          className="cursor-default"
-                          data-tip={`
-                        ${formatFees(event)} ${
-                            event.fromChain && currency[event.fromChain]
-                          } <br>
+                        <TableData>
+                          <span
+                            className="cursor-default"
+                            data-tip={`
+                        ${formatFees(event)} ${event.fromChain && currency[event.fromChain]
+                              } <br>
                           ${dollarValue} $
                       `}
-                        >
-                          <span>{formatFees(event).toFixed(7).toString()}</span>{" "}
-                          <span>
-                            {event.fromChain && currency[event.fromChain]}
+                          >
+                            <span>{formatFees(event).toFixed(7).toString()}</span>{" "}
+                            <span>
+                              {event.fromChain && currency[event.fromChain]}
+                            </span>
+                            <br />
+                            <span className="text-xs">
+                              ${dollarValue && dollarValue.toFixed(2)}
+                            </span>
                           </span>
-                          <br />
-                          <span className="text-xs">
-                            ${dollarValue && dollarValue.toFixed(2)}
-                          </span>
-                        </span>
-                      </TableData>
+                        </TableData>
 
-                      <TableData>
-                        <div className="flex space-x-1 mb-1">
-                          <img
-                            src={
-                              chains.find(
-                                (chain) =>
-                                  chain.name.toLowerCase() ===
-                                  chainNoncetoName[
-                                    event?.fromChain || 0
-                                  ]?.toLowerCase()
-                              )?.icon
-                            }
-                            alt=""
-                            className="chainIcon"
-                          />
-                          <span>
-                            {chainNoncetoName[event?.fromChain || 0] || "N/A"}{" "}
-                          </span>
-                        </div>
-                        <ExplorerLink
-                          hash={extractHash(event.fromHash!)}
-                          chain={event.fromChain!}
-                        />
-                      </TableData>
-
-                      <TableData>
-                        <div className="flex space-x-1 mb-1">
-                          <img
-                            src={
-                              chains.find(
-                                (chain) =>
-                                  chain.name.toLowerCase() ===
-                                  chainNoncetoName[
-                                    event?.toChain || 0
-                                  ]?.toLowerCase()
-                              )?.icon
-                            }
-                            alt=""
-                            className="chainIcon"
-                          />
-                          <span>
-                            {chainNoncetoName[event?.toChain || 0] || "N/A"}
-                          </span>
-                        </div>
-                        {event?.status === "Completed" ? (
+                        <TableData>
+                          <div className="flex space-x-1 mb-1">
+                            <img
+                              src={
+                                chains.find(
+                                  (chain) =>
+                                    chain.name.toLowerCase() ===
+                                    chainNoncetoName[
+                                      event?.fromChain || 0
+                                    ]?.toLowerCase()
+                                )?.icon
+                              }
+                              alt=""
+                              className="chainIcon"
+                            />
+                            <span>
+                              {chainNoncetoName[event?.fromChain || 0] || "N/A"}{" "}
+                            </span>
+                          </div>
                           <ExplorerLink
-                            hash={extractHash(event.toHash!)}
-                            chain={event.toChain!}
+                            hash={extractHash(event.fromHash!)}
+                            chain={event.fromChain!}
                           />
-                        ) : event?.status === "Pending" ? (
-                          <Loader className="addressLoader" />
-                        ) : (
-                          <Loader className="addressLoader" />
-                        )}
-                      </TableData>
+                        </TableData>
 
-                      <TableData>
-                        <span className="methodDataTable">
-                          {event.type || "N/A"}
-                        </span>
-                      </TableData>
-
-                      <TableData>
-                        <span
-                          className="valueData "
-                          data-tip={moment(event?.createdAt).format(
-                            "YYYY/MM/DD H:mm"
+                        <TableData>
+                          <div className="flex space-x-1 mb-1">
+                            <img
+                              src={
+                                chains.find(
+                                  (chain) =>
+                                    chain.name.toLowerCase() ===
+                                    chainNoncetoName[
+                                      event?.toChain || 0
+                                    ]?.toLowerCase()
+                                )?.icon
+                              }
+                              alt=""
+                              className="chainIcon"
+                            />
+                            <span>
+                              {chainNoncetoName[event?.toChain || 0] || "N/A"}
+                            </span>
+                          </div>
+                          {event?.status === "Completed" ? (
+                            <ExplorerLink
+                              hash={extractHash(event.toHash!)}
+                              chain={event.toChain!}
+                            />
+                          ) : event?.status === "Pending" ? (
+                            <Loader className="addressLoader" />
+                          ) : (
+                            <Loader className="addressLoader" />
                           )}
-                        >
-                          {moment(event.createdAt)
-                            .fromNow()
-                            .replace("in", "")
-                            .replace("a few ", "3 ")
-                            .replace("few ", "")
-                            .replace("an ", "1 ")
-                            .replace("a ", "1 ")
-                            .replace("hours ", "hrs ")
-                            .replace("hour ", "hr ")
-                            .replace("minutes ", "mins ")
-                            .replace("minute ", "min ")
-                            .replace("mutes ", "mins ")
-                            .replace("mute ", "min ")
-                            .replace("seconds ", "secs ")
-                            .replace("second ", "sec ")}
-                        </span>
-                      </TableData>
+                        </TableData>
 
-                      <TableData>
-                        <Status status={event.status} />
-                      </TableData>
-                    </tr>
-                  );
-                })
-              ) : (
-                <NoEventsRow />
-              )}
+                        <TableData>
+                          <span className="methodDataTable">
+                            {event.type || "N/A"}
+                          </span>
+                        </TableData>
+
+                        <TableData>
+                          <span
+                            className="valueData "
+                            data-tip={moment(event?.createdAt).format(
+                              "YYYY/MM/DD H:mm"
+                            )}
+                          >
+                            {moment(event.createdAt)
+                              .fromNow()
+                              .replace("in", "")
+                              .replace("a few ", "3 ")
+                              .replace("few ", "")
+                              .replace("an ", "1 ")
+                              .replace("a ", "1 ")
+                              .replace("hours ", "hrs ")
+                              .replace("hour ", "hr ")
+                              .replace("minutes ", "mins ")
+                              .replace("minute ", "min ")
+                              .replace("mutes ", "mins ")
+                              .replace("mute ", "min ")
+                              .replace("seconds ", "secs ")
+                              .replace("second ", "sec ")}
+                          </span>
+                        </TableData>
+
+                        <TableData>
+                          <Status status={event.status} />
+                        </TableData>
+                      </tr>
+                    );
+                  })
+                ) : (
+                  <NoEventsRow />
+                )}
             </tbody>
           </table>
         </Container>
