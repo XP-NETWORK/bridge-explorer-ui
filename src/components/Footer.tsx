@@ -73,6 +73,7 @@ export const Footer = () => {
             <FooterLink href="https://bridge.xp.network/">
               Cross-Chain NFT Bridge
             </FooterLink>
+            <FooterLink href="https://widget.xp.network/?widget=true&wsettings=true#">Bridge Widget</FooterLink>
             <FooterLink href="https://xp.network/api/">XPJS API</FooterLink>
           </div>
           <div className="flex flex-col gap-2">
@@ -98,6 +99,7 @@ export const Footer = () => {
             <h1 className="font-poppins font-medium text-white">XP.NETWORK</h1>
             <FooterLink href="https://xp.network/team/">Team</FooterLink>
             <FooterLink href="https://xp.network/about-us/">About Us</FooterLink>
+            <FooterLink href="https://xp.network/events/">News & Events</FooterLink>
             <FooterLink href="https://blog.xp.network/">Blog</FooterLink>
             <FooterLink href="https://xp.network/backers/">
               Backers
@@ -137,9 +139,9 @@ export const Footer = () => {
         </div>
         <hr className="border-zinc-700 my-5" />
         <div className="text-[.85rem] gap-y-8 justify-between">
-          <p className="text-white text-opacity-50 text-xs mb-8">
+          {/* <p className="text-white text-opacity-50 text-xs mb-8">
             A blockchain-agnostic network for building NFT dApps
-          </p>
+          </p> */}
           <p className="text-white text-sm text-opacity-70">
             © 2022 XP.NETWORK Ltd. All Rights Reserved
           </p>
