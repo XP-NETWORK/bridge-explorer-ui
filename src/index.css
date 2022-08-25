@@ -271,6 +271,11 @@ body {
   opacity: .7;
 }
 
+.text-white{
+  /* --tw-text-opacity: 1 !important; */
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
+
 .newsLetterWrapper input:focus,
 .newsLetterWrapper input:active {
   border: 1px solid #fff;
