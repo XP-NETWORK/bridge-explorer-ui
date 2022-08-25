@@ -123,8 +123,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
           <div className="line"></div>
         </Container>
         <Container className="mt-2 px-0 md:px-4 chainSwitch">
-          <ChainSwitch assignment={"from"} />
-          <ChainSwitch assignment={"to"} />
+          <ChainSwitch />
           <DropDown />
           <span className="nothing"></span>
         </Container>
@@ -191,8 +190,8 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                             className={`sticky left-0 text-center bg-white group-hover:bg-[#F7F7F9] imgTableData ${/^((?!chrome|android).)*safari/i.test(
                               navigator.userAgent
                             )
-                                ? "safariHack"
-                                : "sitckyBottomLine"
+                              ? "safariHack"
+                              : "sitckyBottomLine"
                               }`}
                           >
                             <ReactTooltip

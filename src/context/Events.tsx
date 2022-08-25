@@ -96,11 +96,11 @@ export const EventsProvider: FC = withContainer(({ children, container: { socket
           setTotal(count);
         })
         .then(() => setIsLoading(false));
-    } else if ((eventsQueryString.fromChainName || eventsQueryString.toChainName) && !statusFilter) {
+    } else if ((eventsQueryString.fromChainName || eventsQueryString.toChainName|| eventsQueryString.type) && !statusFilter) {
       console.log("only eventsQueryString.fromChainName");
-      console.log(eventsQueryString.fromChainName, eventsQueryString.toChainName);
+      console.log({eventsQueryString});
 
-      fetch(`${url}api?${eventsQueryString.fromChainName?`fromChainName=`+ eventsQueryString.fromChainName.toUpperCase() : ""}${eventsQueryString.toChainName ? `&toChainName=` + eventsQueryString.toChainName.toUpperCase() : ""}`)
+      fetch(`${url}api?${(eventsQueryString.fromChainName)?`fromChainName=`+ eventsQueryString.fromChainName.toUpperCase() : ""}${eventsQueryString.toChainName ? `&toChainName=` + eventsQueryString.toChainName.toUpperCase() : ""}${eventsQueryString.type?  `&type=` + eventsQueryString.type : ""}`)
 
         .then((res) => res.json())
         .then(async ({ events, count }: { events: IEvent[]; count: number }) => {

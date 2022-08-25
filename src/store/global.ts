@@ -14,7 +14,7 @@ export interface Global {
 
 export const initialState: Global = {
   page: 0,
-  eventsQueryString: "",
+  eventsQueryString: {},
   statusFilter: "",
   showChainModal: false,
   departureOrDestination: "departure",
@@ -42,6 +42,24 @@ const globalSlice = createSlice({
     setEventsQueryString(state, action) {
       state.eventsQueryString = action.payload
     },
+    setEventsQueryStringTo(state, action) {
+      state.eventsQueryString = {
+        ...state.eventsQueryString,
+        toChainName: action.payload
+      }
+    },
+    setEventsQueryStringFrom(state, action) {
+      state.eventsQueryString = {
+        ...state.eventsQueryString,
+        fromChainName: action.payload
+      }
+    },
+    setEventsQueryStringType(state, action) {
+      state.eventsQueryString = {
+        ...state.eventsQueryString,
+        type: action.payload
+      }
+    },
     setTemporaryFrom(state, action) {
       state.temporaryFrom = action.payload;
     },
@@ -63,6 +81,6 @@ const globalSlice = createSlice({
   },
 });
 
-export const { setTo , setFrom , setPage, setTemporaryFrom, setTemporaryTo, setEventsQueryString, setStatusFilter, setChainModal, setDepartureOrDestination, setSwitchDestination } = globalSlice.actions;
+export const { setEventsQueryString, setEventsQueryStringType, setTo, setFrom, setPage, setTemporaryFrom, setTemporaryTo, setEventsQueryStringTo, setEventsQueryStringFrom, setStatusFilter, setChainModal, setDepartureOrDestination, setSwitchDestination } = globalSlice.actions;
 
 export default globalSlice.reducer;

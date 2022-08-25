@@ -329,6 +329,10 @@ ul.chartInfoList li {
 
 .chainSwitch{
   display: flex;
+
+}
+.chainSwitchBg{
+  background-color: red;
 }
 
 .scrollTopBtn {

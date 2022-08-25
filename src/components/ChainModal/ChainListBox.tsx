@@ -8,7 +8,8 @@ import {
   setDepartureOrDestination,
   setSwitchDestination,
   setTemporaryFrom,
-  setEventsQueryString,
+  setEventsQueryStringTo,
+  setEventsQueryStringFrom
 } from "../../store/global";
 // import {Chain} from "./Chain";
 // import "bootstrap/dist/css/bootstrap.min.css";
@@ -42,13 +43,13 @@ export const ChainListBox = () => {
 
   const chainSelectHandlerFrom = async (chain: any) => {
     dispatch(setFrom(chain.text));
-    dispatch(setEventsQueryString({ fromChainName: chain.text, toChainName: selectedTo }));
+    dispatch(setEventsQueryStringFrom(chain.text));
     setSelectedFrom(chain.text);
     handleClose();
   };
   const chainSelectHandlerTo = async (chain: any) => {
     dispatch(setTo(chain.text));
-    dispatch(setEventsQueryString({ fromChainName: selectedFrom, toChainName: chain.text }));
+    dispatch(setEventsQueryStringTo(chain.text));
     setSelectedTo(chain.text);
     handleClose();
   };
