@@ -1,9 +1,9 @@
 .arrow-down {
     margin: auto;
     flex: 1;
-    width: 2rem;
+    width: 21px;
     height: 10px;
-    margin-right: 3px;
+    /* margin-right: 3px; */
     background-image: url("../../assets/icons/arrow-down.svg");
     background-repeat: no-repeat;
     background-position: center;
@@ -12,9 +12,9 @@
 .arrow-downTo {
     margin: auto;
     flex: 1;
-    width: 2rem;
+    width: 21px;
     height: 10px;
-    margin-right: 3px;
+    margin-right: 2px;
     background-image: url("../../assets/icons/arrow-down.svg");
     background-repeat: no-repeat;
     background-position: center;
@@ -23,10 +23,11 @@
 
 .chain-switch {
     flex: 1;
+    display: table;
     margin: auto;
     margin-right:1px;
     margin-left: 2px;
-    width: 6rem;
+    width: 4rem;
     align-items: center;
     height: 28px;
     background: white;
@@ -51,10 +52,8 @@
 }
 
 .name {
-    flex: 5;
+    flex: 2;
     margin-left: 2px;
-    width: 4rem;
-    /* margin: auto; */
 }
 
 .modalBtnWrapper {
