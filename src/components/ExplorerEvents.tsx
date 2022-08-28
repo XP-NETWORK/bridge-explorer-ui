@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ChainSwitch } from "./elements/chainSwitch";
 import { ChainListBox } from "../components/ChainModal/ChainListBox";
 import { DropDown } from "./elements/DropDown";
+import { CollectionNameRow } from "./Table/CollectionNameRow"
 
 import { setStatusFilter } from "../store/global";
 
@@ -151,6 +152,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                 {false && <TableHeading>Tx Hash</TableHeading>}
                 <TableHeading>From</TableHeading>
                 <TableHeading>To</TableHeading>
+                <TableHeading>Collection</TableHeading>
                 <TableHeading>Method</TableHeading>
                 <TableHeading>
                   <span className="ageHeader">
@@ -277,6 +279,11 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                           ) : (
                             <Loader className="addressLoader" />
                           )}
+                        </TableData>
+
+                        <TableData className="CollectioName" >
+                          <CollectionNameRow hash={extractHash(event.toHash!)} collectionName={event?.collectionName ? event?.collectionName : "no collectioName"}
+                            chain={event.toChain!} />
                         </TableData>
 
                         <TableData>

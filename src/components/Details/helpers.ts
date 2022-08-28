@@ -10,7 +10,8 @@ const cacheService = CacheService();
 export const truncate = function (
   fullStr: string | undefined,
   strLen: number,
-  separator?: string
+  separator?: string,
+  separatorLocation?:string
 ) {
   if (!fullStr) return;
   if (fullStr.length <= strLen) return fullStr;
@@ -21,6 +22,13 @@ export const truncate = function (
     charsToShow = strLen - sepLen,
     frontChars = Math.ceil(charsToShow / 2),
     backChars = Math.floor(charsToShow / 2);
+
+    if(separatorLocation === "Last"){
+      return (
+        frontChars = Math.ceil(15),
+        fullStr.substr(0, frontChars) + separator 
+      );
+    }
 
   return (
     fullStr.substr(0, frontChars) +
