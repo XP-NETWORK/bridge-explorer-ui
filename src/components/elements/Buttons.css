@@ -61,3 +61,20 @@
     border-radius: 4px;
     background: #EEEEF2;
 }
+
+.csvModal {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 14px rgb(47 61 84 / 35%);
+    left: 50%;
+    padding: 40px 30px;
+    position: fixed;
+    top: 40%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    z-index: 1000;
+}
+
+.bg-black{
+    --bs-bg-opacity:0 !important
+}
