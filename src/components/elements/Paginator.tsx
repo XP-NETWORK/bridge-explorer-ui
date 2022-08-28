@@ -59,7 +59,7 @@ export const Paginator = withContainer(
     return (
       <div className="paginatorWraper mt-3">
         <span>Transactions</span>
-          {/* {<CSVButton />} */}
+          {<CSVButton />}   
 
           <div className="paginatorInnerWrapper">
             <span>
