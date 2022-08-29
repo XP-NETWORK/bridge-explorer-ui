@@ -97,7 +97,7 @@
     border: 0 !important;
     margin-right: 1px;
 }
-.modal .csvBtn {
+.csvModal .csvBtn {
     display: inline;
     display: initial;
     margin: 0 auto;
