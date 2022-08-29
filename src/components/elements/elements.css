@@ -439,15 +439,29 @@ ul.chartInfoList li {
 .paginatorLabel{
   position: relative;
   height: 30px;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: 3px;
+  margin-right: 3px;
   align-items: center;
 }
 
 .paginatorWraper .button {
   padding: 3.5px 10px;
-  margin-right: 6px;
+  /* margin-right: 6px;
+  margin-left: 6px; */
+  transition: all 0.5s ease;
+}
+
+.paginatorWraper .buttonFirst {
+  padding: 3.5px 10px;
+  margin-right: 3px;
   margin-left: 6px;
+  transition: all 0.5s ease;
+}
+
+.paginatorWraper .buttonLast {
+  padding: 3.5px 10px;
+  margin-right: 6px;
+  margin-left: 3px;
   transition: all 0.5s ease;
 }
 

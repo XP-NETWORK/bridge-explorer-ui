@@ -75,6 +75,52 @@
     z-index: 1000;
 }
 
+.csvModal h2 {
+    position: absolute;
+    top: 15px;
+}
+.csvModal .divider {
+    background-color: var(--grey-borders);
+    height: 1px;
+    margin-top: 10px;
+}
+.modalText {
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+.csvBtn {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    background: #235ef5;
+    border-radius: 4px;
+    border: 0 !important;
+    margin-right: 1px;
+}
+.modal .csvBtn {
+    display: inline;
+    display: initial;
+    margin: 0 auto;
+    padding: 5px 10px;
+}
+img.closeModal {
+    color: #000;
+    cursor: pointer;
+    -webkit-filter: brightness(15%);
+    filter: brightness(15%);
+    font-size: 15px;
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    z-index: 999;
+}
+.CSVwrapper {
+    border: 1px solid var(--grey-borders);
+    border-radius: 4px;
+    color: gray;
+    margin-bottom: 12px;
+    padding: 5px 15px;
+}
 .bg-black{
     --bs-bg-opacity:0 !important
 }

@@ -24,6 +24,7 @@ import { ChainSwitch } from "./elements/chainSwitch";
 import { ChainListBox } from "../components/ChainModal/ChainListBox";
 import { DropDown } from "./elements/DropDown";
 import { CollectionNameRow } from "./Table/CollectionNameRow"
+import DownloadCSV from "./elements/CSVButton"
 
 import { setStatusFilter } from "../store/global";
 
@@ -127,6 +128,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
           <ChainSwitch />
           <DropDown />
           <span className="nothing"></span>
+          <DownloadCSV />
         </Container>
         <Container className="mt-4 px-0 md:px-4 overflow-x-auto tableWrapper">
           <img

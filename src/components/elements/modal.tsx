@@ -14,7 +14,7 @@ const Modal = ({
     portalDiv &&
     ReactDom.createPortal(
       <>
-        <div className="overlay bg-black opacity-5  z-10" onClick={onClose} />
+        <div onClick={onClose} />
         <div className="csvModal z-50">
           {onClose && (
             <img

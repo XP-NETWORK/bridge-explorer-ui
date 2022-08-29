@@ -59,7 +59,7 @@ export const Paginator = withContainer(
     return (
       <div className="paginatorWraper mt-3">
         <span>Transactions</span>
-          {<CSVButton />}   
+          {/* <CSVButton /> */}
 
           <div className="paginatorInnerWrapper">
             <span>
@@ -69,7 +69,7 @@ export const Paginator = withContainer(
 
             <button
               onClick={() => onClickPage(-page)}
-              className={`button ${ctx?.isLoading ? "nonactive" : ""}`}
+              className={`button buttonFirst ${ctx?.isLoading ? "nonactive" : ""}`}
             >
               First
             </button>
@@ -105,7 +105,7 @@ export const Paginator = withContainer(
             />
             <button
               onClick={() => onClickPage(Math.ceil(total / 50) - page - 1)}
-              className={`button ${ctx?.isLoading ? "nonactive" : ""}`}
+              className={`button buttonLast ${ctx?.isLoading ? "nonactive" : ""}`}
             >
               Last
             </button>
