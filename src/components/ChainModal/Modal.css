@@ -85,3 +85,6 @@
     background: rgba(73, 82, 108, 0.1);
 }
 
+.modal-body{
+    padding: 6px 0 24px 0 !important;
+}

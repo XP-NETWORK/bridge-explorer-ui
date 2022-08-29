@@ -17,6 +17,20 @@
   @apply bg-transparent;
 }
 
+::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c8ccd6;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0000;
+}
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
   @apply bg-[#E0E0E3] rounded-md;
