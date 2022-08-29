@@ -705,3 +705,6 @@ input.datePick, input.datePick:focus, input.datePick:active {
   padding-left: 30px;
   /* padding-bottom: 110px; */
 }
+.FilterButton{
+  margin-right: 5px;
+}
