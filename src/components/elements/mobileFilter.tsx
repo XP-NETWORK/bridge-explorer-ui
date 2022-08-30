@@ -11,9 +11,26 @@ import { useSelector } from 'react-redux'
 import { ReduxState } from "../../store";
 import { ChainSwitch } from "./chainSwitch"
 import { DropDown } from "./DropDown"
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
+import { setEventsQueryStringType } from "../../store/global";
+import { useDispatch } from "react-redux";
+import 'bootstrap/dist/css/bootstrap.min.css'
 import "./Buttons.css"
 
 const Filter = ({ onClose }: { onClose: () => boolean }) => {
+    const dispatch = useDispatch();
+    const [value, setValue] = useState('All Types');
+
+    const handleSelect = (e: any) => {
+        console.log(e);
+        if (e === 'All Types')
+            dispatch(setEventsQueryStringType(undefined));
+        else {
+            dispatch(setEventsQueryStringType(e));
+        }
+        setValue(e)
+    }
     const [startDate, setStart] = useState<Date | "">(
         "" //moment().subtract(1, "month").toDate()
     );
@@ -77,9 +94,35 @@ const Filter = ({ onClose }: { onClose: () => boolean }) => {
                 </span>
             </p>
             <div>
-                <DropDown />
+                <div className='modalDropDownContainer'>
+                    <div className='dropDownWrapper'>
+                        <div className='dropDownTitle'>
+                            <p> Tx Type</p>
+                        </div>
+                        <div className='dropDown'>
+                            <DropdownButton onSelect={handleSelect} id="dropdown-basic-button" title={value} size="sm" variant=''>
+                                <Dropdown.Item eventKey="All Types" >All Types</Dropdown.Item>
+                                <Dropdown.Item eventKey="Transfer" >Transfer</Dropdown.Item>
+                                <Dropdown.Item eventKey="Unfreeze" >Unfreeze</Dropdown.Item>
+                            </DropdownButton>
+                        </div>
+                    </div>
+                </div >
                 <br />
-                <DropDown />
+                <div className='modalDropDownContainer'>
+                    <div className='dropDownWrapper'>
+                        <div className='dropDownTitle'>
+                            <p> Tx Type</p>
+                        </div>
+                        <div className='dropDown'>
+                            <DropdownButton onSelect={handleSelect} id="dropdown-basic-button" title={value} size="sm" variant=''>
+                                <Dropdown.Item eventKey="All Types" >All Types</Dropdown.Item>
+                                <Dropdown.Item eventKey="Transfer" >Transfer</Dropdown.Item>
+                                <Dropdown.Item eventKey="Unfreeze" >Unfreeze</Dropdown.Item>
+                            </DropdownButton>
+                        </div>
+                    </div>
+                </div >
                 <br />
             </div>
             <div style={{ textAlign: "right" }}>

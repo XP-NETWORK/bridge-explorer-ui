@@ -11,6 +11,19 @@
     flex-grow: 0;
 }
 
+.modalDropDownContainer {
+    display: flex;
+    margin-left: 5px;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 4px;
+    width: 17rem;
+    height: 100px;
+    flex: none;
+    flex-grow: 0;
+}
+
 .dropDownWrapper {
     box-sizing: border-box;
     display: flex;
