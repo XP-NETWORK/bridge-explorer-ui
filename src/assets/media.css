@@ -41,18 +41,61 @@
 }
 
 @media screen and (max-width: 600px) {
+  .dropDownContainer{
+    width: inherit;
+  }
+  .dropDownWrapper{
+    width: -webkit-fill-available;
+    justify-content: flex-start;
+  }
+  .dropDown{
+    width: -webkit-fill-available !important;
+  }
+  .dropDown button{
+    width: -webkit-fill-available !important;
+  }
+  #dropdown-basic-button {
+    background-color: white;
+    height: 28px;
+    padding-right: 11px;
+    line-height: 18px;
+    border-radius: 4px;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+  }
+  .filterDropDown {
+    display: flex;
+    flex-direction: column;
+    padding: 24px 32px;
+    gap: 24px;
+  }
 
-  .overlay { 
-      z-index: 10 !important;
+  .filtersRow {
+    display: flex;
+    flex-direction: row;
+  }
+  .dropdown-menu.show{
+    max-height: 265px;
+    overflow-y: scroll;
+  }
+  .rowLabelCard {
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
+    align-items: end;
+  }
+  .overlay {
+    z-index: 10 !important;
   }
 
   .mobileCollection {
     border-bottom: none !important;
   }
 
-.previous{
-  margin-left: 8px;
-}
+  .previous {
+    margin-left: 8px;
+  }
 
   .leftWrapper {
     justify-content: space-between;
@@ -73,10 +116,11 @@
   }
 
   .cardsWrapper {
-    gap: 0;
+    gap: 0 !important;
     position: relative;
-    margin-left: 17px;
-    margin-right: 17px;
+    margin-left: 1.5rem !important;
+    margin-right: 1.5rem !important;
+    padding: 0rem 0.5rem 0.5rem 0rem !important;
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
       var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
     --tw-shadow: 0 1px 15px 0px #2f303214;
@@ -94,6 +138,7 @@
     padding-left: 20px;
     padding-top: 12px;
     padding-bottom: 12px;
+    height: 50px;
   }
 
   .explorerCard:last-child {
@@ -264,16 +309,15 @@
     width: 24%;
   }
 
-
-   .sitckyBottomLine {
+  .sitckyBottomLine {
     border-bottom: 1px solid rgb(236, 229, 229) !important;
   }
 
   .safariHack {
     border-bottom: 1px solid rgb(236, 229, 229) !important;
-  } 
-  
-  .paginatorLabel{
+  }
+
+  .paginatorLabel {
     position: relative;
     height: 30px;
     margin-left: 3px;

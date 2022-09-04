@@ -9,7 +9,7 @@ import {
   setSwitchDestination,
   setTemporaryFrom,
   setEventsQueryStringTo,
-  setEventsQueryStringFrom
+  setEventsQueryStringFrom,
 } from "../../store/global";
 // import {Chain} from "./Chain";
 // import "bootstrap/dist/css/bootstrap.min.css";
@@ -19,7 +19,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { ReduxState } from "../../store";
 import "./Chain.css";
-import "./Modal.css"
+import "./Modal.css";
 
 export const ChainListBox = () => {
   const dispatch = useDispatch();
@@ -32,8 +32,8 @@ export const ChainListBox = () => {
   const show = useSelector((state: ReduxState) => state.global.showChainModal);
   const [fromChains, setFromChains] = useState(chains);
   const [toChains, setToChains] = useState(chains);
-  const [selectedFrom, setSelectedFrom] = useState(undefined);
-  const [selectedTo, setSelectedTo] = useState(undefined);
+  const [selectedFrom, setSelectedFrom] = useState("From");
+  const [selectedTo, setSelectedTo] = useState("To");
 
   const handleClose = () => {
     dispatch(setChainModal(false));
@@ -42,15 +42,29 @@ export const ChainListBox = () => {
   };
 
   const chainSelectHandlerFrom = async (chain: any) => {
-    dispatch(setFrom(chain.text));
-    dispatch(setEventsQueryStringFrom(chain.text));
-    setSelectedFrom(chain.text);
+    if (chain === "All chains") {
+      dispatch(setFrom("All chains"));
+      dispatch(setEventsQueryStringFrom(undefined));
+      setSelectedFrom("All chains");
+    } else {
+      dispatch(setFrom(chain.text));
+      dispatch(setEventsQueryStringFrom(chain.text));
+      setSelectedFrom(chain.text);
+    }
+
     handleClose();
   };
   const chainSelectHandlerTo = async (chain: any) => {
-    dispatch(setTo(chain.text));
-    dispatch(setEventsQueryStringTo(chain.text));
-    setSelectedTo(chain.text);
+    if (chain === "All chains") {
+      dispatch(setTo("All chains"));
+      dispatch(setEventsQueryStringTo(undefined));
+      setSelectedTo("All chains");
+    } else {
+      dispatch(setTo(chain.text));
+      dispatch(setEventsQueryStringTo(chain.text));
+      setSelectedTo(chain.text);
+    }
+
     handleClose();
   };
 
@@ -63,19 +77,35 @@ export const ChainListBox = () => {
     const withComing = filteredChains
       .filter((chain) => chain.coming && !chain.newChain)
       .sort((a, b) => b.order - a.order);
-    const withMaintenance = filteredChains.filter((chain) => chain.maintenance && !chain.newChain);
+    const withMaintenance = filteredChains.filter(
+      (chain) => chain.maintenance && !chain.newChain
+    );
     const noComingNoMaintenance = filteredChains
       .filter((chain) => !chain.coming && !chain.maintenance && !chain.newChain)
       .sort((a, b) => a.order - b.order);
-    let sorted = [...withNew, ...noComingNoMaintenance, ...withMaintenance, ...withComing];
+    let sorted = [
+      ...withNew,
+      ...noComingNoMaintenance,
+      ...withMaintenance,
+      ...withComing,
+    ];
     setToChains(sorted);
   }, [from, departureOrDestination, to]);
 
   return (
-    <Modal animation={false} show={show} onHide={handleClose} className="ChainModal">
+    <Modal
+      animation={false}
+      show={show}
+      onHide={handleClose}
+      className="ChainModal"
+    >
       <Modal.Header>
         <Modal.Title>
-          {`Select ${departureOrDestination === "destination" ? "destination" : "departure"} chain`}
+          {`Select ${
+            departureOrDestination === "destination"
+              ? "destination"
+              : "departure"
+          } chain`}
         </Modal.Title>
         <span className="CloseModal" onClick={handleClose}>
           <div className="close-modal"></div>
@@ -85,12 +115,29 @@ export const ChainListBox = () => {
         <div className="nftChainListBox">
           {/* <ChainSearch /> */}
           <ul className="nftChainList scrollSty">
+            <li
+              className="nftChainItem"
+              onClick={() =>
+                departureOrDestination === "departure"
+                  ? chainSelectHandlerFrom("All chains")
+                  : chainSelectHandlerTo("All chains")
+              }
+            >
+              <div className="modalSelectOptionsText">All Chains</div>
+            </li>
             {departureOrDestination === "departure" &&
               fromChains.map((chain) => {
                 const { image, text, key } = chain;
                 return (
-                  <li className="nftChainItem" onClick={() => chainSelectHandlerFrom(chain)}>
-                    <img className="modalSelectOptionsImage" src={image.src} alt="" />
+                  <li
+                    className="nftChainItem"
+                    onClick={() => chainSelectHandlerFrom(chain)}
+                  >
+                    <img
+                      className="modalSelectOptionsImage"
+                      src={image.src}
+                      alt=""
+                    />
                     <div className="modalSelectOptionsText">
                       {text === "xDai" ? "Gnosis" : text}
                     </div>
@@ -101,8 +148,15 @@ export const ChainListBox = () => {
               toChains.map((chain) => {
                 const { image, text, key } = chain;
                 return (
-                  <li className="nftChainItem" onClick={() => chainSelectHandlerTo(chain)}>
-                    <img className="modalSelectOptionsImage" src={image.src} alt="" />
+                  <li
+                    className="nftChainItem"
+                    onClick={() => chainSelectHandlerTo(chain)}
+                  >
+                    <img
+                      className="modalSelectOptionsImage"
+                      src={image.src}
+                      alt=""
+                    />
                     <div className="modalSelectOptionsText">
                       {text === "xDai" ? "Gnosis" : text}
                     </div>

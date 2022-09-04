@@ -26,7 +26,7 @@ export const ChainSwitch = () => {
 
   const show = () => {
     return (
-      <div className="modalBtnWrapper">
+      <div className="modalBtnWrapper desktopOnly">
         <div onClick={handleFromChainSwitch} className="chain-switch">
           <div className="nameWrapper">
             <span className="name"> {from === "xDai" ? "Gnosis" : from}</span>

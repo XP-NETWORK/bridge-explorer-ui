@@ -64,7 +64,7 @@
 }
 
 .chartMetrics > span > span {
-font-weight: 500;
+  font-weight: 500;
 }
 
 .chartMetrics span {
@@ -215,7 +215,7 @@ ul.chartInfoList li {
   padding: 0;
 }
 
-.loadingWrapper.rowNftWrapper  img{
+.loadingWrapper.rowNftWrapper img {
   position: relative;
   z-index: -2;
   width: 38px;
@@ -269,7 +269,8 @@ ul.chartInfoList li {
   padding: 3px 0 !important;
 }
 
-.detailsListRow p, .detailsListRow .statusBar {
+.detailsListRow p,
+.detailsListRow .statusBar {
   align-items: center;
   display: flex;
   margin-left: 60px;
@@ -327,11 +328,10 @@ ul.chartInfoList li {
   height: 38px;
 }
 
-.chainSwitch{
+.chainSwitch {
   display: flex;
-
 }
-.chainSwitchBg{
+.chainSwitchBg {
   background-color: red;
 }
 
@@ -399,23 +399,23 @@ ul.chartInfoList li {
 .super-loader {
   width: 48px;
   height: 48px;
-  border: 5px solid #235EF5;
+  border: 5px solid #235ef5;
   border-bottom-color: transparent;
   border-radius: 50%;
   display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
-  }
+}
 
-  @keyframes rotation {
+@keyframes rotation {
   0% {
-      transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   100% {
-      transform: rotate(360deg);
+    transform: rotate(360deg);
   }
-  } 
-.margin-left{
+}
+.margin-left {
   margin-left: 19px;
 }
 .paginationControlWraper,
@@ -436,7 +436,7 @@ ul.chartInfoList li {
 .paginatorLabel ~ .paginatorLabel {
   display: none;
 }
-.paginatorLabel{
+.paginatorLabel {
   position: relative;
   height: 30px;
   margin-left: 3px;
@@ -482,7 +482,7 @@ ul.chartInfoList li {
 
 .paginate-disabled {
   background-color: light-gray;
-  pointer-events:none
+  pointer-events: none;
 }
 
 /* @media screen and (max-Width:600) {
@@ -537,6 +537,22 @@ ul.chartInfoList li {
   stroke: #235ef5;
 }
 
+.explorerCard {
+  display: flex;
+  flex-direction: column;
+  height: 122px;
+  /* align-items: flex-start; */
+  padding: 1rem 1rem 1rem 2rem !important;
+  gap: 16px;
+  
+}
+
+.rowLabelCard {
+  display: flex;
+  flex-direction: row;
+  gap: 9px;
+}
+
 .explorerCard .loadingWrapper,
 .chartMetrics .loadingWrapper {
   width: 100px;
@@ -554,10 +570,6 @@ ul.chartInfoList li {
   height: initial;
   bottom: 10px;
 }
-
-
-
-
 
 .overlay {
   position: fixed;
@@ -579,13 +591,11 @@ ul.chartInfoList li {
   margin: 0 20px;
 }
 
-
 input.datePick {
   border: 1px solid var(--grey-borders);
   font-family: Inter;
   padding: 5px;
   border-radius: 4px;
-
 }
 
 input.datePick:focus,
@@ -595,8 +605,9 @@ input.datePick:active {
   box-shadow: none;
 }
 
-
-input.datePick, input.datePick:focus, input.datePick:active {
+input.datePick,
+input.datePick:focus,
+input.datePick:active {
   border: none;
   width: 100px !important;
 }
@@ -605,7 +616,7 @@ input.datePick, input.datePick:focus, input.datePick:active {
   margin-bottom: 12px;
   border-radius: 4px;
   border: 1px solid var(--grey-borders);
-  padding: 5px 15px 5px 15px ;
+  padding: 5px 15px 5px 15px;
   color: gray;
 }
 
@@ -663,7 +674,7 @@ input.datePick, input.datePick:focus, input.datePick:active {
     top: 30%;
     left: 50%;
     transform: translate(-30%, -30%);
- }
+  }
 }
 
 @media screen and (max-width: 1000px) {
@@ -677,7 +688,7 @@ input.datePick, input.datePick:focus, input.datePick:active {
   }
 }
 
-.cont{
+.cont {
   flex-direction: column;
 }
 
@@ -692,13 +703,13 @@ input.datePick, input.datePick:focus, input.datePick:active {
   transform: translate(-50%, -50%);
 }
 
-.ErrorToolsContainer{
+.ErrorToolsContainer {
   flex-direction: column;
   margin-top: 23%;
 }
 
 .ErrorImage {
-  flex-basis: 37%
+  flex-basis: 37%;
 }
 
 .ErrorText {

@@ -2,14 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 export interface Global {
   page: number;
   eventsQueryString: any;
-  statusFilter: '' | 'Failed';
-  showChainModal: boolean,
-  departureOrDestination: any,
-  switchDestination: any,
-  temporaryFrom: any,
-  temporaryTo: any,
-  to: string
-  from: string
+  statusFilter: "" | "Failed";
+  showChainModal: boolean;
+  showfilterModal: boolean;
+  departureOrDestination: any;
+  switchDestination: any;
+  temporaryFrom: any;
+  temporaryTo: any;
+  to: string;
+  from: string;
 }
 
 export const initialState: Global = {
@@ -17,21 +18,21 @@ export const initialState: Global = {
   eventsQueryString: {},
   statusFilter: "",
   showChainModal: false,
+  showfilterModal: false,
   departureOrDestination: "departure",
   switchDestination: "",
   temporaryFrom: undefined,
   temporaryTo: undefined,
   to: "To",
-  from: "From"
+  from: "From",
 };
-
 
 const globalSlice = createSlice({
   name: "global",
   initialState,
   reducers: {
     setPage(state, action) {
-      state.page = action.payload
+      state.page = action.payload;
     },
     setTo(state, action) {
       state.to = action.payload;
@@ -40,25 +41,25 @@ const globalSlice = createSlice({
       state.from = action.payload;
     },
     setEventsQueryString(state, action) {
-      state.eventsQueryString = action.payload
+      state.eventsQueryString = action.payload;
     },
     setEventsQueryStringTo(state, action) {
       state.eventsQueryString = {
         ...state.eventsQueryString,
-        toChainName: action.payload
-      }
+        toChainName: action.payload,
+      };
     },
     setEventsQueryStringFrom(state, action) {
       state.eventsQueryString = {
         ...state.eventsQueryString,
-        fromChainName: action.payload
-      }
+        fromChainName: action.payload,
+      };
     },
     setEventsQueryStringType(state, action) {
       state.eventsQueryString = {
         ...state.eventsQueryString,
-        type: action.payload
-      }
+        type: action.payload,
+      };
     },
     setTemporaryFrom(state, action) {
       state.temporaryFrom = action.payload;
@@ -67,10 +68,13 @@ const globalSlice = createSlice({
       state.temporaryTo = action.payload;
     },
     setStatusFilter(state, action) {
-      state.statusFilter = action.payload
+      state.statusFilter = action.payload;
     },
     setChainModal(state, action) {
       state.showChainModal = action.payload;
+    },
+    setFilterModal(state, action) {
+      state.showfilterModal = action.payload;
     },
     setDepartureOrDestination(state, action) {
       state.departureOrDestination = action.payload;
@@ -81,6 +85,21 @@ const globalSlice = createSlice({
   },
 });
 
-export const { setEventsQueryString, setEventsQueryStringType, setTo, setFrom, setPage, setTemporaryFrom, setTemporaryTo, setEventsQueryStringTo, setEventsQueryStringFrom, setStatusFilter, setChainModal, setDepartureOrDestination, setSwitchDestination } = globalSlice.actions;
+export const {
+  setEventsQueryString,
+  setEventsQueryStringType,
+  setTo,
+  setFrom,
+  setPage,
+  setTemporaryFrom,
+  setTemporaryTo,
+  setEventsQueryStringTo,
+  setEventsQueryStringFrom,
+  setStatusFilter,
+  setChainModal,
+  setFilterModal,
+  setDepartureOrDestination,
+  setSwitchDestination,
+} = globalSlice.actions;
 
 export default globalSlice.reducer;
