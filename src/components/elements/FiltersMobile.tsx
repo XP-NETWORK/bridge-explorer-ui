@@ -30,6 +30,7 @@ export default function FiltersMobile() {
   // const [toChain, setToChain] = useState("To");
   const [selectedFrom, setSelectedFrom] = useState("From");
   const [selectedTo, setSelectedTo] = useState("To");
+  const [value, setValue] = useState("All Types");
   const dispatch = useDispatch();
   console.log("to chains", toChains);
   const handleClose = () => {
@@ -49,6 +50,11 @@ export default function FiltersMobile() {
   const chainSelectHandlerTo = (chain: any) => {
     setSelectedTo(chain);
     setFromChains(chains.filter((c) => c.text != chain));
+  };
+
+  const handleSelectType = (e: any) => {
+    console.log(e);
+    setValue(e);
   };
 
   const handleClearAll = () => {
@@ -75,6 +81,12 @@ export default function FiltersMobile() {
       dispatch(setEventsQueryStringTo(selectedTo));
     }
     dispatch(setFilterModal(false));
+
+    if (value === "All Types") {
+      dispatch(setEventsQueryStringType(undefined));
+    } else {
+      dispatch(setEventsQueryStringType(value));
+    }
   };
 
   return (
@@ -130,7 +142,32 @@ export default function FiltersMobile() {
                   </DropdownButton>
                 </div>
               </div>
-              <DropDown />
+              <div className="dropDownContainer">
+                <div className="dropDownWrapper">
+                  <div className="dropDownTitle">
+                    <p> Tx Type</p>
+                  </div>
+                  <div className="dropDown">
+                    <DropdownButton
+                      onSelect={handleSelectType}
+                      id="dropdown-basic-button"
+                      title={value}
+                      size="sm"
+                      variant=""
+                    >
+                      <Dropdown.Item eventKey="All Types">
+                        All Types
+                      </Dropdown.Item>
+                      <Dropdown.Item eventKey="Transfer">
+                        Transfer
+                      </Dropdown.Item>
+                      <Dropdown.Item eventKey="Unfreeze">
+                        Unfreeze
+                      </Dropdown.Item>
+                    </DropdownButton>
+                  </div>
+                </div>
+              </div>
               <div className="filterBtnsWrapper">
                 <button
                   className="csvBtn clearFilterBtnModal"
