@@ -528,13 +528,23 @@ ul.chartInfoList li {
   border: 0 !important;
   margin-right: 1px;
 }
-.csvBtn span {
+
+.csvBtn:hover {
+  background: rgba(35, 94, 245, 0.1);
   color: #235ef5;
+}
+
+.csvBtn:hover span {
+  color: #235ef5;
+}
+
+.csvBtn:hover svg path {
+  fill: #235ef5;
 }
 
 .csvBtn svg {
   margin-right: 5px;
-  stroke: #235ef5;
+  /* stroke: #235ef5; */
 }
 
 .explorerCard {
@@ -544,7 +554,6 @@ ul.chartInfoList li {
   /* align-items: flex-start; */
   padding: 1rem 1rem 1rem 2rem !important;
   gap: 16px;
-  
 }
 
 .rowLabelCard {
