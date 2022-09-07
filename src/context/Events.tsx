@@ -52,6 +52,7 @@ export const EventsProvider: FC = withContainer(
       })
     );
 
+
     const toggleSort = () => setSort(sort === "DESC" ? "ASC" : "DESC");
 
     useEffect(() => {
@@ -154,7 +155,7 @@ export const EventsProvider: FC = withContainer(
       } else if (statusFilter && !eventsQueryString) {
         // console.log("only status");
 
-        fetch(`${url}?status=Failed` + `&sort=${sort}&offset=${paginationPage}`)
+        fetch(`${url}?status=${statusFilter}` + `&sort=${sort}&offset=${paginationPage}`)
           .then((res) => res.json())
           .then(
             async ({ events, count }: { events: IEvent[]; count: number }) => {
@@ -169,7 +170,7 @@ export const EventsProvider: FC = withContainer(
         fetch(
           `${url}?pendingSearch=` +
             eventsQueryString +
-            `&sort=${sort}&offset=${paginationPage}`
+            `status=${statusFilter}&sort=${sort}&offset=${paginationPage}`
         )
           .then((res) => res.json())
           .then(

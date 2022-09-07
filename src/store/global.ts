@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export interface Global {
   page: number;
   eventsQueryString: any;
-  statusFilter: "" | "Failed";
+  statusFilter: "" | "Failed" | "Pending" | "Completed";
   showChainModal: boolean;
   showfilterModal: boolean;
   chainSearch: string;

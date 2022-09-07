@@ -7,10 +7,10 @@ import "./DropDown.css";
 import { setEventsQueryStringType, setStatusFilter } from "../../store/global";
 
 import completedIcon from "../../assets/icons/completed.svg";
-import failedIcon from "../assets/icons/failed.svg";
+import failedIcon from "../../assets/icons/failed.svg";
 import pendingIcon from "../../assets/icons/pending.svg";
-import info from "../assets/icons/info.svg";
-import processing from "../assets/icons/proccess.svg";
+import info from "../../assets/icons/info.svg";
+import processing from "../../assets/icons/proccess.svg";
 
 export const StatusFilter = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ export const StatusFilter = () => {
 
   const handleSelect = (e: any) => {
     console.log(e);
-    if (e === "All Types") dispatch(setStatusFilter(undefined));
+    if (e === "All Types") dispatch(setStatusFilter(""));
     else {
       dispatch(setStatusFilter(e));
     }
@@ -40,7 +40,7 @@ export const StatusFilter = () => {
             variant=""
           >
             <Dropdown.Item eventKey="All Types">All Types</Dropdown.Item>
-            <Dropdown.Item eventKey="">
+            <Dropdown.Item eventKey="Completed">
               {" "}
               <div className="flex min-w-[5rem] flex-nowrap space-x-1 text-[#10B67A]">
                 <img
@@ -52,11 +52,20 @@ export const StatusFilter = () => {
                 <div>Completed</div>
               </div>
             </Dropdown.Item>
-            <Dropdown.Item eventKey="Failed">
+            <Dropdown.Item eventKey="Pending">
               {" "}
               <div className="flex min-w-[5rem] space-x-1 text-[#C058FF]">
                 <img src={pendingIcon} alt="pending icon" />
                 <h1>Pending</h1>
+              </div>
+            </Dropdown.Item>
+            <Dropdown.Item eventKey="Failed">
+              <div className="flex min-w-[5rem] space-x-1 text-[#6D7A92] statusWrapper">
+                <img src={processing} alt="failed icon" />
+                <h1>Processing...</h1>
+                {/* <span data-tip="Halted by the validators <br/>  Please be patient 💙">
+                  <img src={info} alt="" />
+                </span> */}
               </div>
             </Dropdown.Item>
           </DropdownButton>
