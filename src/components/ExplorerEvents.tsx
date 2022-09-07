@@ -29,6 +29,7 @@ import DownloadCSV from "./elements/CSVButton";
 import { setStatusFilter } from "../store/global";
 import FiltersBtn from "./elements/FiltersBtn";
 import FiltersMobile from "./elements/FiltersMobile";
+import { StatusFilter } from "./elements/StatusFilter";
 
 export interface IEvent {
   id: string;
@@ -133,7 +134,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
           <ChainSwitch />
           <div className="desktopOnly">
             <DropDown />
-          </div>
+          </div><StatusFilter/>
           <FiltersBtn />
           <span className="nothing desktopOnly"></span>
 

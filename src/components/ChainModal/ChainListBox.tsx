@@ -47,23 +47,31 @@ export const ChainListBox = () => {
       dispatch(setFrom("All chains"));
       dispatch(setEventsQueryStringFrom(undefined));
       setSelectedFrom("All chains");
+      return;
+    }
+    setSelectedFrom(chain.text);
+    if (chain.text === selectedTo) {
+      switchChains();
     } else {
       dispatch(setFrom(chain.text));
       dispatch(setEventsQueryStringFrom(chain.text));
-      setSelectedFrom(chain.text);
     }
-
     handleClose();
   };
+  
   const chainSelectHandlerTo = async (chain: any) => {
     if (chain === "All chains") {
       dispatch(setTo("All chains"));
       dispatch(setEventsQueryStringTo(undefined));
       setSelectedTo("All chains");
+      return;
+    }
+    setSelectedTo(chain.text);
+    if (chain.text === selectedFrom) {
+      switchChains();
     } else {
       dispatch(setTo(chain.text));
       dispatch(setEventsQueryStringTo(chain.text));
-      setSelectedTo(chain.text);
     }
 
     handleClose();
@@ -94,9 +102,15 @@ export const ChainListBox = () => {
   }, [from, departureOrDestination, to]);
 
   const switchChains = () => {
+    console.log("before switch", selectedFrom, selectedTo);
     let temp = selectedFrom;
     setSelectedFrom(selectedTo);
+    dispatch(setFrom(selectedTo));
+    dispatch(setEventsQueryStringFrom(selectedTo));
     setSelectedTo(temp);
+    dispatch(setTo(temp));
+    dispatch(setEventsQueryStringTo(temp));
+    console.log("chains switched", selectedFrom, selectedTo);
   };
 
   return (
