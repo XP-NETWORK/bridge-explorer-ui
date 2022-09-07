@@ -20,6 +20,7 @@ import { useLocation } from "react-router-dom";
 import { ReduxState } from "../../store";
 import "./Chain.css";
 import "./Modal.css";
+import ChainSearch from "./ChainSearch.jsx";
 
 export const ChainListBox = () => {
   const dispatch = useDispatch();
@@ -91,6 +92,12 @@ export const ChainListBox = () => {
     ];
     setToChains(sorted);
   }, [from, departureOrDestination, to]);
+
+  const switchChains = () => {
+    let temp = selectedFrom;
+    setSelectedFrom(selectedTo);
+    setSelectedTo(temp);
+  };
 
   return (
     <Modal

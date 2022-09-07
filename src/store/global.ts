@@ -5,6 +5,7 @@ export interface Global {
   statusFilter: "" | "Failed";
   showChainModal: boolean;
   showfilterModal: boolean;
+  chainSearch: string;
   departureOrDestination: any;
   switchDestination: any;
   temporaryFrom: any;
@@ -19,6 +20,7 @@ export const initialState: Global = {
   statusFilter: "",
   showChainModal: false,
   showfilterModal: false,
+  chainSearch: "",
   departureOrDestination: "departure",
   switchDestination: "",
   temporaryFrom: undefined,
@@ -76,6 +78,9 @@ const globalSlice = createSlice({
     setFilterModal(state, action) {
       state.showfilterModal = action.payload;
     },
+    setChainSearch(state, action) {
+      state.chainSearch = action.payload;
+    },
     setDepartureOrDestination(state, action) {
       state.departureOrDestination = action.payload;
     },
@@ -98,6 +103,7 @@ export const {
   setStatusFilter,
   setChainModal,
   setFilterModal,
+  setChainSearch,
   setDepartureOrDestination,
   setSwitchDestination,
 } = globalSlice.actions;

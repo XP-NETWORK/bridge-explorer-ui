@@ -32,7 +32,7 @@ export default function FiltersMobile() {
   const [selectedTo, setSelectedTo] = useState("To");
   const [value, setValue] = useState("All Types");
   const dispatch = useDispatch();
-  console.log("to chains", toChains);
+ 
   const handleClose = () => {
     dispatch(setFilterModal(false));
   };
@@ -44,12 +44,27 @@ export default function FiltersMobile() {
   const chainSelectHandlerFrom = (chain: any) => {
     console.log("selected chain", chain);
     setSelectedFrom(chain);
-    setToChains(chains.filter((c) => c.text != chain));
-    console.log("to chains new", toChains);
+    if (chain === selectedTo) {
+      switchChains();
+    }
+    // setToChains(chains.filter((c) => c.text != chain));
   };
+
   const chainSelectHandlerTo = (chain: any) => {
+    console.log("need to switch?",chain === selectedFrom);
+    
     setSelectedTo(chain);
-    setFromChains(chains.filter((c) => c.text != chain));
+    if (chain === selectedFrom) {
+      console.log("need to switch");
+      switchChains();
+    }
+    // setFromChains(chains.filter((c) => c.text != chain));
+  };
+
+  const switchChains = () => {
+    let temp = selectedFrom;
+    setSelectedFrom(selectedTo);
+    setSelectedTo(temp);
   };
 
   const handleSelectType = (e: any) => {
