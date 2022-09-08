@@ -32,7 +32,7 @@ export default function FiltersMobile() {
   const [selectedTo, setSelectedTo] = useState("To");
   const [value, setValue] = useState("All Types");
   const dispatch = useDispatch();
- 
+
   const handleClose = () => {
     dispatch(setFilterModal(false));
   };
@@ -51,8 +51,8 @@ export default function FiltersMobile() {
   };
 
   const chainSelectHandlerTo = (chain: any) => {
-    console.log("need to switch?",chain === selectedFrom);
-    
+    console.log("need to switch?", chain === selectedFrom);
+
     setSelectedTo(chain);
     if (chain === selectedFrom) {
       console.log("need to switch");
@@ -121,42 +121,57 @@ export default function FiltersMobile() {
         <Modal.Body>
           <div className="nftChainListBox">
             <div className="filterDropDown">
-              <div className="modalBtnWrapper">
-                <div className="dropDown">
-                  <DropdownButton
-                    onSelect={chainSelectHandlerFrom}
-                    id="dropdown-basic-button"
-                    title={selectedFrom}
-                    size="sm"
-                    variant=""
-                  >
-                    {fromChains.map((chain) => {
-                      return (
-                        <Dropdown.Item eventKey={chain.text}>
-                          {chain.text}
-                        </Dropdown.Item>
-                      );
-                    })}
-                  </DropdownButton>
-                </div>
-                <div className="dropDown">
-                  <DropdownButton
-                    onSelect={chainSelectHandlerTo}
-                    id="dropdown-basic-button"
-                    title={selectedTo}
-                    size="sm"
-                    variant=""
-                  >
-                    {toChains.map((chain) => {
-                      return (
-                        <Dropdown.Item eventKey={chain.text}>
-                          {chain.text}
-                        </Dropdown.Item>
-                      );
-                    })}
-                  </DropdownButton>
+              {/* <div className="modalBtnWrapper"> */}
+              <div className="dropDownContainer">
+                <div className="dropDownWrapper">
+                  <div className="dropDownTitle">
+                    <p>From</p>
+                  </div>
+                  <div className="dropDown">
+                    <DropdownButton
+                      onSelect={chainSelectHandlerFrom}
+                      id="dropdown-basic-button"
+                      title={selectedFrom}
+                      size="sm"
+                      variant=""
+                    >
+                      {fromChains.map((chain) => {
+                        return (
+                          <Dropdown.Item eventKey={chain.text}>
+                            {chain.text}
+                          </Dropdown.Item>
+                        );
+                      })}
+                    </DropdownButton>
+                  </div>
                 </div>
               </div>
+              <div className="dropDownContainer">
+                <div className="dropDownWrapper">
+                  <div className="dropDownTitle">
+                    <p>To</p>
+                  </div>
+                  <div className="dropDown">
+                    <DropdownButton
+                      onSelect={chainSelectHandlerTo}
+                      id="dropdown-basic-button"
+                      title={selectedTo}
+                      size="sm"
+                      variant=""
+                    >
+                      {toChains.map((chain) => {
+                        return (
+                          <Dropdown.Item eventKey={chain.text}>
+                            {chain.text}
+                          </Dropdown.Item>
+                        );
+                      })}
+                    </DropdownButton>
+                  </div>
+                </div>
+              </div>
+
+              {/* </div> */}
               <div className="dropDownContainer">
                 <div className="dropDownWrapper">
                   <div className="dropDownTitle">

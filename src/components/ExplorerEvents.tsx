@@ -134,7 +134,10 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
           <ChainSwitch />
           <div className="desktopOnly">
             <DropDown />
-          </div><StatusFilter/>
+          </div>
+          <div className="desktopOnly" style={{display:"none"}}>
+          <StatusFilter/>
+          </div>
           <FiltersBtn />
           <span className="nothing desktopOnly"></span>
 

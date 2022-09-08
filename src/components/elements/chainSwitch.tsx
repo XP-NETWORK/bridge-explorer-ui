@@ -1,7 +1,11 @@
 import React from "react";
 import { ReduxState } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
-import { setChainModal, setDepartureOrDestination, setSwitchDestination } from "../../store/global";
+import {
+  setChainModal,
+  setDepartureOrDestination,
+  setSwitchDestination,
+} from "../../store/global";
 import "./Buttons.css";
 
 export const ChainSwitch = () => {
@@ -26,20 +30,40 @@ export const ChainSwitch = () => {
 
   const show = () => {
     return (
-      <div className="modalBtnWrapper desktopOnly">
-        <div onClick={handleFromChainSwitch} className="chain-switch">
-          <div className="nameWrapper">
-            <span className="name"> {from === "xDai" ? "Gnosis" : from}</span>
-            <div className="arrow-down"></div>
+      <>
+        <div className="modalBtnWrapper desktopOnly">
+          <div className="dropDownContainer">
+            <div className="dropDownWrapper">
+              <div className="dropDownTitle">
+                <p>From</p>
+              </div>
+              <div onClick={handleFromChainSwitch} className="chain-switch">
+                <div className="nameWrapper">
+                  <span className="name">
+                    {" "}
+                    {from === "xDai" ? "Gnosis" : from}
+                  </span>
+                  <div className="arrow-down"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="dropDownContainer">
+            <div className="dropDownWrapper">
+              <div className="dropDownTitle">
+                <p>To</p>
+              </div>
+              <div onClick={handleToChainSwitch} className="chain-switch">
+                <div className="nameWrapper">
+                  <span className="name"> {to === "xDai" ? "Gnosis" : to}</span>
+                  <div className="arrow-downTo"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div onClick={handleToChainSwitch} className="chain-switch">
-          <div className="nameWrapper">
-            <span className="name"> {to === "xDai" ? "Gnosis" : to}</span>
-            <div className="arrow-downTo"></div>
-          </div>
-        </div>
-      </div>
+      </>
     );
   };
 

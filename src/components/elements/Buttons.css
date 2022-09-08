@@ -24,11 +24,11 @@
 .chain-switch {
   flex: 1;
   display: table;
-  margin: auto;
+  /* margin: auto;
   margin-right: 1px;
   margin-left: 2px;
   width: 7rem;
-  max-width: 7rem !important;
+  max-width: 7rem !important; */
   align-items: center;
   height: 28px;
   background: white;
@@ -50,6 +50,7 @@
 
 .nameWrapper {
   display: flex;
+  width: 100px;
 }
 
 .name {
@@ -59,8 +60,8 @@
 
 .modalBtnWrapper {
   display: flex;
-  border-radius: 4px;
-  background: #eeeef2;
+  /* border-radius: 4px;
+  background: #eeeef2; */
 }
 
 .csvModal {
@@ -109,18 +110,18 @@
   padding: 5px 16px;
 }
 
-.clearFilterBtnModal{
-    padding: 5px 16px;
-    background-color: #EEEEF2 !important;
-    color: #222222 !important;
+.clearFilterBtnModal {
+  padding: 5px 16px;
+  background-color: #eeeef2 !important;
+  color: #222222 !important;
 }
 
-.filterBtnsWrapper{
-    display: flex;
-    flex-direction: row;
-    width: inherit;
-    justify-content: space-between;
-    margin-top: 32px;
+.filterBtnsWrapper {
+  display: flex;
+  flex-direction: row;
+  width: inherit;
+  justify-content: space-between;
+  margin-top: 32px;
 }
 
 img.closeModal {

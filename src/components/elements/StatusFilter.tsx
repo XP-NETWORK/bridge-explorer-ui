@@ -18,10 +18,15 @@ export const StatusFilter = () => {
 
   const handleSelect = (e: any) => {
     console.log(e);
-    if (e === "All Types") dispatch(setStatusFilter(""));
-    else {
+    if (e === "All Types") {
+      dispatch(setStatusFilter(""));
+    }
+    if (e === "Processing") {
+      dispatch(setStatusFilter("Failed"));
+    } else {
       dispatch(setStatusFilter(e));
     }
+
     setValue(e);
   };
 
@@ -59,10 +64,10 @@ export const StatusFilter = () => {
                 <h1>Pending</h1>
               </div>
             </Dropdown.Item>
-            <Dropdown.Item eventKey="Failed">
-              <div className="flex min-w-[5rem] space-x-1 text-[#6D7A92] statusWrapper">
-                <img src={processing} alt="failed icon" />
-                <h1>Processing...</h1>
+            <Dropdown.Item eventKey="Processing">
+              <div className="flex min-w-[5rem] space-x-1 text-[#10B67A] text-[#6D7A92] statusWrapper">
+                <img src={processing} alt="failed icon"/>
+                <h1>Processing</h1>
                 {/* <span data-tip="Halted by the validators <br/>  Please be patient 💙">
                   <img src={info} alt="" />
                 </span> */}

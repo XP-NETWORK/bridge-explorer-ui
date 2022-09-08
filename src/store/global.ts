@@ -25,8 +25,8 @@ export const initialState: Global = {
   switchDestination: "",
   temporaryFrom: undefined,
   temporaryTo: undefined,
-  to: "To",
-  from: "From",
+  to: "All chains",
+  from: "All chains",
 };
 
 const globalSlice = createSlice({
@@ -48,13 +48,15 @@ const globalSlice = createSlice({
     setEventsQueryStringTo(state, action) {
       state.eventsQueryString = {
         ...state.eventsQueryString,
-        toChainName: action.payload,
+        toChainName:
+          action.payload === "All chains" ? undefined : action.payload,
       };
     },
     setEventsQueryStringFrom(state, action) {
       state.eventsQueryString = {
         ...state.eventsQueryString,
-        fromChainName: action.payload,
+        fromChainName:
+          action.payload === "All chains" ? undefined : action.payload,
       };
     },
     setEventsQueryStringType(state, action) {

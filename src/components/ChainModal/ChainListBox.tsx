@@ -33,8 +33,8 @@ export const ChainListBox = () => {
   const show = useSelector((state: ReduxState) => state.global.showChainModal);
   const [fromChains, setFromChains] = useState(chains);
   const [toChains, setToChains] = useState(chains);
-  const [selectedFrom, setSelectedFrom] = useState("From");
-  const [selectedTo, setSelectedTo] = useState("To");
+  const [selectedFrom, setSelectedFrom] = useState("All chains");
+  const [selectedTo, setSelectedTo] = useState("All chains");
 
   const handleClose = () => {
     dispatch(setChainModal(false));
@@ -43,12 +43,12 @@ export const ChainListBox = () => {
   };
 
   const chainSelectHandlerFrom = async (chain: any) => {
-    if (chain === "All chains") {
-      dispatch(setFrom("All chains"));
-      dispatch(setEventsQueryStringFrom(undefined));
-      setSelectedFrom("All chains");
-      return;
-    }
+    // if (chain === "All chains") {
+    //   dispatch(setFrom("All chains"));
+    //   dispatch(setEventsQueryStringFrom(undefined));
+    //   setSelectedFrom("All chains");
+    //   return;
+    // }
     setSelectedFrom(chain.text);
     if (chain.text === selectedTo) {
       switchChains();
@@ -60,12 +60,12 @@ export const ChainListBox = () => {
   };
   
   const chainSelectHandlerTo = async (chain: any) => {
-    if (chain === "All chains") {
-      dispatch(setTo("All chains"));
-      dispatch(setEventsQueryStringTo(undefined));
-      setSelectedTo("All chains");
-      return;
-    }
+    // if (chain === "All chains") {
+    //   dispatch(setTo("All chains"));
+    //   dispatch(setEventsQueryStringTo(undefined));
+    //   setSelectedTo("All chains");
+    //   return;
+    // }
     setSelectedTo(chain.text);
     if (chain.text === selectedFrom) {
       switchChains();
@@ -73,7 +73,6 @@ export const ChainListBox = () => {
       dispatch(setTo(chain.text));
       dispatch(setEventsQueryStringTo(chain.text));
     }
-
     handleClose();
   };
 
@@ -140,8 +139,8 @@ export const ChainListBox = () => {
               className="nftChainItem"
               onClick={() =>
                 departureOrDestination === "departure"
-                  ? chainSelectHandlerFrom("All chains")
-                  : chainSelectHandlerTo("All chains")
+                  ? chainSelectHandlerFrom({text: "All chains"})
+                  : chainSelectHandlerTo({text: "All chains"})
               }
             >
               <div className="modalSelectOptionsText">All Chains</div>
