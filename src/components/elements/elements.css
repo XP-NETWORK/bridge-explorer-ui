@@ -530,16 +530,16 @@ ul.chartInfoList li {
 }
 
 .csvBtn:hover {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
   background: #235ef5;
 }
 
 .csvBtn:hover span {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
 .csvBtn:hover svg path {
-  fill: #FFFFFF;
+  fill: #ffffff;
 }
 
 .csvBtn svg {
@@ -547,8 +547,8 @@ ul.chartInfoList li {
   /* stroke: #235ef5; */
 }
 
-.csvBtn svg path{
-fill: #235ef5;
+.csvBtn svg path {
+  fill: #235ef5;
 }
 
 .explorerCard {
