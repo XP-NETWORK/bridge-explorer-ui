@@ -17,7 +17,7 @@ import Iotex from "./assets/icons/iotx.svg";
 import One from "./assets/icons/one.svg";
 import Aurora from "./assets/icons/aurora.svg";
 import GT from "./assets/icons/gateChain.svg";
-import VET from "./assets/icons/Vechain.png";
+import VET from "./assets/icons/vechain.png";
 // import { //Chain } from "xp.network/dist/consts";
 import SCRT from "./assets/icons/secret.svg";
 import CKB from "./assets/icons/godwoken.svg";
