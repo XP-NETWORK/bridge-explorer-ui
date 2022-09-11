@@ -135,7 +135,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
           <div className="desktopOnly">
             <DropDown />
           </div>
-          <div className="desktopOnly" style={{display:"none"}}>
+          <div className="desktopOnly">
           <StatusFilter/>
           </div>
           <FiltersBtn />
