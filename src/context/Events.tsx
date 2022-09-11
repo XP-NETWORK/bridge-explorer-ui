@@ -146,6 +146,7 @@ export const EventsProvider: FC = withContainer(
     };
 
     const filteredEvents = async () => {
+      console.log({eventsQueryString})
       const urlF = `${url}api?${
         eventsQueryString.fromChainName
           ? `fromChainName=` + eventsQueryString.fromChainName.toUpperCase()
@@ -155,7 +156,7 @@ export const EventsProvider: FC = withContainer(
           ? `&toChainName=` + eventsQueryString.toChainName.toUpperCase()
           : ""
       }${eventsQueryString.type ? `&type=` + eventsQueryString.type : ""}${
-        eventsQueryString.status!=="All Types" ? `&status=` + eventsQueryString.status : ""
+        eventsQueryString.status && eventsQueryString.status!=="All Types" ? `&status=` + eventsQueryString.status : ""
       }`;
       const eventsObj = await axios.get(urlF);
       console.log(urlF);
