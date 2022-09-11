@@ -73,6 +73,10 @@ const globalSlice = createSlice({
     },
     setStatusFilter(state, action) {
       state.statusFilter = action.payload;
+      state.eventsQueryString = {
+        ...state.eventsQueryString,
+        status: action.payload,
+      };
     },
     setChainModal(state, action) {
       state.showChainModal = action.payload;
