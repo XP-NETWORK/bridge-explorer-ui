@@ -93,8 +93,8 @@
 .csvBtn {
   display: flex;
   align-items: center;
-  color: #fff !important;
-  background: #235ef5;
+  background: rgba(35, 94, 245, 0.1);
+  color: #235ef5;
   border-radius: 4px;
   border: 0 !important;
   margin-right: 1px;

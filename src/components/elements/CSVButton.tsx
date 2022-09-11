@@ -7,9 +7,9 @@ import { useState } from "react";
 import close from "../../assets/img/close.svg";
 import calendar from "../../assets/img/calendar.svg";
 import { url } from "../../constants";
-import {useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
 import { ReduxState } from "../../store";
-import "./Buttons.css"
+import "./Buttons.css";
 
 const DownloadCSV = ({ onClose }: { onClose: () => boolean }) => {
   const [startDate, setStart] = useState<Date | "">(
@@ -19,7 +19,10 @@ const DownloadCSV = ({ onClose }: { onClose: () => boolean }) => {
   const [endDate, setEnd] = useState<Date | "">("");
   const [captchaRender, setCaptchaRender] = useState(false);
 
-  const {eventsQueryString} = useSelector((state: ReduxState) => ({page: state.global.page, eventsQueryString: state.global.eventsQueryString}))
+  const { eventsQueryString } = useSelector((state: ReduxState) => ({
+    page: state.global.page,
+    eventsQueryString: state.global.eventsQueryString,
+  }));
 
   const onSetStart = (date: Date) => {
     if (!moment(date).isAfter(endDate)) {
@@ -117,7 +120,7 @@ const CSVButton = ({ openModal }: { openModal?: () => void }) => {
         width="16"
         height="16"
         viewBox="0 0 16 16"
-        fill="none"
+        fill="#235EF5"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path

@@ -522,29 +522,33 @@ ul.chartInfoList li {
 .csvBtn {
   display: flex;
   align-items: center;
-  color: #fff;
-  background: #235ef5;
+  background: rgba(35, 94, 245, 0.1);
+  color: #235ef5;
   border-radius: 4px;
   border: 0 !important;
   margin-right: 1px;
 }
 
 .csvBtn:hover {
-  background: rgba(35, 94, 245, 0.1);
-  color: #235ef5;
+  color: #FFFFFF !important;
+  background: #235ef5;
 }
 
 .csvBtn:hover span {
-  color: #235ef5;
+  color: #FFFFFF !important;
 }
 
 .csvBtn:hover svg path {
-  fill: #235ef5;
+  fill: #FFFFFF;
 }
 
 .csvBtn svg {
   margin-right: 5px;
   /* stroke: #235ef5; */
+}
+
+.csvBtn svg path{
+fill: #235ef5;
 }
 
 .explorerCard {
