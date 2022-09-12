@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export interface Global {
   page: number;
   eventsQueryString: any;
+  eventsQueryStringSearch: string;
   statusFilter: "" | "Failed" | "Pending" | "Completed";
   showChainModal: boolean;
   showfilterModal: boolean;
@@ -12,11 +13,13 @@ export interface Global {
   temporaryTo: any;
   to: string;
   from: string;
+  resetStatusAndType: boolean;
 }
 
 export const initialState: Global = {
   page: 0,
   eventsQueryString: {},
+  eventsQueryStringSearch: "",
   statusFilter: "",
   showChainModal: false,
   showfilterModal: false,
@@ -27,6 +30,7 @@ export const initialState: Global = {
   temporaryTo: undefined,
   to: "All chains",
   from: "All chains",
+  resetStatusAndType: true,
 };
 
 const globalSlice = createSlice({
@@ -44,14 +48,16 @@ const globalSlice = createSlice({
     },
     setEventsQueryString(state, action) {
       console.log("search:", action.payload);
-      
+      state.to = "All chains";
+      state.from = "All chains";
+      state.resetStatusAndType = !state.resetStatusAndType;
       state.eventsQueryString = action.payload;
     },
     setEventsQueryStringTo(state, action) {
       if (
         typeof state.eventsQueryString === "string" &&
         state.eventsQueryString.length > 0
-      ){
+      ) {
         state.eventsQueryString = {};
       }
       state.eventsQueryString = {
@@ -73,6 +79,9 @@ const globalSlice = createSlice({
         type: action.payload,
       };
     },
+    setEventsQueryStringSearch(state, action) {
+      state.eventsQueryStringSearch = action.payload;
+    },
     setTemporaryFrom(state, action) {
       state.temporaryFrom = action.payload;
     },
@@ -93,7 +102,6 @@ const globalSlice = createSlice({
       state.showfilterModal = action.payload;
     },
     setChainSearch(state, action) {
-     
       state.chainSearch = action.payload;
     },
     setDepartureOrDestination(state, action) {
@@ -115,6 +123,7 @@ export const {
   setTemporaryTo,
   setEventsQueryStringTo,
   setEventsQueryStringFrom,
+  setEventsQueryStringSearch,
   setStatusFilter,
   setChainModal,
   setFilterModal,

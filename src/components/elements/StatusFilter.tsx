@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,10 +11,14 @@ import failedIcon from "../../assets/icons/failed.svg";
 import pendingIcon from "../../assets/icons/pending.svg";
 import info from "../../assets/icons/info.svg";
 import processing from "../../assets/icons/proccess.svg";
+import { ReduxState } from "../../store";
 
 export const StatusFilter = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState("All Types");
+  const resetType = useSelector(
+    (state: ReduxState) => state.global.resetStatusAndType
+  );
 
   const handleSelect = (e: any) => {
     console.log(e);
@@ -30,6 +34,10 @@ export const StatusFilter = () => {
 
     setValue(e);
   };
+
+  useEffect(() => {
+    setValue("All Types");
+  }, [resetType]);
 
   return (
     <div className="dropDownContainer">
