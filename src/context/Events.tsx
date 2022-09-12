@@ -45,11 +45,12 @@ export const EventsProvider: FC = withContainer(
     //const [paginationPage, setPage] = useState(0);
     const [totalEvents, setTotal] = useState(0);
 
-    const { eventsQueryString, statusFilter, paginationPage } = useSelector(
+    const { eventsQueryString, statusFilter,collectionName, paginationPage } = useSelector(
       (state: ReduxState) => ({
         paginationPage: state.global.page,
         eventsQueryString: state.global.eventsQueryString,
         statusFilter: state.global.statusFilter,
+        collectionName: state.global.showByCollection
       })
     );
 
@@ -158,10 +159,14 @@ export const EventsProvider: FC = withContainer(
     }, [events]);
 
     console.log("eventsQueryStrin", eventsQueryString);
+    console.log("colection name ->", collectionName)
     useEffect(() => {
       console.log("eventsQueryString uef", eventsQueryString);
 
       setIsLoading(true);
+      if(collectionName.length > 0 ){
+        loadEventsByCollectionName();
+      }
       if (
         eventsQueryString.fromChainName ||
         eventsQueryString.toChainName ||
@@ -204,6 +209,14 @@ export const EventsProvider: FC = withContainer(
     const loadEventsBySearch = async () => {
       const eventsObj = await axios.get(
         `${url}?chainName=${eventsQueryString}&sort=DESC&offset=0`
+      );
+      console.log("events", eventsObj.data);
+      load(eventsObj.data);
+    };
+   
+    const loadEventsByCollectionName = async () => {
+      const eventsObj = await axios.get(
+        `${url}?api?collectionName=${collectionName}`
       );
       console.log("events", eventsObj.data);
       load(eventsObj.data);

@@ -107,3 +107,49 @@
 .modal-backdrop.show {
     opacity: 0 !important;
 } */
+
+
+.searchChain {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 0 30px;
+    margin-bottom: 6px;
+    margin-top: 6px;
+}
+
+.searchChain input {
+    font-weight: 400;
+    display: block;
+    flex-grow: 1;
+    border: 0;
+    outline: none;
+    /* background: #ECECF1;` */
+    border-radius: 10px;
+    height: 48px;
+    padding: 0 36px 0 16px;
+    color: rgb(39, 38, 38);
+    border: 1px solid #d4d9e1;
+    border-radius: 38px;
+}
+
+.searchChain input:focus {
+    background-color: #fff;
+}
+.searchChain input::placeholder {
+    color: #62718a;
+}
+
+.searchChain button {
+    position: absolute;
+    right: 0;
+    background: transparent;
+    border: 0;
+    outline: none;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0;
+    height: 48px;
+    width: 30px;
+    text-align: left;
+}
