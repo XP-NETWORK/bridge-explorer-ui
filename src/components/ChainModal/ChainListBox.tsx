@@ -10,6 +10,7 @@ import {
   setTemporaryFrom,
   setEventsQueryStringTo,
   setEventsQueryStringFrom,
+  setChainSearch,
 } from "../../store/global";
 // import {Chain} from "./Chain";
 // import "bootstrap/dist/css/bootstrap.min.css";
@@ -28,7 +29,9 @@ export const ChainListBox = () => {
   const departureOrDestination = useSelector(
     (state: ReduxState) => state.global.departureOrDestination
   );
-  const chainSearch = useSelector((state: ReduxState) => state.global.chainSearch);
+  const chainSearch = useSelector(
+    (state: ReduxState) => state.global.chainSearch
+  );
   const from = useSelector((state: ReduxState) => state.global.from);
   const to = useSelector((state: ReduxState) => state.global.to);
   const show = useSelector((state: ReduxState) => state.global.showChainModal);
@@ -39,14 +42,15 @@ export const ChainListBox = () => {
 
   useEffect(() => {
     let sorted = chains.filter((chain) =>
-                chain.text.toLowerCase().includes(chainSearch.toLowerCase())
-            );
+      chain.text.toLowerCase().includes(chainSearch.toLowerCase())
+    );
   }, []);
 
   const handleClose = () => {
     dispatch(setChainModal(false));
     dispatch(setDepartureOrDestination(""));
     dispatch(setSwitchDestination(false));
+    dispatch(setChainSearch(""));
   };
 
   const chainSelectHandlerFrom = async (chain: any) => {
@@ -65,7 +69,7 @@ export const ChainListBox = () => {
     }
     handleClose();
   };
-  
+
   const chainSelectHandlerTo = async (chain: any) => {
     // if (chain === "All chains") {
     //   dispatch(setTo("All chains"));
@@ -82,6 +86,28 @@ export const ChainListBox = () => {
     }
     handleClose();
   };
+
+  useEffect(() => {
+    let sorted;
+    if (chainSearch && departureOrDestination === "departure") {
+      sorted = chains.filter((chain) =>
+        chain.text.toLowerCase().includes(chainSearch.toLowerCase())
+      );
+      setFromChains(sorted);
+    }
+    else{
+      setFromChains(chains);
+    }
+    if (chainSearch && departureOrDestination === "destination") {
+      sorted = chains.filter((chain) =>
+        chain.text.toLowerCase().includes(chainSearch.toLowerCase())
+      );
+      setToChains(sorted);
+    }
+    else{
+      setToChains(chains);
+    }
+  }, [chainSearch]);
 
   useEffect(() => {
     // debugger
@@ -105,6 +131,7 @@ export const ChainListBox = () => {
       ...withComing,
     ];
     setToChains(sorted);
+    setFromChains(sorted);
   }, [from, departureOrDestination, to]);
 
   const switchChains = () => {
@@ -140,14 +167,14 @@ export const ChainListBox = () => {
       </Modal.Header>
       <Modal.Body>
         <div className="nftChainListBox">
-          <ChainSearch/>
+          <ChainSearch />
           <ul className="nftChainList scrollSty">
             <li
               className="nftChainItem"
               onClick={() =>
                 departureOrDestination === "departure"
-                  ? chainSelectHandlerFrom({text: "All chains"})
-                  : chainSelectHandlerTo({text: "All chains"})
+                  ? chainSelectHandlerFrom({ text: "All chains" })
+                  : chainSelectHandlerTo({ text: "All chains" })
               }
             >
               <div className="modalSelectOptionsText">All Chains</div>
