@@ -20,7 +20,7 @@ import { useLocation } from "react-router-dom";
 import { ReduxState } from "../../store";
 import "./Chain.css";
 import "./Modal.css";
-import ChainSearch from "./ChainSearch.jsx";
+import ChainSearch from "./ChainSearch";
 
 export const ChainListBox = () => {
   const dispatch = useDispatch();
@@ -28,6 +28,7 @@ export const ChainListBox = () => {
   const departureOrDestination = useSelector(
     (state: ReduxState) => state.global.departureOrDestination
   );
+  const chainSearch = useSelector((state: ReduxState) => state.global.chainSearch);
   const from = useSelector((state: ReduxState) => state.global.from);
   const to = useSelector((state: ReduxState) => state.global.to);
   const show = useSelector((state: ReduxState) => state.global.showChainModal);
@@ -35,6 +36,12 @@ export const ChainListBox = () => {
   const [toChains, setToChains] = useState(chains);
   const [selectedFrom, setSelectedFrom] = useState("All chains");
   const [selectedTo, setSelectedTo] = useState("All chains");
+
+  useEffect(() => {
+    let sorted = chains.filter((chain) =>
+                chain.text.toLowerCase().includes(chainSearch.toLowerCase())
+            );
+  }, []);
 
   const handleClose = () => {
     dispatch(setChainModal(false));
@@ -133,7 +140,7 @@ export const ChainListBox = () => {
       </Modal.Header>
       <Modal.Body>
         <div className="nftChainListBox">
-          {/* <ChainSearch /> */}
+          <ChainSearch/>
           <ul className="nftChainList scrollSty">
             <li
               className="nftChainItem"
