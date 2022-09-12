@@ -1,6 +1,6 @@
 import GT from "./assets/icons/gate.svg";
 import Tron from "./assets/chains/tron.svg";
-import Vechain from "./assets/chains/Vechain.png";
+import Vechain from "./assets/icons/vechain.png";
 import Algorand from "./assets/chains/algorand.svg";
 import Secret from "./assets/icons/secret.svg";
 
