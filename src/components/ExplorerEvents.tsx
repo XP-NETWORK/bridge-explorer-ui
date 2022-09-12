@@ -57,6 +57,7 @@ export interface IEvent {
   originalContract?: string;
   originalTokenId?: string;
   originalUri?: string;
+  listener?:string
 }
 
 export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {

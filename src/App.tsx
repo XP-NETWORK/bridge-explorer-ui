@@ -2,15 +2,19 @@ import { Routes, Route } from "react-router-dom";
 import { Explorer } from "./pages/Explorer";
 import { Event } from "./pages/Event";
 import { Dashboard } from "./pages/Dashboard";
-import {Network} from "./pages/Network";
+import { Network } from "./pages/Network";
 import { ServiceProvider } from "../src/context/ServcieProvder";
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
 import "./components/ChainModal/Chain.css"
 
-import { socketUrl, url } from "./constants";
+import { socketUrl, url, scraperSocketUrl } from "./constants";
 
 const socket = io(socketUrl, {
+  path: "/socket.io",
+});
+
+const scraperSocket = io(scraperSocketUrl, {
   path: "/socket.io",
 });
 
@@ -49,7 +53,7 @@ export const App = () => {
   }, [])
 
   return (
-    <ServiceProvider value={{socket, appData, fetching}}>
+    <ServiceProvider value={{ socket, appData, fetching, scraperSocket }}>
         <Routes>
           <Route path="/*" element={<Explorer />} />
           <Route path="/tx/:fromHash" element={<Event />} />

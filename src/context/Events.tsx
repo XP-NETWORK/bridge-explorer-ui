@@ -36,7 +36,7 @@ interface IEventsContext {
 
 export const EventsContext = createContext<IEventsContext | null>(null);
 export const EventsProvider: FC = withContainer(
-  ({ children, container: { socket } }) => {
+  ({ children, container: { socket, scraperSocket } }) => {
     const [events, setEvents] = useState<IEvent[]>([]);
     //const [chainName, setChainName] = useState("");
     //const [status, setStatus] = useState("");
@@ -56,8 +56,13 @@ export const EventsProvider: FC = withContainer(
     const toggleSort = () => setSort(sort === "DESC" ? "ASC" : "DESC");
 
     useEffect(() => {
+
       socket.off("incomingEvent");
       socket.off("updateEvent");
+
+      scraperSocket.off("incomingEvent");
+      scraperSocket.off("updateEvent");
+
       socket.on("incomingEvent", async (event: IEvent) => {
         console.log("Incoming event");
         console.log(event);
@@ -71,6 +76,7 @@ export const EventsProvider: FC = withContainer(
           setEvents([incoming, ...events]); //updateEvent
         }
       });
+
       socket.on("updateEvent", async (updated: IEvent) => {
         console.log(
           "updateEvent",
@@ -100,9 +106,54 @@ export const EventsProvider: FC = withContainer(
         }
       });
 
+      scraperSocket.on("incomingEvent", async (event: IEvent) => {
+        console.log("Incoming event");
+        console.log(event);
+        if (eventsQueryString) return;
+        try {
+          const incoming = { imgUri: "", ...event };
+          setEvents([incoming, ...events]);
+        } catch (e: any) {
+          // console.log(e);
+          const incoming = { imgUri: "", ...event };
+          setEvents([incoming, ...events]); //updateEvent
+        }
+      });
+
+      scraperSocket.on("updateEvent", async (updated: IEvent) => {
+        console.log(
+          "updateEvent",
+          updated.fromChain,
+          updated.actionId,
+          updated.status
+        );
+        const idx = events.findIndex(
+          (event) =>
+            event.fromChain + event.actionId ===
+            updated.fromChain + updated.actionId
+        );
+        try {
+          const metadata = await fetchNtf(updated);
+          setEvents([
+            ...events.slice(0, idx),
+            { imgUri: metadata.image as string, ...updated },
+            ...events.slice(idx + 1),
+          ]);
+        } catch (e: any) {
+          // console.log(e, "img fetch error");
+          setEvents([
+            ...events.slice(0, idx),
+            { imgUri: "", ...updated },
+            ...events.slice(idx + 1),
+          ]); //updateEvent
+        }
+      });
+      
       return () => {
         socket.off("incomingEvent");
         socket.off("updateEvent");
+        scraperSocket.off("incomingEvent");
+        scraperSocket.off("updateEvent");
       };
     }, [events]);
 
@@ -159,18 +210,15 @@ export const EventsProvider: FC = withContainer(
     };
 
     const filteredEvents = async () => {
-      console.log({eventsQueryString})
-      const urlF = `${url}api?${
-        eventsQueryString.fromChainName
+      console.log({ eventsQueryString })
+      const urlF = `${url}api?${eventsQueryString.fromChainName
           ? `fromChainName=` + eventsQueryString.fromChainName.toUpperCase()
           : ""
-      }${
-        eventsQueryString.toChainName
+        }${eventsQueryString.toChainName
           ? `&toChainName=` + eventsQueryString.toChainName.toUpperCase()
           : ""
-      }${eventsQueryString.type ? `&type=` + eventsQueryString.type : ""}${
-        eventsQueryString.status ? `&status=` + eventsQueryString.status : ""
-      }`;
+        }${eventsQueryString.type ? `&type=` + eventsQueryString.type : ""}${eventsQueryString.status ? `&status=` + eventsQueryString.status : ""
+        }`;
       const eventsObj = await axios.get(urlF);
       console.log(urlF);
 
