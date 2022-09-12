@@ -69,9 +69,9 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   });
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(setStatusFilter(status));
-  }, [status]);
+  // useEffect(() => {
+  //   dispatch(setStatusFilter(status));
+  // }, [status]);
 
   let scrollBtn = useRef<any>(null);
 

@@ -43,9 +43,17 @@ const globalSlice = createSlice({
       state.from = action.payload;
     },
     setEventsQueryString(state, action) {
+      console.log("search:", action.payload);
+      
       state.eventsQueryString = action.payload;
     },
     setEventsQueryStringTo(state, action) {
+      if (
+        typeof state.eventsQueryString === "string" &&
+        state.eventsQueryString.length > 0
+      ){
+        state.eventsQueryString = {};
+      }
       state.eventsQueryString = {
         ...state.eventsQueryString,
         toChainName:
@@ -85,6 +93,7 @@ const globalSlice = createSlice({
       state.showfilterModal = action.payload;
     },
     setChainSearch(state, action) {
+     
       state.chainSearch = action.payload;
     },
     setDepartureOrDestination(state, action) {
