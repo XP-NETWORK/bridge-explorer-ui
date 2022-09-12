@@ -16,6 +16,7 @@ export const SearchBar: React.FC<{
   const [value, setValue] = useState(
     loc.pathname.replace("/", "") === "processing" ? "" : loc.pathname.replace("/", "")
   );
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

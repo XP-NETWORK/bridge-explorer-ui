@@ -106,12 +106,11 @@ export const EventsProvider: FC = withContainer(
       };
     }, [events]);
 
+    console.log("eventsQueryStrin", eventsQueryString);
     useEffect(() => {
-      console.log("eventsQueryString.length", eventsQueryString.length);
+      console.log("eventsQueryString uef", eventsQueryString);
 
       setIsLoading(true);
-      // if(!eventsQueryString){
-      //   console.log("im in");
       if (
         eventsQueryString.fromChainName ||
         eventsQueryString.toChainName ||
@@ -120,12 +119,18 @@ export const EventsProvider: FC = withContainer(
       ) {
         console.log("im in filtered api call");
         filteredEvents();
+      } else if (
+        typeof eventsQueryString === "string" &&
+        eventsQueryString.length > 0
+      ) {
+        console.log("im in search mode");
+        loadEventsBySearch();
       } else {
         loadAllEvents();
       }
 
       // }
-    }, [eventsQueryString, statusFilter, sort, paginationPage]);
+    }, [eventsQueryString, sort, paginationPage]);
 
     const load = async ({
       events,
@@ -145,6 +150,14 @@ export const EventsProvider: FC = withContainer(
       load(eventsObj.data);
     };
 
+    const loadEventsBySearch = async () => {
+      const eventsObj = await axios.get(
+        `${url}?chainName=${eventsQueryString}&sort=DESC&offset=0`
+      );
+      console.log("events", eventsObj.data);
+      load(eventsObj.data);
+    };
+
     const filteredEvents = async () => {
       console.log({eventsQueryString})
       const urlF = `${url}api?${
@@ -156,7 +169,7 @@ export const EventsProvider: FC = withContainer(
           ? `&toChainName=` + eventsQueryString.toChainName.toUpperCase()
           : ""
       }${eventsQueryString.type ? `&type=` + eventsQueryString.type : ""}${
-        eventsQueryString.status && eventsQueryString.status!=="All Types" ? `&status=` + eventsQueryString.status : ""
+        eventsQueryString.status ? `&status=` + eventsQueryString.status : ""
       }`;
       const eventsObj = await axios.get(urlF);
       console.log(urlF);

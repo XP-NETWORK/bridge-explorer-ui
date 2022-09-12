@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,24 +11,33 @@ import failedIcon from "../../assets/icons/failed.svg";
 import pendingIcon from "../../assets/icons/pending.svg";
 import info from "../../assets/icons/info.svg";
 import processing from "../../assets/icons/proccess.svg";
+import { ReduxState } from "../../store";
 
 export const StatusFilter = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState("All Types");
+  const resetType = useSelector(
+    (state: ReduxState) => state.global.resetStatusAndType
+  );
 
   const handleSelect = (e: any) => {
     console.log(e);
     if (e === "All Types") {
-      dispatch(setStatusFilter(""));
-    }
-    if (e === "Processing") {
+      //   dispatch(setStatusFilter(""));
+    } else if (e === "Processing") {
       dispatch(setStatusFilter("Failed"));
+    } else if (e === "Pending") {
+      dispatch(setStatusFilter("Pending"));
     } else {
       dispatch(setStatusFilter(e));
     }
 
     setValue(e);
   };
+
+  useEffect(() => {
+    setValue("All Types");
+  }, [resetType]);
 
   return (
     <div className="dropDownContainer">
@@ -66,7 +75,7 @@ export const StatusFilter = () => {
             </Dropdown.Item>
             <Dropdown.Item eventKey="Processing">
               <div className="flex min-w-[5rem] space-x-1 text-[#10B67A] text-[#6D7A92] statusWrapper">
-                <img src={processing} alt="failed icon"/>
+                <img src={processing} alt="failed icon" />
                 <h1>Processing</h1>
                 {/* <span data-tip="Halted by the validators <br/>  Please be patient 💙">
                   <img src={info} alt="" />
