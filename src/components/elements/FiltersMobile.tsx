@@ -80,12 +80,12 @@ export default function FiltersMobile() {
     console.log("before switch", selectedFrom, selectedTo);
     let temp = selectedFrom;
     setSelectedFrom(selectedTo);
-    dispatch(setFrom(selectedTo));
-    dispatch(setEventsQueryStringFrom(selectedTo));
+    // dispatch(setFrom(selectedTo));
+    // dispatch(setEventsQueryStringFrom(selectedTo));
     setSelectedTo(temp);
-    dispatch(setTo(temp));
-    dispatch(setEventsQueryStringTo(temp));
-    console.log("chains switched", selectedFrom, selectedTo);
+    // dispatch(setTo(temp));
+    // dispatch(setEventsQueryStringTo(temp));
+    // console.log("chains switched", selectedFrom, selectedTo);
   };
 
   const handleShowFilterResults = () => {

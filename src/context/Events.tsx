@@ -201,14 +201,16 @@ export const EventsProvider: FC = withContainer(
     };
 
     const loadAllEvents = async () => {
-      const eventsObj = await axios.get(url);
+      const eventsObj = await axios.get(
+        `${url}?sort=${sort}&offset=${paginationPage}`
+      );
       console.log("events", eventsObj.data);
       load(eventsObj.data);
     };
 
     const loadEventsBySearch = async () => {
       const eventsObj = await axios.get(
-        `${url}?chainName=${eventsQueryString}&sort=DESC&offset=0`
+        `${url}?chainName=${eventsQueryString}&sort=${sort}&offset=${paginationPage}`
       );
       console.log("events", eventsObj.data);
       load(eventsObj.data);
@@ -216,12 +218,14 @@ export const EventsProvider: FC = withContainer(
 
     const loadEventsByCollectionName = async () => {
       console.log("inside load by name");
-      console.log(`${url}api?collectionName=${collectionName}`);
+      console.log(
+        `${url}api?collectionName=${collectionName}&offset=${paginationPage}`
+      );
 
       const eventsObj = await axios.get(
-        `${url}?api?collectionName=${collectionName}`
+        `${url}api?collectionName=${collectionName}&offset=${paginationPage}`
       );
-      console.log("events", eventsObj.data);
+      console.log("events by collection", eventsObj.data);
       load(eventsObj.data);
     };
 
@@ -237,9 +241,9 @@ export const EventsProvider: FC = withContainer(
           : ""
       }${eventsQueryString.type ? `&type=` + eventsQueryString.type : ""}${
         eventsQueryString.status ? `&status=` + eventsQueryString.status : ""
-      }`;
+      }&offset=${paginationPage}`;
       const eventsObj = await axios.get(urlF);
-      console.log(urlF);
+      console.log("filter with offset",urlF);
 
       console.log("events", eventsObj.data);
       console.log("statusssss", eventsQueryString.status);
