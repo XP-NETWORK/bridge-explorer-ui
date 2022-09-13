@@ -32,20 +32,14 @@ export const ChainListBox = () => {
   const chainSearch = useSelector(
     (state: ReduxState) => state.global.chainSearch
   );
-  const from = useSelector((state: ReduxState) => state.global.from);
-  const to = useSelector((state: ReduxState) => state.global.to);
+  // const from = useSelector((state: ReduxState) => state.global.from);
+  // const to = useSelector((state: ReduxState) => state.global.to);
   const show = useSelector((state: ReduxState) => state.global.showChainModal);
   const [fromChains, setFromChains] = useState(chains);
   const [toChains, setToChains] = useState(chains);
   const [selectedFrom, setSelectedFrom] = useState("All chains");
   const [selectedTo, setSelectedTo] = useState("All chains");
-
-  useEffect(() => {
-    let sorted = chains.filter((chain) =>
-      chain.text.toLowerCase().includes(chainSearch.toLowerCase())
-    );
-  }, []);
-
+  
   const handleClose = () => {
     dispatch(setChainModal(false));
     dispatch(setDepartureOrDestination(""));
@@ -54,12 +48,6 @@ export const ChainListBox = () => {
   };
 
   const chainSelectHandlerFrom = async (chain: any) => {
-    // if (chain === "All chains") {
-    //   dispatch(setFrom("All chains"));
-    //   dispatch(setEventsQueryStringFrom(undefined));
-    //   setSelectedFrom("All chains");
-    //   return;
-    // }
     setSelectedFrom(chain.text);
     if (chain.text === selectedTo) {
       switchChains();
@@ -71,12 +59,6 @@ export const ChainListBox = () => {
   };
 
   const chainSelectHandlerTo = async (chain: any) => {
-    // if (chain === "All chains") {
-    //   dispatch(setTo("All chains"));
-    //   dispatch(setEventsQueryStringTo(undefined));
-    //   setSelectedTo("All chains");
-    //   return;
-    // }
     setSelectedTo(chain.text);
     if (chain.text === selectedFrom) {
       switchChains();
@@ -94,8 +76,7 @@ export const ChainListBox = () => {
         chain.text.toLowerCase().includes(chainSearch.toLowerCase())
       );
       setFromChains(sorted);
-    }
-    else{
+    } else {
       setFromChains(chains);
     }
     if (chainSearch && departureOrDestination === "destination") {
@@ -103,36 +84,35 @@ export const ChainListBox = () => {
         chain.text.toLowerCase().includes(chainSearch.toLowerCase())
       );
       setToChains(sorted);
-    }
-    else{
+    } else {
       setToChains(chains);
     }
   }, [chainSearch]);
 
-  useEffect(() => {
-    // debugger
-    let filteredChains = chains;
-    const withNew = filteredChains
-      .filter((chain) => chain.newChain)
-      .sort((a, b) => a.order - b.order);
-    const withComing = filteredChains
-      .filter((chain) => chain.coming && !chain.newChain)
-      .sort((a, b) => b.order - a.order);
-    const withMaintenance = filteredChains.filter(
-      (chain) => chain.maintenance && !chain.newChain
-    );
-    const noComingNoMaintenance = filteredChains
-      .filter((chain) => !chain.coming && !chain.maintenance && !chain.newChain)
-      .sort((a, b) => a.order - b.order);
-    let sorted = [
-      ...withNew,
-      ...noComingNoMaintenance,
-      ...withMaintenance,
-      ...withComing,
-    ];
-    setToChains(sorted);
-    setFromChains(sorted);
-  }, [from, departureOrDestination, to]);
+  // useEffect(() => {
+  //   // debugger
+  //   let filteredChains = chains;
+  //   const withNew = filteredChains
+  //     .filter((chain) => chain.newChain)
+  //     .sort((a, b) => a.order - b.order);
+  //   const withComing = filteredChains
+  //     .filter((chain) => chain.coming && !chain.newChain)
+  //     .sort((a, b) => b.order - a.order);
+  //   const withMaintenance = filteredChains.filter(
+  //     (chain) => chain.maintenance && !chain.newChain
+  //   );
+  //   const noComingNoMaintenance = filteredChains
+  //     .filter((chain) => !chain.coming && !chain.maintenance && !chain.newChain)
+  //     .sort((a, b) => a.order - b.order);
+  //   let sorted = [
+  //     ...withNew,
+  //     ...noComingNoMaintenance,
+  //     ...withMaintenance,
+  //     ...withComing,
+  //   ];
+  //   setToChains(sorted);
+  //   setFromChains(sorted);
+  // }, [from, departureOrDestination, to]);
 
   const switchChains = () => {
     console.log("before switch", selectedFrom, selectedTo);

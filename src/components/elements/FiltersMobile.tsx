@@ -4,67 +4,51 @@ import { useDispatch, useSelector } from "react-redux";
 import filter from "../../assets/img/filter.svg";
 import { ReduxState } from "../../store";
 import {
+  setDepartureOrDestination,
   setEventsQueryStringFrom,
   setEventsQueryStringTo,
   setEventsQueryStringType,
   setFilterModal,
   setFrom,
+  setStatusFilter,
+  setSwitchDestination,
   setTo,
 } from "../../store/global";
 import { chains } from "../../values";
 import { DropDown } from "./DropDown";
 
 export default function FiltersMobile() {
-  // const [showFilters, setShowFilters] = useState();
-  const departureOrDestination = useSelector(
-    (state: ReduxState) => state.global.departureOrDestination
-  );
-  const from = useSelector((state: ReduxState) => state.global.from);
-  const to = useSelector((state: ReduxState) => state.global.to);
-
   const [fromChains, setFromChains] = useState(chains);
   const [toChains, setToChains] = useState(chains);
   const show = useSelector((state: ReduxState) => state.global.showfilterModal);
-  console.log("show", show);
-  // const [fromChain, setFromChain] = useState("From");
-  // const [toChain, setToChain] = useState("To");
-  const [selectedFrom, setSelectedFrom] = useState("From");
-  const [selectedTo, setSelectedTo] = useState("To");
+
+  const [selectedFrom, setSelectedFrom] = useState("All chains");
+  const [selectedTo, setSelectedTo] = useState("All chains");
   const [value, setValue] = useState("All Types");
+  const [statusValue, setStatusValue] = useState("All Types");
+
   const dispatch = useDispatch();
 
   const handleClose = () => {
     dispatch(setFilterModal(false));
+    dispatch(setDepartureOrDestination(""));
+    dispatch(setSwitchDestination(false));
   };
 
-  // const openFilters = () =>{
-  //   dispatch(setFilterModal(true));
-  // }
+  const handleClearAll = () => {
+    // dispatch(setEventsQueryStringType(undefined));
+    setFilterModal(false);
+    setSelectedFrom("All chains");
+    setSelectedTo("All chains");
+    setValue("All Types");
+    setStatusValue("All Types");
 
-  const chainSelectHandlerFrom = (chain: any) => {
-    console.log("selected chain", chain);
-    setSelectedFrom(chain);
-    if (chain === selectedTo) {
-      switchChains();
-    }
-    // setToChains(chains.filter((c) => c.text != chain));
-  };
-
-  const chainSelectHandlerTo = (chain: any) => {
-    console.log("need to switch?", chain === selectedFrom);
-
-    setSelectedTo(chain);
-    if (chain === selectedFrom) {
-      console.log("need to switch");
-      switchChains();
-    }
-    // setFromChains(chains.filter((c) => c.text != chain));
-  };
-
-  const switchChains = () => {
-    let temp = selectedFrom;
-    setSelectedFrom(selectedTo);
-    setSelectedTo(temp);
+    dispatch(setFrom(selectedFrom));
+    dispatch(setEventsQueryStringFrom(selectedFrom));
+    dispatch(setEventsQueryStringTo(selectedTo));
+    dispatch(setTo(selectedTo));
+    dispatch(setEventsQueryStringType(undefined));
+    dispatch(setStatusFilter(undefined));
   };
 
   const handleSelectType = (e: any) => {
@@ -72,36 +56,62 @@ export default function FiltersMobile() {
     setValue(e);
   };
 
-  const handleClearAll = () => {
-    // dispatch(setEventsQueryStringType(undefined));
-    setFilterModal(false);
-    setSelectedFrom("From");
-    setSelectedTo("To");
+  const handleSelectStatus = (e: any) => {
+    console.log(e);
+
+    setStatusValue(e);
+  };
+
+  const chainSelectHandlerFrom = async (chain: any) => {
+    setSelectedFrom(chain);
+    if (chain === selectedTo && chain !== "All chains") {
+      switchChains();
+    }
+  };
+
+  const chainSelectHandlerTo = async (chain: any) => {
+    setSelectedTo(chain);
+    if (chain === selectedFrom && chain !== "All chains") {
+      switchChains();
+    }
+  };
+
+  const switchChains = () => {
+    console.log("before switch", selectedFrom, selectedTo);
+    let temp = selectedFrom;
+    setSelectedFrom(selectedTo);
+    dispatch(setFrom(selectedTo));
+    dispatch(setEventsQueryStringFrom(selectedTo));
+    setSelectedTo(temp);
+    dispatch(setTo(temp));
+    dispatch(setEventsQueryStringTo(temp));
+    console.log("chains switched", selectedFrom, selectedTo);
   };
 
   const handleShowFilterResults = () => {
-    console.log("from,to", selectedFrom, selectedTo);
+    dispatch(setFrom(selectedFrom));
+    dispatch(setEventsQueryStringFrom(selectedFrom));
 
-    if (selectedFrom === "From") {
-      dispatch(setEventsQueryStringFrom(undefined));
-    } else {
-      dispatch(setFrom(selectedFrom));
-      dispatch(setEventsQueryStringFrom(selectedFrom));
-    }
-
-    if (selectedTo === "To") {
-      dispatch(setEventsQueryStringTo(undefined));
-    } else {
-      dispatch(setTo(selectedTo));
-      dispatch(setEventsQueryStringTo(selectedTo));
-    }
-    dispatch(setFilterModal(false));
+    dispatch(setTo(selectedTo));
+    dispatch(setEventsQueryStringTo(selectedTo));
 
     if (value === "All Types") {
       dispatch(setEventsQueryStringType(undefined));
     } else {
       dispatch(setEventsQueryStringType(value));
     }
+
+    if (statusValue === "All Types") {
+      //   dispatch(setStatusFilter(""));
+    } else if (statusValue === "Processing") {
+      dispatch(setStatusFilter("Failed"));
+    } else if (statusValue === "Pending") {
+      dispatch(setStatusFilter("Pending"));
+    } else {
+      dispatch(setStatusFilter(statusValue));
+    }
+
+    handleClose();
   };
 
   return (
@@ -135,6 +145,9 @@ export default function FiltersMobile() {
                       size="sm"
                       variant=""
                     >
+                      <Dropdown.Item eventKey={"All chains"}>
+                        All chains
+                      </Dropdown.Item>
                       {fromChains.map((chain) => {
                         return (
                           <Dropdown.Item eventKey={chain.text}>
@@ -159,6 +172,9 @@ export default function FiltersMobile() {
                       size="sm"
                       variant=""
                     >
+                      <Dropdown.Item eventKey={"All chains"}>
+                        All chains
+                      </Dropdown.Item>
                       {toChains.map((chain) => {
                         return (
                           <Dropdown.Item eventKey={chain.text}>
@@ -198,6 +214,35 @@ export default function FiltersMobile() {
                   </div>
                 </div>
               </div>
+
+              <div className="dropDownContainer">
+                <div className="dropDownWrapper">
+                  <div className="dropDownTitle">
+                    <p> Status</p>
+                  </div>
+                  <div className="dropDown">
+                    <DropdownButton
+                      onSelect={handleSelectStatus}
+                      id="dropdown-basic-button"
+                      title={statusValue}
+                      size="sm"
+                      variant=""
+                    >
+                      <Dropdown.Item eventKey="All Types">
+                        All Types
+                      </Dropdown.Item>
+                      <Dropdown.Item eventKey="Completed">
+                        Completed
+                      </Dropdown.Item>
+                      <Dropdown.Item eventKey="Pending">Pending</Dropdown.Item>
+                      <Dropdown.Item eventKey="Processing">
+                        Processing
+                      </Dropdown.Item>
+                    </DropdownButton>
+                  </div>
+                </div>
+              </div>
+
               <div className="filterBtnsWrapper">
                 <button
                   className="csvBtn clearFilterBtnModal"

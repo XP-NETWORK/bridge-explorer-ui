@@ -32,7 +32,7 @@ export const initialState: Global = {
   to: "All chains",
   from: "All chains",
   resetStatusAndType: true,
-  showByCollection:"",
+  showByCollection: "",
 };
 
 const globalSlice = createSlice({
@@ -113,10 +113,7 @@ const globalSlice = createSlice({
       state.switchDestination = action.payload;
     },
     setShowByCollection(state, action) {
-      console.log("state",action.payload);
-      
       state.showByCollection = action.payload;
-      console.log("state.showByCollection",state.showByCollection);
     }
   },
 });
@@ -138,7 +135,7 @@ export const {
   setChainSearch,
   setDepartureOrDestination,
   setSwitchDestination,
-  setShowByCollection
+  setShowByCollection,
 } = globalSlice.actions;
 
 export default globalSlice.reducer;

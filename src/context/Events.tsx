@@ -45,19 +45,17 @@ export const EventsProvider: FC = withContainer(
     //const [paginationPage, setPage] = useState(0);
     const [totalEvents, setTotal] = useState(0);
 
-    const { eventsQueryString, statusFilter,collectionName, paginationPage } = useSelector(
-      (state: ReduxState) => ({
+    const { eventsQueryString, statusFilter, collectionName, paginationPage } =
+      useSelector((state: ReduxState) => ({
         paginationPage: state.global.page,
         eventsQueryString: state.global.eventsQueryString,
         statusFilter: state.global.statusFilter,
-        collectionName: state.global.showByCollection
-      })
-    );
+        collectionName: state.global.showByCollection,
+      }));
 
     const toggleSort = () => setSort(sort === "DESC" ? "ASC" : "DESC");
 
     useEffect(() => {
-
       socket.off("incomingEvent");
       socket.off("updateEvent");
 
@@ -149,7 +147,7 @@ export const EventsProvider: FC = withContainer(
           ]); //updateEvent
         }
       });
-      
+
       return () => {
         socket.off("incomingEvent");
         socket.off("updateEvent");
@@ -159,12 +157,14 @@ export const EventsProvider: FC = withContainer(
     }, [events]);
 
     console.log("eventsQueryStrin", eventsQueryString);
-    console.log("colection name ->", collectionName)
+    console.log("colection name ->", collectionName);
     useEffect(() => {
       console.log("eventsQueryString uef", eventsQueryString);
-
+      console.log("name length ", collectionName.length);
       setIsLoading(true);
-      if(collectionName.length > 0 ){
+      if (collectionName.length > 0) {
+        console.log("collection name is clickedddd");
+
         loadEventsByCollectionName();
       }
       if (
@@ -186,7 +186,7 @@ export const EventsProvider: FC = withContainer(
       }
 
       // }
-    }, [eventsQueryString, sort, paginationPage]);
+    }, [eventsQueryString, sort, paginationPage, collectionName]);
 
     const load = async ({
       events,
@@ -213,8 +213,11 @@ export const EventsProvider: FC = withContainer(
       console.log("events", eventsObj.data);
       load(eventsObj.data);
     };
-   
+
     const loadEventsByCollectionName = async () => {
+      console.log("inside load by name");
+      console.log(`${url}api?collectionName=${collectionName}`);
+
       const eventsObj = await axios.get(
         `${url}?api?collectionName=${collectionName}`
       );
@@ -223,15 +226,18 @@ export const EventsProvider: FC = withContainer(
     };
 
     const filteredEvents = async () => {
-      console.log({ eventsQueryString })
-      const urlF = `${url}api?${eventsQueryString.fromChainName
+      console.log({ eventsQueryString });
+      const urlF = `${url}api?${
+        eventsQueryString.fromChainName
           ? `fromChainName=` + eventsQueryString.fromChainName.toUpperCase()
           : ""
-        }${eventsQueryString.toChainName
+      }${
+        eventsQueryString.toChainName
           ? `&toChainName=` + eventsQueryString.toChainName.toUpperCase()
           : ""
-        }${eventsQueryString.type ? `&type=` + eventsQueryString.type : ""}${eventsQueryString.status ? `&status=` + eventsQueryString.status : ""
-        }`;
+      }${eventsQueryString.type ? `&type=` + eventsQueryString.type : ""}${
+        eventsQueryString.status ? `&status=` + eventsQueryString.status : ""
+      }`;
       const eventsObj = await axios.get(urlF);
       console.log(urlF);
 
