@@ -15,11 +15,22 @@ export const SearchBar: React.FC<{
 }> = ({ mode }) => {
   const loc = useLocation();
   const [value, setValue] = useState(
-    loc.pathname.replace("/", "") === "processing" ? "" : loc.pathname.replace("/", "")
+    loc.pathname.replace("/", "") === "processing"
+      ? ""
+      : loc.pathname.replace("/", "")
   );
-  const eventsQueryString = useSelector(
-    (state: ReduxState) => state.global.eventsQueryString
+
+  const { eventsQueryString, from, to, statusFilter } = useSelector(
+    (state: ReduxState) => ({
+      from: state.global.from,
+      to: state.global.to,
+      eventsQueryString: state.global.eventsQueryString,
+      statusFilter: state.global.statusFilter,
+    })
   );
+  // const eventsQueryString = useSelector(
+  //   (state: ReduxState) => state.global.eventsQueryString
+  // );
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,10 +41,10 @@ export const SearchBar: React.FC<{
   );
 
   useEffect(() => {
-    if(Object.keys(eventsQueryString).length === 0){
+    if (typeof eventsQueryString !== "string") {
       setValue("");
     }
-  }, [eventsQueryString]);
+  }, [from, to, statusFilter]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.target.value === "" ? handleClearSearch() : mode(true);
@@ -79,7 +90,10 @@ export const SearchBar: React.FC<{
           onChange={handleChange}
           value={value}
         />
-        <div className="clearWrapper" style={{ display: value ? "flex" : "none" }}>
+        <div
+          className="clearWrapper"
+          style={{ display: value ? "flex" : "none" }}
+        >
           <img
             src={Cross}
             alt="cross"

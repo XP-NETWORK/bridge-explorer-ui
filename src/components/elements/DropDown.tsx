@@ -9,14 +9,14 @@ import { ReduxState } from "../../store";
 
 export const DropDown = () => {
   const dispatch = useDispatch();
-  const [value, setValue] = useState("All Types");
+  const [value, setValue] = useState("Show All");
   const resetType = useSelector(
     (state: ReduxState) => state.global.resetStatusAndType
   );
 
   const handleSelect = (e: any) => {
     console.log(e);
-    if (e === "All Types") dispatch(setEventsQueryStringType(undefined));
+    if (e === "Show All") dispatch(setEventsQueryStringType(undefined));
     else {
       dispatch(setEventsQueryStringType(e));
     }
@@ -24,7 +24,7 @@ export const DropDown = () => {
   };
 
   useEffect(() => {
-    setValue("All Types");
+    setValue("Show All");
   }, [resetType]);
 
   return (
@@ -41,7 +41,7 @@ export const DropDown = () => {
             size="sm"
             variant=""
           >
-            <Dropdown.Item eventKey="All Types">All Types</Dropdown.Item>
+            <Dropdown.Item eventKey="Show All">Show All</Dropdown.Item>
             <Dropdown.Item eventKey="Transfer">Transfer</Dropdown.Item>
             <Dropdown.Item eventKey="Unfreeze">Unfreeze</Dropdown.Item>
           </DropdownButton>

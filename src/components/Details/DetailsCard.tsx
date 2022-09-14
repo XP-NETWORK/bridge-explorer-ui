@@ -31,7 +31,9 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
   const [soundOn, setSoundOn] = useState(false);
   const [hasSound, setHasSound] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [sexyClass, setSexyClass] = useState("rounded-lg  nftImage aspect-square ");
+  const [sexyClass, setSexyClass] = useState(
+    "rounded-lg  nftImage aspect-square "
+  );
   const nftVideo = useRef<HTMLVideoElement | null>(null);
 
   const isMobile = useIsMobile();
@@ -58,18 +60,20 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
       // console.log(hasAudio(nftVideo));
       setHasSound(hasAudio(nftVideo?.current));
       nftVideo?.current?.play();
-      checkSexyness()
+      checkSexyness();
     }
-  }, [isLoading,metadata ,event]);
+  }, [isLoading, metadata, event]);
 
-  const checkSexyness = () :void =>{
-    if(metadata !== undefined){
-    const uri  = metadata?.properties?.external_url || metadata?.image ;
-    const isNftSexy = uri?.includes("treatdao");
-    const blurClass =  isNftSexy? "rounded-lg  nftImage aspect-square blur" : "rounded-lg  nftImage aspect-square";
-    setSexyClass(blurClass)
-  }
-  }
+  const checkSexyness = (): void => {
+    if (metadata !== undefined) {
+      const uri = metadata?.properties?.external_url || metadata?.image;
+      const isNftSexy = uri?.includes("treatdao");
+      const blurClass = isNftSexy
+        ? "rounded-lg  nftImage aspect-square blur"
+        : "rounded-lg  nftImage aspect-square";
+      setSexyClass(blurClass);
+    }
+  };
 
   return (
     <div className="text-[#222222] overflow-hidden sm:border sm:p-5 md:p-6 rounded-xl detailsCard">
@@ -78,7 +82,11 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
 
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="flex flex-col ">
-          <div className={`nftWrapper aspect-square  ${isLoading ? "loadingWrapper" : "loadedWrapper"}`}>
+          <div
+            className={`nftWrapper aspect-square  ${
+              isLoading ? "loadingWrapper" : "loadedWrapper"
+            }`}
+          >
             {metadata?.animation_url ? (
               <div className="relative rounded-lg overflow-hidden nftImage">
                 <video
@@ -119,7 +127,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
                 )}
               </div>
             ) : (
-             ( metadata?.image) && (
+              metadata?.image && (
                 <ImgOrFail
                   alt="nft preview"
                   className={sexyClass}
@@ -132,7 +140,11 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
           </div>
         </div>
         <div className="flex flex-col  md:p-5  infoTextContainer desktopOnly">
-          <div className={`flex w-full ${dataLoad ? "loadingWrapper" : "loadedWrapper"}`}>
+          <div
+            className={`flex w-full ${
+              dataLoad ? "loadingWrapper" : "loadedWrapper"
+            }`}
+          >
             <div className="font-medium w-32">Collection Name:</div>
             <p className="break-words w-[calc(100%-8rem)] md:w-fit infoTextWrap"></p>
           </div>
@@ -175,11 +187,26 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
                 dataLoad || !metadata ? "loadingWrapper" : "loadedWrapper"
               }`}
             >
-               Collection Name:
+              Collection Name:
             </div>
-            <div className={`break text-[#222222] w-full mobileCollection ${ !event?.collectionName&& !metadata?.nftContract && !metadata?.name? "loadingWrapper" : "loadedWrapper"}`}>
-            {console.log(event?.collectionName)}
-              {!event?.collectionName && !metadata?.nftContract && !metadata?.name? "loading..." : event?.collectionName || metadata?.nftContract || metadata?.name || 'unknown'}
+            <div
+              className={`break text-[#222222] w-full mobileCollection ${
+                !event?.collectionName &&
+                !metadata?.nftContract &&
+                !metadata?.name
+                  ? "loadingWrapper"
+                  : "loadedWrapper"
+              }`}
+            >
+              {console.log(event?.collectionName)}
+              {!event?.collectionName &&
+              !metadata?.nftContract &&
+              !metadata?.name
+                ? "loading..."
+                : event?.collectionName ||
+                  metadata?.nftContract ||
+                  metadata?.name ||
+                  "unknown"}
             </div>
           </div>
 

@@ -49,7 +49,7 @@ export const ChainListBox = () => {
 
   const chainSelectHandlerFrom = async (chain: any) => {
     setSelectedFrom(chain.text);
-    if (chain.text === selectedTo) {
+    if (chain.text === selectedTo && chain.text !== "All chains") {
       switchChains();
     } else {
       dispatch(setFrom(chain.text));
@@ -60,7 +60,7 @@ export const ChainListBox = () => {
 
   const chainSelectHandlerTo = async (chain: any) => {
     setSelectedTo(chain.text);
-    if (chain.text === selectedFrom) {
+    if (chain.text === selectedFrom && chain.text !== "All chains") {
       switchChains();
     } else {
       dispatch(setTo(chain.text));

@@ -24,8 +24,8 @@ export default function FiltersMobile() {
 
   const [selectedFrom, setSelectedFrom] = useState("All chains");
   const [selectedTo, setSelectedTo] = useState("All chains");
-  const [value, setValue] = useState("All Types");
-  const [statusValue, setStatusValue] = useState("All Statuses");
+  const [value, setValue] = useState("Show All");
+  const [statusValue, setStatusValue] = useState("Show All");
 
   const dispatch = useDispatch();
 
@@ -40,8 +40,8 @@ export default function FiltersMobile() {
     setFilterModal(false);
     setSelectedFrom("All chains");
     setSelectedTo("All chains");
-    setValue("All Types");
-    setStatusValue("All Statuses");
+    setValue("Show All");
+    setStatusValue("Show All");
 
     dispatch(setFrom(selectedFrom));
     dispatch(setEventsQueryStringFrom(selectedFrom));
@@ -95,13 +95,13 @@ export default function FiltersMobile() {
     dispatch(setTo(selectedTo));
     dispatch(setEventsQueryStringTo(selectedTo));
 
-    if (value === "All Types") {
+    if (value === "Show All") {
       dispatch(setEventsQueryStringType(undefined));
     } else {
       dispatch(setEventsQueryStringType(value));
     }
 
-    if (statusValue === "All Statuses") {
+    if (statusValue === "Show All") {
       //   dispatch(setStatusFilter(""));
     } else if (statusValue === "Processing") {
       dispatch(setStatusFilter("Failed"));
@@ -201,8 +201,8 @@ export default function FiltersMobile() {
                       size="sm"
                       variant=""
                     >
-                      <Dropdown.Item eventKey="All Types">
-                        All Types
+                      <Dropdown.Item eventKey="Show All">
+                      Show All
                       </Dropdown.Item>
                       <Dropdown.Item eventKey="Transfer">
                         Transfer
@@ -228,8 +228,8 @@ export default function FiltersMobile() {
                       size="sm"
                       variant=""
                     >
-                      <Dropdown.Item eventKey="All Statuses">
-                        All Types
+                      <Dropdown.Item eventKey="Show All">
+                      Show All
                       </Dropdown.Item>
                       <Dropdown.Item eventKey="Completed">
                         Completed

@@ -170,6 +170,11 @@ ul.chartInfoList li {
   border-color: #e4e5e7;
 }
 
+.detailsCard .mb-5 {
+  margin-bottom: 1.25rem !important;
+}
+
+
 .nftImage {
   width: 100%;
   height: 100%;
