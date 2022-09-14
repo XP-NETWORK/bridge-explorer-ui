@@ -18,15 +18,15 @@ export const CollectionNameRow = ({
   const dispatch = useDispatch();
   const showCollection = (e: any) => {
     e.stopPropagation();
-    console.log("collectionName row", collectionName);
+    //console.log("collectionName row", collectionName);
 
     a();
   };
 
   const a = () => {
-    console.log("collectionName a", collectionName);
+    //console.log("collectionName a", collectionName);
     dispatch(setShowByCollection(collectionName));
-    console.log("collectionName a", collectionName);
+    //console.log("collectionName a", collectionName);
   };
   return (
     <button

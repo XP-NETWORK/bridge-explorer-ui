@@ -156,11 +156,7 @@ export const EventsProvider: FC = withContainer(
       };
     }, [events]);
 
-    console.log("eventsQueryStrin--------------------", eventsQueryString);
-    console.log("colection name ->", collectionName);
     useEffect(() => {
-      console.log("eventsQueryString uef", eventsQueryString);
-      console.log("name length ", collectionName.length);
       setIsLoading(true);
       if (collectionName.length > 0) {
         console.log("collection name is clickedddd");
@@ -173,7 +169,7 @@ export const EventsProvider: FC = withContainer(
         eventsQueryString.type ||
         eventsQueryString.status
       ) {
-        console.log("im in filtered api call");
+      
         filteredEvents();
       } else if (
         typeof eventsQueryString === "string" &&
@@ -204,7 +200,7 @@ export const EventsProvider: FC = withContainer(
       const eventsObj = await axios.get(
         `${url}?sort=${sort}&offset=${paginationPage}`
       );
-      console.log("events", eventsObj.data);
+      // console.log("events", eventsObj.data);
       load(eventsObj.data);
     };
 
@@ -212,12 +208,12 @@ export const EventsProvider: FC = withContainer(
       const eventsObj = await axios.get(
         `${url}?chainName=${eventsQueryString}&sort=${sort}&offset=${paginationPage}`
       );
-      console.log("events", eventsObj.data);
+      // console.log("events", eventsObj.data);
       load(eventsObj.data);
     };
 
     const loadEventsByCollectionName = async () => {
-      console.log("inside load by name");
+      // console.log("inside load by name");
       console.log(
         `${url}api?collectionName=${collectionName}&offset=${paginationPage}`
       );
@@ -225,7 +221,7 @@ export const EventsProvider: FC = withContainer(
       const eventsObj = await axios.get(
         `${url}api?collectionName=${collectionName}&offset=${paginationPage}`
       );
-      console.log("events by collection", eventsObj.data);
+      // console.log("events by collection", eventsObj.data);
       load(eventsObj.data);
     };
 
@@ -243,10 +239,10 @@ export const EventsProvider: FC = withContainer(
         eventsQueryString.status ? `&status=` + eventsQueryString.status : ""
       }&offset=${paginationPage}`;
       const eventsObj = await axios.get(urlF);
-      console.log("filter with offset",urlF);
+      // console.log("filter with offset",urlF);
 
-      console.log("events", eventsObj.data);
-      console.log("statusssss", eventsQueryString.status);
+      // console.log("events", eventsObj.data);
+      // console.log("statusssss", eventsQueryString.status);
       load(eventsObj.data);
     };
 

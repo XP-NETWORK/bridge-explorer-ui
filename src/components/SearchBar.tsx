@@ -6,7 +6,7 @@ import { useCallback } from "react";
 import { debounce } from "./Details/helpers";
 import { useLocation } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { setEventsQueryString } from "../store/global";
+import { setEventsQueryString, setResetSearch } from "../store/global";
 import { useNavigate } from "react-router-dom";
 import { ReduxState } from "../store";
 
@@ -20,14 +20,14 @@ export const SearchBar: React.FC<{
       : loc.pathname.replace("/", "")
   );
 
-  const { eventsQueryString, from, to, statusFilter } = useSelector(
-    (state: ReduxState) => ({
+  const { eventsQueryString, from, to, statusFilter, resetSearch } =
+    useSelector((state: ReduxState) => ({
       from: state.global.from,
       to: state.global.to,
       eventsQueryString: state.global.eventsQueryString,
       statusFilter: state.global.statusFilter,
-    })
-  );
+      resetSearch: state.global.resetSearch,
+    }));
   // const eventsQueryString = useSelector(
   //   (state: ReduxState) => state.global.eventsQueryString
   // );
@@ -39,14 +39,18 @@ export const SearchBar: React.FC<{
     debounce((value: string) => dispatch(setEventsQueryString(value)), 1000),
     []
   );
+  console.log({ eventsQueryString });
 
   useEffect(() => {
-    if (typeof eventsQueryString !== "string") {
+    if (resetSearch) {
+      mode(false);
       setValue("");
+      // dispatch(setResetSearch(false)) ;
     }
-  }, [from, to, statusFilter]);
+  }, [resetSearch]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setResetSearch(false));
     e.target.value === "" ? handleClearSearch() : mode(true);
     setValue(e.target.value);
     navigate(e.target.value);
@@ -59,8 +63,10 @@ export const SearchBar: React.FC<{
   };
 
   useEffect(() => {
-    debounced(value);
-    value ? mode(true) : handleClearSearch();
+    if (!resetSearch) {
+      debounced(value);
+      value ? mode(true) : handleClearSearch();
+    }
   }, [value]);
 
   // useEffect(() => {

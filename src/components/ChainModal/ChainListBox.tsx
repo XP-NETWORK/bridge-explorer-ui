@@ -115,7 +115,6 @@ export const ChainListBox = () => {
   // }, [from, departureOrDestination, to]);
 
   const switchChains = () => {
-    console.log("before switch", selectedFrom, selectedTo);
     let temp = selectedFrom;
     setSelectedFrom(selectedTo);
     dispatch(setFrom(selectedTo));
@@ -123,7 +122,6 @@ export const ChainListBox = () => {
     setSelectedTo(temp);
     dispatch(setTo(temp));
     dispatch(setEventsQueryStringTo(temp));
-    console.log("chains switched", selectedFrom, selectedTo);
   };
 
   return (

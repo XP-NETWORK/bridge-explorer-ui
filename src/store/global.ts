@@ -15,6 +15,7 @@ export interface Global {
   from: string;
   resetStatusAndType: boolean;
   showByCollection: string;
+  resetSearch: boolean;
 }
 
 export const initialState: Global = {
@@ -33,6 +34,7 @@ export const initialState: Global = {
   from: "All chains",
   resetStatusAndType: true,
   showByCollection: "",
+  resetSearch: false,
 };
 
 const globalSlice = createSlice({
@@ -56,12 +58,12 @@ const globalSlice = createSlice({
       state.eventsQueryString = action.payload;
     },
     setEventsQueryStringTo(state, action) {
-      if (
-        typeof state.eventsQueryString === "string" &&
-        state.eventsQueryString.length > 0
-      ) {
-        state.eventsQueryString = {};
-      }
+      // if (
+      //   typeof state.eventsQueryString === "string" &&
+      //   state.eventsQueryString.length > 0
+      // ) {
+      //   state.eventsQueryString = {};
+      // }
       state.eventsQueryString = {
         ...state.eventsQueryString,
         toChainName:
@@ -73,21 +75,26 @@ const globalSlice = createSlice({
         typeof state.eventsQueryString === "string" &&
         state.eventsQueryString.length > 0
       ) {
-        state.eventsQueryString = {};
+         state.eventsQueryString = {};
+        state.resetSearch = true;
       }
       state.eventsQueryString = {
         ...state.eventsQueryString,
         fromChainName:
           action.payload === "All chains" ? undefined : action.payload,
       };
+      
+    },
+    setResetSearch(state, action){
+      state.resetSearch = action.payload;
     },
     setEventsQueryStringType(state, action) {
-      if (
-        typeof state.eventsQueryString === "string" &&
-        state.eventsQueryString.length > 0
-      ) {
-        state.eventsQueryString = {};
-      }
+      // if (
+      //   typeof state.eventsQueryString === "string" &&
+      //   state.eventsQueryString.length > 0
+      // ) {
+      //   state.eventsQueryString = {};
+      // }
       state.eventsQueryString = {
         ...state.eventsQueryString,
         type: action.payload,
@@ -103,12 +110,12 @@ const globalSlice = createSlice({
       state.temporaryTo = action.payload;
     },
     setStatusFilter(state, action) {
-      if (
-        typeof state.eventsQueryString === "string" &&
-        state.eventsQueryString.length > 0
-      ) {
-        state.eventsQueryString = {};
-      }
+      // if (
+      //   typeof state.eventsQueryString === "string" &&
+      //   state.eventsQueryString.length > 0
+      // ) {
+      //   state.eventsQueryString = {};
+      // }
       state.statusFilter = action.payload;
       state.eventsQueryString = {
         ...state.eventsQueryString,
@@ -132,7 +139,7 @@ const globalSlice = createSlice({
     },
     setShowByCollection(state, action) {
       state.showByCollection = action.payload;
-    }
+    },
   },
 });
 
@@ -154,6 +161,7 @@ export const {
   setDepartureOrDestination,
   setSwitchDestination,
   setShowByCollection,
+  setResetSearch
 } = globalSlice.actions;
 
 export default globalSlice.reducer;

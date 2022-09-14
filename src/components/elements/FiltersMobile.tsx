@@ -77,7 +77,7 @@ export default function FiltersMobile() {
   };
 
   const switchChains = () => {
-    console.log("before switch", selectedFrom, selectedTo);
+   // console.log("before switch", selectedFrom, selectedTo);
     let temp = selectedFrom;
     setSelectedFrom(selectedTo);
     // dispatch(setFrom(selectedTo));
