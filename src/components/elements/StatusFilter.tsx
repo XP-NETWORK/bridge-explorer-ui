@@ -15,14 +15,14 @@ import { ReduxState } from "../../store";
 
 export const StatusFilter = () => {
   const dispatch = useDispatch();
-  const [value, setValue] = useState("All Types");
+  const [value, setValue] = useState("All Statuses");
   const resetType = useSelector(
     (state: ReduxState) => state.global.resetStatusAndType
   );
 
   const handleSelect = (e: any) => {
     console.log(e);
-    if (e === "All Types") {
+    if (e === "All Statuses") {
       //   dispatch(setStatusFilter(""));
     } else if (e === "Processing") {
       dispatch(setStatusFilter("Failed"));
@@ -36,7 +36,7 @@ export const StatusFilter = () => {
   };
 
   useEffect(() => {
-    setValue("All Types");
+    setValue("All Statuses");
   }, [resetType]);
 
   return (
@@ -53,7 +53,7 @@ export const StatusFilter = () => {
             size="sm"
             variant=""
           >
-            <Dropdown.Item eventKey="All Types">All Types</Dropdown.Item>
+            <Dropdown.Item eventKey="All Statuses">All Statuses</Dropdown.Item>
             <Dropdown.Item eventKey="Completed">
               {" "}
               <div className="flex min-w-[5rem] flex-nowrap space-x-1 text-[#10B67A]">

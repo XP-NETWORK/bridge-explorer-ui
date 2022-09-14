@@ -25,7 +25,7 @@ export default function FiltersMobile() {
   const [selectedFrom, setSelectedFrom] = useState("All chains");
   const [selectedTo, setSelectedTo] = useState("All chains");
   const [value, setValue] = useState("All Types");
-  const [statusValue, setStatusValue] = useState("All Types");
+  const [statusValue, setStatusValue] = useState("All Statuses");
 
   const dispatch = useDispatch();
 
@@ -41,7 +41,7 @@ export default function FiltersMobile() {
     setSelectedFrom("All chains");
     setSelectedTo("All chains");
     setValue("All Types");
-    setStatusValue("All Types");
+    setStatusValue("All Statuses");
 
     dispatch(setFrom(selectedFrom));
     dispatch(setEventsQueryStringFrom(selectedFrom));
@@ -101,7 +101,7 @@ export default function FiltersMobile() {
       dispatch(setEventsQueryStringType(value));
     }
 
-    if (statusValue === "All Types") {
+    if (statusValue === "All Statuses") {
       //   dispatch(setStatusFilter(""));
     } else if (statusValue === "Processing") {
       dispatch(setStatusFilter("Failed"));
@@ -228,7 +228,7 @@ export default function FiltersMobile() {
                       size="sm"
                       variant=""
                     >
-                      <Dropdown.Item eventKey="All Types">
+                      <Dropdown.Item eventKey="All Statuses">
                         All Types
                       </Dropdown.Item>
                       <Dropdown.Item eventKey="Completed">
