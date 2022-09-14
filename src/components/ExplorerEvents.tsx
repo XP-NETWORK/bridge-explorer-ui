@@ -32,6 +32,7 @@ import {
   setEventsQueryStringTo,
   setEventsQueryStringType,
   setFrom,
+  setShowByCollection,
   setStatusFilter,
   setTo,
 } from "../store/global";
@@ -138,6 +139,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
     dispatch(setEventsQueryStringType(undefined));
     dispatch(setStatusFilter(undefined));
     dispatch(setEventsQueryString(""));
+    dispatch(setShowByCollection(""));
   };
 
   return (

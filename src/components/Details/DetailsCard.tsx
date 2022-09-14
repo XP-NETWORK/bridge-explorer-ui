@@ -72,7 +72,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
   }
 
   return (
-    <div className="text-[#222222] overflow-hidden sm:border p-1 sm:p-5 md:p-6 rounded-xl detailsCard">
+    <div className="text-[#222222] overflow-hidden sm:border sm:p-5 md:p-6 rounded-xl detailsCard">
       <h1 className="text-base font-medium">{metadata?.name}</h1>
       <hr className="mb-5 mt-3" />
 
