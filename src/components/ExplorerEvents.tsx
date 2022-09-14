@@ -26,7 +26,15 @@ import { DropDown } from "./elements/DropDown";
 import { CollectionNameRow } from "./Table/CollectionNameRow";
 import DownloadCSV from "./elements/CSVButton";
 
-import { setStatusFilter } from "../store/global";
+import {
+  setEventsQueryString,
+  setEventsQueryStringFrom,
+  setEventsQueryStringTo,
+  setEventsQueryStringType,
+  setFrom,
+  setStatusFilter,
+  setTo,
+} from "../store/global";
 import FiltersBtn from "./elements/FiltersBtn";
 import FiltersMobile from "./elements/FiltersMobile";
 import { StatusFilter } from "./elements/StatusFilter";
@@ -57,7 +65,7 @@ export interface IEvent {
   originalContract?: string;
   originalTokenId?: string;
   originalUri?: string;
-  listener?:string
+  listener?: string;
 }
 
 export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
@@ -122,6 +130,16 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
     navigate(`/tx/${extractHash(event.fromHash)}`);
   };
 
+  const handleClearAll = () => {
+    dispatch(setFrom("All chains"));
+    dispatch(setEventsQueryStringFrom("All chains"));
+    dispatch(setEventsQueryStringTo("All chains"));
+    dispatch(setTo("All chains"));
+    dispatch(setEventsQueryStringType(undefined));
+    dispatch(setStatusFilter(undefined));
+    dispatch(setEventsQueryString(""));
+  };
+
   return (
     <>
       <div>
@@ -137,7 +155,16 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
             <DropDown />
           </div>
           <div className="desktopOnly">
-          <StatusFilter/>
+            <StatusFilter />
+          </div>
+          <div className="desktopOnly">
+            <button
+              className=" text-[#222222] px-2 flex items-center space-x-1 p-1 hover:bg-[#235EF5] hover:text-white rounded csvBtn"
+              style={{ marginLeft: "5px", fontSize: "14px" ,height:"100%"}}
+              onClick={handleClearAll}
+            >
+              Clear all
+            </button>
           </div>
           <FiltersBtn />
           <span className="nothing desktopOnly"></span>

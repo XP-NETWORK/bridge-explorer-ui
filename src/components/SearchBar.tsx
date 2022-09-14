@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 import { useCallback } from "react";
 import { debounce } from "./Details/helpers";
 import { useLocation } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setEventsQueryString } from "../store/global";
 import { useNavigate } from "react-router-dom";
+import { ReduxState } from "../store";
 
 export const SearchBar: React.FC<{
   mode: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,7 +17,10 @@ export const SearchBar: React.FC<{
   const [value, setValue] = useState(
     loc.pathname.replace("/", "") === "processing" ? "" : loc.pathname.replace("/", "")
   );
-  
+  const eventsQueryString = useSelector(
+    (state: ReduxState) => state.global.eventsQueryString
+  );
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -24,6 +28,12 @@ export const SearchBar: React.FC<{
     debounce((value: string) => dispatch(setEventsQueryString(value)), 1000),
     []
   );
+
+  useEffect(() => {
+    if(Object.keys(eventsQueryString).length === 0){
+      setValue("");
+    }
+  }, [eventsQueryString]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.target.value === "" ? handleClearSearch() : mode(true);

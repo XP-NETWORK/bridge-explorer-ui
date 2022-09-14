@@ -69,6 +69,12 @@ const globalSlice = createSlice({
       };
     },
     setEventsQueryStringFrom(state, action) {
+      if (
+        typeof state.eventsQueryString === "string" &&
+        state.eventsQueryString.length > 0
+      ) {
+        state.eventsQueryString = {};
+      }
       state.eventsQueryString = {
         ...state.eventsQueryString,
         fromChainName:
@@ -76,6 +82,12 @@ const globalSlice = createSlice({
       };
     },
     setEventsQueryStringType(state, action) {
+      if (
+        typeof state.eventsQueryString === "string" &&
+        state.eventsQueryString.length > 0
+      ) {
+        state.eventsQueryString = {};
+      }
       state.eventsQueryString = {
         ...state.eventsQueryString,
         type: action.payload,
@@ -91,6 +103,12 @@ const globalSlice = createSlice({
       state.temporaryTo = action.payload;
     },
     setStatusFilter(state, action) {
+      if (
+        typeof state.eventsQueryString === "string" &&
+        state.eventsQueryString.length > 0
+      ) {
+        state.eventsQueryString = {};
+      }
       state.statusFilter = action.payload;
       state.eventsQueryString = {
         ...state.eventsQueryString,

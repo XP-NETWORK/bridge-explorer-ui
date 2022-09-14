@@ -156,7 +156,7 @@ export const EventsProvider: FC = withContainer(
       };
     }, [events]);
 
-    console.log("eventsQueryStrin", eventsQueryString);
+    console.log("eventsQueryStrin--------------------", eventsQueryString);
     console.log("colection name ->", collectionName);
     useEffect(() => {
       console.log("eventsQueryString uef", eventsQueryString);

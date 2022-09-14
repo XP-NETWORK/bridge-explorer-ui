@@ -44,6 +44,40 @@
   cursor: pointer;
 }
 
+#dropdown-basic-button{
+  border: 0px;
+  outline: 0px;
+}
+
+#dropdown-basic-button:hover {
+  border: 0px;
+  outline: 0px;
+}
+
+.dropdown:hover .dropdown-toggle::after {
+  color: #235ef5 !important;
+}
+
+.clearFiltersDesk {
+  display: flex;
+  align-items: center;
+  background: rgba(35, 94, 245, 0.1);
+  color: #235ef5;
+  border-radius: 4px;
+  border: 0 !important;
+  margin-right: 1px;
+  padding: 5px 8px;
+  margin-left: 5px;
+  font-family: "Inter";
+  font-style: normal;
+  font-size: 14px;
+}
+
+.clearFiltersDesk:hover {
+  background: #235ef5;
+  color: #ffffff;
+}
+
 .nothing {
   flex: 12;
 }
