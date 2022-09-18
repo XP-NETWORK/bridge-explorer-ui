@@ -3,6 +3,7 @@ import Tron from "./assets/chains/tron.svg";
 import Vechain from "./assets/icons/vechain.png";
 import Algorand from "./assets/chains/algorand.svg";
 import Secret from "./assets/icons/secret.svg";
+import Moonbeam from "./assets/icons/moonbeam.svg"
 
 import axios from "axios";
 
@@ -135,7 +136,7 @@ export const chains = [
   { id: "algorand", name: "Algorand", icon: Algorand, notConvert: true },
   { id: "nervos-network", name: "Godwoken", icon: "./assets/icons/godwoken.svg" },
   { id: "secret", name: "Secret", icon: Secret },
-  { id: "moonbeam", name: "Moonbeam", icon: Secret },
+  { id: "moonbeam", name: "Moonbeam", icon: Moonbeam },
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";

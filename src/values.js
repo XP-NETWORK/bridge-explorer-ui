@@ -21,6 +21,7 @@ import VET from "./assets/icons/vechain.png";
 // import { //Chain } from "xp.network/dist/consts";
 import SCRT from "./assets/icons/secret.svg";
 import CKB from "./assets/icons/godwoken.svg";
+import Moonbeam from "./assets/icons/moonbeam.svg"
 
 export const EVM = "EVM";
 export const ELROND = "Elrond";
@@ -330,7 +331,21 @@ export const chains = [
     order: 0,
     tnChainId: "pulsar-2",
     image: { avatar: true, src: SCRT },
-    mainnet: false,
+    mainnet: true,
+    testNet: biz,
+    test: false,
+    newChain: biz,
+  },
+  {
+    type: "EVM",
+    key: "Moonbeam",
+    text: "Moonbeam",
+    value: "Moonbeam",
+    nonce: 0x20,
+    order: 0,
+    tnChainId: "pulsar-2",
+    image: { avatar: true, src: Moonbeam },
+    mainnet: true,
     testNet: biz,
     test: false,
     newChain: biz,
