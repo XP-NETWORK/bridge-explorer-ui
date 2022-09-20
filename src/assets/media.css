@@ -57,6 +57,12 @@
   .desktopOnly {
     display: none;
   }
+  .filterDropDown {
+    padding: 30px 40px;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 @media screen and (max-width: 600px) {
