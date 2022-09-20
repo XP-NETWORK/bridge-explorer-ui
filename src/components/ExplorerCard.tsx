@@ -26,7 +26,7 @@ export const ExplorerCard: FC<Props> = ({
           src={icon}
           alt="icon"
         />
-        <h2 className="text-md font-medium mt-2">{subtitle}</h2>
+        <h2 className="text-md font-medium">{subtitle}</h2>
       </label>
       <ExplorerCardBg className="absolute select-none pointer-events-none right-0 top-0 dotsImg" />
     </div>

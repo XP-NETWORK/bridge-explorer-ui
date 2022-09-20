@@ -18,11 +18,13 @@ export const Paginator = withContainer(
     container: {
       appData: { totalTx, totalWallets },
     },
+    showTransactions
   }) => {
     const disptach = useDispatch();
     const [disableCursor, setDisableCursor] = useState("");
     const ctx = useContext(EventsContext);
-
+    console.log({showTransactions});
+    
     const total = ctx?.totalEvents || 1;
     const { eventsQueryString, page, statusFilter } = useSelector((state: ReduxState) => ({
       page: state.global.page,
@@ -57,8 +59,8 @@ export const Paginator = withContainer(
     }, [eventsQueryString, statusFilter]);
 
     return (
-      <div className="paginatorWraper mt-3">
-        <span>Transactions</span>
+      <div className={showTransactions? "paginatorWraper mt-3" : "paginatorWraper mt-3 paginatorCenter "}>
+        {showTransactions && <span>Transactions</span>}
           {/* <CSVButton /> */}
 
           <div className="paginatorInnerWrapper">

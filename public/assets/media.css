@@ -37,6 +37,15 @@
   }
 }
 
+@media screen and (max-width: 885px) {
+  .show {
+    display: block !important;
+  }
+  .hide {
+    display: none !important;
+  }
+}
+
 @media screen and (max-width: 600px) {
   /* html {
     position: inherit;
@@ -47,7 +56,6 @@
     display: none;
   }
 
-  
   .paginatorWraper {
     flex-direction: column;
   }

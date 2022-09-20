@@ -27,6 +27,8 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
 
   const isMobile = useIsMobile();
   const truncateSize = useMemo(() => (isMobile ? 33 : 60), [isMobile]);
+  const [fromIconSrc, setFromIconSrc] = useState("");
+  const [toIconSrc, setToIconSrc] = useState("");
 
   // console.log(isMobile);
   useEffect(() => {
@@ -47,6 +49,19 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
 
     return rate;
   };
+
+  useEffect(() => {
+    chains.map((chain) => {
+      if (chain.name === chainNoncetoName[event?.fromChain || 0]) {
+        console.log(chain.icon.slice(1));
+        setFromIconSrc(chain.icon.slice(1));
+      }
+      if (chain.name === chainNoncetoName[event?.toChain || 0]) {
+        console.log(chain.icon.slice(1));
+        setToIconSrc(chain.icon.slice(1));
+      }
+    });
+  }, [event]);
 
   return (
     <div className="flex flex-col w-full">
@@ -115,6 +130,11 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
+          <img
+            src={fromIconSrc}
+            alt="chain icon"
+            className="chainIconDetails"
+          />
           <span className="text-[#222222]">
             {chainNoncetoName[event?.fromChain || 0] || "N/A"}
           </span>
@@ -131,6 +151,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
+          <img src={toIconSrc} alt="chain icon" className="chainIconDetails" />
           <span className="text-[#222222]">
             {chainNoncetoName[event?.toChain || 0] || "N/A"}
           </span>

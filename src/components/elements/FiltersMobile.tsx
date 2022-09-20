@@ -77,7 +77,7 @@ export default function FiltersMobile() {
   };
 
   const switchChains = () => {
-   // console.log("before switch", selectedFrom, selectedTo);
+    // console.log("before switch", selectedFrom, selectedTo);
     let temp = selectedFrom;
     setSelectedFrom(selectedTo);
     // dispatch(setFrom(selectedTo));
@@ -202,7 +202,7 @@ export default function FiltersMobile() {
                       variant=""
                     >
                       <Dropdown.Item eventKey="Show All">
-                      Show All
+                        Show All
                       </Dropdown.Item>
                       <Dropdown.Item eventKey="Transfer">
                         Transfer
@@ -229,7 +229,7 @@ export default function FiltersMobile() {
                       variant=""
                     >
                       <Dropdown.Item eventKey="Show All">
-                      Show All
+                        Show All
                       </Dropdown.Item>
                       <Dropdown.Item eventKey="Completed">
                         Completed
@@ -248,7 +248,7 @@ export default function FiltersMobile() {
                   className="csvBtn clearFilterBtnModal"
                   onClick={handleClearAll}
                 >
-                  Clear all
+                  Clear filters
                 </button>
                 <button
                   className="csvBtn filterBtnModal"

@@ -46,7 +46,7 @@
   align-items: center;
   padding: 4px 6px;
   gap: 6px;
-  width: 65px;
+  /* width: 65px; */
   height: 28px;
   border-radius: 4px;
   flex: none;
@@ -55,7 +55,7 @@
 }
 
 .dropDownTitle > p {
-  width: 53px;
+  /* width: 53px; */
   height: 22px;
   font-weight: 350;
   font-size: 14px;

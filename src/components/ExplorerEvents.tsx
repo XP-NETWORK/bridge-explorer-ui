@@ -39,6 +39,7 @@ import {
 import FiltersBtn from "./elements/FiltersBtn";
 import FiltersMobile from "./elements/FiltersMobile";
 import { StatusFilter } from "./elements/StatusFilter";
+import { ReduxState } from "../store";
 
 export interface IEvent {
   id: string;
@@ -78,6 +79,14 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
     velas: { usd: 0 },
   });
   const dispatch = useDispatch();
+  const [showClearBtn, setShowClearBtn] = useState(false);
+
+  const { eventsQueryString, collectionName } = useSelector(
+    (state: ReduxState) => ({
+      eventsQueryString: state.global.eventsQueryString,
+      collectionName: state.global.showByCollection,
+    })
+  );
 
   // useEffect(() => {
   //   dispatch(setStatusFilter(status));
@@ -123,6 +132,16 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
     return rate;
   };
 
+  useEffect(() => {
+    if (
+      (typeof eventsQueryString === "object" &&
+        Object.keys(eventsQueryString).length > 0) ||
+      collectionName !== ""
+    ) {
+      setShowClearBtn(true);
+    }
+  }, [eventsQueryString, collectionName]);
+
   const navigateTo = (e: any, event: IEvent) => {
     console.log(e.target.tagName.toLowerCase());
     if (e.target.tagName.toLowerCase() === "img") {
@@ -140,6 +159,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
     dispatch(setStatusFilter(undefined));
     dispatch(setEventsQueryString(""));
     dispatch(setShowByCollection(""));
+    setShowClearBtn(false);
   };
 
   return (
@@ -148,7 +168,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
         <ChainListBox />
         <FiltersMobile />
         <Container>
-          <Paginator />
+          <Paginator showTransactions={true} />
           <div className="line"></div>
         </Container>
         <Container className="mt-2 px-0 md:px-4 chainSwitch">
@@ -162,10 +182,15 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
           <div className="desktopOnly">
             <button
               className=" text-[#222222] px-2 flex items-center space-x-1 p-1 hover:bg-[#235EF5] hover:text-white rounded csvBtn"
-              style={{ marginLeft: "5px", fontSize: "14px" ,height:"100%"}}
+              style={{
+                marginLeft: "5px",
+                fontSize: "14px",
+                height: "100%",
+                display: showClearBtn ? "block" : "none",
+              }}
               onClick={handleClearAll}
             >
-              Clear all
+              Clear filters
             </button>
           </div>
           <FiltersBtn />
@@ -384,6 +409,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
               )}
             </tbody>
           </table>
+          <Paginator showTransactions={false} />
         </Container>
       </div>
     </>
