@@ -39,7 +39,7 @@ export const ChainListBox = () => {
   const [toChains, setToChains] = useState(chains);
   const [selectedFrom, setSelectedFrom] = useState("All chains");
   const [selectedTo, setSelectedTo] = useState("All chains");
-  
+
   const handleClose = () => {
     dispatch(setChainModal(false));
     dispatch(setDepartureOrDestination(""));
@@ -89,30 +89,30 @@ export const ChainListBox = () => {
     }
   }, [chainSearch]);
 
-  // useEffect(() => {
-  //   // debugger
-  //   let filteredChains = chains;
-  //   const withNew = filteredChains
-  //     .filter((chain) => chain.newChain)
-  //     .sort((a, b) => a.order - b.order);
-  //   const withComing = filteredChains
-  //     .filter((chain) => chain.coming && !chain.newChain)
-  //     .sort((a, b) => b.order - a.order);
-  //   const withMaintenance = filteredChains.filter(
-  //     (chain) => chain.maintenance && !chain.newChain
-  //   );
-  //   const noComingNoMaintenance = filteredChains
-  //     .filter((chain) => !chain.coming && !chain.maintenance && !chain.newChain)
-  //     .sort((a, b) => a.order - b.order);
-  //   let sorted = [
-  //     ...withNew,
-  //     ...noComingNoMaintenance,
-  //     ...withMaintenance,
-  //     ...withComing,
-  //   ];
-  //   setToChains(sorted);
-  //   setFromChains(sorted);
-  // }, [from, departureOrDestination, to]);
+  useEffect(() => {
+    // debugger
+    let filteredChains = chains;
+    const withNew = filteredChains
+      .filter((chain) => chain.newChain)
+      .sort((a, b) => a.order - b.order);
+    const withComing = filteredChains
+      .filter((chain) => chain.coming && !chain.newChain)
+      .sort((a, b) => b.order - a.order);
+    const withMaintenance = filteredChains.filter(
+      (chain) => chain.maintenance && !chain.newChain
+    );
+    const noComingNoMaintenance = filteredChains
+      .filter((chain) => !chain.coming && !chain.maintenance && !chain.newChain)
+      .sort((a, b) => a.order - b.order);
+    let sorted = [
+      ...withNew,
+      ...noComingNoMaintenance,
+      ...withMaintenance,
+      ...withComing,
+    ];
+    setToChains(sorted);
+    setFromChains(sorted);
+  }, [selectedFrom, departureOrDestination, selectedTo]);
 
   const switchChains = () => {
     let temp = selectedFrom;

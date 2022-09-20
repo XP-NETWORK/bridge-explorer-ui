@@ -19,7 +19,7 @@ export default function FiltersBtn() {
         onClick={openFilters}
       >
         <img src={filter} />
-        <span>filters</span>
+        <span>Filters</span>
       </button>
     </div>
    );

@@ -65,7 +65,7 @@ const NavItem: FC<{ to: string; className?: string }> = ({
 }) => {
   return (
     <NavLink
-      className={`sm:flex p-4 w-full min-w-[14rem] z-20 sm:min-w-fit sm:p-0 sm:hover:bg-white  hover:bg-slate-100 text-[#030303] items-end font-medium sm:pb-2.5  text-[15px] max-w-fit sm:border-t-2 border-transparent ${className}`}
+      className={`sm:flex p-4 w-full min-w-[14rem] z-20 sm:min-w-fit sm:p-0 sm:hover:bg-white  hover:bg-slate-100 text-[#030303] items-end font-medium sm:pb-2.5  text-[15px] max-w-fit  border-transparent ${className}`}
       to={to}
     >
       {children}

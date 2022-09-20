@@ -41,17 +41,17 @@
 }
 
 @media screen and (max-width: 600px) {
-  .dropDownContainer{
+  .dropDownContainer {
     width: inherit;
   }
-  .dropDownWrapper{
+  .dropDownWrapper {
     width: -webkit-fill-available;
     justify-content: flex-start;
   }
-  .dropDown{
+  .dropDown {
     width: -webkit-fill-available !important;
   }
-  .dropDown button{
+  .dropDown button {
     width: -webkit-fill-available !important;
   }
   #dropdown-basic-button {
@@ -75,7 +75,7 @@
     display: flex;
     flex-direction: row;
   }
-  .dropdown-menu.show{
+  .dropdown-menu.show {
     max-height: 265px;
     overflow-y: scroll;
   }
@@ -117,10 +117,11 @@
 
   .cardsWrapper {
     gap: 0 !important;
+    border-radius: 6px;
     position: relative;
     margin-left: 1.5rem !important;
     margin-right: 1.5rem !important;
-    padding: 0rem 0.5rem 0.5rem 0rem !important;
+    padding: 0rem 0.5rem 0rem 0rem !important;
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
       var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
     --tw-shadow: 0 1px 15px 0px #2f303214;
@@ -314,7 +315,7 @@
   }
 
   .safariHack {
-    border-bottom: 1px solid rgb(236, 229, 229) !important;
+    /* border-bottom: 1px solid rgb(236, 229, 229) !important; */
   }
 
   .paginatorLabel {
@@ -323,5 +324,8 @@
     margin-left: 3px;
     margin-right: 3px;
     align-items: center;
+  }
+  .fontSize {
+    font-size: 1.2rem;
   }
 }
