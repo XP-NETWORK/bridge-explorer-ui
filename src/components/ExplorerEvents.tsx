@@ -216,9 +216,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
           <table className="min-w-full divide-y border-b eventsTable">
             <thead className="bg-gray-50 ">
               <tr>
-                <TableHeading className="sticky left-0 bg-gray-50 ">
-                  NFT
-                </TableHeading>
+                <TableHeading className="left-0 bg-gray-50 ">NFT</TableHeading>
                 <TableHeading>Tx Value</TableHeading>
                 {false && <TableHeading>Tx Hash</TableHeading>}
                 <TableHeading>From</TableHeading>
@@ -261,7 +259,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                         target="_blank"
                       >
                         <TableData
-                          className={`sticky left-0 text-center bg-white group-hover:bg-[#F7F7F9] imgTableData ${
+                          className={`left-0 text-center bg-white group-hover:bg-[#F7F7F9] imgTableData ${
                             /^((?!chrome|android).)*safari/i.test(
                               navigator.userAgent
                             )
