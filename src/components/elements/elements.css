@@ -1,10 +1,16 @@
+/* @import "compass/css3"; */
+
 .shadow-\[0_2px_13px_0px_rgba\(0\2c 0\2c 0\2c 0\.1\)\] {
   position: sticky;
   top: 0;
   background: #ffffff;
   z-index: 1000;
+  height: 60px;
   /* background: #ffffff;
   box-shadow: 0px 2px 13px rgba(0, 0, 0, 0.1); */
+}
+.sm\:shadow-none {
+  height: 60px;
 }
 
 .line {
@@ -609,6 +615,77 @@ ul.chartInfoList li {
   height: initial;
   bottom: 10px;
 }
+.navLeft {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.navLeft img {
+  max-width: max-content !important;
+}
+
+.mainnetDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 2px 5px;
+  gap: 5px;
+  /* width: 84px; */
+  /* height: 20px; */
+  background: rgba(243, 251, 248, 0.6);
+  border-radius: 5px;
+  margin-top: 20px;
+  /* align-self: flex-end; */
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+
+  color: #10b67a;
+}
+
+.pulse-button {
+  position: relative;
+  display: block;
+  width: 5.6px;
+  height: 5.6px;
+  border-radius: 50%;
+  background: #10b67a;
+  cursor: pointer;
+  box-shadow: 0 0 0 0 rgba(#5a99d4, 0.5);
+  -webkit-animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+	}
+
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 5px rgba(0, 0, 0, 0);
+	}
+
+	100% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+	}
+}
+/* @-webkit-keyframes pulse {
+  0% {
+    @include transform(scale(0.9));
+  }
+  70% {
+    @include transform(scale(1));
+    box-shadow: 0 0 0 50px rgba(#5a99d4, 0);
+  }
+  100% {
+    @include transform(scale(0.9));
+    box-shadow: 0 0 0 0 rgba(#5a99d4, 0);
+  }
+} */
 
 .overlay {
   position: fixed;

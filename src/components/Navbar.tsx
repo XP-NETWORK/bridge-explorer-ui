@@ -19,9 +19,15 @@ export const Navbar = () => {
   return (
     <nav className="bg-white shadow-[0_2px_13px_0px_rgba(0,0,0,0.1)]">
       <Container className="relative flex-shrink  flex flex-col sm:flex-row gap-y-4 justify-between px-4 border-red-400">
-        <a href="/" className="max-w-fit">
-          <img src={logo} alt="logo" height={60} width={192} />
-        </a>
+        <div className="navLeft">
+          <a href="/" className="max-w-fit">
+            <img src={logo} alt="logo" height={60} width={192} />
+          </a>
+          <div className="mainnetDiv">
+            <span className="pulse-button"></span>
+            Mainnet
+          </div>
+        </div>
         <div
           ref={menu}
           className="absolute overflow-hidden sm:static right-4 shadow-[0_1px_15px_0px_#2F303214] sm:shadow-none bg-white top-20 z-40 rounded-xl sm:overflow-visible sm:rounded-0 flex sm:flex flex-col justify-between sm:flex-row gap-x-4"

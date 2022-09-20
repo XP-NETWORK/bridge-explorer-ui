@@ -7,6 +7,8 @@ import "./DropDown.css";
 import { setEventsQueryStringType, setStatusFilter } from "../../store/global";
 
 import completedIcon from "../../assets/icons/completed.svg";
+import showAllIcon from "../../assets/icons/all.svg";
+
 import failedIcon from "../../assets/icons/failed.svg";
 import pendingIcon from "../../assets/icons/pending.svg";
 import info from "../../assets/icons/info.svg";
@@ -53,7 +55,15 @@ export const StatusFilter = () => {
             size="sm"
             variant=""
           >
-            <Dropdown.Item eventKey="Show All">Show All</Dropdown.Item>
+            <Dropdown.Item eventKey="Show All"> <div className="flex min-w-[5rem] flex-nowrap space-x-1 ">
+                <img
+                  src={showAllIcon}
+                  className="aspect-square"
+                  alt="show all icon"
+                  width={16}
+                />
+                <div>Show All</div>
+              </div></Dropdown.Item>
             <Dropdown.Item eventKey="Completed">
               {" "}
               <div className="flex min-w-[5rem] flex-nowrap space-x-1 text-[#10B67A]">
