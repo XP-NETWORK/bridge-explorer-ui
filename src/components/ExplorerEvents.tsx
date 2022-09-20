@@ -173,7 +173,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
         </Container>
         <Container className="mt-2 px-0 md:px-4 chainSwitch">
           <ChainSwitch />
-          <div className="desktopOnly">
+          <div className="desktopOnly hideInIpad">
             <DropDown />
           </div>
           <div className="desktopOnly">

@@ -2,6 +2,9 @@
   .scrollTopBtn {
     right: 14%;
   }
+  /* .ipad{
+    display: none;
+  } */
 }
 
 @media screen and (max-width: 1500px) {
@@ -40,7 +43,26 @@
   }
 }
 
+@media only screen and (min-device-width: 600px) and (max-device-width: 1024px) {
+  /* .ipad{
+    display: flex;
+  }
+  .hideInIpad {
+    display: none !important;
+  } */
+  .mobileOnly {
+    display: block !important;
+  }
+
+  .desktopOnly {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 600px) {
+  /* .ipad{
+    display: none;
+  } */
   .dropDownContainer {
     width: inherit;
   }
@@ -327,5 +349,8 @@
   }
   .fontSize {
     font-size: 1.2rem;
+  }
+  .dropDownTitle {
+    width: 65px;
   }
 }
