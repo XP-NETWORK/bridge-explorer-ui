@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { chains } from "../../values.js";
 import {
@@ -26,6 +26,9 @@ import showAll from "../../assets/icons/all.svg";
 import ScrollArrows from "./ScrollArrows";
 
 export const ChainListBox = () => {
+  const [reached, setReached] = useState(false);
+  const nftChainListRef = useRef(null);
+
   const dispatch = useDispatch();
   const location = useLocation();
   const departureOrDestination = useSelector(
@@ -126,6 +129,18 @@ export const ChainListBox = () => {
     dispatch(setEventsQueryStringTo(temp));
   };
 
+  const handleScroll = (e:any) => {
+    //@ts-ignore
+    const { scrollTop, scrollHeight, clientHeight } = nftChainListRef.current;
+    if (nftChainListRef?.current) {
+      if (
+        Math.ceil(scrollTop) + clientHeight === scrollHeight ||
+        Math.ceil(scrollTop) - 1 + clientHeight === scrollHeight
+      ) {
+        setReached(true);
+      } else setReached(false);
+    }
+  };
   return (
     <Modal
       animation={false}
@@ -148,7 +163,11 @@ export const ChainListBox = () => {
       <Modal.Body>
         <div className="nftChainListBox">
           <ChainSearch />
-          <ul className="nftChainList scrollSty">
+          <ul
+            className="nftChainList scrollSty"
+            onScroll={handleScroll}
+            ref={nftChainListRef}
+          >
             <li
               className="nftChainItem"
               onClick={() =>
@@ -199,9 +218,9 @@ export const ChainListBox = () => {
                 );
               })}
           </ul>
-          <div className="mobileOnly">
-            <ScrollArrows />
-          </div>
+          {/* <div className="mobileOnly"> */}
+          {!reached && <ScrollArrows />}
+          {/* </div> */}
         </div>
       </Modal.Body>
     </Modal>

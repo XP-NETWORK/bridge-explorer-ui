@@ -37,12 +37,28 @@ export default function FiltersMobile() {
   const [toIconSrc, setToIconSrc] = useState("");
   const [showClearBtn, setShowClearBtn] = useState(false);
 
+  console.log({ showClearBtn });
+
   const { eventsQueryString, collectionName } = useSelector(
     (state: ReduxState) => ({
       eventsQueryString: state.global.eventsQueryString,
       collectionName: state.global.showByCollection,
     })
   );
+
+  useEffect(() => {
+    if (
+      selectedFrom == "All chains" &&
+      selectedTo == "All chains" &&
+      value == "Show All" &&
+      statusValue == "Show All"
+    ) {
+      setShowClearBtn(false);
+     } 
+    //else {
+    //   setShowClearBtn(true);
+    // }
+  }, [selectedFrom, selectedTo, value, statusValue]);
 
   useEffect(() => {
     if (
@@ -58,8 +74,8 @@ export default function FiltersMobile() {
 
   const handleClose = () => {
     dispatch(setFilterModal(false));
-    dispatch(setDepartureOrDestination(""));
-    dispatch(setSwitchDestination(false));
+    // dispatch(setDepartureOrDestination(""));
+    // dispatch(setSwitchDestination(false));
   };
 
   useEffect(() => {
@@ -79,6 +95,7 @@ export default function FiltersMobile() {
 
   const handleClearAll = () => {
     // dispatch(setEventsQueryStringType(undefined));
+
     setFilterModal(false);
     setSelectedFrom("All chains");
     setSelectedTo("All chains");
@@ -91,8 +108,8 @@ export default function FiltersMobile() {
     dispatch(setTo(selectedTo));
     dispatch(setEventsQueryStringType(undefined));
     dispatch(setStatusFilter(undefined));
-    setShowClearBtn(false);
     handleClose();
+    setShowClearBtn(false);
   };
 
   // const handleSelectType = (e: any) => {
