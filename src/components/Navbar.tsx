@@ -41,7 +41,7 @@ export const Navbar = () => {
           <a
             className="sm:flex p-4 w-full min-w-[14rem] z-20  hover:bg-slate-100 sm:min-w-fit sm:p-0 sm:hover:bg-white  text-[#030303] items-end font-medium text-[15px] sm:pb-2.5 max-w-fit sm:border-t-2 border-transparent"
             href="/"
-            style={{ marginTop: "20px" }}
+            style={{ marginTop: "25px" }}
           >
             Explorer
           </a>
@@ -50,7 +50,7 @@ export const Navbar = () => {
             className="sm:flex p-4 w-full min-w-[14rem] z-20  hover:bg-slate-100 sm:min-w-fit sm:p-0 sm:hover:bg-white  text-[#030303] items-end font-medium text-[15px] sm:pb-2.5 max-w-fit sm:border-t-2 border-transparent"
             href="https://bridge.xp.network/"
             target="_blank"
-            style={{ marginTop: "20px" }}
+            style={{ marginTop: "25px" }}
           >
             Bridge
           </a>

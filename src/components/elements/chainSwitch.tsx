@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ReduxState } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -7,11 +7,31 @@ import {
   setSwitchDestination,
 } from "../../store/global";
 import "./Buttons.css";
+import { chainNoncetoName, chains } from "../../constants";
 
 export const ChainSwitch = () => {
   const from = useSelector((state: ReduxState) => state.global.from);
   const to = useSelector((state: ReduxState) => state.global.to);
   const dispatch = useDispatch();
+  const [fromIconSrc, setFromIconSrc] = useState("");
+  const [toIconSrc, setToIconSrc] = useState("");
+
+  useEffect(() => {
+    console.log("from",from);
+    console.log("icon",chainNoncetoName[from || 0]);
+    
+    
+    chains.map((chain) => {
+      if (chain.name === from) {
+        console.log("src", chain.icon.slice(1));
+        setFromIconSrc(chain.icon.slice(1));
+      }
+      if (chain.name === to) {
+        console.log(chain.icon.slice(1));
+        setToIconSrc(chain.icon.slice(1));
+      }
+    });
+  }, [from, to]);
 
   function handleSwitchChain() {
     dispatch(setDepartureOrDestination("destination"));
@@ -39,6 +59,7 @@ export const ChainSwitch = () => {
               </div>
               <div onClick={handleFromChainSwitch} className="chain-switch">
                 <div className="nameWrapper">
+                  {fromIconSrc && <img src={fromIconSrc} alt="" className="chainIconDropd" />}
                   <span className="name">
                     {" "}
                     {from === "xDai" ? "Gnosis" : from}
@@ -56,6 +77,8 @@ export const ChainSwitch = () => {
               </div>
               <div onClick={handleToChainSwitch} className="chain-switch">
                 <div className="nameWrapper">
+                {toIconSrc && <img src={toIconSrc} alt="" className="chainIconDropd" />}
+                
                   <span className="name"> {to === "xDai" ? "Gnosis" : to}</span>
                   <div className="arrow-downTo"></div>
                 </div>

@@ -251,7 +251,7 @@ export default function FiltersMobile() {
                   Clear filters
                 </button>
                 <button
-                  className="csvBtn "
+                  className="csvBtn filterBtnModal"
                   onClick={handleShowFilterResults}
                 >
                   Show results

@@ -22,6 +22,7 @@ import { ReduxState } from "../../store";
 import "./Chain.css";
 import "./Modal.css";
 import ChainSearch from "./ChainSearch";
+import showAll from "../../assets/icons/all.svg";
 
 export const ChainListBox = () => {
   const dispatch = useDispatch();
@@ -124,6 +125,8 @@ export const ChainListBox = () => {
     dispatch(setEventsQueryStringTo(temp));
   };
 
+  
+
   return (
     <Modal
       animation={false}
@@ -155,6 +158,7 @@ export const ChainListBox = () => {
                   : chainSelectHandlerTo({ text: "All chains" })
               }
             >
+              <img className="modalSelectOptionsImage" src={showAll} alt="" />
               <div className="modalSelectOptionsText">All Chains</div>
             </li>
             {departureOrDestination === "departure" &&

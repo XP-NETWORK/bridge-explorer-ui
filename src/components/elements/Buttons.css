@@ -84,7 +84,15 @@
 
 .nameWrapper {
   display: flex;
-  width: 100px;
+  flex-direction: row;
+  width: 105px;
+  align-items: center;
+  gap: 2px;
+}
+
+.chainIconDropd {
+  width: 15px;
+  height: 15px;
 }
 
 .name {
@@ -144,8 +152,14 @@
   color: #222222;
 }
 
-
 .filterBtnModal {
+  background-color: #235ef5;
+  color: #ffffff;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
   padding: 5px 16px;
 }
 
