@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import filter from "../../assets/img/filter.svg";
 import { ReduxState } from "../../store";
 import {
+  setChainModal,
   setDepartureOrDestination,
   setEventsQueryStringFrom,
   setEventsQueryStringTo,
@@ -16,16 +17,24 @@ import {
 } from "../../store/global";
 import { chains } from "../../values";
 import { DropDown } from "./DropDown";
+import allIcon from "../../assets/icons/all.svg";
+import { chains as Chains } from "../../constants";
+import { StatusFilter } from "./StatusFilter";
 
 export default function FiltersMobile() {
   const [fromChains, setFromChains] = useState(chains);
   const [toChains, setToChains] = useState(chains);
+  const from = useSelector((state: ReduxState) => state.global.from);
+  const to = useSelector((state: ReduxState) => state.global.to);
+
   const show = useSelector((state: ReduxState) => state.global.showfilterModal);
 
   const [selectedFrom, setSelectedFrom] = useState("All chains");
   const [selectedTo, setSelectedTo] = useState("All chains");
   const [value, setValue] = useState("Show All");
   const [statusValue, setStatusValue] = useState("Show All");
+  const [fromIconSrc, setFromIconSrc] = useState("");
+  const [toIconSrc, setToIconSrc] = useState("");
 
   const dispatch = useDispatch();
 
@@ -34,6 +43,26 @@ export default function FiltersMobile() {
     dispatch(setDepartureOrDestination(""));
     dispatch(setSwitchDestination(false));
   };
+
+  useEffect(() => {
+    console.log({ from });
+
+    if (from) {
+      setFromIconSrc(allIcon);
+    }
+    if (to) {
+      setToIconSrc(allIcon);
+    }
+    Chains.map((chain) => {
+      if (chain.name.toLowerCase() === from.toLowerCase()) {
+        setFromIconSrc(chain.icon.slice(1));
+        console.log(chain.icon.slice(1));
+      }
+      if (chain.name.toLowerCase() === to.toLowerCase()) {
+        setToIconSrc(chain.icon.slice(1));
+      }
+    });
+  }, [from, to]);
 
   const handleClearAll = () => {
     // dispatch(setEventsQueryStringType(undefined));
@@ -52,30 +81,30 @@ export default function FiltersMobile() {
     handleClose();
   };
 
-  const handleSelectType = (e: any) => {
-    console.log(e);
-    setValue(e);
-  };
+  // const handleSelectType = (e: any) => {
+  //   console.log(e);
+  //   setValue(e);
+  // };
 
-  const handleSelectStatus = (e: any) => {
-    console.log(e);
+  // const handleSelectStatus = (e: any) => {
+  //   console.log(e);
 
-    setStatusValue(e);
-  };
+  //   setStatusValue(e);
+  // };
 
-  const chainSelectHandlerFrom = async (chain: any) => {
-    setSelectedFrom(chain);
-    if (chain === selectedTo && chain !== "All chains") {
-      switchChains();
-    }
-  };
+  // const chainSelectHandlerFrom = async (chain: any) => {
+  //   setSelectedFrom(chain);
+  //   if (chain === selectedTo && chain !== "All chains") {
+  //     switchChains();
+  //   }
+  // };
 
-  const chainSelectHandlerTo = async (chain: any) => {
-    setSelectedTo(chain);
-    if (chain === selectedFrom && chain !== "All chains") {
-      switchChains();
-    }
-  };
+  // const chainSelectHandlerTo = async (chain: any) => {
+  //   setSelectedTo(chain);
+  //   if (chain === selectedFrom && chain !== "All chains") {
+  //     switchChains();
+  //   }
+  // };
 
   const switchChains = () => {
     // console.log("before switch", selectedFrom, selectedTo);
@@ -115,6 +144,16 @@ export default function FiltersMobile() {
     handleClose();
   };
 
+  const handleFromChainSwitch = () => {
+    dispatch(setDepartureOrDestination("departure"));
+    dispatch(setChainModal(true));
+  };
+
+  const handleToChainSwitch = () => {
+    dispatch(setDepartureOrDestination("destination"));
+    dispatch(setChainModal(true));
+  };
+
   return (
     <>
       <Modal
@@ -138,58 +177,52 @@ export default function FiltersMobile() {
                   <div className="dropDownTitle">
                     <p>From</p>
                   </div>
-                  <div className="dropDown">
-                    <DropdownButton
-                      onSelect={chainSelectHandlerFrom}
-                      id="dropdown-basic-button"
-                      title={selectedFrom}
-                      size="sm"
-                      variant=""
-                    >
-                      <Dropdown.Item eventKey={"All chains"}>
-                        All chains
-                      </Dropdown.Item>
-                      {fromChains.map((chain) => {
-                        return (
-                          <Dropdown.Item eventKey={chain.text}>
-                            {chain.text}
-                          </Dropdown.Item>
-                        );
-                      })}
-                    </DropdownButton>
+                  <div onClick={handleFromChainSwitch} className="chain-switch">
+                    <div className="nameWrapper">
+                      {fromIconSrc && (
+                        <img
+                          src={fromIconSrc}
+                          alt=""
+                          className="chainIconDropd"
+                        />
+                      )}
+                      <span className="name">
+                        {" "}
+                        {from === "xDai" ? "Gnosis" : from}
+                      </span>
+                    </div>
+                    <div className="arrow-down"></div>
                   </div>
                 </div>
               </div>
+
               <div className="dropDownContainer">
                 <div className="dropDownWrapper">
                   <div className="dropDownTitle">
                     <p>To</p>
                   </div>
-                  <div className="dropDown">
-                    <DropdownButton
-                      onSelect={chainSelectHandlerTo}
-                      id="dropdown-basic-button"
-                      title={selectedTo}
-                      size="sm"
-                      variant=""
-                    >
-                      <Dropdown.Item eventKey={"All chains"}>
-                        All chains
-                      </Dropdown.Item>
-                      {toChains.map((chain) => {
-                        return (
-                          <Dropdown.Item eventKey={chain.text}>
-                            {chain.text}
-                          </Dropdown.Item>
-                        );
-                      })}
-                    </DropdownButton>
+                  <div onClick={handleToChainSwitch} className="chain-switch">
+                    <div className="nameWrapper">
+                      {toIconSrc && (
+                        <img
+                          src={toIconSrc}
+                          alt=""
+                          className="chainIconDropd"
+                        />
+                      )}
+
+                      <span className="name">
+                        {" "}
+                        {to === "xDai" ? "Gnosis" : to}
+                      </span>
+                    </div>
+                    <div className="arrow-downTo"></div>
                   </div>
                 </div>
               </div>
 
               {/* </div> */}
-              <div className="dropDownContainer">
+              {/* <div className="dropDownContainer">
                 <div className="dropDownWrapper">
                   <div className="dropDownTitle">
                     <p> Tx Type</p>
@@ -214,9 +247,10 @@ export default function FiltersMobile() {
                     </DropdownButton>
                   </div>
                 </div>
-              </div>
+              </div> */}
+              <DropDown />
 
-              <div className="dropDownContainer">
+              {/* <div className="dropDownContainer">
                 <div className="dropDownWrapper">
                   <div className="dropDownTitle">
                     <p> Status</p>
@@ -242,7 +276,8 @@ export default function FiltersMobile() {
                     </DropdownButton>
                   </div>
                 </div>
-              </div>
+              </div> */}
+              <StatusFilter />
 
               <div className="filterBtnsWrapper">
                 <button
