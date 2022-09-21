@@ -90,9 +90,21 @@
   gap: 2px;
 }
 
-.typeBtnWidth{
+.typeBtnWidth {
   width: auto;
 }
+
+.navMarginTop{
+  
+}
+
+.statusTitleFont {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+}
+
 .chainIconDropd {
   width: 15px;
   height: 15px;

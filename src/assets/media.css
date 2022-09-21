@@ -5,6 +5,9 @@
   /* .ipad{
     display: none;
   } */
+  .navMarginTop {
+    margin-top: 25px;
+  }
 }
 
 @media screen and (max-width: 1500px) {
@@ -84,6 +87,11 @@
   }
 }
 
+@media screen and (max-width: 640px) {
+  .navMarginTop {
+    margin-top: 0px;
+  }
+}
 @media screen and (max-width: 600px) {
   /* .ipad{
     display: none;

@@ -47,7 +47,7 @@
 .dropDownTitle {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 4px 6px;
   gap: 6px;
