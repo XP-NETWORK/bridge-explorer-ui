@@ -119,27 +119,27 @@ export default function FiltersMobile() {
   };
 
   const handleShowFilterResults = () => {
-    dispatch(setFrom(selectedFrom));
-    dispatch(setEventsQueryStringFrom(selectedFrom));
+    // dispatch(setFrom(selectedFrom));
+    // dispatch(setEventsQueryStringFrom(selectedFrom));
 
-    dispatch(setTo(selectedTo));
-    dispatch(setEventsQueryStringTo(selectedTo));
+    // dispatch(setTo(selectedTo));
+    // dispatch(setEventsQueryStringTo(selectedTo));
 
-    if (value === "Show All") {
-      dispatch(setEventsQueryStringType(undefined));
-    } else {
-      dispatch(setEventsQueryStringType(value));
-    }
+    // if (value === "Show All") {
+    //   dispatch(setEventsQueryStringType(undefined));
+    // } else {
+    //   dispatch(setEventsQueryStringType(value));
+    // }
 
-    if (statusValue === "Show All") {
-      //   dispatch(setStatusFilter(""));
-    } else if (statusValue === "Processing") {
-      dispatch(setStatusFilter("Failed"));
-    } else if (statusValue === "Pending") {
-      dispatch(setStatusFilter("Pending"));
-    } else {
-      dispatch(setStatusFilter(statusValue));
-    }
+    // if (statusValue === "Show All") {
+    //   //   dispatch(setStatusFilter(""));
+    // } else if (statusValue === "Processing") {
+    //   dispatch(setStatusFilter("Failed"));
+    // } else if (statusValue === "Pending") {
+    //   dispatch(setStatusFilter("Pending"));
+    // } else {
+    //   dispatch(setStatusFilter(statusValue));
+    // }
 
     handleClose();
   };

@@ -23,6 +23,7 @@ import "./Chain.css";
 import "./Modal.css";
 import ChainSearch from "./ChainSearch";
 import showAll from "../../assets/icons/all.svg";
+import ScrollArrows from "./ScrollArrows";
 
 export const ChainListBox = () => {
   const dispatch = useDispatch();
@@ -125,8 +126,6 @@ export const ChainListBox = () => {
     dispatch(setEventsQueryStringTo(temp));
   };
 
-  
-
   return (
     <Modal
       animation={false}
@@ -200,6 +199,9 @@ export const ChainListBox = () => {
                 );
               })}
           </ul>
+          <div className="mobileOnly">
+            <ScrollArrows />
+          </div>
         </div>
       </Modal.Body>
     </Modal>

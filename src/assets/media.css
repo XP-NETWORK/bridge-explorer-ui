@@ -165,6 +165,9 @@
   .ChainModal .modal-dialog {
     top: 12%;
   }
+  .nftChainList {
+    max-height: 383px !important;
+  }
 }
 @media screen and (max-width: 600px) {
   /* .ipad{
