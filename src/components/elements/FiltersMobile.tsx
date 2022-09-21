@@ -35,6 +35,24 @@ export default function FiltersMobile() {
   const [statusValue, setStatusValue] = useState("Show All");
   const [fromIconSrc, setFromIconSrc] = useState("");
   const [toIconSrc, setToIconSrc] = useState("");
+  const [showClearBtn, setShowClearBtn] = useState(false);
+
+  const { eventsQueryString, collectionName } = useSelector(
+    (state: ReduxState) => ({
+      eventsQueryString: state.global.eventsQueryString,
+      collectionName: state.global.showByCollection,
+    })
+  );
+
+  useEffect(() => {
+    if (
+      (typeof eventsQueryString === "object" &&
+        Object.keys(eventsQueryString).length > 0) ||
+      collectionName !== ""
+    ) {
+      setShowClearBtn(true);
+    }
+  }, [eventsQueryString, collectionName]);
 
   const dispatch = useDispatch();
 
@@ -73,6 +91,7 @@ export default function FiltersMobile() {
     dispatch(setTo(selectedTo));
     dispatch(setEventsQueryStringType(undefined));
     dispatch(setStatusFilter(undefined));
+    setShowClearBtn(false);
     handleClose();
   };
 
@@ -278,6 +297,7 @@ export default function FiltersMobile() {
                 <button
                   className="csvBtn clearFilterBtnModal"
                   onClick={handleClearAll}
+                  style={{ visibility: showClearBtn ? "visible" : "hidden" }}
                 >
                   Clear filters
                 </button>
