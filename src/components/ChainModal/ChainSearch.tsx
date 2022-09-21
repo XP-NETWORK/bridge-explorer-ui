@@ -30,7 +30,7 @@ export default function ChainSearch() {
             value={search || ""}
             onChange={(e) => handleChange(e)}
             type="text"
-            placeholder="Search"
+            placeholder="Search chain name "
           />
           <button type="submit">
             <img src={searchSvg}  alt="search"/>
