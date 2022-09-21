@@ -226,13 +226,13 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                 <TableHeading>
                   <span className="ageHeader">
                     Age
-                    <img
+                    {/* <img
                       src={sortIcon}
                       className={`${
                         eventsContext?.sort === "ASC" ? "rotated" : ""
                       }`}
                       onClick={eventsContext!.toggleSort}
-                    />
+                    /> */}
                   </span>
                 </TableHeading>
                 <TableHeading>Status</TableHeading>
@@ -254,27 +254,28 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                       className="bg-white group hover:bg-transparent txRow"
                       onClick={(e) => navigateTo(e, event)}
                     >
-                     
-                        <TableData
-                          className={`left-0 text-center bg-white group-hover:bg-[#F7F7F9] imgTableData ${
-                            /^((?!chrome|android).)*safari/i.test(
-                              navigator.userAgent
-                            )
-                              ? "safariHack"
-                              : "sitckyBottomLine"
-                          }`}
-                        > <a
-                        href={`/tx/${extractHash(event.fromHash)}`}
-                        target="_blank"
+                      <TableData
+                        className={`left-0 text-center bg-white group-hover:bg-[#F7F7F9] imgTableData ${
+                          /^((?!chrome|android).)*safari/i.test(
+                            navigator.userAgent
+                          )
+                            ? "safariHack"
+                            : "sitckyBottomLine"
+                        }`}
                       >
+                        {" "}
+                        <a
+                          href={`/tx/${extractHash(event.fromHash)}`}
+                          target="_blank"
+                        >
                           <ReactTooltip
                             effect="solid"
                             className="copyTip"
                             multiline
                           />
                           <RowNFT event={event} />
-                       </a> </TableData>
-                      
+                        </a>{" "}
+                      </TableData>
 
                       <TableData>
                         <span

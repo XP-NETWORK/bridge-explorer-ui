@@ -91,6 +91,10 @@
   .navMarginTop {
     margin-top: 0px;
   }
+  .sm\:shadow-none {
+    height: auto;
+    top: 61px !important;
+  }
 }
 @media screen and (max-width: 600px) {
   /* .ipad{

@@ -49,6 +49,7 @@ export default function FiltersMobile() {
     dispatch(setTo(selectedTo));
     dispatch(setEventsQueryStringType(undefined));
     dispatch(setStatusFilter(undefined));
+    handleClose();
   };
 
   const handleSelectType = (e: any) => {
