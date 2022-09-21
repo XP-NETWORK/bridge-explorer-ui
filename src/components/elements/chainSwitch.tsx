@@ -19,13 +19,14 @@ export const ChainSwitch = () => {
 
   useEffect(() => {
     console.log({ from });
-
-    if (from) {
-      setFromIconSrc(allIcon);
-    }
-    if (to) {
-      setToIconSrc(allIcon);
-    }
+    setFromIconSrc("");
+    setToIconSrc("");
+    // if (from) {
+    //   setFromIconSrc(allIcon);
+    // }
+    // if (to) {
+    //   setToIconSrc(allIcon);
+    // }
     chains.map((chain) => {
       if (chain.name.toLowerCase() === from.toLowerCase()) {
         setFromIconSrc(chain.icon.slice(1));

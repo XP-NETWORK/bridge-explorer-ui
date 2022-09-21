@@ -46,13 +46,8 @@ export default function FiltersMobile() {
 
   useEffect(() => {
     console.log({ from });
-
-    if (from) {
-      setFromIconSrc(allIcon);
-    }
-    if (to) {
-      setToIconSrc(allIcon);
-    }
+    setFromIconSrc("");
+    setToIconSrc("");
     Chains.map((chain) => {
       if (chain.name.toLowerCase() === from.toLowerCase()) {
         setFromIconSrc(chain.icon.slice(1));

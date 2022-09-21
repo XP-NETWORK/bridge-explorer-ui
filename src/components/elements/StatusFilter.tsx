@@ -46,12 +46,12 @@ export const StatusFilter = () => {
       case "Show All":
         return (
           <div className="flex min-w-[5rem] flex-nowrap space-x-1 ">
-            <img
+            {/* <img
               src={showAllIcon}
               className="aspect-square"
               alt="show all icon"
               width={16}
-            />
+            /> */}
             <div>{value}</div>
           </div>
         );
