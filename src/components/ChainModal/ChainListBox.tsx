@@ -159,7 +159,7 @@ export const ChainListBox = () => {
               }
             >
               <img className="modalSelectOptionsImage" src={showAll} alt="" />
-              <div className="modalSelectOptionsText">All Chains</div>
+              <div className="modalSelectOptionsText">Select All Chains</div>
             </li>
             {departureOrDestination === "departure" &&
               fromChains.map((chain) => {

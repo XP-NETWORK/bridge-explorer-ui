@@ -85,11 +85,14 @@
 .nameWrapper {
   display: flex;
   flex-direction: row;
-  width: 105px;
+  width: 120px;
   align-items: center;
   gap: 2px;
 }
 
+.typeBtnWidth{
+  width: auto;
+}
 .chainIconDropd {
   width: 15px;
   height: 15px;

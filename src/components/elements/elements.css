@@ -290,6 +290,8 @@ ul.chartInfoList li {
 
 .chainIconDetails {
   margin-right: 5px;
+  width: 20px;
+  height: 20px;
 }
 
 .detailsListRow p,
@@ -659,7 +661,7 @@ ul.chartInfoList li {
 @keyframes pulse {
   0% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 0 0 rgba(18, 220, 39, 0.7);
   }
 
   70% {
@@ -669,7 +671,7 @@ ul.chartInfoList li {
 
   100% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    box-shadow: 0 0 0 0 rgba(13, 172, 24, 0);
   }
 }
 /* @-webkit-keyframes pulse {

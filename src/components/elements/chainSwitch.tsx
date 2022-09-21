@@ -8,6 +8,7 @@ import {
 } from "../../store/global";
 import "./Buttons.css";
 import { chainNoncetoName, chains } from "../../constants";
+import allIcon from "../../assets/icons/all.svg";
 
 export const ChainSwitch = () => {
   const from = useSelector((state: ReduxState) => state.global.from);
@@ -17,17 +18,20 @@ export const ChainSwitch = () => {
   const [toIconSrc, setToIconSrc] = useState("");
 
   useEffect(() => {
-    console.log("from",from);
-    console.log("icon",chainNoncetoName[from || 0]);
-    
-    
+    console.log({ from });
+
+    if (from) {
+      setFromIconSrc(allIcon);
+    }
+    if (to) {
+      setToIconSrc(allIcon);
+    }
     chains.map((chain) => {
-      if (chain.name === from) {
-        console.log("src", chain.icon.slice(1));
+      if (chain.name.toLowerCase() === from.toLowerCase()) {
         setFromIconSrc(chain.icon.slice(1));
-      }
-      if (chain.name === to) {
         console.log(chain.icon.slice(1));
+      }
+      if (chain.name.toLowerCase() === to.toLowerCase()) {
         setToIconSrc(chain.icon.slice(1));
       }
     });
@@ -59,7 +63,9 @@ export const ChainSwitch = () => {
               </div>
               <div onClick={handleFromChainSwitch} className="chain-switch">
                 <div className="nameWrapper">
-                  {fromIconSrc && <img src={fromIconSrc} alt="" className="chainIconDropd" />}
+                  {fromIconSrc && (
+                    <img src={fromIconSrc} alt="" className="chainIconDropd" />
+                  )}
                   <span className="name">
                     {" "}
                     {from === "xDai" ? "Gnosis" : from}
@@ -77,8 +83,10 @@ export const ChainSwitch = () => {
               </div>
               <div onClick={handleToChainSwitch} className="chain-switch">
                 <div className="nameWrapper">
-                {toIconSrc && <img src={toIconSrc} alt="" className="chainIconDropd" />}
-                
+                  {toIconSrc && (
+                    <img src={toIconSrc} alt="" className="chainIconDropd" />
+                  )}
+
                   <span className="name"> {to === "xDai" ? "Gnosis" : to}</span>
                   <div className="arrow-downTo"></div>
                 </div>

@@ -27,6 +27,9 @@ export const DropDown = () => {
     setValue("Show All");
   }, [resetType]);
 
+
+
+  let title = <div className="nameWrapper typeBtnWidth">{value} <div className="arrow-down"></div></div>;
   return (
     <div className="dropDownContainer">
       <div className="dropDownWrapper">
@@ -37,7 +40,7 @@ export const DropDown = () => {
           <DropdownButton
             onSelect={handleSelect}
             id="dropdown-basic-button"
-            title={value}
+            title={title}
             size="sm"
             variant=""
           >

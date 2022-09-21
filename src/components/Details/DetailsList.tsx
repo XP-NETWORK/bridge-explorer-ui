@@ -53,12 +53,20 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
   useEffect(() => {
     chains.map((chain) => {
       if (chain.name === chainNoncetoName[event?.fromChain || 0]) {
-        console.log(chain.icon.slice(1));
-        setFromIconSrc(chain.icon.slice(1));
+        console.log(chain.icon);
+        if (chain.icon[0] === ".") {
+          setFromIconSrc(chain.icon.slice(1));
+        } else {
+          setFromIconSrc(chain.icon);
+        }
       }
       if (chain.name === chainNoncetoName[event?.toChain || 0]) {
-        console.log(chain.icon.slice(1));
-        setToIconSrc(chain.icon.slice(1));
+        console.log(chain.icon);
+        if (chain.icon[0] === ".") {
+          setToIconSrc(chain.icon.slice(1));
+        } else {
+          setToIconSrc(chain.icon);
+        }
       }
     });
   }, [event]);
