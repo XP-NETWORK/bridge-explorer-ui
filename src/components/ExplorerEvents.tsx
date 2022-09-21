@@ -254,10 +254,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                       className="bg-white group hover:bg-transparent txRow"
                       onClick={(e) => navigateTo(e, event)}
                     >
-                      <a
-                        href={`/tx/${extractHash(event.fromHash)}`}
-                        target="_blank"
-                      >
+                     
                         <TableData
                           className={`left-0 text-center bg-white group-hover:bg-[#F7F7F9] imgTableData ${
                             /^((?!chrome|android).)*safari/i.test(
@@ -266,15 +263,18 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                               ? "safariHack"
                               : "sitckyBottomLine"
                           }`}
-                        >
+                        > <a
+                        href={`/tx/${extractHash(event.fromHash)}`}
+                        target="_blank"
+                      >
                           <ReactTooltip
                             effect="solid"
                             className="copyTip"
                             multiline
                           />
                           <RowNFT event={event} />
-                        </TableData>
-                      </a>
+                       </a> </TableData>
+                      
 
                       <TableData>
                         <span
