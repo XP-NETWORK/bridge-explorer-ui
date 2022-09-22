@@ -75,7 +75,7 @@ const globalSlice = createSlice({
         typeof state.eventsQueryString === "string" &&
         state.eventsQueryString.length > 0
       ) {
-         state.eventsQueryString = {};
+        state.eventsQueryString = {};
         state.resetSearch = true;
       }
       state.eventsQueryString = {
@@ -83,9 +83,8 @@ const globalSlice = createSlice({
         fromChainName:
           action.payload === "All chains" ? undefined : action.payload,
       };
-      
     },
-    setResetSearch(state, action){
+    setResetSearch(state, action) {
       state.resetSearch = action.payload;
     },
     setEventsQueryStringType(state, action) {
@@ -139,6 +138,7 @@ const globalSlice = createSlice({
     },
     setShowByCollection(state, action) {
       state.showByCollection = action.payload;
+      console.log("global nameCollection", state.showByCollection);
     },
   },
 });
@@ -161,7 +161,7 @@ export const {
   setDepartureOrDestination,
   setSwitchDestination,
   setShowByCollection,
-  setResetSearch
+  setResetSearch,
 } = globalSlice.actions;
 
 export default globalSlice.reducer;

@@ -1,106 +1,106 @@
 .ChainModal .modal-dialog,
 .MaiarModal .modal-dialog {
-    max-width: 370px !important;
-    margin: auto;
-    top: 18%;
+  max-width: 370px !important;
+  margin: auto;
+  top: 18%;
 }
 
 .modal-content {
-    box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.13) !important;
-    border-radius: 20px !important;
-    background-color: #F7F7F9 !important;
-    background-clip: padding-box;
+  box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.13) !important;
+  border-radius: 20px !important;
+  background-color: #f7f7f9 !important;
+  background-clip: padding-box;
 }
 
 .close-modal {
-    width: 12px !important;
-    height: 12px !important;
-    background-image: url("../../assets/icons/close.svg") !important;
+  width: 12px !important;
+  height: 12px !important;
+  background-image: url("../../assets/icons/close.svg") !important;
 }
 
 .close-modal:hover {
-    background-image: url("../../assets/icons/close_hovered.svg") !important;
+  background-image: url("../../assets/icons/close_hovered.svg") !important;
 }
 
 .modal-header {
-    border-bottom: 1px solid transparent !important;
-    padding: 30px !important;
-    padding-bottom: 0px !important;
+  border-bottom: 1px solid transparent !important;
+  padding: 30px !important;
+  padding-bottom: 0px !important;
 }
 
 .modal-title {
-    margin: auto;
-    color: #14161a !important;
-    font-size: 20px !important;
-    font-weight: 500 !important;
-    line-height: 27px !important;
+  margin: auto;
+  color: #14161a !important;
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  line-height: 27px !important;
 }
 
 .modalSelectOptionsText {
-    width: 100% !important;
-    color: #14161a !important;
-    position: relative !important;
-    display: flex !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
+  width: 100% !important;
+  color: #14161a !important;
+  position: relative !important;
+  display: flex !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
 }
 
-
 @media screen and (max-width: 425px) {
-    .ChainModal .modal-dialog {
-        max-width: 100% !important;
-    }
+  .ChainModal .modal-dialog {
+    max-width: 100% !important;
+  }
 }
 
 @media screen and (min-width: 576px) {
-    .about-nft__modal .modal-dialog {
-        max-width: 660px !important;
-    }
+  .about-nft__modal .modal-dialog {
+    max-width: 660px !important;
+  }
 }
 
 .nftChainList {
-    list-style: none !important;
-    max-height: 375px !important;
-    overflow: scroll !important;
+  list-style: none !important;
+  max-height: 375px !important;
+  overflow: scroll !important;
 }
 
 .nftChainItem {
-    display: flex;
-    align-items: center;
-    height: 56px;
-    margin: 8px 26px;
-    padding: 14px 16px;
-    cursor: pointer;
-    transition: all 0.5s;
-    border-radius: 86px;
-    border: 1px solid white;
-    box-shadow: 0px 1px 6px rgb(180 185 199 / 25%);
+  display: flex;
+  align-items: center;
+  height: 56px;
+  margin: 8px 26px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: all 0.5s;
+  border-radius: 86px;
+  border: 1px solid white;
+  box-shadow: 0px 1px 6px rgb(180 185 199 / 25%);
 }
 
 .nftChainItem img {
-    display: block;
-    width: 28px;
-    margin-right: 13px;
+  display: block;
+  width: 28px;
+  height: 28px;
+  margin-right: 13px;
 }
 
 .nftChainItem:hover {
-    background: rgba(73, 82, 108, 0.1);
+  background: rgba(73, 82, 108, 0.1);
 }
 
-.modal-body{
-    padding: 6px 0 24px 0 !important;
+.modal-body {
+  padding: 6px 0 24px 0 !important;
 }
 
 .modal-backdrop {
-    background: #1d212a;
-    opacity: 0.9;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1040;
-    width: 100vw;
-    height: 100vh;
-    color: rgb(149 164 191 / 80%);
+  background: #1d212a;
+  opacity: 0.9;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  color: rgb(149 164 191 / 80%);
 }
 
 /* 
@@ -108,48 +108,47 @@
     opacity: 0 !important;
 } */
 
-
 .searchChain {
-    display: flex;
-    align-items: center;
-    position: relative;
-    margin: 0 30px;
-    margin-bottom: 6px;
-    margin-top: 6px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 0 30px;
+  margin-bottom: 6px;
+  margin-top: 6px;
 }
 
 .searchChain input {
-    font-weight: 400;
-    display: block;
-    flex-grow: 1;
-    border: 0;
-    outline: none;
-    /* background: #ECECF1;` */
-    border-radius: 10px;
-    height: 48px;
-    padding: 0 36px 0 16px;
-    color: rgb(39, 38, 38);
-    border: 1px solid #d4d9e1;
-    border-radius: 38px;
+  font-weight: 400;
+  display: block;
+  flex-grow: 1;
+  border: 0;
+  outline: none;
+  /* background: #ECECF1;` */
+  border-radius: 10px;
+  height: 48px;
+  padding: 0 36px 0 16px;
+  color: rgb(39, 38, 38);
+  border: 1px solid #d4d9e1;
+  border-radius: 38px;
 }
 
 .searchChain input:focus {
-    background-color: #fff;
+  background-color: #fff;
 }
 .searchChain input::placeholder {
-    color: #62718a;
+  color: #62718a;
 }
 
 .searchChain button {
-    position: absolute;
-    right: 0;
-    background: transparent;
-    border: 0;
-    outline: none;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 0;
-    height: 48px;
-    width: 30px;
-    text-align: left;
+  position: absolute;
+  right: 0;
+  background: transparent;
+  border: 0;
+  outline: none;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0;
+  height: 48px;
+  width: 30px;
+  text-align: left;
 }

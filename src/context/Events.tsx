@@ -160,7 +160,6 @@ export const EventsProvider: FC = withContainer(
       setIsLoading(true);
       if (collectionName.length > 0) {
         console.log("collection name is clickedddd");
-
         loadEventsByCollectionName();
       }
       if (
@@ -169,7 +168,6 @@ export const EventsProvider: FC = withContainer(
         eventsQueryString.type ||
         eventsQueryString.status
       ) {
-      
         filteredEvents();
       } else if (
         typeof eventsQueryString === "string" &&
@@ -194,6 +192,7 @@ export const EventsProvider: FC = withContainer(
       await loadImages(events, setEvents);
       setTotal(count);
       setIsLoading(false);
+      console.log({ events });
     };
 
     const loadAllEvents = async () => {
@@ -202,6 +201,7 @@ export const EventsProvider: FC = withContainer(
       );
       // console.log("events", eventsObj.data);
       load(eventsObj.data);
+      console.log("load all events");
     };
 
     const loadEventsBySearch = async () => {
@@ -210,6 +210,7 @@ export const EventsProvider: FC = withContainer(
       );
       // console.log("events", eventsObj.data);
       load(eventsObj.data);
+      console.log("load all search");
     };
 
     const loadEventsByCollectionName = async () => {
@@ -223,6 +224,7 @@ export const EventsProvider: FC = withContainer(
       );
       // console.log("events by collection", eventsObj.data);
       load(eventsObj.data);
+      console.log("load by collection name");
     };
 
     const filteredEvents = async () => {
@@ -244,6 +246,7 @@ export const EventsProvider: FC = withContainer(
       // console.log("events", eventsObj.data);
       // console.log("statusssss", eventsQueryString.status);
       load(eventsObj.data);
+      console.log("load by filters");
     };
 
     // useEffect(() => {
