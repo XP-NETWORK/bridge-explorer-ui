@@ -45,16 +45,14 @@ export const ChainListBox = () => {
   const [selectedFrom, setSelectedFrom] = useState("All chains");
   const [selectedTo, setSelectedTo] = useState("All chains");
 
-  // useEffect(() => {
-  //   //@ts-ignore
-  //   const { clientHeight } = nftChainListRef.current;
-  //   console.log(clientHeight);
-  //   if (chainSearch !== "") {
-  //     if (clientHeight <= "370") {
-  //       setReached(true);
-  //     }
-  //   }
-  // }, [chainSearch]);
+  useEffect(() => {
+    //@ts-ignore
+    if (fromChains.length <= 5 || toChains.length <= 5) {
+      setReached(true);
+    } else {
+      setReached(false);
+    }
+  }, [fromChains, toChains]);
 
   const handleClose = () => {
     dispatch(setChainModal(false));
