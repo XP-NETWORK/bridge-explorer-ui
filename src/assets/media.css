@@ -171,8 +171,8 @@
   }
 }
 @media screen and (max-width: 600px) {
-  .copyBtnWrapper .ml-2 {
-    margin-left: 0.2rem;
+  .ml-2 {
+    margin-left: 0.3rem;
   }
   /* .ipad{
     display: none;
