@@ -6,7 +6,8 @@
     display: none;
   } */
   .navMarginTop {
-    margin-top: 25px;
+    /* margin-top: 25px; */
+    align-self: flex-start;
   }
 }
 

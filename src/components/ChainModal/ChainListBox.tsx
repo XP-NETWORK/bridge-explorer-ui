@@ -45,6 +45,17 @@ export const ChainListBox = () => {
   const [selectedFrom, setSelectedFrom] = useState("All chains");
   const [selectedTo, setSelectedTo] = useState("All chains");
 
+  // useEffect(() => {
+  //   //@ts-ignore
+  //   const { clientHeight } = nftChainListRef.current;
+  //   console.log(clientHeight);
+  //   if (chainSearch !== "") {
+  //     if (clientHeight <= "370") {
+  //       setReached(true);
+  //     }
+  //   }
+  // }, [chainSearch]);
+
   const handleClose = () => {
     dispatch(setChainModal(false));
     dispatch(setDepartureOrDestination(""));
@@ -129,7 +140,7 @@ export const ChainListBox = () => {
     dispatch(setEventsQueryStringTo(temp));
   };
 
-  const handleScroll = (e:any) => {
+  const handleScroll = (e: any) => {
     //@ts-ignore
     const { scrollTop, scrollHeight, clientHeight } = nftChainListRef.current;
     if (nftChainListRef?.current) {
@@ -141,6 +152,7 @@ export const ChainListBox = () => {
       } else setReached(false);
     }
   };
+
   return (
     <Modal
       animation={false}
