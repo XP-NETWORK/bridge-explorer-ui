@@ -6,11 +6,13 @@ import { ReduxState } from "../../store";
 import {
   setChainModal,
   setDepartureOrDestination,
+  setEventsQueryString,
   setEventsQueryStringFrom,
   setEventsQueryStringTo,
   setEventsQueryStringType,
   setFilterModal,
   setFrom,
+  setShowByCollection,
   setStatusFilter,
   setSwitchDestination,
   setTo,
@@ -22,8 +24,8 @@ import { chains as Chains } from "../../constants";
 import { StatusFilter } from "./StatusFilter";
 
 export default function FiltersMobile() {
-  const [fromChains, setFromChains] = useState(chains);
-  const [toChains, setToChains] = useState(chains);
+  // const [fromChains, setFromChains] = useState(chains);
+  // const [toChains, setToChains] = useState(chains);
   const from = useSelector((state: ReduxState) => state.global.from);
   const to = useSelector((state: ReduxState) => state.global.to);
 
@@ -45,20 +47,20 @@ export default function FiltersMobile() {
       collectionName: state.global.showByCollection,
     })
   );
-
+  console.log("here", { selectedFrom, selectedTo, value, statusValue });
   useEffect(() => {
     if (
-      selectedFrom == "All chains" &&
-      selectedTo == "All chains" &&
-      value == "Show All" &&
-      statusValue == "Show All"
+      from === "All chains" &&
+      to === "All chains" &&
+      value === "Show All" &&
+      statusValue === "Show All"
     ) {
       setShowClearBtn(false);
-     } 
+    }
     //else {
     //   setShowClearBtn(true);
     // }
-  }, [selectedFrom, selectedTo, value, statusValue]);
+  }, [from, to, value, statusValue]);
 
   useEffect(() => {
     if (
@@ -93,23 +95,22 @@ export default function FiltersMobile() {
     });
   }, [from, to]);
 
+ 
+
   const handleClearAll = () => {
     // dispatch(setEventsQueryStringType(undefined));
 
     setFilterModal(false);
-    setSelectedFrom("All chains");
-    setSelectedTo("All chains");
-    setValue("Show All");
-    setStatusValue("Show All");
-
-    dispatch(setFrom(selectedFrom));
-    dispatch(setEventsQueryStringFrom(selectedFrom));
-    dispatch(setEventsQueryStringTo(selectedTo));
-    dispatch(setTo(selectedTo));
+    dispatch(setFrom("All chains"));
+    dispatch(setEventsQueryStringFrom("All chains"));
+    dispatch(setEventsQueryStringTo("All chains"));
+    dispatch(setTo("All chains"));
     dispatch(setEventsQueryStringType(undefined));
     dispatch(setStatusFilter(undefined));
-    handleClose();
+    dispatch(setEventsQueryString(""));
+    dispatch(setShowByCollection(""));
     setShowClearBtn(false);
+    // handleClose();
   };
 
   // const handleSelectType = (e: any) => {
