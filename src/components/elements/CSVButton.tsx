@@ -83,7 +83,7 @@ const DownloadCSV = ({ onClose }: { onClose: () => boolean }) => {
           {...(!isSettingDate[0] ? { value: "Start date" } : {})}
           onChange={(date: Date) => onSetStart(date)}
           onInputClick={() => setIsSetting([true, isSettingDate[1]])}
-          className="datePick w-full"
+          className="datePick w-full" maxDate={moment().toDate()}
         />
         <span>-</span>
         <DatePicker
@@ -91,7 +91,7 @@ const DownloadCSV = ({ onClose }: { onClose: () => boolean }) => {
           {...(!isSettingDate[1] ? { value: "End date" } : {})}
           onChange={(date: Date) => onSetEnd(date)}
           onInputClick={() => setIsSetting([isSettingDate[0], true])}
-          className="datePick w-full endDatePick"
+          className="datePick w-full endDatePick" maxDate={moment().toDate()}
         />
         <img src={calendar} alt="calendar" />
       </div>

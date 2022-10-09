@@ -147,6 +147,7 @@
     align-items: flex-start;
     align-self: flex-start;
     color: #222222;
+    margin-right: 8px;
   }
   .nftChainList {
     background: #f7f7f9;
