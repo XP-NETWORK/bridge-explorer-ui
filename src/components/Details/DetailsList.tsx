@@ -51,6 +51,13 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
   };
 
   useEffect(() => {
+    // console.log({event});
+    // if(event?.fromChain ==""){
+    //   setFromIconSrc("");
+    // }
+    // if(event?.toChain ==""){
+    //   setToIconSrc("");
+    // }
     chains.map((chain) => {
       if (chain.name === chainNoncetoName[event?.fromChain || 0]) {
         console.log(chain.icon);
@@ -59,9 +66,9 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
         } else {
           setFromIconSrc(chain.icon);
         }
-      }
+      } 
       if (chain.name === chainNoncetoName[event?.toChain || 0]) {
-        console.log(chain.icon);
+       
         if (chain.icon[0] === ".") {
           setToIconSrc(chain.icon.slice(1));
         } else {

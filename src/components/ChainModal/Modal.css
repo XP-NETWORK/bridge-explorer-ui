@@ -151,4 +151,5 @@
   height: 48px;
   width: 30px;
   text-align: left;
+  pointer-events: none;
 }

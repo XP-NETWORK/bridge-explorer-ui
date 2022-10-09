@@ -44,6 +44,7 @@ export const EventsProvider: FC = withContainer(
     const [sort, setSort] = useState("DESC");
     //const [paginationPage, setPage] = useState(0);
     const [totalEvents, setTotal] = useState(0);
+    const [enableNav, setEnableNav] = useState(true);
 
     const { eventsQueryString, statusFilter, collectionName, paginationPage } =
       useSelector((state: ReduxState) => ({
@@ -154,6 +155,12 @@ export const EventsProvider: FC = withContainer(
         scraperSocket.off("incomingEvent");
         scraperSocket.off("updateEvent");
       };
+    }, [events]);
+
+    useEffect(() => {
+      if(events.length<=50){
+
+      }
     }, [events]);
 
     useEffect(() => {
