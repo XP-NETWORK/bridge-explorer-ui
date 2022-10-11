@@ -358,9 +358,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                         <CollectionNameRow
                           hash={extractHash(event.toHash!)}
                           collectionName={
-                            event?.collectionName
-                              ? event?.collectionName
-                              : "no collectioName"
+                            event?.collectionName ? event?.collectionName : "-"
                           }
                           chain={event.toChain!}
                         />

@@ -64,7 +64,9 @@ export const SearchBar: React.FC<{
 
   useEffect(() => {
     if (!resetSearch) {
-      debounced(value);
+      if (value !== "") {
+        debounced(value);
+      }
       value ? mode(true) : handleClearSearch();
     }
   }, [value]);
