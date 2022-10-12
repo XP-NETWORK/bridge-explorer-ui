@@ -4,6 +4,17 @@ import { withContainer } from "../../context/ServcieProvder";
 import { Line, Column } from "@ant-design/plots";
 import moment from "moment";
 import { Loader } from "./Loader";
+import "./Chart.css";
+
+import {
+  Area,
+  AreaChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 export const Chart = withContainer(
   ({
     dailyData,
@@ -18,31 +29,31 @@ export const Chart = withContainer(
     container: any;
   }) => {
     let mockData = [
-      {
-        txNumber: 22,
-        walletsNumber: 3,
-        date: "2022/3/3",
-      },
-      {
-        txNumber: 7,
-        walletsNumber: 3,
-        date: "2022/3/4",
-      },
-      {
-        txNumber: 19,
-        walletsNumber: 3,
-        date: "2022/3/5",
-      },
-      {
-        txNumber: 56,
-        walletsNumber: 3,
-        date: "2022/3/6",
-      },
-      {
-        txNumber: 31,
-        walletsNumber: 3,
-        date: "2022/3/7",
-      },
+      // {
+      //   txNumber: 22,
+      //   walletsNumber: 3,
+      //   date: "2022/3/3",
+      // },
+      // {
+      //   txNumber: 7,
+      //   walletsNumber: 3,
+      //   date: "2022/3/4",
+      // },
+      // {
+      //   txNumber: 19,
+      //   walletsNumber: 3,
+      //   date: "2022/3/5",
+      // },
+      // {
+      //   txNumber: 56,
+      //   walletsNumber: 3,
+      //   date: "2022/3/6",
+      // },
+      // {
+      //   txNumber: 31,
+      //   walletsNumber: 3,
+      //   date: "2022/3/7",
+      // },
       ...dailyData,
     ];
 
@@ -52,68 +63,20 @@ export const Chart = withContainer(
       idx: i,
     }));
 
+    console.log({mockData});
+    
+    const CustomTooltip = ({ active, payload, label }: any) => {
+      if (active && payload && payload.length) {
+        console.log(payload[0]);
+        return (
+          <div className="tooltipDiv">
+            <p className="dateTool">{payload[0].payload.date}</p>
+            {payload[0].value} Tx
+          </div>
+        );
+      }
 
-    const config = {
-            // scrollbar: {
-      //   // type: "vertical",
-
-      //   // width: 120,
-
-      //   height: 8,
-
-      //   // padding: [1,1,1,1],
-
-      //   categorySize: 30,
-
-      //   animate: true,
-
-      //   // style: {
-      //   //   trackColor: "red",
-
-      //   //   thumbColor: "green",
-
-      //   //   thumbHighlightColor: "yellow",
-
-      //   //   lineCap: "assdcvsddf",
-      //   // },
-      // },
-      data: mockData,
-      xField: "adate",
-      yField: "txNumber",
-      height: 200,
-     
-      columnStyle: {
-         
-            fill: '#235EF5',
-
-      
-        },
-      
-      tooltip: {
-        showTitle: false,
-        fields: ["txNumber", "date"],
-      },
-      
-      yAxis: {
-        grid: null
-      },
-      xAxis: {
-        tickLine: {
-          length: 0
-        },
-        
-        label: {
-          offsetX: 30,
-          formatter: (text: string, x:any, idx:number) => {
-
-            if (+text === +moment("03/03/2022").startOf("day")) {
-                return moment("03/03/2022").format("D MMM YYYY");
-            }
-            return +idx === mockData.length - 3 ? moment().format("D MMM YYYY") : '';
-              
-          },
-        },
-      },
+      return null;
     };
 
     return (
@@ -128,7 +91,7 @@ export const Chart = withContainer(
                   {fetching ? (
                     <Loader />
                   ) : (
-                    mockData[mockData.length - 1].txNumber
+                    mockData[mockData.length - 1].Tx
                   )}
                 </span>
               </span>
@@ -137,7 +100,52 @@ export const Chart = withContainer(
               </span>
             </div>
             <div className="lineWrapper">
-            { charFetching? <div className="chartLoaderWrap"><span className="super-loader"></span></div>:  <Column {...config} />}
+              {charFetching ? (
+                <div className="chartLoaderWrap">
+                  <span className="super-loader"></span>
+                </div>
+              ) : (
+                <ResponsiveContainer width="95%" height={251}>
+                  <AreaChart
+                    data={mockData}
+                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                  >
+                    <defs>
+                      <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                        <stop
+                          offset="5%"
+                          stopColor="#5B8FF9"
+                          stopOpacity={0.25}
+                        />
+                        <stop
+                          offset="95%"
+                          stopColor="#5B8FF9"
+                          stopOpacity={0.25}
+                        />
+                      </linearGradient>
+                    </defs>
+                    {/* <XAxis dataKey="day" tickMargin={4} label="mar"/> */}
+                    <YAxis
+                      axisLine={false}
+                      type="number"
+                      domain={[
+                        (dataMin: any) => 0,
+                        (dataMax: any) =>
+                          Math.round(dataMax / 100 + 1) * 100 + 500,
+                      ]}
+                    />
+                    <CartesianGrid strokeDasharray="1" vertical={false} />
+                    <Tooltip content={<CustomTooltip />} />
+                    <Area
+                      type="monotone"
+                      dataKey="Tx"
+                      stroke="#2E66F5"
+                      fillOpacity={1}
+                      fill="url(#colorUv)"
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
+              )}
             </div>
           </div>
           {false && (

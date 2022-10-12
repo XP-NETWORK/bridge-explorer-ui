@@ -39,8 +39,8 @@
   box-shadow: 0px 1px 15px rgba(47, 48, 50, 0.08);
   border-radius: 6px;
   display: flex;
-  justify-content: flex-end;
-  padding: 25px;
+  justify-content: center;
+  padding: 24px 32px;
 }
 
 .chartVisual {

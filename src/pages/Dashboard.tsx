@@ -8,22 +8,24 @@ import { url } from "../constants";
 import React from "react";
 
 export interface DailyData {
-  txNumber: number;
+  id: string;
+  Tx: string;
   walletsNumber: number;
   date: string;
+  day: string;
 }
 
 export const Dashboard = React.memo(() => {
   const [dailyData, setDailyData] = useState<DailyData[]>([]);
-  const [fetching, setFetching] = useState(false)
+  const [fetching, setFetching] = useState(false);
 
   useEffect(() => {
     setFetching(true);
 
     (async () => {
-      const res = await fetch(`${url}dashboard`);
-      console.log("res" , res)
-      setFetching(false)
+      const res = await fetch(`${url}newDash`);
+      console.log("res", res);
+      setFetching(false);
       if (res.ok) {
         const body = await res.json();
         setDailyData(body);
@@ -33,7 +35,7 @@ export const Dashboard = React.memo(() => {
 
   return (
     <div>
-      <Chart dailyData={dailyData} charFetching={fetching}/>
+      <Chart dailyData={dailyData} charFetching={fetching} />
     </div>
   );
 });
