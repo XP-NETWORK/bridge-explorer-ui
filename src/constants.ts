@@ -3,7 +3,9 @@ import Tron from "./assets/chains/tron.svg";
 import Vechain from "./assets/icons/vechain.png";
 import Algorand from "./assets/chains/algorand.svg";
 import Secret from "./assets/icons/secret.svg";
-import Moonbeam from "./assets/icons/moonbeam.svg"
+import Moonbeam from "./assets/icons/moonbeam.svg";
+import Abeychain from "./assets/icons/Abey.svg";
+import Dfinity from "./assets/icons/dfinity.svg";
 
 import axios from "axios";
 
@@ -27,7 +29,9 @@ export const currency: any = {
   "15": "ALGOS",
   "22": "CKB",
   "24": "SCRT",
-  "32": "GLMR"
+  "32": "GLMR",
+  "33": "ABEY",
+  "28": "ICP",
 };
 
 export const txExplorers: any = {
@@ -50,7 +54,9 @@ export const txExplorers: any = {
   "15": "https://algoexplorer.io/tx/",
   "22": "https://v1.gwscan.com/tx/",
   "24": "https://atomscan.com/secret-network/transactions/",
-  "32": "https://moonscan.io/tx/"
+  "32": "https://moonscan.io/tx/",
+  "33": "",
+  "28": "",
 };
 
 export const addressExplorers: any = {
@@ -73,7 +79,9 @@ export const addressExplorers: any = {
   "15": "https://algoexplorer.io/address/",
   "22": "https://v1.gwscan.com/tx/",
   "24": `https://atomscan.com/secret-network/accounts/`,
-  "32": "https://moonscan.io/address/"
+  "32": "https://moonscan.io/address/",
+  "33": "https://testnet-explorer.abeychain.com/tx/",
+  "28": "https://icscan.io/transaction/",
 };
 
 export const chainNoncetoName: any = {
@@ -97,7 +105,9 @@ export const chainNoncetoName: any = {
   "15": "Algorand",
   "22": "Godwoken",
   "24": "Secret",
-  "32": "Moonbeam"
+  "32": "Moonbeam",
+  "33": "Abeychain",
+  "28": "Dfinity",
 };
 
 export const _headers = {
@@ -134,19 +144,27 @@ export const chains = [
   { id: "tron", name: "Tron", icon: Tron },
   { id: "vechain", name: "Vechain", icon: Vechain },
   { id: "algorand", name: "Algorand", icon: Algorand, notConvert: true },
-  { id: "nervos-network", name: "Godwoken", icon: "./assets/icons/godwoken.svg" },
+  {
+    id: "nervos-network",
+    name: "Godwoken",
+    icon: "./assets/icons/godwoken.svg",
+  },
   { id: "secret", name: "Secret", icon: Secret },
   { id: "moonbeam", name: "Moonbeam", icon: Moonbeam },
+  { id: "abeychain", name: "Abeychain", icon: Abeychain },
+  { id: "dfinity", name: "Dfinity", icon: Dfinity },
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";
 export const socketUrl = "wss://dev-explorer-api.herokuapp.com";
-export const scraperSocketUrl = "wss://explorer-scraper.herokuapp.com/"
+export const scraperSocketUrl = "wss://explorer-scraper.herokuapp.com/";
 
 // export const url = "http://localhost:3100/";
 //export const socketUrl = "ws://localhost:3100";
 
 export const setTelegram = async (destination: string, error: any) => {
   // console.log("got here")
-  await axios.get(`https://api.telegram.org/bot5434178910:AAF7EpfcDyvsLG_pAIv-SXVRU6bYBqjlqKo/sendMessage?chat_id=-721145192&text=Error on ${destination} ,  Message : ${error}&parse_mode=HTML`);
-}
+  await axios.get(
+    `https://api.telegram.org/bot5434178910:AAF7EpfcDyvsLG_pAIv-SXVRU6bYBqjlqKo/sendMessage?chat_id=-721145192&text=Error on ${destination} ,  Message : ${error}&parse_mode=HTML`
+  );
+};
