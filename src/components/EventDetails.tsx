@@ -28,14 +28,14 @@ export const EventDetails = () => {
 
   // TODO: fetch metadata from nftUri
   useEffect(() => {
-    try{
+    try {
       fetch(event?.nftUri!)
-      .then((res) => res.json())
-      .then((metadata) => {
-        setMetadata(metadata);
-      });
-    }catch(err){
-      console.log(err)
+        .then((res) => res.json())
+        .then((metadata) => {
+          setMetadata(metadata);
+        });
+    } catch (err) {
+      console.error(err);
     }
   }, [event]);
 

@@ -6,7 +6,7 @@ import { Network } from "./pages/Network";
 import { ServiceProvider } from "../src/context/ServcieProvder";
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
-import "./components/ChainModal/Chain.css"
+import "./components/ChainModal/Chain.css";
 
 import { socketUrl, url, scraperSocketUrl } from "./constants";
 
@@ -20,46 +20,43 @@ const scraperSocket = io(scraperSocketUrl, {
 
 interface AppData {
   totalTx: number;
-  totalWallets: number
+  totalWallets: number;
 }
 
-
 export const App = () => {
-
   const [appData, setAppData] = useState<AppData>({
     totalTx: 0,
-    totalWallets: 0
-  })
+    totalWallets: 0,
+  });
 
-  const [fetching, setFetching] = useState(true)
+  const [fetching, setFetching] = useState(true);
 
   useEffect(() => {
     (async () => {
       try {
         const res = await fetch(`${url}getMetrics`);
-        const metrics = await res.json()
+        const metrics = await res.json();
         if (metrics) {
           setAppData({
             totalTx: metrics.totalTx,
-            totalWallets: metrics.totalWallets
-          })
+            totalWallets: metrics.totalWallets,
+          });
         }
-      setFetching(false)
+        setFetching(false);
       } catch (e) {
-        console.log(false);
-        console.log(e, 'get metrics route');
+        console.error("get metrics route");
       }
-    })()
-  }, [])
+    })();
+  }, []);
 
   return (
     <ServiceProvider value={{ socket, appData, fetching, scraperSocket }}>
-        <Routes>
-          <Route path="/*" element={<Explorer />} />
-          <Route path="/tx/:fromHash" element={<Event />} />
-          <Route path="/network" element={<Network />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
+      <Routes>
+        <Route path="/*" element={<Explorer />} />
+        <Route path="/tx/:fromHash" element={<Event />} />
+        <Route path="/network" element={<Network />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
     </ServiceProvider>
   );
 };

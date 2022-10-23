@@ -198,7 +198,7 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
                   : "loadedWrapper"
               }`}
             >
-              {console.log(event?.collectionName)}
+              
               {!event?.collectionName &&
               !metadata?.nftContract &&
               !metadata?.name

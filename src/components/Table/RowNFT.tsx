@@ -40,7 +40,6 @@ export const RowNFT = ({ event }: { event: IEvent }) => {
 
   useEffect(() => {
     if (isVisible && !imgUrl) {
-      console.log(event.tokenId, "ev");
       fetchNtf(event)
         .then((metadata) => {
           if (metadata.image) {

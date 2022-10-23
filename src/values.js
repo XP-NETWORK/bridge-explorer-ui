@@ -22,6 +22,7 @@ import VET from "./assets/icons/vechain.png";
 import SCRT from "./assets/icons/secret.svg";
 import CKB from "./assets/icons/godwoken.svg";
 import Moonbeam from "./assets/icons/moonbeam.svg";
+import Abeychain from "./assets/icons/Abey.svg";
 
 export const EVM = "EVM";
 export const ELROND = "Elrond";
@@ -322,34 +323,48 @@ export const chains = [
     testNet: false,
     newChain: true,
   },
-  // {
-  //   type: "Cosmos",
-  //   key: "Secret",
-  //   text: "Secret",
-  //   value: "Secret",
-  //   nonce: 0x18,
-  //   order: 0,
-  //   tnChainId: "pulsar-2",
-  //   image: { avatar: true, src: SCRT },
-  //   mainnet: true,
-  //   testNet: biz,
-  //   test: false,
-  //   newChain: biz,
-  // },
-  // {
-  //   type: "EVM",
-  //   key: "Moonbeam",
-  //   text: "Moonbeam",
-  //   value: "Moonbeam",
-  //   nonce: 0x20,
-  //   order: 0,
-  //   tnChainId: "pulsar-2",
-  //   image: { avatar: true, src: Moonbeam },
-  //   mainnet: true,
-  //   testNet: biz,
-  //   test: false,
-  //   newChain: biz,
-  // },
+  {
+    type: "Cosmos",
+    key: "Secret",
+    text: "Secret",
+    value: "Secret",
+    nonce: 0x18,
+    order: 0,
+    tnChainId: "pulsar-2",
+    image: { avatar: true, src: SCRT },
+    mainnet: true,
+    testNet: biz,
+    test: false,
+    newChain: biz,
+  },
+  {
+    type: "EVM",
+    key: "Moonbeam",
+    text: "Moonbeam",
+    value: "Moonbeam",
+    nonce: 0x20,
+    order: 0,
+    tnChainId: "pulsar-2",
+    image: { avatar: true, src: Moonbeam },
+    mainnet: true,
+    testNet: biz,
+    test: false,
+    newChain: biz,
+  },
+  {
+    type: "EVM",
+    key: "Abeychain",
+    text: "Abeychain",
+    value: "Abeychain",
+    nonce: 0x21,
+    order: 0,
+    tnChainId: "pulsar-2",
+    image: { avatar: true, src: Abeychain },
+    // mainnet: true,
+    // testNet: biz,
+    // test: false,
+    newChain: biz,
+  },
 ];
 
 export const chainsConfig = {

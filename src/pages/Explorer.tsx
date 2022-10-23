@@ -25,14 +25,14 @@ export const Explorer = () => {
         <Title />
         <EventsProvider>
           <SearchBar mode={setSearchingMode} />
-          {!searchingMode ? (
-            <span>
-              <ExplorerCards />
-              <Dashboard />
-            </span>
-          ) : (
+          {/* {!searchingMode ? ( */}
+          <span>
+            <ExplorerCards />
+            <Dashboard />
+          </span>
+          {/* ) : (
             ""
-          )}
+          )} */}
           {/* <BreadCrumbs
             onChange={(value: string) => {
               setTab(value);

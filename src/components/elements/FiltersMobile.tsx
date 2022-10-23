@@ -39,15 +39,12 @@ export default function FiltersMobile() {
   const [toIconSrc, setToIconSrc] = useState("");
   const [showClearBtn, setShowClearBtn] = useState(false);
 
-  console.log({ showClearBtn });
-
   const { eventsQueryString, collectionName } = useSelector(
     (state: ReduxState) => ({
       eventsQueryString: state.global.eventsQueryString,
       collectionName: state.global.showByCollection,
     })
   );
-  console.log("here", { selectedFrom, selectedTo, value, statusValue });
   useEffect(() => {
     if (
       from === "All chains" &&
@@ -81,21 +78,17 @@ export default function FiltersMobile() {
   };
 
   useEffect(() => {
-    console.log({ from });
     setFromIconSrc("");
     setToIconSrc("");
     Chains.map((chain) => {
       if (chain.name.toLowerCase() === from.toLowerCase()) {
         setFromIconSrc(chain.icon.slice(1));
-        console.log(chain.icon.slice(1));
       }
       if (chain.name.toLowerCase() === to.toLowerCase()) {
         setToIconSrc(chain.icon.slice(1));
       }
     });
   }, [from, to]);
-
- 
 
   const handleClearAll = () => {
     // dispatch(setEventsQueryStringType(undefined));

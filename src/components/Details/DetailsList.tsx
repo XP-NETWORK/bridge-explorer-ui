@@ -60,7 +60,6 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
     // }
     chains.map((chain) => {
       if (chain.name === chainNoncetoName[event?.fromChain || 0]) {
-        console.log(chain.icon);
         if (chain.icon[0] === ".") {
           setFromIconSrc(chain.icon.slice(1));
         } else {

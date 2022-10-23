@@ -23,7 +23,6 @@ export const StatusFilter = () => {
   );
 
   const handleSelect = (e: any) => {
-    console.log(e);
     if (e === "Show All") {
       dispatch(setStatusFilter(""));
     } else if (e === "Processing") {

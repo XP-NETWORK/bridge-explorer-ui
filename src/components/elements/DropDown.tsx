@@ -15,7 +15,6 @@ export const DropDown = () => {
   );
 
   const handleSelect = (e: any) => {
-    console.log(e);
     if (e === "Show All") dispatch(setEventsQueryStringType(undefined));
     else {
       dispatch(setEventsQueryStringType(e));

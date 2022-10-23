@@ -63,11 +63,10 @@ export const Chart = withContainer(
       idx: i,
     }));
 
-    console.log({mockData});
-    
+    console.log({ mockData });
+
     const CustomTooltip = ({ active, payload, label }: any) => {
       if (active && payload && payload.length) {
-        console.log(payload[0]);
         return (
           <div className="tooltipDiv">
             <p className="dateTool">{payload[0].payload.date}</p>
@@ -88,11 +87,7 @@ export const Chart = withContainer(
               <span>
                 Today Tx:{" "}
                 <span>
-                  {fetching ? (
-                    <Loader />
-                  ) : (
-                    mockData[mockData.length - 1].Tx
-                  )}
+                  {fetching ? <Loader /> : mockData[mockData.length - 1]?.Tx}
                 </span>
               </span>
               <span>

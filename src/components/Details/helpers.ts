@@ -50,7 +50,7 @@ export const loadImages = async (
         ...data,
       };
     } catch (e: any) {
-      console.log(e);
+      console.error(e);
       return { imgUri: "", ...data };
     }
   });

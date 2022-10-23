@@ -64,8 +64,6 @@ export const EventsProvider: FC = withContainer(
       scraperSocket.off("updateEvent");
 
       socket.on("incomingEvent", async (event: IEvent) => {
-        console.log("Incoming event");
-        console.log(event);
         if (eventsQueryString) return;
         try {
           const incoming = { imgUri: "", ...event };
@@ -78,12 +76,6 @@ export const EventsProvider: FC = withContainer(
       });
 
       socket.on("updateEvent", async (updated: IEvent) => {
-        console.log(
-          "updateEvent",
-          updated.fromChain,
-          updated.actionId,
-          updated.status
-        );
         const idx = events.findIndex(
           (event) =>
             event.fromChain + event.actionId ===
@@ -107,8 +99,6 @@ export const EventsProvider: FC = withContainer(
       });
 
       scraperSocket.on("incomingEvent", async (event: IEvent) => {
-        console.log("Incoming event");
-        console.log(event);
         if (eventsQueryString) return;
         try {
           const incoming = { imgUri: "", ...event };
@@ -121,12 +111,6 @@ export const EventsProvider: FC = withContainer(
       });
 
       scraperSocket.on("updateEvent", async (updated: IEvent) => {
-        console.log(
-          "updateEvent",
-          updated.fromChain,
-          updated.actionId,
-          updated.status
-        );
         const idx = events.findIndex(
           (event) =>
             event.fromChain + event.actionId ===
@@ -158,15 +142,13 @@ export const EventsProvider: FC = withContainer(
     }, [events]);
 
     useEffect(() => {
-      if(events.length<=50){
-
+      if (events.length <= 50) {
       }
     }, [events]);
 
     useEffect(() => {
       setIsLoading(true);
       if (collectionName.length > 0) {
-        console.log("collection name is clickedddd");
         loadEventsByCollectionName();
       }
       if (
@@ -180,7 +162,6 @@ export const EventsProvider: FC = withContainer(
         typeof eventsQueryString === "string" &&
         eventsQueryString.length > 0
       ) {
-        console.log("im in search mode");
         loadEventsBySearch();
       } else {
         loadAllEvents();
@@ -199,7 +180,6 @@ export const EventsProvider: FC = withContainer(
       await loadImages(events, setEvents);
       setTotal(count);
       setIsLoading(false);
-      console.log({ events });
     };
 
     const loadAllEvents = async () => {

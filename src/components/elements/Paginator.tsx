@@ -23,7 +23,6 @@ export const Paginator = withContainer(
     const disptach = useDispatch();
     const [disableCursor, setDisableCursor] = useState("");
     const ctx = useContext(EventsContext);
-    console.log({ showTransactions });
 
     const total = ctx?.totalEvents || 1;
     const { eventsQueryString, page, statusFilter } = useSelector(
@@ -59,7 +58,6 @@ export const Paginator = withContainer(
     };
 
     useEffect(() => {
-      console.log({total});
 
       if (total <= 50) {
         setDisableCursor("paginate-disabled");

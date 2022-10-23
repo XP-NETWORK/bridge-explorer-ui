@@ -143,7 +143,6 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   }, [eventsQueryString, collectionName]);
 
   const navigateTo = (e: any, event: IEvent) => {
-    console.log(e.target.tagName.toLowerCase());
     if (e.target.tagName.toLowerCase() === "img") {
       return;
     }

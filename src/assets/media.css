@@ -161,7 +161,7 @@
     margin-top: 0px;
   }
   .sm\:shadow-none {
-    /* height: auto; */
+    height: auto;
     top: 61px !important;
   }
   .ChainModal .modal-dialog {

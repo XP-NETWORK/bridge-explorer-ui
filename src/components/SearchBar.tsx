@@ -39,7 +39,6 @@ export const SearchBar: React.FC<{
     debounce((value: string) => dispatch(setEventsQueryString(value)), 1000),
     []
   );
-  console.log({ eventsQueryString });
 
   useEffect(() => {
     if (resetSearch) {
@@ -60,6 +59,7 @@ export const SearchBar: React.FC<{
     mode(false);
     setValue("");
     navigate("/");
+    debounced("");
   };
 
   useEffect(() => {
