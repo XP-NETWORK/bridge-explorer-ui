@@ -122,7 +122,7 @@ export const Chart = withContainer(
                       domain={[
                         (dataMin: any) => 0,
                         (dataMax: any) =>
-                          Math.round(dataMax / 100 + 1) * 100 + 500,
+                          Math.round(dataMax / 100 + 1) * 100 + 150,
                       ]}
                     />
                     <CartesianGrid strokeDasharray="1" vertical={false} />
