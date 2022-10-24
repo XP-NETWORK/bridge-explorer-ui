@@ -5,6 +5,8 @@ import Algorand from "./assets/chains/algorand.svg";
 import Secret from "./assets/icons/secret.svg";
 import Moonbeam from "./assets/icons/moonbeam.svg";
 import Abeychain from "./assets/icons/Abey.svg";
+import Dfinity from "./assets/icons/dfinity.svg";
+import Skale from "./assets/icons/skale.svg";
 
 import axios from "axios";
 
@@ -30,6 +32,7 @@ export const currency: any = {
   "24": "SCRT",
   "32": "GLMR",
   "33": "ABEY",
+  "28": "ICP",
 };
 
 export const txExplorers: any = {
@@ -54,6 +57,8 @@ export const txExplorers: any = {
   "24": "https://atomscan.com/secret-network/transactions/",
   "32": "https://moonscan.io/tx/",
   "33": "https://scan.abeychain.com/tx/",
+  "28": "https://www.icpexplorer.org/#/tx/",
+  "30": "https://honorable-steel-rasalhague.explorer.mainnet.skalenodes.com/tx/",
 };
 
 export const addressExplorers: any = {
@@ -78,6 +83,8 @@ export const addressExplorers: any = {
   "24": `https://atomscan.com/secret-network/accounts/`,
   "32": "https://moonscan.io/address/",
   "33": "",
+  "28": "",
+  "30": "",
 };
 
 export const chainNoncetoName: any = {
@@ -103,6 +110,8 @@ export const chainNoncetoName: any = {
   "24": "Secret",
   "32": "Moonbeam",
   "33": "Abeychain",
+  "28": "Dfinity",
+  "30": "Skale",
 };
 
 export const _headers = {
@@ -147,6 +156,8 @@ export const chains = [
   { id: "secret", name: "Secret", icon: Secret },
   { id: "moonbeam", name: "Moonbeam", icon: Moonbeam },
   { id: "abeychain", name: "Abeychain", icon: Abeychain },
+  { id: "dfinity", name: "Dfinity", icon: Dfinity },
+  { id: "skale", name: "Skale", icon: Skale },
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";

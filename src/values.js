@@ -23,6 +23,8 @@ import SCRT from "./assets/icons/secret.svg";
 import CKB from "./assets/icons/godwoken.svg";
 import Moonbeam from "./assets/icons/moonbeam.svg";
 import Abeychain from "./assets/icons/Abey.svg";
+import Dfinity from "./assets/icons/dfinity.svg";
+import Skale from "./assets/icons/skale.svg";
 
 export const EVM = "EVM";
 export const ELROND = "Elrond";
@@ -360,6 +362,34 @@ export const chains = [
     order: 0,
     tnChainId: "pulsar-2",
     image: { avatar: true, src: Abeychain },
+    // mainnet: true,
+    // testNet: biz,
+    // test: false,
+    newChain: biz,
+  },
+  {
+    type: "Dfinity",
+    key: "Dfinity",
+    text: "Dfinity",
+    value: "Dfinity",
+    nonce: 0x1c,
+    order: 0,
+    tnChainId: "pulsar-2",
+    image: { avatar: true, src: Dfinity },
+    // mainnet: true,
+    // testNet: biz,
+    // test: false,
+    newChain: biz,
+  },
+  {
+    type: "EVM",
+    key: "Skale",
+    text: "Skale",
+    value: "Skale",
+    nonce: 0x1e,
+    order: 0,
+    tnChainId: "pulsar-2",
+    image: { avatar: true, src: Skale },
     // mainnet: true,
     // testNet: biz,
     // test: false,
