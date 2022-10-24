@@ -1,8 +1,5 @@
-import * as React from "react";
 import { DailyData } from "../../pages/Dashboard";
 import { withContainer } from "../../context/ServcieProvder";
-import { Line, Column } from "@ant-design/plots";
-import moment from "moment";
 import { Loader } from "./Loader";
 import "./Chart.css";
 
@@ -12,7 +9,6 @@ import {
   CartesianGrid,
   ResponsiveContainer,
   Tooltip,
-  XAxis,
   YAxis,
 } from "recharts";
 export const Chart = withContainer(
