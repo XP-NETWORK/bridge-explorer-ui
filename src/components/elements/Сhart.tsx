@@ -60,6 +60,11 @@ export const Chart = withContainer(
     }));
 
     console.log({ mockData });
+    console.log(
+      "today",
+      Number(mockData[mockData.length - 1]?.Tx) -
+        Number(mockData[mockData.length - 2]?.Tx)
+    );
 
     const CustomTooltip = ({ active, payload, label }: any) => {
       if (active && payload && payload.length) {
@@ -83,7 +88,12 @@ export const Chart = withContainer(
               <span>
                 Today Tx:{" "}
                 <span>
-                  {fetching ? <Loader /> : mockData[mockData.length - 1]?.Tx}
+                  {fetching ? (
+                    <Loader />
+                  ) : (
+                    Number(mockData[mockData.length - 1]?.Tx) -
+                    Number(mockData[mockData.length - 2]?.Tx)
+                  )}
                 </span>
               </span>
               <span>
@@ -96,7 +106,7 @@ export const Chart = withContainer(
                   <span className="super-loader"></span>
                 </div>
               ) : (
-                <ResponsiveContainer width="95%" height={251}>
+                <ResponsiveContainer width="100%" height={251}>
                   <AreaChart
                     data={mockData}
                     margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
