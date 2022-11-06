@@ -25,6 +25,7 @@ import Moonbeam from "./assets/icons/moonbeam.svg";
 import Abeychain from "./assets/icons/Abey.svg";
 import Dfinity from "./assets/icons/dfinity.svg";
 import Skale from "./assets/icons/skale.svg";
+import ton from "./assets/chains/ton.svg"
 
 export const EVM = "EVM";
 export const ELROND = "Elrond";
@@ -183,19 +184,20 @@ export const chains = [
   //   testNet: false,
   //   mainnet: false,
   // },
-  // {
-  //   type: "EVM",
-  //   key: "TON",
-  //   text: "TON",
-  //   value: "TON",
-  //   chainId: undefined,
-  //   order: 22,
-  //   coming: true,
-  //   image: { avatar: true, src: Ton },
-  //   maintenance: false,
-  //   testNet: false,
-  //   mainnet: false,
-  // },
+  {
+    type: "TON",
+    key: "TON",
+    text: "TON",
+    value: "TON",
+    nonce: 27,
+    chainId: undefined,
+    order: 22,
+    coming: true,
+    image: { avatar: true, src: Ton },
+    maintenance: false,
+    testNet: false,
+    mainnet: false,
+  },
   {
     type: "EVM",
     key: "Fuse",
@@ -615,6 +617,7 @@ export const coins = [
   "VET", //19
   "CKB", //20
   "SCRT", //21
+  "TON"
 ];
 
 export const TESTNET_CHAIN_INFO = {
