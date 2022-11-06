@@ -7,6 +7,7 @@ import Moonbeam from "./assets/icons/moonbeam.svg";
 import Abeychain from "./assets/icons/Abey.svg";
 import Dfinity from "./assets/icons/dfinity.svg";
 import Skale from "./assets/icons/skale.svg";
+import Ton from "./assets/chains/ton.svg"
 
 import axios from "axios";
 
@@ -33,6 +34,7 @@ export const currency: any = {
   "32": "GLMR",
   "33": "ABEY",
   "28": "ICP",
+  "27": "TON"
 };
 
 export const txExplorers: any = {
@@ -82,9 +84,10 @@ export const addressExplorers: any = {
   "22": "https://v1.gwscan.com/tx/",
   "24": `https://atomscan.com/secret-network/accounts/`,
   "32": "https://moonscan.io/address/",
-  "33": "",
-  "28": "",
-  "30": "",
+  "27": "https://tonscan.org/address/",
+  "33": "https://scan.abeychain.com/address/",
+  "28": "https://www.icpexplorer.org/#/acct/",
+  "30": "https://honorable-steel-rasalhague.explorer.mainnet.skalenodes.com/address/",
 };
 
 export const chainNoncetoName: any = {
@@ -112,6 +115,7 @@ export const chainNoncetoName: any = {
   "33": "Abeychain",
   "28": "Dfinity",
   "30": "Skale",
+  "27": "Ton"
 };
 
 export const _headers = {
@@ -158,6 +162,7 @@ export const chains = [
   { id: "abeychain", name: "Abeychain", icon: Abeychain },
   { id: "dfinity", name: "Dfinity", icon: Dfinity },
   { id: "skale", name: "Skale", icon: Skale },
+  { id: "tontoken", name: "Ton", icon: Ton },
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";
