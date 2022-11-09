@@ -61,6 +61,7 @@ export const txExplorers: any = {
   "33": "https://scan.abeychain.com/tx/",
   "28": "https://www.icpexplorer.org/#/tx/",
   "30": "https://honorable-steel-rasalhague.explorer.mainnet.skalenodes.com/tx/",
+  "27": "https://tonscan.org/tx/by-msg-hash/"
 };
 
 export const addressExplorers: any = {
