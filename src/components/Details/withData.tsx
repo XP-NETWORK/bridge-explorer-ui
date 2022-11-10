@@ -12,7 +12,27 @@ export const withData = function (Wrapped: React.FC<any>) {
 
     let params = useParams();
     useEffect(() => {
-      fetch(`${url}?fromHash=${params.fromHash}`)
+      if (!params.fromHash) return;
+      let hash = params.fromHash;
+      
+      if (hash.includes("-")) {
+        hash = hash.replaceAll("-", "%2B");
+      }
+      if (hash.includes("=")) {
+        hash = hash.replaceAll("=", "%3D");
+      }
+      if (hash.includes("_")) {
+        hash = hash.replaceAll("=", "%2F");
+      }
+      if (hash.includes("/")) {
+        hash = hash.replaceAll("/", "%2F");
+      }
+      if (hash.includes("+")) {
+        hash = hash.replaceAll("+", "%2B");
+      }
+      console.log(hash);
+
+      fetch(`${url}?fromHash=${hash}`)
         .then((res) => res.json())
         .then(async (data) => {
           setEvent({
