@@ -121,7 +121,9 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   ): number => {
     const chain = chains.find((chain) => chain.name.toLowerCase() === chainName.toLowerCase());
     const rate = (chain && rates[chain.id]?.usd) || 1;
-
+    if (chainName === "TON") {
+      console.log({rate , chainName});
+    }
     return rate;
   };
 
@@ -249,10 +251,10 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                         }`}
                       >
                         {" "}
-                        <a href={`/tx/${extractHash(confiUrl(event.fromHash))}`} target="_blank">
+                        {/* <a href={`/tx/${extractHash(confiUrl(event.fromHash))}`} target="_blank"> */}
                           <ReactTooltip effect="solid" className="copyTip" multiline />
                           <RowNFT event={event} />
-                        </a>{" "}
+                        {/* </a>{" "} */}
                       </TableData>
 
                       <TableData>
