@@ -168,8 +168,12 @@ export const formatFees = (event: IEvent) => {
     (c) => c.name.toLowerCase() === event.fromChainName?.toLowerCase()
   );
 
-  if (event.fromChain === "9" || event.fromChain === "24"||event.fromChain === "27") {
+  if (event.fromChain === "9" || event.fromChain === "24") {
     return Number(new BigNumber(event.txFees).shiftedBy(-6).toString());
+  }
+
+  if (event.fromChain === "27") {
+    return Number(new BigNumber(event.txFees).shiftedBy(-7).toString());
   }
 
   if (chain?.notConvert) return +event.txFees;

@@ -163,7 +163,7 @@ export const chains = [
   { id: "abeychain", name: "Abeychain", icon: Abeychain },
   { id: "dfinity", name: "Dfinity", icon: Dfinity },
   { id: "skale", name: "Skale", icon: Skale },
-  { id: "the-open-network", name: "Ton", icon: Ton },
+  { id: "the-open-network", name: "Ton", icon: Ton, notConvert: true},
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";
