@@ -173,7 +173,7 @@ export const formatFees = (event: IEvent) => {
   }
 
   if (event.fromChain === "27") {
-    return Number(new BigNumber(event.txFees).shiftedBy(-7).toString());
+    return Number(new BigNumber(event.txFees.substring(0,7)).shiftedBy(-7).toString());
   }
 
   if (chain?.notConvert) return +event.txFees;
