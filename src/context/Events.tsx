@@ -1,11 +1,4 @@
-import {
-  createContext,
-  Dispatch,
-  FC,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { IEvent } from "../components/ExplorerEvents";
 import axios from "axios";
 import { url } from "../constants";
@@ -43,13 +36,14 @@ export const EventsProvider: FC = withContainer(
     const [totalEvents, setTotal] = useState(0);
     const [enableNav, setEnableNav] = useState(true);
 
-    const { eventsQueryString, statusFilter, collectionName, paginationPage } =
-      useSelector((state: ReduxState) => ({
+    const { eventsQueryString, statusFilter, collectionName, paginationPage } = useSelector(
+      (state: ReduxState) => ({
         paginationPage: state.global.page,
         eventsQueryString: state.global.eventsQueryString,
         statusFilter: state.global.statusFilter,
         collectionName: state.global.showByCollection,
-      }));
+      })
+    );
 
     const toggleSort = () => setSort(sort === "DESC" ? "ASC" : "DESC");
 
@@ -74,9 +68,7 @@ export const EventsProvider: FC = withContainer(
 
       socket.on("updateEvent", async (updated: IEvent) => {
         const idx = events.findIndex(
-          (event) =>
-            event.fromChain + event.actionId ===
-            updated.fromChain + updated.actionId
+          (event) => event.fromChain + event.actionId === updated.fromChain + updated.actionId
         );
         try {
           const metadata = await fetchNtf(updated);
@@ -109,9 +101,7 @@ export const EventsProvider: FC = withContainer(
 
       scraperSocket.on("updateEvent", async (updated: IEvent) => {
         const idx = events.findIndex(
-          (event) =>
-            event.fromChain + event.actionId ===
-            updated.fromChain + updated.actionId
+          (event) => event.fromChain + event.actionId === updated.fromChain + updated.actionId
         );
         try {
           const metadata = await fetchNtf(updated);
@@ -145,45 +135,30 @@ export const EventsProvider: FC = withContainer(
 
     useEffect(() => {
       setIsLoading(true);
-      if (collectionName.length > 0) {
-        loadEventsByCollectionName();
+      switch (true) {
+        case collectionName.length > 0:
+          loadEventsByCollectionName();
+          break;
+        case eventsQueryString.fromChainName!== undefined || eventsQueryString.toChainName!== undefined || eventsQueryString.type!== undefined || eventsQueryString.status!== undefined:
+          filteredEvents();
+          break;
+        case typeof eventsQueryString === "string" && eventsQueryString.length > 0:
+          loadEventsBySearch();
+          break;
+        default:
+          loadAllEvents();
+          break;
       }
-      if (
-        eventsQueryString.fromChainName ||
-        eventsQueryString.toChainName ||
-        eventsQueryString.type ||
-        eventsQueryString.status
-      ) {
-        filteredEvents();
-      } else if (
-        typeof eventsQueryString === "string" &&
-        eventsQueryString.length > 0
-      ) {
-        loadEventsBySearch();
-      } else {
-        loadAllEvents();
-      }
-
-      // }
     }, [eventsQueryString, sort, paginationPage, collectionName]);
 
-    const load = async ({
-      events,
-      count,
-    }: {
-      events: IEvent[];
-      count: number;
-    }) => {
+    const load = async ({ events, count }: { events: IEvent[]; count: number }) => {
       await loadImages(events, setEvents);
       setTotal(count);
       setIsLoading(false);
     };
 
     const loadAllEvents = async () => {
-      const eventsObj = await axios.get(
-        `${url}?sort=${sort}&offset=${paginationPage}`
-      );
-      // console.log("events", eventsObj.data);
+      const eventsObj = await axios.get(`${url}?sort=${sort}&offset=${paginationPage}`);
       load(eventsObj.data);
       console.log("load all events");
     };
@@ -192,21 +167,16 @@ export const EventsProvider: FC = withContainer(
       const eventsObj = await axios.get(
         `${url}?chainName=${eventsQueryString}&sort=${sort}&offset=${paginationPage}`
       );
-      // console.log("events", eventsObj.data);
       load(eventsObj.data);
       console.log("load all search");
     };
 
     const loadEventsByCollectionName = async () => {
-      // console.log("inside load by name");
-      console.log(
-        `${url}api?collectionName=${collectionName}&offset=${paginationPage}`
-      );
+      console.log(`${url}api?collectionName=${collectionName}&offset=${paginationPage}`);
 
       const eventsObj = await axios.get(
         `${url}api?collectionName=${collectionName}&offset=${paginationPage}`
       );
-      // console.log("events by collection", eventsObj.data);
       load(eventsObj.data);
       console.log("load by collection name");
     };
@@ -225,10 +195,6 @@ export const EventsProvider: FC = withContainer(
         eventsQueryString.status ? `&status=` + eventsQueryString.status : ""
       }&offset=${paginationPage}`;
       const eventsObj = await axios.get(urlF);
-      // console.log("filter with offset",urlF);
-
-      // console.log("events", eventsObj.data);
-      // console.log("statusssss", eventsQueryString.status);
       load(eventsObj.data);
       console.log("load by filters");
     };
@@ -345,9 +311,6 @@ export const EventsProvider: FC = withContainer(
     );
   }
 );
-function async(
-  arg0: { events: IEvent[]; count: any },
-  arg1: { events: any; count: any }
-) {
+function async(arg0: { events: IEvent[]; count: any }, arg1: { events: any; count: any }) {
   throw new Error("Function not implemented.");
 }
