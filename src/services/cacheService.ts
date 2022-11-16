@@ -14,6 +14,7 @@ class CacheService {
       originalTokenId,
       originalChainNonce,
       originalContract,
+      nftUri
     } = event;
     let chain, token, collectionIdent;
     switch (type) {
@@ -27,7 +28,7 @@ class CacheService {
         break;
 
       case "Unfreeze":
-        if (originalTokenId && originalChainNonce) {
+        if ( originalChainNonce && originalTokenId ) {
           chain = originalChainNonce;
           token = originalTokenId;
           collectionIdent = originalContract;
@@ -36,18 +37,28 @@ class CacheService {
         break;
     }
 
-    return { chain, token, collectionIdent };
+    return { chain, token, collectionIdent, nftUri };
   }
 
   async get(event: IEvent) {
-    const { chain, token, collectionIdent } = this.getParams(event);
+    const { chain, token, collectionIdent, nftUri } = this.getParams(event);
 
-    return axios
-      .get(
-        `${this.service}/nft/data/?tokenId=${token}&chainId=${chain}&contract=${collectionIdent}`
-      )
-      .then((res) => res.data)
-      .catch(() => {});
+    if (chain === "27") {
+      return axios
+        .get(
+          `${this.service}/nft/uri/?uri=${encodeURIComponent(nftUri)}`
+        )
+        .then((res) => res.data)
+        .catch(() => { });
+
+    } else {
+      return axios
+        .get(
+          `${this.service}/nft/data/?tokenId=${token}&chainId=${chain}&contract=${collectionIdent}`
+        )
+        .then((res) => res.data)
+        .catch(() => { });
+    }
   }
 
   async add(event: IEvent) {

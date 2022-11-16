@@ -250,11 +250,8 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                             : "sitckyBottomLine"
                         }`}
                       >
-                        {" "}
-                        {/* <a href={`/tx/${extractHash(confiUrl(event.fromHash))}`} target="_blank"> */}
                           <ReactTooltip effect="solid" className="copyTip" multiline />
                           <RowNFT event={event} />
-                        {/* </a>{" "} */}
                       </TableData>
 
                       <TableData>
