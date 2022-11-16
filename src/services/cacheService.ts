@@ -36,7 +36,6 @@ class CacheService {
         }
         break;
     }
-
     return { chain, token, collectionIdent, nftUri };
   }
 
