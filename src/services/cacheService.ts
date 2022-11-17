@@ -38,7 +38,10 @@ class CacheService {
   }
 
   async get(event: IEvent) {
+    console.log(event);
     switch (true) {
+
+
       case event?.type === "Transfer" && event.chainName === "TON":
         return this.getByUri(event?.nftUri)
 
@@ -51,10 +54,12 @@ class CacheService {
     }
   }
 
-  async getByUri(params: any) {
+  async getByUri(uri: string | undefined) {
+    console.log({ uri });
+
     return axios
       .get(
-        `${this.service}/nft/uri/?uri=${encodeURIComponent(params?.nftUri)}`
+        `${this.service}/nft/uri/?uri=${encodeURIComponent(uri || "")}`
       )
       .then((res) => res.data)
       .catch(() => { });
