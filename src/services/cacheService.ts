@@ -40,13 +40,11 @@ class CacheService {
   async get(event: IEvent) {
     console.log(event);
     switch (true) {
-
-
-      case event?.type === "Transfer" && event.chainName === "TON":
-        return this.getByUri(event?.nftUri)
+      // case event?.type === "Transfer" && event.chainName === "TON":
+      //   return this.getByUri(event?.nftUri)
 
       case event?.type === "Unfreeze" && event.originalChainNonce === "27":
-        return this.getByUri(event?.originalUri)
+        return this.getByData({ chain:event.originalChainNonce, token:event.originalContract, collectionIdent:event.originalContract })
 
       default:
         const { chain, token, collectionIdent } = this.getParams(event);
