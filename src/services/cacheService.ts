@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import { IEvent } from "../components/ExplorerEvents";
 
 class CacheService {
@@ -14,9 +13,8 @@ class CacheService {
       originalTokenId,
       originalChainNonce,
       originalContract,
-      nftUri
     } = event;
-    let chain, token, collectionIdent;
+    let chain, token, collectionIdent, uri;
     switch (type) {
       case "Transfer":
         if (tokenId && fromChain) {
@@ -28,7 +26,7 @@ class CacheService {
         break;
 
       case "Unfreeze":
-        if ( originalChainNonce && originalTokenId ) {
+        if (originalChainNonce && originalTokenId) {
           chain = originalChainNonce;
           token = originalTokenId;
           collectionIdent = originalContract;
@@ -36,28 +34,39 @@ class CacheService {
         }
         break;
     }
-    return { chain, token, collectionIdent, nftUri };
+    return { chain, token, collectionIdent, uri };
   }
 
   async get(event: IEvent) {
-    const { chain, token, collectionIdent, nftUri } = this.getParams(event);
+    switch (true) {
+      case event.type === "Transfer" && event.chainName === "TON":
+        return this.getByUri(event.nftUri)
 
-    if (chain === "27") {
-      return axios
-        .get(
-          `${this.service}/nft/uri/?uri=${encodeURIComponent(nftUri)}`
-        )
-        .then((res) => res.data)
-        .catch(() => { });
+      case event.type === "Unfreeze" && event.originalChainNonce === "27":
+        return this.getByUri(event.originalUri)
 
-    } else {
-      return axios
-        .get(
-          `${this.service}/nft/data/?tokenId=${token}&chainId=${chain}&contract=${collectionIdent}`
-        )
-        .then((res) => res.data)
-        .catch(() => { });
+      default:
+        const { chain, token, collectionIdent } = this.getParams(event);
+        return this.getByData({ chain, token, collectionIdent })
     }
+  }
+
+  async getByUri(params: any) {
+    return axios
+      .get(
+        `${this.service}/nft/uri/?uri=${encodeURIComponent(params.nftUri)}`
+      )
+      .then((res) => res.data)
+      .catch(() => { });
+  }
+
+  async getByData(params: any) {
+    return axios
+      .get(
+        `${this.service}/nft/data/?tokenId=${params.token}&chainId=${params.chain}&contract=${params.collectionIdent}`
+      )
+      .then((res) => res.data)
+      .catch(() => { });
   }
 
   async add(event: IEvent) {
