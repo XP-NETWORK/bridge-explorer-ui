@@ -74,60 +74,60 @@ class CacheService {
       .catch(() => { });
   }
 
-  async add(event: IEvent) {
-    let { chain, token, collectionIdent } = this.getParams(event);
+  // async add(event: IEvent) {
+  //   let { chain, token, collectionIdent } = this.getParams(event);
 
-    let uri, origin, native;
+  //   let uri, origin, native;
 
-    const { originalUri, nftUri } = event;
+  //   const { originalUri, nftUri } = event;
 
-    if (originalUri) {
-      uri = originalUri;
-      origin = chain;
-      native = {
-        tokenId: token,
-        contract: collectionIdent,
-      };
-    } else {
-      if (/(wnfts\.xp\.network|nft\.xp\.network)/.test(nftUri)) {
-        console.log("here");
-        const res = await axios(nftUri);
+  //   if (originalUri) {
+  //     uri = originalUri;
+  //     origin = chain;
+  //     native = {
+  //       tokenId: token,
+  //       contract: collectionIdent,
+  //     };
+  //   } else {
+  //     if (/(wnfts\.xp\.network|nft\.xp\.network)/.test(nftUri)) {
+  //       console.log("here");
+  //       const res = await axios(nftUri);
 
-        const wrapped = res.data?.wrapped;
+  //       const wrapped = res.data?.wrapped;
 
-        collectionIdent = wrapped?.contract;
-        uri = wrapped?.original_uri;
-        origin = wrapped?.origin;
-        native = wrapped;
-      } else {
-        uri = nftUri;
-        origin = chain;
-        native = {
-          tokenId: token,
-          contract: collectionIdent,
-        };
-      }
-    }
+  //       collectionIdent = wrapped?.contract;
+  //       uri = wrapped?.original_uri;
+  //       origin = wrapped?.origin;
+  //       native = wrapped;
+  //     } else {
+  //       uri = nftUri;
+  //       origin = chain;
+  //       native = {
+  //         tokenId: token,
+  //         contract: collectionIdent,
+  //       };
+  //     }
+  //   }
 
-    const nft = {
-      collectionIdent,
-      uri,
-      native: {
-        ...native,
-        chainId: origin,
-      },
-    };
+  //   const nft = {
+  //     collectionIdent,
+  //     uri,
+  //     native: {
+  //       ...native,
+  //       chainId: origin,
+  //     },
+  //   };
 
-    const parsed = await axios.post(`${this.service}/nft/add`, {
-      nft,
-      account: "",
-      whitelisted: true,
-    });
+  //   const parsed = await axios.post(`${this.service}/nft/add`, {
+  //     nft,
+  //     account: "",
+  //     whitelisted: true,
+  //   });
 
-    const { data: parsedData } = parsed;
+  //   const { data: parsedData } = parsed;
 
-    return parsedData.metaData || parsedData;
-  }
+  //   return parsedData.metaData || parsedData;
+  // }
 }
 
 export default () => new CacheService();

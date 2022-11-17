@@ -62,7 +62,7 @@ export const fetchNtf = async (data: IEvent) => {
     const meta = await cacheService.get(data);
 
     if (meta === "no NFT with that data was found") {
-      return await cacheService.add(data);
+     console.log("no NFT with that data was found");
     } else {
       return meta;
     }
