@@ -324,3 +324,7 @@ input:-webkit-autofill {
     opacity: 0;
   }
 }
+
+.rounded-lg{
+  height: 38px !important;
+}
