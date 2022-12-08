@@ -6,13 +6,7 @@ import moment from "moment";
 import { truncate } from "./helpers";
 import useIsMobile from "../../hooks/isMobile";
 import { useEffect, useMemo, useState } from "react";
-import {
-  txExplorers,
-  addressExplorers,
-  currency,
-  chains,
-  chainNoncetoName,
-} from "../../constants";
+import { txExplorers, addressExplorers, currency, chains, chainNoncetoName } from "../../constants";
 import { ethers } from "ethers";
 import ClockIcon from "../../assets/icons/clock.svg";
 import { getExchangeRates } from "../../getExchangeRate";
@@ -42,9 +36,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
     rates: { [key: string]: { usd: number } },
     chainName: string
   ): number => {
-    const chain = chains.find(
-      (chain) => chain.name.toLowerCase() === chainName.toLowerCase()
-    );
+    const chain = chains.find((chain) => chain.name.toLowerCase() === chainName.toLowerCase());
     const rate = (chain && rates[chain.id]?.usd) || 1;
 
     return rate;
@@ -65,9 +57,8 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
         } else {
           setFromIconSrc(chain.icon);
         }
-      } 
+      }
       if (chain.name === chainNoncetoName[event?.toChain || 0]) {
-       
         if (chain.icon[0] === ".") {
           setToIconSrc(chain.icon.slice(1));
         } else {
@@ -96,11 +87,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
               className={`${tooltipCopy ? "copyTip copied" : "copyTip"}`}
             />
             {!dataLoad && (
-              <CopyWithTooltip
-                copyValue={event?.fromHash}
-                copyProps={copyProps}
-                copyIdx={5}
-              />
+              <CopyWithTooltip copyValue={event?.fromHash} copyProps={copyProps} copyIdx={5} />
             )}
             <span className="text-[#235EF5]">
               {truncate(event?.fromHash, truncateSize) || "N/A"}
@@ -123,17 +110,10 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
             rel="noreferrer"
             className={`text-[#235EF5] ${event?.toHash ? "" : "nonactive "}`}
           >
-            {truncate(
-              event?.toHash && extractHash(event?.toHash),
-              truncateSize
-            ) || "N/A"}
+            {truncate(event?.toHash && extractHash(event?.toHash), truncateSize) || "N/A"}
           </a>
           {!dataLoad && event?.toHash && (
-            <CopyWithTooltip
-              copyValue={event?.toHash}
-              copyProps={copyProps}
-              copyIdx={6}
-            />
+            <CopyWithTooltip copyValue={event?.toHash} copyProps={copyProps} copyIdx={6} />
           )}
         </p>
       </div>
@@ -144,31 +124,19 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
-          <img
-            src={fromIconSrc}
-            alt="chain icon"
-            className="chainIconDetails"
-          />
-          <span className="text-[#222222]">
-            {chainNoncetoName[event?.fromChain || 0] || "N/A"}
-          </span>
+          <img src={fromIconSrc} alt="chain icon" className="chainIconDetails" />
+          <span className="text-[#222222]">{chainNoncetoName[event?.fromChain || 0] || "N/A"}</span>
         </p>
       </div>
-      <div
-        className={`flex items-start justify-start gap-2 border-b py-4 detailsListRow`}
-      >
-        <div className="text-[#222222] font-medium w-32">
-          Destination Chain:
-        </div>
+      <div className={`flex items-start justify-start gap-2 border-b py-4 detailsListRow`}>
+        <div className="text-[#222222] font-medium w-32">Destination Chain:</div>
         <p
           className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${
             dataLoad ? "loadingWrapper" : "loadedWrapper"
           }`}
         >
           <img src={toIconSrc} alt="chain icon" className="chainIconDetails" />
-          <span className="text-[#222222]">
-            {chainNoncetoName[event?.toChain || 0] || "N/A"}
-          </span>
+          <span className="text-[#222222]">{chainNoncetoName[event?.toChain || 0] || "N/A"}</span>
         </p>
       </div>
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
@@ -191,11 +159,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
             </a>
           </span>
           {!dataLoad && (
-            <CopyWithTooltip
-              copyValue={event?.senderAddress}
-              copyProps={copyProps}
-              copyIdx={7}
-            />
+            <CopyWithTooltip copyValue={event?.senderAddress} copyProps={copyProps} copyIdx={7} />
           )}
         </p>
       </div>
@@ -209,36 +173,22 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
           <a
             target="_blank"
             rel="noreferrer"
-            href={`${event?.toChain && addressExplorers[event?.toChain]}${
-              event?.targetAddress
-            }`}
+            href={`${event?.toChain && addressExplorers[event?.toChain]}${event?.targetAddress}`}
           >
             <span className="text-[#235EF5]">
               {truncate(event?.targetAddress, truncateSize) || "N/A"}
             </span>
           </a>
           {!dataLoad && (
-            <CopyWithTooltip
-              copyValue={event?.targetAddress}
-              copyProps={copyProps}
-              copyIdx={8}
-            />
+            <CopyWithTooltip copyValue={event?.targetAddress} copyProps={copyProps} copyIdx={8} />
           )}
         </p>
       </div>
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
         <div className="text-[#222222] font-medium w-32">Date:</div>
-        <p
-          className={`md:pl-14  md:w-fit ${
-            dataLoad ? "loadingWrapper" : "loadedWrapper"
-          }`}
-        >
+        <p className={`md:pl-14  md:w-fit ${dataLoad ? "loadingWrapper" : "loadedWrapper"}`}>
           <span className="mr-1">
-            <img
-              src={ClockIcon}
-              alt="clock icon"
-              style={{ filter: "brightness(35%)" }}
-            />
+            <img src={ClockIcon} alt="clock icon" style={{ filter: "brightness(35%)" }} />
           </span>
           <span className="text-[#222222]">{`${moment(event?.createdAt)
             .fromNow()
@@ -254,30 +204,28 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
             .replace("mutes ", "mins ")
             .replace("mute ", "min ")
             .replace("seconds ", "secs ")
-            .replace("second ", "sec ")} (${new Date(
-            event?.createdAt
-          ).toUTCString()})`}</span>
+            .replace("second ", "sec ")} (${new Date(event?.createdAt).toUTCString()})`}</span>
         </p>
       </div>
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
         <div className="text-[#222222] font-medium w-32">Transaction Fee:</div>
-        <p
-          className={`md:pl-14  md:w-fit ${
-            dataLoad ? "loadingWrapper" : "loadedWrapper"
-          }`}
-        >
+        <p className={`md:pl-14  md:w-fit ${dataLoad ? "loadingWrapper" : "loadedWrapper"}`}>
           <span className="text-[#222222]">
-            {event?.txFees && formatFees(event)}{" "}
-            {event?.fromChain && currency[event.fromChain]} ($
+            {event?.txFees && formatFees(event)} {event?.fromChain && currency[event.fromChain]} ($
             {event?.fromChain &&
-              (
-                getExchangeRate(exchangeRates, event.chainName) *
-                formatFees(event)
-              ).toFixed(2)}
+              (getExchangeRate(exchangeRates, event.chainName) * formatFees(event)).toFixed(2)}
             )
           </span>
         </p>
       </div>
+      {event?.sftAmount && (
+        <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
+          <div className="text-[#222222] font-medium w-32">Amount:</div>
+          <p className={`md:pl-14  md:w-fit ${dataLoad ? "loadingWrapper" : "loadedWrapper"}`}>
+            <span className="text-[#222222]">{event?.sftAmount}</span>
+          </p>
+        </div>
+      )}
 
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
         <div className="text-[#222222] font-medium w-32">Status:</div>

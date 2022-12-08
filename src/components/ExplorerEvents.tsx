@@ -68,6 +68,7 @@ export interface IEvent {
   originalTokenId?: string;
   originalUri?: string;
   listener?: string;
+  sftAmount?: number;
 }
 
 export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
@@ -250,8 +251,8 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                             : "sitckyBottomLine"
                         }`}
                       >
-                          <ReactTooltip effect="solid" className="copyTip" multiline />
-                          <RowNFT event={event} />
+                        <ReactTooltip effect="solid" className="copyTip" multiline />
+                        <RowNFT event={event} />
                       </TableData>
 
                       <TableData>
