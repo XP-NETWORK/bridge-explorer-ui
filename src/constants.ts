@@ -8,6 +8,7 @@ import Abeychain from "./assets/icons/Abey.svg";
 import Dfinity from "./assets/icons/dfinity.svg";
 import Skale from "./assets/icons/skale.svg";
 import Ton from "./assets/chains/ton.svg"
+import Caduceus from "./assets/icons/caduceus.svg"
 
 import axios from "axios";
 
@@ -34,7 +35,8 @@ export const currency: any = {
   "32": "GLMR",
   "33": "ABEY",
   "28": "ICP",
-  "27": "TON"
+  "27": "TON",
+  "35": "CMP"
 };
 
 export const txExplorers: any = {
@@ -61,7 +63,8 @@ export const txExplorers: any = {
   "33": "https://scan.abeychain.com/tx/",
   "28": "https://www.icpexplorer.org/#/tx/",
   "30": "https://honorable-steel-rasalhague.explorer.mainnet.skalenodes.com/tx/",
-  "27": "https://tonscan.org/tx/by-msg-hash/"
+  "27": "https://tonscan.org/tx/by-msg-hash/",
+  "35": "https://mainnet.scan.caduceus.foundation/tx/"
 };
 
 export const addressExplorers: any = {
@@ -89,6 +92,7 @@ export const addressExplorers: any = {
   "33": "https://scan.abeychain.com/address/",
   "28": "https://www.icpexplorer.org/#/acct/",
   "30": "https://honorable-steel-rasalhague.explorer.mainnet.skalenodes.com/address/",
+  "35": "https://mainnet.scan.caduceus.foundation/address/",
 };
 
 export const chainNoncetoName: any = {
@@ -116,7 +120,8 @@ export const chainNoncetoName: any = {
   "33": "Abeychain",
   "28": "Dfinity",
   "30": "Skale",
-  "27": "Ton"
+  "27": "Ton",
+  "35": "Caduceus",
 };
 
 export const _headers = {
@@ -164,6 +169,7 @@ export const chains = [
   { id: "dfinity", name: "Dfinity", icon: Dfinity },
   { id: "skale", name: "Skale", icon: Skale },
   { id: "the-open-network", name: "Ton", icon: Ton, notConvert: true},
+  { id: "the-open-network", name: "Caduceus", icon: Caduceus, notConvert: true},
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";
