@@ -26,7 +26,7 @@ interface IEventsContext {
 
 export const EventsContext = createContext<IEventsContext | null>(null);
 export const EventsProvider: FC = withContainer(
-  ({ children, container: { socket, scraperSocket } }) => {
+  ({ children, container: { socket, scraperSocket, destScraperSocket } }) => {
     const [events, setEvents] = useState<IEvent[]>([]);
     //const [chainName, setChainName] = useState("");
     //const [status, setStatus] = useState("");
@@ -53,6 +53,9 @@ export const EventsProvider: FC = withContainer(
 
       scraperSocket.off("incomingEvent");
       scraperSocket.off("updateEvent");
+
+      destScraperSocket.off("incomingEvent");
+      destScraperSocket.off("updateEvent");
 
       socket.on("incomingEvent", async (event: IEvent) => {
         if (eventsQueryString) return;
@@ -120,11 +123,34 @@ export const EventsProvider: FC = withContainer(
         }
       });
 
+      destScraperSocket.on("updateEvent", async (updated: IEvent) => {
+        const idx = events.findIndex(
+          (event) => event.fromChain + event.actionId === updated.fromChain + updated.actionId
+        );
+        try {
+          const metadata = await fetchNtf(updated);
+          setEvents([
+            ...events.slice(0, idx),
+            { imgUri: metadata.image as string, ...updated },
+            ...events.slice(idx + 1),
+          ]);
+        } catch (e: any) {
+          // console.log(e, "img fetch error");
+          setEvents([
+            ...events.slice(0, idx),
+            { imgUri: "", ...updated },
+            ...events.slice(idx + 1),
+          ]); //updateEvent
+        }
+      });
+
       return () => {
         socket.off("incomingEvent");
         socket.off("updateEvent");
         scraperSocket.off("incomingEvent");
         scraperSocket.off("updateEvent");
+        destScraperSocket.off("updateEvent");
+        destScraperSocket.off("updateEvent");
       };
     }, [events]);
 
@@ -139,7 +165,10 @@ export const EventsProvider: FC = withContainer(
         case collectionName.length > 0:
           loadEventsByCollectionName();
           break;
-        case eventsQueryString.fromChainName!== undefined || eventsQueryString.toChainName!== undefined || eventsQueryString.type!== undefined || eventsQueryString.status!== undefined:
+        case eventsQueryString.fromChainName !== undefined ||
+          eventsQueryString.toChainName !== undefined ||
+          eventsQueryString.type !== undefined ||
+          eventsQueryString.status !== undefined:
           filteredEvents();
           break;
         case typeof eventsQueryString === "string" && eventsQueryString.length > 0:

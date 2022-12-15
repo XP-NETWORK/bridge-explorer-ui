@@ -8,13 +8,16 @@ import io from "socket.io-client";
 import { useEffect, useState } from "react";
 import "./components/ChainModal/Chain.css";
 
-import { socketUrl, url, scraperSocketUrl } from "./constants";
+import { socketUrl, url, scraperSocketUrl, destScraperSocketUrl } from "./constants";
 
 const socket = io(socketUrl, {
   path: "/socket.io",
 });
 
 const scraperSocket = io(scraperSocketUrl, {
+  path: "/socket.io",
+});
+const destScraperSocket = io(destScraperSocketUrl, {
   path: "/socket.io",
 });
 
@@ -50,7 +53,7 @@ export const App = () => {
   }, []);
 
   return (
-    <ServiceProvider value={{ socket, appData, fetching, scraperSocket }}>
+    <ServiceProvider value={{ socket, appData, fetching, scraperSocket, destScraperSocket }}>
       <Routes>
         <Route path="/*" element={<Explorer />} />
         <Route path="/tx/:fromHash" element={<Event />} />
