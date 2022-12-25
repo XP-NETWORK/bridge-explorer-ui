@@ -51,7 +51,7 @@ const globalSlice = createSlice({
       state.from = action.payload;
     },
     setEventsQueryString(state, action) {
-      console.log("search:", action.payload);
+      // console.log("search:", action.payload);
       state.to = "All chains";
       state.from = "All chains";
       state.resetStatusAndType = !state.resetStatusAndType;
@@ -138,7 +138,7 @@ const globalSlice = createSlice({
     },
     setShowByCollection(state, action) {
       state.showByCollection = action.payload;
-      console.log("global nameCollection", state.showByCollection);
+      // console.log("global nameCollection", state.showByCollection);
     },
   },
 });

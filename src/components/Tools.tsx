@@ -194,14 +194,14 @@ const Dropdown: FC<{
             isOpen || "hidden"
           } z-10 mt-1 dropdown-scrollbar rounded absolute w-full py-2 bg-white shadow-[0_1px_15px_0px_#2F303214] max-h-52 no-scrollbar overflow-y-scroll`}
         >
-          {_chains.map((chain) => (
+          {_chains.map((chain , index) => (
             <li
               onClick={(e) => {
                 setSelectedChain(e.currentTarget.innerText);
                 setIsOpen(false);
               }}
               className="py-2 flex px-4 select-none cursor-pointer hover:bg-[#F7F7F9]"
-              key={chain.name}
+              key={chain.name + String(index)}
             >
               <img src={chain.icon} alt="chain icon" />
               <span className="ml-2">{chain.name}</span>

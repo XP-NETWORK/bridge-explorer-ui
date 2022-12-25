@@ -59,12 +59,12 @@ export const Chart = withContainer(
       idx: i,
     }));
 
-    console.log({ mockData });
-    console.log(
-      "today",
-      Number(mockData[mockData.length - 1]?.Tx) -
-        Number(mockData[mockData.length - 2]?.Tx)
-    );
+    // console.log({ mockData });
+    // console.log(
+    //   "today",
+    //   Number(mockData[mockData.length - 1]?.Tx) -
+    //     Number(mockData[mockData.length - 2]?.Tx)
+    // );
 
     const CustomTooltip = ({ active, payload, label }: any) => {
       if (active && payload && payload.length) {

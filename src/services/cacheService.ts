@@ -38,7 +38,7 @@ class CacheService {
   }
 
   async get(event: IEvent) {
-    console.log(event);
+    // console.log(event);
     switch (true) {
       // case event?.type === "Transfer" && event.chainName === "TON":
       //   return this.getByUri(event?.nftUri)
@@ -53,7 +53,7 @@ class CacheService {
   }
 
   async getByUri(uri: string | undefined) {
-    console.log({ uri });
+    // console.log({ uri });
 
     return axios
       .get(

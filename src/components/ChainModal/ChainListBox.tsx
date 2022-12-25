@@ -190,10 +190,11 @@ export const ChainListBox = () => {
               <div className="modalSelectOptionsText">Select All Chains</div>
             </li>
             {departureOrDestination === "departure" &&
-              fromChains.map((chain) => {
+              fromChains.map((chain , inedx) => {
                 const { image, text, key } = chain;
                 return (
                   <li
+                  key={inedx}
                     className="nftChainItem"
                     onClick={() => chainSelectHandlerFrom(chain)}
                   >
@@ -209,12 +210,13 @@ export const ChainListBox = () => {
                 );
               })}
             {departureOrDestination === "destination" &&
-              toChains.map((chain) => {
+              toChains.map((chain, index) => {
                 const { image, text, key } = chain;
                 return (
                   <li
                     className="nftChainItem"
                     onClick={() => chainSelectHandlerTo(chain)}
+                    key={index}
                   >
                     <img
                       className="modalSelectOptionsImage"

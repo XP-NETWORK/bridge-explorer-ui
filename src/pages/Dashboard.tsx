@@ -24,7 +24,7 @@ export const Dashboard = React.memo(() => {
 
     (async () => {
       const res = await fetch(`${url}newDash`);
-      console.log("res", res);
+      // console.log("res", res);
       setFetching(false);
       if (res.ok) {
         const body = await res.json();

@@ -30,7 +30,7 @@ export const withData = function (Wrapped: React.FC<any>) {
       if (hash.includes("+")) {
         hash = hash.replaceAll("+", "%2B");
       }
-      console.log(hash);
+      // console.log(hash);
 
       fetch(`${url}?fromHash=${hash}`)
         .then((res) => res.json())

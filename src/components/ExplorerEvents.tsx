@@ -240,7 +240,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
 
                   return (
                     <tr
-                      key={event.id}
+                      key={event.id + String(idx)}
                       className="bg-white group hover:bg-transparent txRow"
                       onClick={(e) => navigateTo(e, event)}
                     >

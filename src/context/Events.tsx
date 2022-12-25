@@ -91,6 +91,7 @@ export const EventsProvider: FC = withContainer(
       });
 
       scraperSocket.on("incomingEvent", async (event: IEvent) => {
+        console.log("Incoming Event!!", event);
         if (eventsQueryString) return;
         try {
           const incoming = { imgUri: "", ...event };
@@ -124,6 +125,7 @@ export const EventsProvider: FC = withContainer(
       });
 
       destScraperSocket.on("updateEvent", async (updated: IEvent) => {
+        console.log("updateEvent Event!!", updated);
         const idx = events.findIndex(
           (event) => event.fromChain + event.actionId === updated.fromChain + updated.actionId
         );
@@ -189,7 +191,7 @@ export const EventsProvider: FC = withContainer(
     const loadAllEvents = async () => {
       const eventsObj = await axios.get(`${url}?sort=${sort}&offset=${paginationPage}`);
       load(eventsObj.data);
-      console.log("load all events");
+      // console.log("load all events");
     };
 
     const loadEventsBySearch = async () => {
@@ -197,21 +199,21 @@ export const EventsProvider: FC = withContainer(
         `${url}?chainName=${eventsQueryString}&sort=${sort}&offset=${paginationPage}`
       );
       load(eventsObj.data);
-      console.log("load all search");
+      // console.log("load all search");
     };
 
     const loadEventsByCollectionName = async () => {
-      console.log(`${url}api?collectionName=${collectionName}&offset=${paginationPage}`);
+      // console.log(`${url}api?collectionName=${collectionName}&offset=${paginationPage}`);
 
       const eventsObj = await axios.get(
         `${url}api?collectionName=${collectionName}&offset=${paginationPage}`
       );
       load(eventsObj.data);
-      console.log("load by collection name");
+      // console.log("load by collection name");
     };
 
     const filteredEvents = async () => {
-      console.log({ eventsQueryString });
+      // console.log({ eventsQueryString });
       const urlF = `${url}api?${
         eventsQueryString.fromChainName
           ? `fromChainName=` + eventsQueryString.fromChainName.toUpperCase()
@@ -225,7 +227,7 @@ export const EventsProvider: FC = withContainer(
       }&offset=${paginationPage}`;
       const eventsObj = await axios.get(urlF);
       load(eventsObj.data);
-      console.log("load by filters");
+      // console.log("load by filters");
     };
 
     // useEffect(() => {
