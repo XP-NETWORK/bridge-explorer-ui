@@ -17,7 +17,7 @@ export const Chart = withContainer(
     charFetching,
     container: {
       fetching,
-      appData: { totalTx },
+      appData: { totalTx ,totalAsstest },
     },
   }: {
     dailyData: DailyData[];
@@ -98,6 +98,9 @@ export const Chart = withContainer(
               </span>
               <span>
                 Total Tx: <span>{fetching ? <Loader /> : totalTx}</span>
+              </span>
+              <span>
+                Total Assets: <span>{fetching ? <Loader /> : totalAsstest}</span>
               </span>
             </div>
             <div className="lineWrapper">

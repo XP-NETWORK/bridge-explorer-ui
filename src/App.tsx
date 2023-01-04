@@ -24,12 +24,14 @@ const destScraperSocket = io(destScraperSocketUrl, {
 interface AppData {
   totalTx: number;
   totalWallets: number;
+  totalAsstest:number
 }
 
 export const App = () => {
   const [appData, setAppData] = useState<AppData>({
     totalTx: 0,
     totalWallets: 0,
+    totalAsstest: 0,
   });
 
   const [fetching, setFetching] = useState(true);
@@ -43,6 +45,7 @@ export const App = () => {
           setAppData({
             totalTx: metrics.totalTx,
             totalWallets: metrics.totalWallets,
+            totalAsstest: metrics.totalAsstest,
           });
         }
         setFetching(false);
