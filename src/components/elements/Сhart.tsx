@@ -83,7 +83,7 @@ export const Chart = withContainer(
       <div className="lg:max-w-5xl mx-auto px-4 mt-3 md:mt-6">
         <div className="chartWrapper">
           <div className="chartVisual">
-            <h3 className="font-medium text-[#222222]">Daily Transactions</h3>
+            {/* <h3 className="font-medium text-[#222222]">Daily Transactions</h3> */}
             <div className="chartMetrics">
               <span>
                 Today Tx:{" "}

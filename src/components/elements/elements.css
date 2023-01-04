@@ -59,19 +59,20 @@
 }
 
 .chartMetrics {
-  position: absolute;
+  /* position: absolute; */
   top: -3px;
   right: 10px;
   display: flex;
   flex-direction: column;
   align-items: space-between;
   margin-bottom: 12px;
+  margin-left: 20px;
   color: #222222;
   font-size: 14px;
 }
 
 .lineWrapper {
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .chartMetrics > span {
