@@ -24,8 +24,7 @@ export const Explorer = () => {
       <ErrorBoundary>
         <Title />
         <EventsProvider>
-          <SearchBar mode={setSearchingMode} />
-          {/* {!searchingMode ? ( */}
+          <SearchBar />
           <span>
             <ExplorerCards />
             <Dashboard />

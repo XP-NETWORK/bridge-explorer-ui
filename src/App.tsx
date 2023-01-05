@@ -3,6 +3,7 @@ import { Explorer } from "./pages/Explorer";
 import { Event } from "./pages/Event";
 import { Dashboard } from "./pages/Dashboard";
 import { Network } from "./pages/Network";
+import { Search } from "./pages/Search";
 import { ServiceProvider } from "../src/context/ServcieProvder";
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
@@ -62,6 +63,8 @@ export const App = () => {
         <Route path="/tx/:fromHash" element={<Event />} />
         <Route path="/network" element={<Network />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/search/*" element={<Search />} />
       </Routes>
     </ServiceProvider>
   );
