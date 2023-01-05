@@ -5,7 +5,7 @@ import { ChainSwitch } from "../components/elements/chainSwitch";
 import { DropDown } from "../components/elements/DropDown";
 import FiltersBtn from "../components/elements/FiltersBtn";
 import FiltersMobile from "../components/elements/FiltersMobile";
-import { Paginator } from "../components/elements/Paginator";
+import { SearchPaginator } from "../components/elements/SearchPaginator";
 import { StatusFilter } from "../components/elements/StatusFilter";
 import { IEvent } from "../components/ExplorerEvents";
 import { SearchBar } from "../components/SearchBar";
@@ -28,9 +28,12 @@ import { Title } from "../components/Title";
 import axios from "axios";
 
 export const Search = (props: any) => {
+  const uri = `https://dev-explorer-api.herokuapp.com/`;
   const navigate = useNavigate();
   const loc = useLocation();
   const [showClearBtn, setShowClearBtn] = useState(false);
+  const [totalTrx, setTotalTrx] = useState<any>(0);
+  const [pageNumber, setPageNumber] = useState(0);
   const [eventsContext, setEventsContext] = useState({
     isLoading: true,
     events: [
@@ -80,18 +83,27 @@ export const Search = (props: any) => {
     const searchParams = new URLSearchParams(loc.search);
     switch (true) {
       case searchParams.has("bar"):
-        console.log(loc.search.split("=")[1]);
-        const val = loc.search.split("=")[1];
-        const resp = await axios.get(`https://dev-explorer-api.herokuapp.com/?chainName=${val}&sort=DESC&offset=0`);
-        console.log(resp.data.events.length);
-        if (resp.data.events.length > 0) {
-          setEventsContext({
-            isLoading: false,
-            events: resp.data.events,
-          });
-        }
+        const search = searchParams.get("bar");
+        const offset = searchParams.get("offset");
+        setPageNumber(offset ? +offset : 0);
+        const resp = await axios.get(`${uri}?chainName=${search}&sort=DESC&offset=${offset}`);
+        if (resp.data.events.length < 1) return;
+        setEventsContext({
+          isLoading: false,
+          events: resp.data.events,
+        });
+        setTotalTrx(resp.data.count);
         break;
       default:
+        const defaultOffset = searchParams.get("offset");
+        setPageNumber(defaultOffset ? +defaultOffset : 0);
+        const defaultResp = await axios.get(`${uri}?sort=DESC&offset=${defaultOffset}`);
+        if (defaultResp.data.events.length < 1) return;
+        setEventsContext({
+          isLoading: false,
+          events: defaultResp.data.events,
+        });
+        setTotalTrx(defaultResp.data.count);
         break;
     }
   };
@@ -137,7 +149,7 @@ export const Search = (props: any) => {
         <ChainListBox />
         <FiltersMobile />
         <Container>
-          <Paginator showTransactions={true} />
+          <SearchPaginator totalTrx={totalTrx} pageNumber={pageNumber} />
           <div className="line"></div>
         </Container>
 
@@ -336,7 +348,7 @@ export const Search = (props: any) => {
               )}
             </tbody>
           </table>
-          <Paginator showTransactions={false} />
+          <SearchPaginator totalTrx={totalTrx} pageNumber={pageNumber} />
         </Container>
       </div>
     </>

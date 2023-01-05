@@ -18,7 +18,7 @@ export const SearchBar: React.FC<{}> = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate(`/search?bar=${value}`);
+    navigate(`/search?bar=${value}&offset=${0}`);
     console.log("onSubmit");
   };
 
