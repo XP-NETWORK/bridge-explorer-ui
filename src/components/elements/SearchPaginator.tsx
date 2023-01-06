@@ -2,9 +2,10 @@ import React from "react";
 import ReactPaginate from "react-paginate";
 import prev from "../../assets/icons/prev.svg";
 import next from "../../assets/icons/next.svg";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 export const SearchPaginator = (props: any) => {
+  let [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const loc = useLocation();
   const { totalTrx, pageNumber, url } = props;
@@ -12,22 +13,34 @@ export const SearchPaginator = (props: any) => {
   const ctx = { isLoading: false };
   const disableCursor = false;
 
-//   const handleFirst = async (page: any) => {
-//     const searchParams = new URLSearchParams(loc.search);
-//     const offset = searchParams.get("offset");
-//     console.log({ offset });
-
-//     var href = new URL(window.location.href);
-//     var href2 = new URL(String(href.href));
-
-//     href2.searchParams.set("offset", String((offset ? +offset : 0) + 1));
-//     console.log(href2.toString());
-//     navigate(href2.toString());
-//   };
-  const handleFirst = async (page: any) => {
+  const handleOffset = (e: any, place: string) => {
+    e.preventDefault();
     const searchParams = new URLSearchParams(loc.search);
-    // searchParams.set("offset" , "sdfg");
-   
+    const offset = searchParams.get("offset");
+    console.log({ offset });
+
+    let url = new URL(window.location.href);
+    let params = new URLSearchParams(url.search);
+
+    switch (place) {
+      case "first":
+        params.set("offset", "0");
+        break;
+      case "last":
+        params.set("offset", String(Math.ceil(total) -1));
+        break;
+      case "next":
+        params.set("offset", String((offset ? +offset : 0) + 1));
+        break;
+      case "back":
+        params.set("offset", String((offset ? +offset : 0) - 1));
+        break;
+      default:
+        break;
+    }
+
+    console.log(params.toString());
+    navigate(`?` + params.toString());
   };
 
   return (
@@ -40,7 +53,7 @@ export const SearchPaginator = (props: any) => {
         </span>
 
         <button
-          onClick={handleFirst}
+          onClick={(e) => handleOffset(e, "first")}
           className={`button buttonFirst ${ctx?.isLoading ? "nonactive" : ""}`}
         >
           First
@@ -57,7 +70,7 @@ export const SearchPaginator = (props: any) => {
               className={`paginationControlWraper  ${
                 ctx?.isLoading ? "nonactive" : ""
               } ${disableCursor}`}
-              onClick={() => handleFirst(1)}
+              onClick={(e) => handleOffset(e, "next")}
             >
               <img src={next} />
             </div>
@@ -70,14 +83,14 @@ export const SearchPaginator = (props: any) => {
           previousLabel={
             <div
               className={`paginationControlWraper ${ctx?.isLoading ? "nonactive" : ""}`}
-              onClick={() => handleFirst(-1)}
+              onClick={(e) => handleOffset(e, "back")}
             >
               <img src={prev} />
             </div>
           }
         />
         <button
-          onClick={() => handleFirst(Math.ceil(total / 50) - pageNumber - 1)}
+          onClick={(e) => handleOffset(e, "last")}
           className={`button buttonLast ${ctx?.isLoading ? "nonactive" : ""}`}
         >
           Last
