@@ -25,7 +25,7 @@ export const Navbar = () => {
           </a>
           <div className="mainnetDiv">
             <span className="pulse-button"></span>
-            Mainnet
+            Testnet
           </div>
         </div>
         <div

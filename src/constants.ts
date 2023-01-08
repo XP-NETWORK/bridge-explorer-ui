@@ -172,17 +172,17 @@ export const chains = [
   { id: "the-open-network", name: "Caduceus", icon: Caduceus, notConvert: true},
 ];
 
-export const url = "https://dev-explorer-api.herokuapp.com/";
-export const socketUrl = "wss://dev-explorer-api.herokuapp.com";
-export const scraperSocketUrl = "wss://explorer-scraper.herokuapp.com/";
-export const destScraperSocketUrl = "wss://dest-scraper.herokuapp.com/";
+export const url ="https://testnet-explorer-api.herokuapp.com/";
+export const socketUrl ="wss://testnet-scraper.herokuapp.com";
+export const scraperSocketUrl ="wss://testnet-scraper.herokuapp.com/";
+export const destScraperSocketUrl ="wss://testnet-destscraper.herokuapp.com/";
 
 // export const url = "http://localhost:3100/";
 //export const socketUrl = "ws://localhost:3100";
 
 export const setTelegram = async (destination: string, error: any) => {
-  // console.log("got here")
-  await axios.get(
-    `https://api.telegram.org/bot5434178910:AAF7EpfcDyvsLG_pAIv-SXVRU6bYBqjlqKo/sendMessage?chat_id=-721145192&text=Error on ${destination} ,  Message : ${error}&parse_mode=HTML`
-  );
+  console.log("setTelegram")
+  // await axios.get(
+  //   `https://api.telegram.org/bot5434178910:AAF7EpfcDyvsLG_pAIv-SXVRU6bYBqjlqKo/sendMessage?chat_id=-721145192&text=Error on ${destination} ,  Message : ${error}&parse_mode=HTML`
+  // );
 };
