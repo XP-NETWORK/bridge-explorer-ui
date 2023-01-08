@@ -60,11 +60,13 @@ export const ChainListBox = () => {
 
   const chainSelectHandlerFrom = async (chain: any) => {
     handleClose();
+    dispatch(setFrom(chain.text));
     navigate(`/search?from=${chain.key}&offset=${0}`);
   };
 
   const chainSelectHandlerTo = async (chain: any) => {
     handleClose();
+    dispatch(setTo(chain.text));
     navigate(`/search?to=${chain.key}&offset=${0}`);
   };
 
