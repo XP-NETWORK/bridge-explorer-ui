@@ -20,12 +20,6 @@ export const ChainSwitch = () => {
   useEffect(() => {
     setFromIconSrc("");
     setToIconSrc("");
-    // if (from) {
-    //   setFromIconSrc(allIcon);
-    // }
-    // if (to) {
-    //   setToIconSrc(allIcon);
-    // }
     chains.map((chain) => {
       if (chain.name.toLowerCase() === from.toLowerCase()) {
         setFromIconSrc(chain.icon.slice(1));
