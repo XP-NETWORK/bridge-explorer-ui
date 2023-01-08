@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { ReduxState } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { setChainModal, setDepartureOrDestination } from "../../store/global";
-import "./Buttons.css";
 import { chains } from "../../constants";
+import "./Buttons.css";
 
 export const ChainSwitch = () => {
   const from = useSelector((state: ReduxState) => state.global.from);
