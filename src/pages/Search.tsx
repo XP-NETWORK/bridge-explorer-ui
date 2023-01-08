@@ -94,6 +94,41 @@ export const Search = (props: any) => {
         });
         setTotalTrx(resp.data.count);
         break;
+      case searchParams.has("from"):
+        const from = searchParams.get("from");
+        let fromDataFilter, fromData;
+        if (eventsContext.events.length > 1) {
+          fromDataFilter = eventsContext.events.filter(
+            (item: any) =>
+              item.chainName === from?.toUpperCase() || item.fromChainName === from?.toUpperCase()
+          );
+        } else {
+          fromData = await axios.get(`${uri}api?chainName=${from?.toUpperCase()}&offset=0`);
+        }
+        console.log(fromData);
+        setEventsContext({
+          isLoading: false,
+          events: fromDataFilter ? fromDataFilter : fromData?.data.events,
+        });
+        setTotalTrx(fromDataFilter ? fromDataFilter.length : fromData?.data?.events?.length);
+        console.log(from);
+        break;
+      case searchParams.has("to"):
+        const to = searchParams.get("to");
+        let toDataFilter, toData;
+        if (eventsContext.events.length > 1) {
+          toDataFilter = eventsContext.events.filter((item: any) => item.toChainName === to?.toUpperCase());
+        } else {
+          toData = await axios.get(`${uri}api?toChainName=${to?.toUpperCase()}&offset=0`);
+        }
+        console.log(toData);
+        setEventsContext({
+          isLoading: false,
+          events: toDataFilter ? toDataFilter : toData?.data.events,
+        });
+        setTotalTrx(toDataFilter ? toDataFilter.length : toData?.data?.events?.length);
+        console.log(to);
+        break;
       default:
         const defaultOffset = searchParams.get("offset");
         setPageNumber(defaultOffset ? +defaultOffset : 0);

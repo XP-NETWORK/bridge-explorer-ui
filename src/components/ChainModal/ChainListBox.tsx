@@ -17,7 +17,7 @@ import {
 // import { Modal } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ReduxState } from "../../store";
 import "./Chain.css";
 import "./Modal.css";
@@ -28,15 +28,13 @@ import ScrollArrows from "./ScrollArrows";
 export const ChainListBox = () => {
   const [reached, setReached] = useState(false);
   const nftChainListRef = useRef(null);
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const departureOrDestination = useSelector(
     (state: ReduxState) => state.global.departureOrDestination
   );
-  const chainSearch = useSelector(
-    (state: ReduxState) => state.global.chainSearch
-  );
+  const chainSearch = useSelector((state: ReduxState) => state.global.chainSearch);
 
   const show = useSelector((state: ReduxState) => state.global.showChainModal);
   const [fromChains, setFromChains] = useState(chains);
@@ -61,25 +59,13 @@ export const ChainListBox = () => {
   };
 
   const chainSelectHandlerFrom = async (chain: any) => {
-    setSelectedFrom(chain.text);
-    if (chain.text === selectedTo && chain.text !== "All chains") {
-      switchChains();
-    } else {
-      dispatch(setFrom(chain.text));
-      dispatch(setEventsQueryStringFrom(chain.text));
-    }
     handleClose();
+    navigate(`/search?from=${chain.key}&offset=${0}`);
   };
 
   const chainSelectHandlerTo = async (chain: any) => {
-    setSelectedTo(chain.text);
-    if (chain.text === selectedFrom && chain.text !== "All chains") {
-      switchChains();
-    } else {
-      dispatch(setTo(chain.text));
-      dispatch(setEventsQueryStringTo(chain.text));
-    }
     handleClose();
+    navigate(`/search?to=${chain.key}&offset=${0}`);
   };
 
   useEffect(() => {
@@ -111,18 +97,11 @@ export const ChainListBox = () => {
     const withComing = filteredChains
       .filter((chain) => chain.coming && !chain.newChain)
       .sort((a, b) => b.order - a.order);
-    const withMaintenance = filteredChains.filter(
-      (chain) => chain.maintenance && !chain.newChain
-    );
+    const withMaintenance = filteredChains.filter((chain) => chain.maintenance && !chain.newChain);
     const noComingNoMaintenance = filteredChains
       .filter((chain) => !chain.coming && !chain.maintenance && !chain.newChain)
       .sort((a, b) => a.order - b.order);
-    let sorted = [
-      ...withNew,
-      ...noComingNoMaintenance,
-      ...withMaintenance,
-      ...withComing,
-    ];
+    let sorted = [...withNew, ...noComingNoMaintenance, ...withMaintenance, ...withComing];
     setToChains(sorted);
     setFromChains(sorted);
   }, [selectedFrom, departureOrDestination, selectedTo]);
@@ -151,19 +130,10 @@ export const ChainListBox = () => {
   };
 
   return (
-    <Modal
-      animation={false}
-      show={show}
-      onHide={handleClose}
-      className="ChainModal"
-    >
+    <Modal animation={false} show={show} onHide={handleClose} className="ChainModal">
       <Modal.Header>
         <Modal.Title>
-          {`Select ${
-            departureOrDestination === "destination"
-              ? "destination"
-              : "departure"
-          } chain`}
+          {`Select ${departureOrDestination === "destination" ? "destination" : "departure"} chain`}
         </Modal.Title>
         <span className="CloseModal" onClick={handleClose}>
           <div className="close-modal"></div>
@@ -172,11 +142,7 @@ export const ChainListBox = () => {
       <Modal.Body>
         <div className="nftChainListBox">
           <ChainSearch />
-          <ul
-            className="nftChainList scrollSty"
-            onScroll={handleScroll}
-            ref={nftChainListRef}
-          >
+          <ul className="nftChainList scrollSty" onScroll={handleScroll} ref={nftChainListRef}>
             <li
               className="nftChainItem"
               onClick={() =>
@@ -189,19 +155,15 @@ export const ChainListBox = () => {
               <div className="modalSelectOptionsText">Select All Chains</div>
             </li>
             {departureOrDestination === "departure" &&
-              fromChains.map((chain , inedx) => {
+              fromChains.map((chain, inedx) => {
                 const { image, text, key } = chain;
                 return (
                   <li
-                  key={inedx}
+                    key={inedx}
                     className="nftChainItem"
                     onClick={() => chainSelectHandlerFrom(chain)}
                   >
-                    <img
-                      className="modalSelectOptionsImage"
-                      src={image.src}
-                      alt=""
-                    />
+                    <img className="modalSelectOptionsImage" src={image.src} alt="" />
                     <div className="modalSelectOptionsText">
                       {text === "xDai" ? "Gnosis" : text}
                     </div>
@@ -217,11 +179,7 @@ export const ChainListBox = () => {
                     onClick={() => chainSelectHandlerTo(chain)}
                     key={index}
                   >
-                    <img
-                      className="modalSelectOptionsImage"
-                      src={image.src}
-                      alt=""
-                    />
+                    <img className="modalSelectOptionsImage" src={image.src} alt="" />
                     <div className="modalSelectOptionsText">
                       {text === "xDai" ? "Gnosis" : text}
                     </div>
