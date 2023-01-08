@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ReduxState } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setChainModal,
-  setDepartureOrDestination,
-  setSwitchDestination,
-} from "../../store/global";
+import { setChainModal, setDepartureOrDestination } from "../../store/global";
 import "./Buttons.css";
-import { chainNoncetoName, chains } from "../../constants";
-import allIcon from "../../assets/icons/all.svg";
+import { chains } from "../../constants";
 
 export const ChainSwitch = () => {
   const from = useSelector((state: ReduxState) => state.global.from);
@@ -29,11 +24,6 @@ export const ChainSwitch = () => {
       }
     });
   }, [from, to]);
-
-  function handleSwitchChain() {
-    dispatch(setDepartureOrDestination("destination"));
-    dispatch(setSwitchDestination(true));
-  }
 
   const handleFromChainSwitch = () => {
     dispatch(setDepartureOrDestination("departure"));
@@ -56,13 +46,8 @@ export const ChainSwitch = () => {
               </div>
               <div onClick={handleFromChainSwitch} className="chain-switch">
                 <div className="nameWrapper">
-                  {fromIconSrc && (
-                    <img src={fromIconSrc} alt="" className="chainIconDropd" />
-                  )}
-                  <span className="name">
-                    {" "}
-                    {from === "xDai" ? "Gnosis" : from}
-                  </span>
+                  {fromIconSrc && <img src={fromIconSrc} alt="" className="chainIconDropd" />}
+                  <span className="name"> {from === "xDai" ? "Gnosis" : from}</span>
                   <div className="arrow-down"></div>
                 </div>
               </div>
@@ -76,9 +61,7 @@ export const ChainSwitch = () => {
               </div>
               <div onClick={handleToChainSwitch} className="chain-switch">
                 <div className="nameWrapper">
-                  {toIconSrc && (
-                    <img src={toIconSrc} alt="" className="chainIconDropd" />
-                  )}
+                  {toIconSrc && <img src={toIconSrc} alt="" className="chainIconDropd" />}
 
                   <span className="name"> {to === "xDai" ? "Gnosis" : to}</span>
                   <div className="arrow-downTo"></div>
