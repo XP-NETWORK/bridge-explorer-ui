@@ -54,9 +54,6 @@ export default function FiltersMobile() {
     ) {
       setShowClearBtn(false);
     }
-    //else {
-    //   setShowClearBtn(true);
-    // }
   }, [from, to, value, statusValue]);
 
   useEffect(() => {
@@ -73,8 +70,6 @@ export default function FiltersMobile() {
 
   const handleClose = () => {
     dispatch(setFilterModal(false));
-    // dispatch(setDepartureOrDestination(""));
-    // dispatch(setSwitchDestination(false));
   };
 
   useEffect(() => {
@@ -91,8 +86,6 @@ export default function FiltersMobile() {
   }, [from, to]);
 
   const handleClearAll = () => {
-    // dispatch(setEventsQueryStringType(undefined));
-
     setFilterModal(false);
     dispatch(setFrom("All chains"));
     dispatch(setEventsQueryStringFrom("All chains"));
@@ -103,69 +96,9 @@ export default function FiltersMobile() {
     dispatch(setEventsQueryString(""));
     dispatch(setShowByCollection(""));
     setShowClearBtn(false);
-    // handleClose();
-  };
-
-  // const handleSelectType = (e: any) => {
-  //   console.log(e);
-  //   setValue(e);
-  // };
-
-  // const handleSelectStatus = (e: any) => {
-  //   console.log(e);
-
-  //   setStatusValue(e);
-  // };
-
-  // const chainSelectHandlerFrom = async (chain: any) => {
-  //   setSelectedFrom(chain);
-  //   if (chain === selectedTo && chain !== "All chains") {
-  //     switchChains();
-  //   }
-  // };
-
-  // const chainSelectHandlerTo = async (chain: any) => {
-  //   setSelectedTo(chain);
-  //   if (chain === selectedFrom && chain !== "All chains") {
-  //     switchChains();
-  //   }
-  // };
-
-  const switchChains = () => {
-    // console.log("before switch", selectedFrom, selectedTo);
-    let temp = selectedFrom;
-    setSelectedFrom(selectedTo);
-    // dispatch(setFrom(selectedTo));
-    // dispatch(setEventsQueryStringFrom(selectedTo));
-    setSelectedTo(temp);
-    // dispatch(setTo(temp));
-    // dispatch(setEventsQueryStringTo(temp));
-    // console.log("chains switched", selectedFrom, selectedTo);
   };
 
   const handleShowFilterResults = () => {
-    // dispatch(setFrom(selectedFrom));
-    // dispatch(setEventsQueryStringFrom(selectedFrom));
-
-    // dispatch(setTo(selectedTo));
-    // dispatch(setEventsQueryStringTo(selectedTo));
-
-    // if (value === "Show All") {
-    //   dispatch(setEventsQueryStringType(undefined));
-    // } else {
-    //   dispatch(setEventsQueryStringType(value));
-    // }
-
-    // if (statusValue === "Show All") {
-    //   //   dispatch(setStatusFilter(""));
-    // } else if (statusValue === "Processing") {
-    //   dispatch(setStatusFilter("Failed"));
-    // } else if (statusValue === "Pending") {
-    //   dispatch(setStatusFilter("Pending"));
-    // } else {
-    //   dispatch(setStatusFilter(statusValue));
-    // }
-
     handleClose();
   };
 
@@ -196,7 +129,6 @@ export default function FiltersMobile() {
         <Modal.Body>
           <div className="nftChainListBox">
             <div className="filterDropDown">
-              {/* <div className="modalBtnWrapper"> */}
               <div className="dropDownContainer">
                 <div className="dropDownWrapper">
                   <div className="dropDownTitle">
@@ -245,63 +177,7 @@ export default function FiltersMobile() {
                   </div>
                 </div>
               </div>
-
-              {/* </div> */}
-              {/* <div className="dropDownContainer">
-                <div className="dropDownWrapper">
-                  <div className="dropDownTitle">
-                    <p> Tx Type</p>
-                  </div>
-                  <div className="dropDown">
-                    <DropdownButton
-                      onSelect={handleSelectType}
-                      id="dropdown-basic-button"
-                      title={value}
-                      size="sm"
-                      variant=""
-                    >
-                      <Dropdown.Item eventKey="Show All">
-                        Show All
-                      </Dropdown.Item>
-                      <Dropdown.Item eventKey="Transfer">
-                        Transfer
-                      </Dropdown.Item>
-                      <Dropdown.Item eventKey="Unfreeze">
-                        Unfreeze
-                      </Dropdown.Item>
-                    </DropdownButton>
-                  </div>
-                </div>
-              </div> */}
               <DropDown />
-
-              {/* <div className="dropDownContainer">
-                <div className="dropDownWrapper">
-                  <div className="dropDownTitle">
-                    <p> Status</p>
-                  </div>
-                  <div className="dropDown">
-                    <DropdownButton
-                      onSelect={handleSelectStatus}
-                      id="dropdown-basic-button"
-                      title={statusValue}
-                      size="sm"
-                      variant=""
-                    >
-                      <Dropdown.Item eventKey="Show All">
-                        Show All
-                      </Dropdown.Item>
-                      <Dropdown.Item eventKey="Completed">
-                        Completed
-                      </Dropdown.Item>
-                      <Dropdown.Item eventKey="Pending">Pending</Dropdown.Item>
-                      <Dropdown.Item eventKey="Processing">
-                        Processing
-                      </Dropdown.Item>
-                    </DropdownButton>
-                  </div>
-                </div>
-              </div> */}
               <StatusFilter />
 
               <div className="filterBtnsWrapper">
