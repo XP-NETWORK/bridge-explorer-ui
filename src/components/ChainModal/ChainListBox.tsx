@@ -37,8 +37,7 @@ export const ChainListBox = () => {
   const chainSearch = useSelector(
     (state: ReduxState) => state.global.chainSearch
   );
-  // const from = useSelector((state: ReduxState) => state.global.from);
-  // const to = useSelector((state: ReduxState) => state.global.to);
+
   const show = useSelector((state: ReduxState) => state.global.showChainModal);
   const [fromChains, setFromChains] = useState(chains);
   const [toChains, setToChains] = useState(chains);
@@ -230,9 +229,7 @@ export const ChainListBox = () => {
                 );
               })}
           </ul>
-          {/* <div className="mobileOnly"> */}
           {!reached && <ScrollArrows />}
-          {/* </div> */}
         </div>
       </Modal.Body>
     </Modal>
