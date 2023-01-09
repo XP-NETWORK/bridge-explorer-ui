@@ -174,7 +174,7 @@ export const chains = [
   { id: "skale", name: "Skale", icon: Skale },
   { id: "the-open-network", name: "Ton", icon: Ton, notConvert: true},
   { id: "Caduceus", name: "Caduceus", icon: Caduceus, notConvert: true},
-  { id: "OKC", name: "OKC", icon: OKC, notConvert: true},
+  { id: "oec-token", name: "OKC", icon: OKC, notConvert: true},
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";
