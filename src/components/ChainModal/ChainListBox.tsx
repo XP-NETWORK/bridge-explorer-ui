@@ -30,17 +30,17 @@ export const ChainListBox = () => {
   const nftChainListRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const location = useLocation();
   const departureOrDestination = useSelector(
     (state: ReduxState) => state.global.departureOrDestination
   );
   const chainSearch = useSelector((state: ReduxState) => state.global.chainSearch);
-
   const show = useSelector((state: ReduxState) => state.global.showChainModal);
   const [fromChains, setFromChains] = useState(chains);
   const [toChains, setToChains] = useState(chains);
   const [selectedFrom, setSelectedFrom] = useState("All chains");
   const [selectedTo, setSelectedTo] = useState("All chains");
+  const url = new URL(window.location.href);
+  const params = new URLSearchParams(url.search);
 
   useEffect(() => {
     //@ts-ignore
@@ -61,13 +61,17 @@ export const ChainListBox = () => {
   const chainSelectHandlerFrom = async (chain: any) => {
     handleClose();
     dispatch(setFrom(chain.text));
-    navigate(`/search?from=${chain.key}&offset=${0}`);
+    params.delete("bar");
+    params.set("chainName", chain.key.toUpperCase());
+    navigate((String(url).includes("search") ? `?` : `search?`) + params.toString());
   };
 
   const chainSelectHandlerTo = async (chain: any) => {
     handleClose();
     dispatch(setTo(chain.text));
-    navigate(`/search?to=${chain.key}&offset=${0}`);
+    params.delete("bar");
+    params.set("toChainName", chain.key.toUpperCase());
+    navigate((String(url).includes("search") ? `?` : `search?`) + params.toString());
   };
 
   useEffect(() => {
