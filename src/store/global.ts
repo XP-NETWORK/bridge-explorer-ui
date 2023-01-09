@@ -51,11 +51,7 @@ const globalSlice = createSlice({
       state.from = action.payload;
     },
     setEventsQueryString(state, action) {
-      // console.log("search:", action.payload);
-      state.to = "All chains";
-      state.from = "All chains";
       state.resetStatusAndType = !state.resetStatusAndType;
-      state.eventsQueryString = action.payload;
     },
     setEventsQueryStringTo(state, action) {
       // if (

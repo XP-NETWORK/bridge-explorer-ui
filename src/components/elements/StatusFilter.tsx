@@ -1,20 +1,15 @@
 import { useEffect, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import { useDispatch, useSelector } from "react-redux";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./DropDown.css";
-import { setEventsQueryStringType, setStatusFilter } from "../../store/global";
-
+import { useSelector } from "react-redux";
 import completedIcon from "../../assets/icons/completed.svg";
 import showAllIcon from "../../assets/icons/all.svg";
-
-import failedIcon from "../../assets/icons/failed.svg";
 import pendingIcon from "../../assets/icons/pending.svg";
-import info from "../../assets/icons/info.svg";
 import processing from "../../assets/icons/proccess.svg";
 import { ReduxState } from "../../store";
 import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./DropDown.css";
 
 export const StatusFilter = () => {
   const navigate = useNavigate();
@@ -30,7 +25,7 @@ export const StatusFilter = () => {
       params.delete("status");
       navigate((String(url).includes("search") ? `?` : `search?`) + params.toString());
     } else {
-      params.set("status", e);
+      params.set("status", e === "Processing" ? "Failed" : e);
       navigate((String(url).includes("search") ? `?` : `search?`) + params.toString());
     }
   };

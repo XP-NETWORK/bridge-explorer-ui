@@ -26,6 +26,8 @@ import { confiUrl } from "../services/hashConfig";
 import { Navbar } from "../components/Navbar";
 import { Title } from "../components/Title";
 import axios from "axios";
+import { setFrom, setTo, setEventsQueryString } from "../store/global";
+import { useDispatch } from "react-redux";
 
 export const Search = (props: any) => {
   const uri = `https://dev-explorer-api.herokuapp.com/`;
@@ -73,7 +75,7 @@ export const Search = (props: any) => {
   const [exchangeRates, setExchangeRates] = useState<{ [key: string]: { usd: number } }>({
     velas: { usd: 0 },
   });
-
+  const dispatch = useDispatch();
   useEffect(() => {
     console.log("I run everytime this component rerenders");
     getParams();
@@ -109,15 +111,10 @@ export const Search = (props: any) => {
   };
 
   const handleClearAll = () => {
+    navigate("/search");
     dispatch(setFrom("All chains"));
-    dispatch(setEventsQueryStringFrom("All chains"));
-    dispatch(setEventsQueryStringTo("All chains"));
     dispatch(setTo("All chains"));
-    dispatch(setEventsQueryStringType(undefined));
-    dispatch(setStatusFilter(undefined));
-    dispatch(setEventsQueryString(""));
-    dispatch(setShowByCollection(""));
-    setShowClearBtn(false);
+    dispatch(setEventsQueryString("change"));
   };
 
   const getExchangeRate = (
@@ -168,7 +165,7 @@ export const Search = (props: any) => {
                 marginLeft: "5px",
                 fontSize: "14px",
                 height: "100%",
-                display: showClearBtn ? "block" : "none",
+                display: "block",
               }}
               onClick={handleClearAll}
             >
@@ -201,9 +198,7 @@ export const Search = (props: any) => {
                 <TableHeading>Collection</TableHeading>
                 <TableHeading>Method</TableHeading>
                 <TableHeading>
-                  <span className="ageHeader">
-                    Age
-                  </span>
+                  <span className="ageHeader">Age</span>
                 </TableHeading>
                 <TableHeading>Status</TableHeading>
               </tr>
@@ -211,8 +206,7 @@ export const Search = (props: any) => {
             <tbody className=" divide-y   overflow-x-scroll">
               {eventsContext?.isLoading ? (
                 <LoaderRow />
-              ) : 
-              eventsContext?.events.length ? (
+              ) : eventsContext?.events.length ? (
                 eventsContext?.events.map((event: any, idx: number) => {
                   const dollarValue = Number(
                     getExchangeRate(exchangeRates, event.chainName) * formatFees(event)
@@ -369,77 +363,3 @@ export const TableData: FC<{ className?: string }> = ({ children, className }) =
     {children}
   </td>
 );
-
-function dispatch(arg0: any) {
-  throw new Error("Function not implemented.");
-}
-
-function setFrom(arg0: string): any {
-  throw new Error("Function not implemented.");
-}
-
-function setEventsQueryStringFrom(arg0: string): any {
-  throw new Error("Function not implemented.");
-}
-
-function setEventsQueryStringTo(arg0: string): any {
-  throw new Error("Function not implemented.");
-}
-
-function setTo(arg0: string): any {
-  throw new Error("Function not implemented.");
-}
-
-function setEventsQueryStringType(undefined: undefined): any {
-  throw new Error("Function not implemented.");
-}
-
-function setStatusFilter(undefined: undefined): any {
-  throw new Error("Function not implemented.");
-}
-
-function setEventsQueryString(arg0: string): any {
-  throw new Error("Function not implemented.");
-}
-
-function setShowByCollection(arg0: string): any {
-  throw new Error("Function not implemented.");
-}
-
-      // case searchParams.has("chainName"):
-      //   const from = searchParams.get("chainName");
-      //   let fromDataFilter, fromData;
-      //   if (eventsContext.events.length > 1) {
-      //     fromDataFilter = eventsContext.events.filter(
-      //       (item: any) =>
-      //         item.chainName === from?.toUpperCase() || item.fromChainName === from?.toUpperCase()
-      //     );
-      //   } else {
-      //     fromData = await axios.get(`${uri}api?chainName=${from?.toUpperCase()}&offset=0`);
-      //   }
-      //   console.log(fromData);
-      //   setEventsContext({
-      //     isLoading: false,
-      //     events: fromDataFilter ? fromDataFilter : fromData?.data.events,
-      //   });
-      //   setTotalTrx(fromDataFilter ? fromDataFilter.length : fromData?.data?.events?.length);
-      //   console.log(from);
-      //   break;
-      // case searchParams.has("toChainName"):
-      // const to = searchParams.get("toChainName");
-      // let toDataFilter, toData;
-      // if (eventsContext.events.length > 1) {
-      //   toDataFilter = eventsContext.events.filter(
-      //     (item: any) => item.toChainName === to?.toUpperCase()
-      //   );
-      // } else {
-      //   toData = await axios.get(`${uri}api?toChainName=${to?.toUpperCase()}&offset=0`);
-      // }
-      // console.log(toData);
-      // setEventsContext({
-      //   isLoading: false,
-      //   events: toDataFilter ? toDataFilter : toData?.data.events,
-      // });
-      // setTotalTrx(toDataFilter ? toDataFilter.length : toData?.data?.events?.length);
-      // console.log(to);
-      // break;

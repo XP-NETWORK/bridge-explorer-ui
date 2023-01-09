@@ -61,16 +61,25 @@ export const ChainListBox = () => {
   const chainSelectHandlerFrom = async (chain: any) => {
     handleClose();
     dispatch(setFrom(chain.text));
+    console.log(chain);
     params.delete("bar");
-    params.set("chainName", chain.key.toUpperCase());
+    chain.text === "All chains"
+      ? params.delete("chainName")
+      : params.set("chainName", chain?.key?.toUpperCase());
+
     navigate((String(url).includes("search") ? `?` : `search?`) + params.toString());
   };
 
   const chainSelectHandlerTo = async (chain: any) => {
     handleClose();
     dispatch(setTo(chain.text));
+    console.log(chain);
     params.delete("bar");
-    params.set("toChainName", chain.key.toUpperCase());
+
+    chain.text === "All chains"
+      ? params.delete("toChainName")
+      : params.set("toChainName", chain?.key?.toUpperCase());
+
     navigate((String(url).includes("search") ? `?` : `search?`) + params.toString());
   };
 
@@ -111,16 +120,6 @@ export const ChainListBox = () => {
     setToChains(sorted);
     setFromChains(sorted);
   }, [selectedFrom, departureOrDestination, selectedTo]);
-
-  const switchChains = () => {
-    let temp = selectedFrom;
-    setSelectedFrom(selectedTo);
-    dispatch(setFrom(selectedTo));
-    dispatch(setEventsQueryStringFrom(selectedTo));
-    setSelectedTo(temp);
-    dispatch(setTo(temp));
-    dispatch(setEventsQueryStringTo(temp));
-  };
 
   const handleScroll = (e: any) => {
     //@ts-ignore

@@ -216,11 +216,11 @@ export const EventsProvider: FC = withContainer(
       // console.log({ eventsQueryString });
       const urlF = `${url}api?${
         eventsQueryString.fromChainName
-          ? `fromChainName=` + eventsQueryString.fromChainName.toUpperCase()
+          ? `fromChainName=` + eventsQueryString?.fromChainName?.toUpperCase()
           : ""
       }${
         eventsQueryString.toChainName
-          ? `&toChainName=` + eventsQueryString.toChainName.toUpperCase()
+          ? `&toChainName=` + eventsQueryString?.toChainName?.toUpperCase()
           : ""
       }${eventsQueryString.type ? `&type=` + eventsQueryString.type : ""}${
         eventsQueryString.status ? `&status=` + eventsQueryString.status : ""
