@@ -26,6 +26,8 @@ import Abeychain from "./assets/icons/Abey.svg";
 import Dfinity from "./assets/icons/dfinity.svg";
 import Skale from "./assets/icons/skale.svg";
 import ton from "./assets/chains/ton.svg"
+import OKC from "./assets/icons/OKC.svg"
+import caduceus from "./assets/icons/caduceus.svg"
 
 export const EVM = "EVM";
 export const ELROND = "Elrond";
@@ -47,6 +49,34 @@ export const chains = [
     tnChainId: 3,
     order: -1,
     image: { avatar: true, src: Ethereum },
+    maintenance: false,
+    testNet: true,
+    mainnet: true,
+  },
+  {
+    type: "EVM",
+    key: "OKC",
+    text: "OKC",
+    value: "OKC",
+    nonce: 36,
+    chainId: 1,
+    tnChainId: 3,
+    order: -1,
+    image: { avatar: true, src: OKC },
+    maintenance: false,
+    testNet: true,
+    mainnet: true,
+  },
+  {
+    type: "EVM",
+    key: "caduceus",
+    text: "caduceus",
+    value: "caduceus",
+    nonce: 35,
+    chainId: 1,
+    tnChainId: 3,
+    order: -1,
+    image: { avatar: true, src: caduceus },
     maintenance: false,
     testNet: true,
     mainnet: true,
