@@ -100,7 +100,7 @@ export const Search = (props: any) => {
         const defaultOffset = searchParams.get("offset");
         setPageNumber(defaultOffset ? +defaultOffset : 0);
         const defaultResp = await axios.get(`${uri}api/${loc.search}`);
-        if (defaultResp.data.events.length < 1) return;
+        // if (defaultResp.data.events.length < 1) return;
         setEventsContext({
           isLoading: false,
           events: defaultResp.data.events,
