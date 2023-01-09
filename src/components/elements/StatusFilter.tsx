@@ -14,26 +14,25 @@ import pendingIcon from "../../assets/icons/pending.svg";
 import info from "../../assets/icons/info.svg";
 import processing from "../../assets/icons/proccess.svg";
 import { ReduxState } from "../../store";
+import { useNavigate } from "react-router-dom";
 
 export const StatusFilter = () => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [value, setValue] = useState("Show All");
-  const resetType = useSelector(
-    (state: ReduxState) => state.global.resetStatusAndType
-  );
+  const resetType = useSelector((state: ReduxState) => state.global.resetStatusAndType);
+  const url = new URL(window.location.href);
+  const params = new URLSearchParams(url.search);
 
   const handleSelect = (e: any) => {
-    if (e === "Show All") {
-      dispatch(setStatusFilter(""));
-    } else if (e === "Processing") {
-      dispatch(setStatusFilter("Failed"));
-    } else if (e === "Pending") {
-      dispatch(setStatusFilter("Pending"));
-    } else {
-      dispatch(setStatusFilter(e));
-    }
-
     setValue(e);
+    params.delete("bar");
+    if (e === "Show All") {
+      params.delete("status");
+      navigate((String(url).includes("search") ? `?` : `search?`) + params.toString());
+    } else {
+      params.set("status", e);
+      navigate((String(url).includes("search") ? `?` : `search?`) + params.toString());
+    }
   };
 
   useEffect(() => {
@@ -58,12 +57,7 @@ export const StatusFilter = () => {
       case "Completed":
         return (
           <div className="flex min-w-[5rem] flex-nowrap space-x-1 text-[#10B67A]">
-            <img
-              src={completedIcon}
-              className="aspect-square"
-              alt="completed icon"
-              width={16}
-            />
+            <img src={completedIcon} className="aspect-square" alt="completed icon" width={16} />
             <div>Completed</div>
           </div>
         );
@@ -115,12 +109,7 @@ export const StatusFilter = () => {
             <Dropdown.Item eventKey="Show All">
               {" "}
               <div className="flex min-w-[5rem] flex-nowrap space-x-1 ">
-                <img
-                  src={showAllIcon}
-                  className="aspect-square"
-                  alt="show all icon"
-                  width={16}
-                />
+                <img src={showAllIcon} className="aspect-square" alt="show all icon" width={16} />
                 <div>Show All</div>
               </div>
             </Dropdown.Item>

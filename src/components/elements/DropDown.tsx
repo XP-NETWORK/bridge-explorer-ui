@@ -1,34 +1,40 @@
 import { useEffect, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./DropDown.css";
-import { setEventsQueryStringType } from "../../store/global";
 import { ReduxState } from "../../store";
+import { useNavigate } from "react-router-dom";
 
 export const DropDown = () => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [value, setValue] = useState("Show All");
-  const resetType = useSelector(
-    (state: ReduxState) => state.global.resetStatusAndType
-  );
+  const resetType = useSelector((state: ReduxState) => state.global.resetStatusAndType);
+  const url = new URL(window.location.href);
+  const params = new URLSearchParams(url.search);
 
   const handleSelect = (e: any) => {
-    if (e === "Show All") dispatch(setEventsQueryStringType(undefined));
-    else {
-      dispatch(setEventsQueryStringType(e));
-    }
     setValue(e);
+    params.delete("bar");
+    if (e === "Show All") {
+      params.delete("type");
+      navigate((String(url).includes("search") ? `?` : `search?`) + params.toString());
+    } else {
+      params.set("type", e);
+      navigate((String(url).includes("search") ? `?` : `search?`) + params.toString());
+    }
   };
 
   useEffect(() => {
     setValue("Show All");
   }, [resetType]);
 
-
-
-  let title = <div className="nameWrapper typeBtnWidth">{value} <div className="arrow-down"></div></div>;
+  let title = (
+    <div className="nameWrapper typeBtnWidth">
+      {value} <div className="arrow-down"></div>
+    </div>
+  );
   return (
     <div className="dropDownContainer">
       <div className="dropDownWrapper">

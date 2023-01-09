@@ -203,13 +203,6 @@ export const Search = (props: any) => {
                 <TableHeading>
                   <span className="ageHeader">
                     Age
-                    {/* <img
-                      src={sortIcon}
-                      className={`${
-                        eventsContext?.sort === "ASC" ? "rotated" : ""
-                      }`}
-                      onClick={eventsContext!.toggleSort}
-                    /> */}
                   </span>
                 </TableHeading>
                 <TableHeading>Status</TableHeading>
@@ -218,7 +211,7 @@ export const Search = (props: any) => {
             <tbody className=" divide-y   overflow-x-scroll">
               {eventsContext?.isLoading ? (
                 <LoaderRow />
-              ) : // if events length is 0 after 2 seconds, show loader
+              ) : 
               eventsContext?.events.length ? (
                 eventsContext?.events.map((event: any, idx: number) => {
                   const dollarValue = Number(
