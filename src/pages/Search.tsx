@@ -138,13 +138,14 @@ export const Search = (props: any) => {
 
   let scrollBtn = useRef<any>(null);
   return (
-    <>
+    <div>
       <Navbar />
-      <Title />
-      <SearchBar />
-      <div>
+      <Container className="lg:max-w-5xl mx-auto px-4 mt-4 px-0 md:px-4 overflow-x-auto tableWrapper">
+        <Title />
+        <SearchBar />
         <ChainListBox />
         <FiltersMobile />
+
         <Container>
           <SearchPaginator totalTrx={totalTrx} pageNumber={pageNumber} />
           <div className="line"></div>
@@ -337,8 +338,8 @@ export const Search = (props: any) => {
           </table>
           <SearchPaginator totalTrx={totalTrx} pageNumber={pageNumber} />
         </Container>
-      </div>
-    </>
+      </Container>
+    </div>
   );
 };
 

@@ -39,12 +39,10 @@ export default function FiltersMobile() {
   const [toIconSrc, setToIconSrc] = useState("");
   const [showClearBtn, setShowClearBtn] = useState(false);
 
-  const { eventsQueryString, collectionName } = useSelector(
-    (state: ReduxState) => ({
-      eventsQueryString: state.global.eventsQueryString,
-      collectionName: state.global.showByCollection,
-    })
-  );
+  const { eventsQueryString, collectionName } = useSelector((state: ReduxState) => ({
+    eventsQueryString: state.global.eventsQueryString,
+    collectionName: state.global.showByCollection,
+  }));
   useEffect(() => {
     if (
       from === "All chains" &&
@@ -58,8 +56,7 @@ export default function FiltersMobile() {
 
   useEffect(() => {
     if (
-      (typeof eventsQueryString === "object" &&
-        Object.keys(eventsQueryString).length > 0) ||
+      (typeof eventsQueryString === "object" && Object.keys(eventsQueryString).length > 0) ||
       collectionName !== ""
     ) {
       setShowClearBtn(true);
@@ -114,12 +111,7 @@ export default function FiltersMobile() {
 
   return (
     <>
-      <Modal
-        animation={false}
-        show={show}
-        onHide={handleClose}
-        className="ChainModal"
-      >
+      <Modal animation={false} show={show} onHide={handleClose} className="ChainModal">
         <Modal.Header>
           <Modal.Title>Filters</Modal.Title>
           <span className="CloseModal" onClick={handleClose}>
@@ -136,17 +128,8 @@ export default function FiltersMobile() {
                   </div>
                   <div onClick={handleFromChainSwitch} className="chain-switch">
                     <div className="nameWrapper">
-                      {fromIconSrc && (
-                        <img
-                          src={fromIconSrc}
-                          alt=""
-                          className="chainIconDropd"
-                        />
-                      )}
-                      <span className="name">
-                        {" "}
-                        {from === "xDai" ? "Gnosis" : from}
-                      </span>
+                      {fromIconSrc && <img src={fromIconSrc} alt="" className="chainIconDropd" />}
+                      <span className="name"> {from === "xDai" ? "Gnosis" : from}</span>
                     </div>
                     <div className="arrow-down"></div>
                   </div>
@@ -160,18 +143,9 @@ export default function FiltersMobile() {
                   </div>
                   <div onClick={handleToChainSwitch} className="chain-switch">
                     <div className="nameWrapper">
-                      {toIconSrc && (
-                        <img
-                          src={toIconSrc}
-                          alt=""
-                          className="chainIconDropd"
-                        />
-                      )}
+                      {toIconSrc && <img src={toIconSrc} alt="" className="chainIconDropd" />}
 
-                      <span className="name">
-                        {" "}
-                        {to === "xDai" ? "Gnosis" : to}
-                      </span>
+                      <span className="name"> {to === "xDai" ? "Gnosis" : to}</span>
                     </div>
                     <div className="arrow-downTo"></div>
                   </div>
@@ -184,14 +158,11 @@ export default function FiltersMobile() {
                 <button
                   className="csvBtn clearFilterBtnModal"
                   onClick={handleClearAll}
-                  style={{ visibility: showClearBtn ? "visible" : "hidden" }}
+                  style={{ visibility: "visible" }}
                 >
                   Clear filters
                 </button>
-                <button
-                  className="csvBtn filterBtnModal"
-                  onClick={handleShowFilterResults}
-                >
+                <button className="csvBtn filterBtnModal" onClick={handleShowFilterResults}>
                   Show results
                 </button>
               </div>
