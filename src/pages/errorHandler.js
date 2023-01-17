@@ -24,11 +24,11 @@ export class ErrorBoundary extends React.Component {
       // Error path
       return (
         <div className="cont">
-          <div class="ErrorContainer">
-            <div class="ErrorImage">
+          <div className="ErrorContainer">
+            <div className="ErrorImage">
               <img src={systemError} />
             </div>
-            <div class="ErrorText">
+            <div className="ErrorText">
               <h1>OUCH!</h1>
               <p>System Error.</p>
             </div>
