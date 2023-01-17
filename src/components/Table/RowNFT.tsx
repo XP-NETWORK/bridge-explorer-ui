@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-  useMemo,
-} from "react";
+import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { ImgOrFail } from "../elements/ImgOrFail";
 import { IEvent } from "../ExplorerEvents";
 import ImgBroken from "../../assets/img-broken.png";
@@ -13,14 +7,16 @@ import { fetchNtf } from "../Details/helpers";
 
 export const RowNFT = ({ event }: { event: IEvent }) => {
   const nftrow = useRef(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [isVisible, setVisible] = useState(false);
-  const [imgUrl, setLoaded] = useState("");
+  const [imgUrl, setLoaded] = useState({
+    animation_url: "",
+    image: "",
+  });
   const [fetching, setFetching] = useState(true);
   const isNftSexy = event?.nftUri?.includes("treatdao");
-  const specificTokenId =
-    event?.tokenId === "30517440993403660343476421412" ? true : false;
-  const blurClass =
-    isNftSexy || specificTokenId ? "rounded-lg  blurList" : "rounded-lg ";
+  const specificTokenId = event?.tokenId === "30517440993403660343476421412" ? true : false;
+  const blurClass = isNftSexy || specificTokenId ? "rounded-lg  blurList" : "rounded-lg ";
 
   const observer = new IntersectionObserver(
     async (entries) => {
@@ -39,30 +35,55 @@ export const RowNFT = ({ event }: { event: IEvent }) => {
   }, [nftrow]);
 
   useEffect(() => {
-    if (isVisible && !imgUrl) {
+    if (isVisible) {
       fetchNtf(event)
         .then((metadata) => {
-          if (metadata.image) {
-            return setLoaded(metadata.image);
+          if (metadata) {
+            return setLoaded(metadata);
           }
         })
         .catch((e) => {
           setFetching(false);
         });
     }
-  }, [isVisible]);
+  }, [isVisible, imgUrl]);
 
   return (
     <div className="nftRow" ref={nftrow}>
       <div className={`${fetching ? "loadingWrapper rowNftWrapper" : ""}`}>
-        <ImgOrFail
-          className={blurClass}
-          setFetching={setFetching}
-          src={imgUrl}
-          width={38}
-          height={38}
-          alt={""}
-        />
+        {imgUrl?.image ? (
+          <ImgOrFail
+            className={blurClass}
+            setFetching={setFetching}
+            src={imgUrl?.image}
+            width={38}
+            height={38}
+            alt={""}
+          />
+        ) : (
+          imgUrl?.animation_url && (
+            <div className="relative rounded-lg overflow-hidden nftImage">
+              <video
+                // ref={imgUrl?.animation_url}
+                poster={imgUrl?.image}
+                className="z-10 aspect-square"
+                playsInline
+                autoPlay
+                muted
+                loop
+                style={{ display: isLoading ? "none" : "block" }}
+                onLoadStart={() => {
+                  setIsLoading(true);
+                }}
+                onLoadedData={() => {
+                  setIsLoading(false);
+                }}
+              >
+                <source src={imgUrl?.animation_url} type="video/mp4" />
+              </video>
+            </div>
+          )
+        )}
       </div>
     </div>
   );
