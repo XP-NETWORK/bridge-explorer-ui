@@ -14,18 +14,16 @@ import { socketUrl, url, scraperSocketUrl, destScraperSocketUrl } from "./consta
 const socket = io(socketUrl, {
   path: "/socket.io",
 });
-
 const scraperSocket = io(scraperSocketUrl, {
   path: "/socket.io",
 });
 const destScraperSocket = io(destScraperSocketUrl, {
   path: "/socket.io",
 });
-
 interface AppData {
   totalTx: number;
   totalWallets: number;
-  totalAsstest:number
+  totalAsstest: number;
 }
 
 export const App = () => {

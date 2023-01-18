@@ -7,6 +7,7 @@ import { loadImages, fetchNtf } from "../components/Details/helpers";
 import { useSelector } from "react-redux";
 import { ReduxState } from "../store";
 import { count } from "console";
+import { useLocation } from "react-router-dom";
 
 interface IEventsContext {
   events: IEvent[];
@@ -35,6 +36,8 @@ export const EventsProvider: FC = withContainer(
     //const [paginationPage, setPage] = useState(0);
     const [totalEvents, setTotal] = useState(0);
     const [enableNav, setEnableNav] = useState(true);
+    const loc = useLocation();
+    console.log({ loc });
 
     const { eventsQueryString, statusFilter, collectionName, paginationPage } = useSelector(
       (state: ReduxState) => ({
@@ -58,18 +61,21 @@ export const EventsProvider: FC = withContainer(
       destScraperSocket.off("updateEvent");
 
       socket.on("incomingEvent", async (event: IEvent) => {
-        if (eventsQueryString) return;
-        try {
-          const incoming = { imgUri: "", ...event };
-          setEvents([incoming, ...events]);
-        } catch (e: any) {
-          // console.log(e);
-          const incoming = { imgUri: "", ...event };
-          setEvents([incoming, ...events]); //updateEvent
+        console.log("socket-incoming", event);
+        if (loc.pathname === "/") {
+          try {
+            const incoming = { imgUri: "", ...event };
+            setEvents([incoming, ...events]);
+          } catch (e: any) {
+            // console.log(e);
+            const incoming = { imgUri: "", ...event };
+            setEvents([incoming, ...events]); //updateEvent
+          }
         }
       });
 
       socket.on("updateEvent", async (updated: IEvent) => {
+        console.log("socket-updateEvent!!", updated);
         const idx = events.findIndex(
           (event) => event.fromChain + event.actionId === updated.fromChain + updated.actionId
         );
@@ -90,8 +96,12 @@ export const EventsProvider: FC = withContainer(
         }
       });
 
+      socket.on("disconnect", function () {
+        console.log("disconnect!!!!!");
+      });
+
       scraperSocket.on("incomingEvent", async (event: IEvent) => {
-        console.log("Incoming Event!!", event);
+        console.log("scraperSocket-Incoming Event!!", event);
         if (eventsQueryString) return;
         try {
           const incoming = { imgUri: "", ...event };
@@ -104,6 +114,7 @@ export const EventsProvider: FC = withContainer(
       });
 
       scraperSocket.on("updateEvent", async (updated: IEvent) => {
+        console.log("scraperSocket-updateEvent!!", updated);
         const idx = events.findIndex(
           (event) => event.fromChain + event.actionId === updated.fromChain + updated.actionId
         );
@@ -125,7 +136,7 @@ export const EventsProvider: FC = withContainer(
       });
 
       destScraperSocket.on("updateEvent", async (updated: IEvent) => {
-        console.log("updateEvent Event!!", updated);
+        console.log("destScraperSocket-updateEvent!!", updated);
         const idx = events.findIndex(
           (event) => event.fromChain + event.actionId === updated.fromChain + updated.actionId
         );

@@ -178,7 +178,7 @@ export const chains = [
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";
-export const socketUrl = "wss://dev-explorer-api.herokuapp.com";
+export const socketUrl = "wss://dev-explorer-api.herokuapp.com/";
 export const scraperSocketUrl = "wss://explorer-scraper.herokuapp.com/";
 export const destScraperSocketUrl = "wss://dest-scraper.herokuapp.com/";
 
