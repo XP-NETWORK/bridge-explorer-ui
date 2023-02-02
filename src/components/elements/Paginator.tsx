@@ -90,7 +90,7 @@ export const Paginator = withContainer(
         <div className="paginatorInnerWrapper">
           <span>
             {50 * page + 1} - {total > 50 ? 50 * page + 50 : total} of{" "}
-            {ctx?.totalEvents || totalTx}
+            {ctx?.totalEvents.toLocaleString() || totalTx.toLocaleString()}
           </span>
 
           <button
