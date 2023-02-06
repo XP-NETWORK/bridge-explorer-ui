@@ -28,7 +28,8 @@ export const Chart = withContainer(
         return (
           <div className="tooltipDiv">
             <p className="dateTool">{payload[0].payload.date}</p>
-            {payload[0].value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} Tx's <br /><br />
+            {payload[0].value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} Tx's <br />
+            <br />
             {payload[1].value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} SFT's
             <br />
           </div>
@@ -74,6 +75,10 @@ export const Chart = withContainer(
                         <stop offset="5%" stopColor="#5B8FF9" stopOpacity={0.25} />
                         <stop offset="95%" stopColor="#5B8FF9" stopOpacity={0.25} />
                       </linearGradient>
+                      <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="1%" stopColor="#10B67A" stopOpacity={0.1} />
+                        <stop offset="99%" stopColor="" stopOpacity={0} />
+                      </linearGradient>
                     </defs>
                     <YAxis
                       axisLine={false}
@@ -85,16 +90,16 @@ export const Chart = withContainer(
                     <Area
                       type="monotone"
                       dataKey="Tx"
-                      stroke="#2E66F5"
+                      stroke="#8884d8"
                       fillOpacity={1}
                       fill="url(#colorUv)"
                     />
                     <Area
                       type="monotone"
                       dataKey="sftNumber"
-                      stroke="#2E66F5"
+                      stroke="#82ca9d"
                       fillOpacity={1}
-                      fill="green"
+                      fill="url(#colorPv)"
                     />
                   </AreaChart>
                 </ResponsiveContainer>
