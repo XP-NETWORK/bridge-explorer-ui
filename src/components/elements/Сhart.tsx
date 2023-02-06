@@ -28,9 +28,13 @@ export const Chart = withContainer(
         return (
           <div className="tooltipDiv">
             <p className="dateTool">{payload[0].payload.date}</p>
-            {payload[0].value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} Tx's <br />
-            <br />
-            {payload[1].value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} SFT's
+            <span>
+              {payload[0].value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} TXN <br />
+            </span>
+            <span>
+              {payload[1].value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ASS <br />
+            </span>
+
             <br />
           </div>
         );
