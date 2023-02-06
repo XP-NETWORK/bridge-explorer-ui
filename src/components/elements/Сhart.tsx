@@ -28,7 +28,9 @@ export const Chart = withContainer(
         return (
           <div className="tooltipDiv">
             <p className="dateTool">{payload[0].payload.date}</p>
-            {payload[0].value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} Tx
+            {payload[0].value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} Tx's <br /><br />
+            {payload[1].value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} SFT's
+            <br />
           </div>
         );
       }
@@ -76,7 +78,7 @@ export const Chart = withContainer(
                     <YAxis
                       axisLine={false}
                       type="number"
-                      domain={[(dataMin: any) => 0, (dataMax: any) => dataMax + 2000]}
+                      domain={[(dataMin: any) => 0, (dataMax: any) => Math.ceil(dataMax + 2000)]}
                     />
                     <CartesianGrid strokeDasharray="1" vertical={false} />
                     <Tooltip content={<CustomTooltip />} />
@@ -86,6 +88,13 @@ export const Chart = withContainer(
                       stroke="#2E66F5"
                       fillOpacity={1}
                       fill="url(#colorUv)"
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="sftNumber"
+                      stroke="#2E66F5"
+                      fillOpacity={1}
+                      fill="green"
                     />
                   </AreaChart>
                 </ResponsiveContainer>
