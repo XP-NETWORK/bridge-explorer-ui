@@ -1,15 +1,13 @@
-import React from "react";
 import ReactPaginate from "react-paginate";
 import prev from "../../assets/icons/prev.svg";
 import next from "../../assets/icons/next.svg";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 export const SearchPaginator = (props: any) => {
-  let [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const loc = useLocation();
-  const { totalTrx, pageNumber, url } = props;
-  const total = totalTrx / 50;
+  const { totalTrx, pageNumber } = props;
+  const nPages = Math.ceil(totalTrx / 50);
   const ctx = { isLoading: false };
   const disableCursor = false;
 
@@ -27,7 +25,7 @@ export const SearchPaginator = (props: any) => {
         params.set("offset", "0");
         break;
       case "last":
-        params.set("offset", String(Math.ceil(total) -1));
+        params.set("offset", String(nPages - 1));
         break;
       case "next":
         params.set("offset", String((offset ? +offset : 0) + 1));
@@ -49,7 +47,9 @@ export const SearchPaginator = (props: any) => {
 
       <div className="paginatorInnerWrapper">
         <span>
-          {50 * pageNumber + 1} - {total > 50 ? 50 * pageNumber + 50 : total} of {totalTrx}
+          {50 * pageNumber + 1} -
+          {totalTrx > 50 ? (pageNumber === nPages ? totalTrx : 50 * pageNumber + 50) : totalTrx} of{" "}
+          {totalTrx}
         </span>
 
         <button
@@ -62,7 +62,7 @@ export const SearchPaginator = (props: any) => {
         <ReactPaginate
           breakLabel={
             <span>
-              Page {pageNumber + 1} of {Math.ceil(total)}
+              Page {pageNumber + 1} of {nPages}
             </span>
           }
           nextLabel={
