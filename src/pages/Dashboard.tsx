@@ -10,6 +10,7 @@ import React from "react";
 export interface DailyData {
   id: string;
   Tx: string;
+  sftNumber?: string;
   walletsNumber: number;
   date: string;
   day: string;
