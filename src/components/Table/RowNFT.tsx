@@ -46,7 +46,7 @@ export const RowNFT = ({ event }: { event: IEvent }) => {
           setFetching(false);
         });
     }
-  }, [isVisible, imgUrl]);
+  }, [isVisible, event]);
 
   return (
     <div className="nftRow" ref={nftrow}>
