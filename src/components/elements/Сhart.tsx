@@ -32,7 +32,7 @@ export const Chart = withContainer(
               {payload[0].value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} TXN <br />
             </span>
             <span>
-              {payload[1].value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ASS <br />
+              {payload[1].value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} Assets <br />
             </span>
 
             <br />
