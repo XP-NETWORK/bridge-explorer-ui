@@ -37,7 +37,7 @@ export const EventsProvider: FC = withContainer(
     const [totalEvents, setTotal] = useState(0);
     const [enableNav, setEnableNav] = useState(true);
     const loc = useLocation();
-    console.log({ loc });
+    // console.log({ loc });
 
     const { eventsQueryString, statusFilter, collectionName, paginationPage } = useSelector(
       (state: ReduxState) => ({
