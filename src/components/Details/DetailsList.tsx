@@ -36,7 +36,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
     rates: { [key: string]: { usd: number } },
     chainName: string
   ): number => {
-    const chain = chains.find((chain) => chain.name.toLowerCase() === chainName.toLowerCase());
+    const chain = chains?.find((chain) => chain?.name?.toLowerCase() === chainName?.toLowerCase());
     const rate = (chain && rates[chain.id]?.usd) || 1;
 
     return rate;
@@ -50,19 +50,19 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
     // if(event?.toChain ==""){
     //   setToIconSrc("");
     // }
-    chains.map((chain) => {
-      if (chain.name === chainNoncetoName[event?.fromChain || 0]) {
-        if (chain.icon[0] === ".") {
-          setFromIconSrc(chain.icon.slice(1));
+    chains?.map((chain) => {
+      if (chain?.name === chainNoncetoName[event?.fromChain || 0]) {
+        if (chain?.icon[0] === ".") {
+          setFromIconSrc(chain?.icon?.slice(1));
         } else {
-          setFromIconSrc(chain.icon);
+          setFromIconSrc(chain?.icon);
         }
       }
-      if (chain.name === chainNoncetoName[event?.toChain || 0]) {
-        if (chain.icon[0] === ".") {
-          setToIconSrc(chain.icon.slice(1));
+      if (chain?.name === chainNoncetoName[event?.toChain || 0]) {
+        if (chain?.icon[0] === ".") {
+          setToIconSrc(chain?.icon?.slice(1));
         } else {
-          setToIconSrc(chain.icon);
+          setToIconSrc(chain?.icon);
         }
       }
     });
@@ -211,9 +211,9 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
         <div className="text-[#222222] font-medium w-32">Transaction Fee:</div>
         <p className={`md:pl-14  md:w-fit ${dataLoad ? "loadingWrapper" : "loadedWrapper"}`}>
           <span className="text-[#222222]">
-            {event?.txFees && formatFees(event)} {event?.fromChain && currency[event.fromChain]} ($
+            {event?.txFees && formatFees(event)} {event?.fromChain && currency[event?.fromChain]} ($
             {event?.fromChain &&
-              (getExchangeRate(exchangeRates, event.chainName) * formatFees(event)).toFixed(2)}
+              (getExchangeRate(exchangeRates, event?.chainName) * formatFees(event))?.toFixed(2)}
             )
           </span>
         </p>

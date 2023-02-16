@@ -121,7 +121,7 @@ export const Search = (props: any) => {
     rates: { [key: string]: { usd: number } },
     chainName: string
   ): number => {
-    const chain = chains.find((chain) => chain.name.toLowerCase() === chainName.toLowerCase());
+    const chain = chains?.find((chain) => chain?.name?.toLowerCase() === chainName?.toLowerCase());
     const rate = (chain && rates[chain.id]?.usd) || 1;
     // if (chainName === "TON") {
     //   console.log({rate , chainName});
@@ -210,7 +210,7 @@ export const Search = (props: any) => {
               ) : eventsContext?.events.length ? (
                 eventsContext?.events.map((event: any, idx: number) => {
                   const dollarValue = Number(
-                    getExchangeRate(exchangeRates, event.chainName) * formatFees(event)
+                    getExchangeRate(exchangeRates, event?.chainName) * formatFees(event)
                   );
 
                   return (

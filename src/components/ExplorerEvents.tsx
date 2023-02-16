@@ -120,7 +120,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
     rates: { [key: string]: { usd: number } },
     chainName: string
   ): number => {
-    const chain = chains.find((chain) => chain.name.toLowerCase() === chainName.toLowerCase());
+    const chain = chains.find((chain) => chain?.name?.toLowerCase() === chainName?.toLowerCase());
     const rate = (chain && rates[chain.id]?.usd) || 1;
     // if (chainName === "TON") {
     //   console.log({rate , chainName});
@@ -236,7 +236,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
               eventsContext?.events.length ? (
                 eventsContext?.events.map((event: IEvent, idx: number) => {
                   const dollarValue =
-                    getExchangeRate(exchangeRates, event.chainName) * formatFees(event);
+                    getExchangeRate(exchangeRates, event?.chainName) * formatFees(event);
 
                   return (
                     <tr
