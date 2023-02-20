@@ -69,7 +69,7 @@ export const txExplorers: any = {
   "27": "https://tonscan.org/tx/by-msg-hash/",
   "35": "https://mainnet.scan.caduceus.foundation/tx/",
   "36": "https://www.oklink.com/en/okc/tx/",
-  "37": "https://explorer.arbitrum.io/tx/",
+  "37": "https://nova.arbiscan.io/tx/",
 };
 
 export const addressExplorers: any = {
@@ -99,7 +99,7 @@ export const addressExplorers: any = {
   "30": "https://honorable-steel-rasalhague.explorer.mainnet.skalenodes.com/address/",
   "35": "https://mainnet.scan.caduceus.foundation/address/",
   "36": "https://www.oklink.com/en/okc/address/",
-  "37": "https://explorer.arbitrum.io/address/",
+  "37": "https://nova.arbiscan.io/address/",
 };
 
 export const chainNoncetoName: any = {
