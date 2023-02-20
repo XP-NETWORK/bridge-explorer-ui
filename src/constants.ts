@@ -37,7 +37,8 @@ export const currency: any = {
   "33": "ABEY",
   "28": "ICP",
   "27": "TON",
-  "35": "CMP"
+  "35": "CMP",
+  "37": "ARB"
 };
 
 export const txExplorers: any = {
@@ -67,6 +68,7 @@ export const txExplorers: any = {
   "27": "https://tonscan.org/tx/by-msg-hash/",
   "35": "https://mainnet.scan.caduceus.foundation/tx/",
   "36": "https://www.oklink.com/en/okc/tx/",
+  "37": "https://explorer.arbitrum.io/tx/",
 };
 
 export const addressExplorers: any = {
@@ -96,6 +98,7 @@ export const addressExplorers: any = {
   "30": "https://honorable-steel-rasalhague.explorer.mainnet.skalenodes.com/address/",
   "35": "https://mainnet.scan.caduceus.foundation/address/",
   "36": "https://www.oklink.com/en/okc/address/",
+  "37": "https://explorer.arbitrum.io/address/",
 };
 
 export const chainNoncetoName: any = {
@@ -126,6 +129,7 @@ export const chainNoncetoName: any = {
   "27": "Ton",
   "35": "Caduceus",
   "36": "OKC",
+  "37": "Arbitrum",
 };
 
 export const _headers = {
@@ -172,9 +176,10 @@ export const chains = [
   { id: "abeychain", name: "Abeychain", icon: Abeychain },
   { id: "dfinity", name: "Dfinity", icon: Dfinity },
   { id: "skale", name: "Skale", icon: Skale },
-  { id: "the-open-network", name: "Ton", icon: Ton, notConvert: true},
-  { id: "caduceus", name: "Caduceus", icon: Caduceus},
+  { id: "the-open-network", name: "Ton", icon: Ton, notConvert: true },
+  { id: "caduceus", name: "Caduceus", icon: Caduceus },
   { id: "oec-token", name: "OKC", icon: OKC, },
+  { id: "Arbitrum", name: "Arbitrum", icon: OKC, },
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";
