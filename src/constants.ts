@@ -10,6 +10,7 @@ import Skale from "./assets/icons/skale.svg";
 import Ton from "./assets/chains/ton.svg"
 import Caduceus from "./assets/icons/caduceus.svg"
 import OKC from "./assets/icons/OKC.svg"
+import Arbitrum from "./assets/icons/arbitrum.svg"
 
 import axios from "axios";
 
@@ -179,7 +180,7 @@ export const chains = [
   { id: "the-open-network", name: "Ton", icon: Ton, notConvert: true },
   { id: "caduceus", name: "Caduceus", icon: Caduceus },
   { id: "oec-token", name: "OKC", icon: OKC, },
-  { id: "Arbitrum", name: "Arbitrum", icon: OKC, },
+  { id: "Arbitrum", name: "Arbitrum", icon: Arbitrum, },
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";

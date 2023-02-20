@@ -28,6 +28,7 @@ import Skale from "./assets/icons/skale.svg";
 import ton from "./assets/chains/ton.svg"
 import OKC from "./assets/icons/OKC.svg"
 import caduceus from "./assets/icons/caduceus.svg"
+import Arbitrum from "./assets/icons/arbitrum.svg"
 
 export const EVM = "EVM";
 export const ELROND = "Elrond";
@@ -422,6 +423,20 @@ export const chains = [
     order: 0,
     tnChainId: "pulsar-2",
     image: { avatar: true, src: Skale },
+    // mainnet: true,
+    // testNet: biz,
+    // test: false,
+    newChain: biz,
+  },
+  {
+    type: "EVM",
+    key: "Arbitrum",
+    text: "Arbitrum",
+    value: "Arbitrum",
+    nonce: 37,
+    order: 0,
+    tnChainId: "pulsar-2",
+    image: { avatar: true, src: Arbitrum },
     // mainnet: true,
     // testNet: biz,
     // test: false,
