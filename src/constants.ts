@@ -130,7 +130,7 @@ export const chainNoncetoName: any = {
   "27": "Ton",
   "35": "Caduceus",
   "36": "OKC",
-  "37": "Arbitrum",
+  "37": "Arbitrum Nova",
 };
 
 export const _headers = {
@@ -180,7 +180,7 @@ export const chains = [
   { id: "the-open-network", name: "Ton", icon: Ton, notConvert: true },
   { id: "caduceus", name: "Caduceus", icon: Caduceus },
   { id: "oec-token", name: "OKC", icon: OKC, },
-  { id: "Arbitrum", name: "Arbitrum", icon: Arbitrum, },
+  { id: "Arbitrum", name: "Arbitrum Nova", icon: Arbitrum, },
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";
