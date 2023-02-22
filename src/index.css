@@ -8,10 +8,15 @@
   overflow: overlay;
 }
 
+
 .dropdown-scrollbar::-webkit-scrollbar {
   @apply w-1 bg-transparent;
 }
-
+table {
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch; /* for newer versions of iOS */
+}
 /* Track */
 ::-webkit-scrollbar-track {
   @apply bg-transparent;
