@@ -82,6 +82,11 @@ export const Search = (props: any) => {
     getParams();
   }, [loc]);
 
+  window.onload = async event => {
+    event.preventDefault();
+    navigate("/");
+  };
+
   const getParams = async () => {
     const searchParams = new URLSearchParams(loc.search);
     switch (true) {
