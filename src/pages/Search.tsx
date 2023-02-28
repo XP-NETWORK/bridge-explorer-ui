@@ -28,6 +28,7 @@ import { Title } from "../components/Title";
 import axios from "axios";
 import { setFrom, setTo, setEventsQueryString } from "../store/global";
 import { useDispatch } from "react-redux";
+import { Footer } from "../components/Footer";
 
 export const Search = (props: any) => {
   const uri = `https://dev-explorer-api.herokuapp.com/`;
@@ -121,7 +122,7 @@ export const Search = (props: any) => {
     rates: { [key: string]: { usd: number } },
     chainName: string
   ): number => {
-    const chain = chains?.find((chain) => chain?.name?.toLowerCase() === chainName?.toLowerCase());
+    const chain = chains?.find(chain => chain?.name?.toLowerCase() === chainName?.toLowerCase());
     const rate = (chain && rates[chain.id]?.usd) || 1;
     // if (chainName === "TON") {
     //   console.log({rate , chainName});
@@ -183,7 +184,7 @@ export const Search = (props: any) => {
             alt="scrollUp"
             className="scrollTopBtn"
             ref={scrollBtn}
-            onClick={(e) => {
+            onClick={e => {
               setTimeout(() => window.scrollTo({ top: 10, behavior: "smooth" }), 100);
             }}
           />
@@ -217,7 +218,7 @@ export const Search = (props: any) => {
                     <tr
                       key={event.id + String(idx)}
                       className="bg-white group hover:bg-transparent txRow"
-                      onClick={(e) => navigateTo(e, event)}
+                      onClick={e => navigateTo(e, event)}
                     >
                       <TableData
                         className={`left-0 text-center bg-white group-hover:bg-[#F7F7F9] imgTableData ${
@@ -250,7 +251,7 @@ export const Search = (props: any) => {
                           <img
                             src={
                               chains.find(
-                                (chain) =>
+                                chain =>
                                   chain.name.toLowerCase() ===
                                   chainNoncetoName[event?.fromChain || 0]?.toLowerCase()
                               )?.icon
@@ -271,7 +272,7 @@ export const Search = (props: any) => {
                           <img
                             src={
                               chains.find(
-                                (chain) =>
+                                chain =>
                                   chain.name.toLowerCase() ===
                                   chainNoncetoName[event?.toChain || 0]?.toLowerCase()
                               )?.icon
@@ -339,6 +340,7 @@ export const Search = (props: any) => {
           <SearchPaginator totalTrx={totalTrx} pageNumber={pageNumber} />
         </Container>
       </Container>
+      <Footer />
     </div>
   );
 };
