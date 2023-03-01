@@ -151,9 +151,9 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
             <a
               target="_blank"
               rel="noreferrer"
-              href={`${event?.fromChain && addressExplorers[event?.fromChain]}${
+              href={`${event?.fromChain && addressExplorers[event?.fromChain]}${encodeURIComponent(
                 event?.senderAddress
-              }`}
+              )}`}
             >
               {truncate(event?.senderAddress, truncateSize) || "N/A"}
             </a>
