@@ -26,8 +26,8 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
 
   // console.log(isMobile);
   useEffect(() => {
-    const ids: string[] = chains.map((chain) => chain.id);
-    getExchangeRates(ids).then((rates) => {
+    const ids: string[] = chains.map(chain => chain.id);
+    getExchangeRates(ids).then(rates => {
       setExchangeRates(rates);
     });
   }, []);
@@ -36,7 +36,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
     rates: { [key: string]: { usd: number } },
     chainName: string
   ): number => {
-    const chain = chains?.find((chain) => chain?.name?.toLowerCase() === chainName?.toLowerCase());
+    const chain = chains?.find(chain => chain?.name?.toLowerCase() === chainName?.toLowerCase());
     const rate = (chain && rates[chain.id]?.usd) || 1;
 
     return rate;
@@ -50,7 +50,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
     // if(event?.toChain ==""){
     //   setToIconSrc("");
     // }
-    chains?.map((chain) => {
+    chains?.map(chain => {
       if (chain?.name === chainNoncetoName[event?.fromChain || 0]) {
         if (chain?.icon[0] === ".") {
           setFromIconSrc(chain?.icon?.slice(1));
@@ -173,7 +173,9 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
           <a
             target="_blank"
             rel="noreferrer"
-            href={`${event?.toChain && addressExplorers[event?.toChain]}${event?.targetAddress}`}
+            href={`${event?.toChain && addressExplorers[event?.toChain]}${encodeURIComponent(
+              event?.targetAddress ? event?.targetAddress : ""
+            )}`}
           >
             <span className="text-[#235EF5]">
               {truncate(event?.targetAddress, truncateSize) || "N/A"}
