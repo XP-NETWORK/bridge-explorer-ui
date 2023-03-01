@@ -61,7 +61,7 @@ export const txExplorers: any = {
   "25": "https://explore.vechain.org/transactions/",
   "15": "https://algoexplorer.io/tx/",
   "22": "https://v1.gwscan.com/tx/",
-  "24": "https://atomscan.com/secret-network/transactions/",
+  "24": "https://secretnodes.com/secret/transactions/",
   "32": "https://moonscan.io/tx/",
   "33": "https://scan.abeychain.com/tx/",
   "28": "https://www.icpexplorer.org/#/tx/",
