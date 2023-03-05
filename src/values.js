@@ -25,10 +25,11 @@ import Moonbeam from "./assets/icons/moonbeam.svg";
 import Abeychain from "./assets/icons/Abey.svg";
 import Dfinity from "./assets/icons/dfinity.svg";
 import Skale from "./assets/icons/skale.svg";
-import ton from "./assets/chains/ton.svg"
-import OKC from "./assets/icons/OKC.svg"
-import caduceus from "./assets/icons/caduceus.svg"
-import Arbitrum from "./assets/icons/arbitrum.svg"
+import ton from "./assets/chains/ton.svg";
+import OKC from "./assets/icons/OKC.svg";
+import caduceus from "./assets/icons/caduceus.svg";
+import Arbitrum from "./assets/icons/arbitrum.svg";
+import NearWallet from "./assets/icons/NearWallet.svg";
 
 export const EVM = "EVM";
 export const ELROND = "Elrond";
@@ -526,6 +527,12 @@ export const chainsConfig = {
     //Chain: //Chain.ELROND,
     tx: "https://explorer.elrond.com/transactions/",
   },
+  Near: {
+    type: NearWallet,
+    token: "near",
+    img: NearWallet,
+    tx: "https://explorer.near.org/transactions/",
+  },
   Avalanche: {
     type: EVM,
     img: Avalanche,
@@ -662,7 +669,7 @@ export const coins = [
   "VET", //19
   "CKB", //20
   "SCRT", //21
-  "TON"
+  "TON",
 ];
 
 export const TESTNET_CHAIN_INFO = {
@@ -719,6 +726,12 @@ export const CHAIN_INFO = {
     native: "EGLD",
     decimals: 1e18,
     blockExplorerUrls: "https://explorer.elrond.com/address/",
+  },
+  Near: {
+    nonce: 31,
+    native: "near",
+    decimals: 1e18,
+    blockExplorerUrls: "https://explorer.near.org/accounts/",
   },
   TON: {
     nonce: 3,

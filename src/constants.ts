@@ -11,6 +11,7 @@ import Ton from "./assets/chains/ton.svg"
 import Caduceus from "./assets/icons/caduceus.svg"
 import OKC from "./assets/icons/OKC.svg"
 import Arbitrum from "./assets/icons/arbitrum.svg"
+import NearWallet from "./assets/icons/NearWallet.svg"
 
 import axios from "axios";
 
@@ -39,7 +40,8 @@ export const currency: any = {
   "28": "ICP",
   "27": "TON",
   "35": "CMP",
-  "37": "ARB"
+  "37": "ARB",
+  "31": "Near"
 };
 
 export const txExplorers: any = {
@@ -70,6 +72,7 @@ export const txExplorers: any = {
   "35": "https://mainnet.scan.caduceus.foundation/tx/",
   "36": "https://www.oklink.com/en/okc/tx/",
   "37": "https://nova.arbiscan.io/tx/",
+  "31": "https://explorer.near.org/transactions/",
 };
 
 export const addressExplorers: any = {
@@ -100,6 +103,7 @@ export const addressExplorers: any = {
   "35": "https://mainnet.scan.caduceus.foundation/address/",
   "36": "https://www.oklink.com/en/okc/address/",
   "37": "https://nova.arbiscan.io/address/",
+  "31": "https://explorer.near.org/accounts/",
 };
 
 export const chainNoncetoName: any = {
@@ -131,6 +135,7 @@ export const chainNoncetoName: any = {
   "35": "Caduceus",
   "36": "OKC",
   "37": "Arbitrum Nova",
+  "31": "Near",
 };
 
 export const _headers = {
@@ -181,6 +186,7 @@ export const chains = [
   { id: "caduceus", name: "Caduceus", icon: Caduceus },
   { id: "oec-token", name: "OKC", icon: OKC, },
   { id: "Arbitrum", name: "Arbitrum Nova", icon: Arbitrum, },
+  { id: "near", name: "Near", icon: NearWallet, },
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";
