@@ -71,9 +71,9 @@ export const chains = [
   },
   {
     type: "EVM",
-    key: "caduceus",
-    text: "caduceus",
-    value: "caduceus",
+    key: "Caduceus",
+    text: "Caduceus",
+    value: "Caduceus",
     nonce: 35,
     chainId: 1,
     tnChainId: 3,
