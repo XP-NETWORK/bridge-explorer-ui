@@ -389,9 +389,9 @@ export const chains = [
   },
   {
     type: "EVM",
-    key: "Abeychain",
-    text: "Abeychain",
-    value: "Abeychain",
+    key: "ABEYCHAIN",
+    text: "ABEYCHAIN",
+    value: "ABEYCHAIN",
     nonce: 0x21,
     order: 0,
     tnChainId: "pulsar-2",
