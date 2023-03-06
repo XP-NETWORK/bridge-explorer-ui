@@ -33,7 +33,6 @@ export const Dashboard = React.memo(() => {
       }
     })();
   }, []);
-
   return (
     <div>
       <Chart dailyData={dailyData} charFetching={fetching} />

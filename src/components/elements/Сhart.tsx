@@ -3,7 +3,15 @@ import { withContainer } from "../../context/ServcieProvder";
 import { Loader } from "./Loader";
 import "./Chart.css";
 
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, YAxis } from "recharts";
+import {
+  Area,
+  AreaChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 export const Chart = withContainer(
   ({
     dailyData,
@@ -84,11 +92,8 @@ export const Chart = withContainer(
                         <stop offset="99%" stopColor="" stopOpacity={0} />
                       </linearGradient>
                     </defs>
-                    <YAxis
-                      axisLine={false}
-                      type="number"
-                      domain={[(dataMin: any) => 0, (dataMax: any) => Math.ceil(dataMax + 2000)]}
-                    />
+                    <YAxis axisLine={false} type="number" domain={[0, "dataMax + 2000"]} />
+                    <XAxis dataKey={() => mockData.map(i => i.date)} axisLine={false} />
                     <CartesianGrid strokeDasharray="1" vertical={false} />
                     <Tooltip content={<CustomTooltip />} />
                     <Area
