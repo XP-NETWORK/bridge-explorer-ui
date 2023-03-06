@@ -21,157 +21,49 @@
   .scrollTopBtn {
     right: 7%;
   }
+  /* body {
+    background-color: grey;
+  } */
 }
 
 @media screen and (max-width: 1200px) {
   .scrollTopBtn {
     right: 3%;
   }
+  /* body {
+    background-color: blue;
+  } */
 }
 
 @media screen and (max-width: 1100px) {
   .scrollTopBtn {
     right: 0%;
   }
+  /* body {
+    background-color: orange;
+  } */
 }
 
+/* my computer */
 @media screen and (min-width: 1024px) {
   .lg\:max-w-5xl {
     max-width: 70rem !important;
   }
+  /* body {
+    background-color: brown;
+  } */
 }
 
 @media screen and (max-width: 1000px) {
   .scrollTopBtn {
     display: none;
   }
-}
-
-@media only screen and (min-device-width: 600px) and (max-device-width: 1023px) {
-  /* .ipad{
-    display: flex;
-  }
-  .hideInIpad {
-    display: none !important;
+  /* body {
+    background-color: yellow;
   } */
-  .mobileOnly {
-    display: block !important;
-  }
-
-  .desktopOnly {
-    display: none;
-  }
-  .filterDropDown {
-    padding: 30px 40px;
-    gap: 5px;
-    display: flex;
-    flex-direction: column;
-  }
-  .dropDownWrapper {
-    width: -webkit-fill-available;
-    display: flex;
-    justify-content: flex-start;
-  }
-  .dropDownTitle {
-    width: 65px;
-    justify-content: flex-start;
-  }
-  .dropDown {
-    width: -webkit-fill-available;
-  }
-  #dropdown-basic-button {
-    width: -webkit-fill-available;
-  }
-  .ChainModal .modal-dialog,
-  .MaiarModal .modal-dialog {
-    top: 10%;
-  }
 }
-@media only screen and (max-device-width: 1023px) {
-  .arrow-down {
-    margin: auto;
-    flex: 1 1;
-    width: 21px;
-    height: 10px;
-    /* margin-right: 3px; */
-    background-position: right;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  .arrow-downTo {
-    background-position: right;
-    margin-right: 10px;
-  }
-  .chain-switch {
-    display: flex;
-    flex-direction: row;
-  }
-  .typeBtnWidth {
-    width: -webkit-fill-available;
-  }
-  .typeBtnWidth .arrow-down,
-  .typeBtnWidth .arrow-downTo {
-    margin-right: 2px;
-  }
 
-  /* chains selection */
-  .modalSelectOptionsText {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 15px;
-    line-height: 160%;
-  }
-  .nftChainItem {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 6px;
-    gap: 12px;
-    height: 40px;
-
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid #ffffff;
-    box-shadow: 0px 1px 6px rgba(180, 185, 199, 0.25);
-    border-radius: 86px;
-  }
-  .modal-title {
-    font-family: "Inter" !important;
-    font-style: normal;
-    font-weight: 600 !important;
-    font-size: 14px !important;
-    line-height: 20px !important;
-    /* identical to box height, or 143% */
-    margin: 0;
-    display: flex;
-    align-items: flex-start;
-    align-self: flex-start;
-    color: #222222;
-    margin-right: 8px;
-  }
-  .nftChainList {
-    background: #f7f7f9;
-  }
-  .modal-body {
-    padding: 6px 0 44px 0 !important;
-  }
-}
-@media screen and (max-width: 640px) {
-  .navMarginTop {
-    margin-top: 0px;
-  }
-  .sm\:shadow-none {
-    height: auto;
-    top: 61px !important;
-  }
-  .ChainModal .modal-dialog {
-    top: 12%;
-  }
-  .nftChainList {
-    max-height: 383px !important;
-  }
-}
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 500px) {
   .ml-2 {
     margin-left: 0.3rem;
   }
@@ -263,8 +155,8 @@
     margin-left: 1.5rem !important;
     margin-right: 1.5rem !important;
     padding: 0rem 0.5rem 0rem 0rem !important;
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
-      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000),
+      var(--tw-shadow);
     --tw-shadow: 0 1px 15px 0px #2f303214;
     --tw-shadow-colored: 0 1px 15px 0px var(--tw-shadow-color);
   }
@@ -326,10 +218,6 @@
 
   .dotsImg {
     display: none;
-  }
-  .paginatorLabel {
-    width: 130px;
-    /* left: 50%; */
   }
 
   .paginatorInnerWrapper {
@@ -460,23 +348,36 @@
     /* border-bottom: 1px solid rgb(236, 229, 229) !important; */
   }
 
-  .paginatorLabel {
-    position: relative;
-    height: 30px;
-    margin-left: 3px;
-    margin-right: 3px;
-    align-items: center;
-  }
   .fontSize {
     font-size: 1.2rem;
   }
   .dropDownTitle {
     width: 65px;
   }
-}
-
-@media screen and (max-width: 400px) {
-  .p-4 {
-    padding: 1.3rem !important;
+  /* body {
+    background-color: green;
+  } */
+  .previous a {
+    height: 32px;
+    width: 32px;
+  }
+  .next a {
+    height: 32px;
+    width: 32px;
+  }
+  .paginationControlWraper {
+    padding: 6px;
+    height: 32px;
+    width: 32px;
+  }
+  .paginatorLabel {
+    width: 120px;
+    height: 32px;
+    padding: 0px;
+  }
+  .paginatorLabel a {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3px;
   }
 }
