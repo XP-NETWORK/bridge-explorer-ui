@@ -67,9 +67,6 @@
   .ml-2 {
     margin-left: 0.3rem;
   }
-  /* .ipad{
-    display: none;
-  } */
   .dropDownContainer {
     width: inherit;
   }
@@ -122,26 +119,12 @@
     border-bottom: none !important;
   }
 
-  .previous {
-    margin-left: 8px;
-  }
-
   .leftWrapper {
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
   }
-
   .leftWrapper .button {
-  }
-
-  /* .prevControl {
-    margin-right: 200px;
-  } */
-
-  .paginatorInnerWrapper {
-    margin-top: 0;
-    /* margin-left: 12px; */
   }
 
   .cardsWrapper::after {
@@ -354,12 +337,12 @@
   .dropDownTitle {
     width: 65px;
   }
-  /* body {
-    background-color: green;
-  } */
   .previous a {
     height: 32px;
     width: 32px;
+  }
+  .previous {
+    margin-left: 8px;
   }
   .next a {
     height: 32px;
