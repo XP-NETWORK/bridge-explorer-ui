@@ -152,7 +152,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
                 target="_blank"
                 rel="noreferrer"
                 href={`https://www.mintscan.io/secret/account/${encodeURIComponent(
-                  event?.senderAddress
+                  String(event?.contract)
                 )}`}
               >
                 {truncate(event?.contract, truncateSize) || "N/A"}
