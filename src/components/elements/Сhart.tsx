@@ -93,7 +93,7 @@ export const Chart = withContainer(
                       </linearGradient>
                     </defs>
                     <YAxis axisLine={false} type="number" domain={[0, "dataMax + 2000"]} />
-                    <XAxis dataKey={() => mockData.map(i => i.date)} axisLine={false} />
+                    {/* <XAxis dataKey={() => mockData.map(i => i.date)} axisLine={false} /> */}
                     <CartesianGrid strokeDasharray="1" vertical={false} />
                     <Tooltip content={<CustomTooltip />} />
                     <Area
