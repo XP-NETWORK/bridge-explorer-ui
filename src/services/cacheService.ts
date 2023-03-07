@@ -13,6 +13,7 @@ class CacheService {
       originalTokenId,
       originalChainNonce,
       originalContract,
+      toChain
     } = event;
     let chain, token, collectionIdent, uri;
     switch (type) {
@@ -20,7 +21,7 @@ class CacheService {
         if (tokenId && fromChain) {
           chain = fromChain;
           token = tokenId;
-          collectionIdent = contract;
+          collectionIdent = toChain === "24" ? contract?.split(",")[1] : contract;
           break;
         }
         break;
@@ -44,7 +45,7 @@ class CacheService {
       //   return this.getByUri(event?.nftUri)
 
       case event?.type === "Unfreeze" && event.originalChainNonce === "27":
-        return this.getByData({ chain:event.originalChainNonce, token:event.originalContract, collectionIdent:event.originalContract })
+        return this.getByData({ chain: event.originalChainNonce, token: event.originalContract, collectionIdent: event.originalContract })
 
       default:
         const { chain, token, collectionIdent } = this.getParams(event);
