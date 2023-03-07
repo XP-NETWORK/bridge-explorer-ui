@@ -139,6 +139,31 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
           <span className="text-[#222222]">{chainNoncetoName[event?.toChain || 0] || "N/A"}</span>
         </p>
       </div>
+      {event?.toChain && event?.toChain === "24" && (
+        <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
+          <div className="text-[#222222] font-medium w-32">Contract:</div>
+          <p
+            className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${
+              dataLoad ? "loadingWrapper" : "loadedWrapper"
+            }`}
+          >
+            <span className="text-[#235EF5]">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href={`https://www.mintscan.io/secret/account/${encodeURIComponent(
+                  event?.senderAddress
+                )}`}
+              >
+                {truncate(event?.contract, truncateSize) || "N/A"}
+              </a>
+            </span>
+            {!dataLoad && (
+              <CopyWithTooltip copyValue={event?.senderAddress} copyProps={copyProps} copyIdx={7} />
+            )}
+          </p>
+        </div>
+      )}
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
         <div className="text-[#222222] font-medium w-32">From:</div>
 
