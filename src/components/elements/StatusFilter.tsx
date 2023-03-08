@@ -8,10 +8,12 @@ import pendingIcon from "../../assets/icons/pending.svg";
 import processing from "../../assets/icons/proccess.svg";
 import { ReduxState } from "../../store";
 import { useNavigate } from "react-router-dom";
+import useCheckMobileScreen from "../../hooks/isMobile";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./DropDown.css";
 
 export const StatusFilter = () => {
+  const isMobile = useCheckMobileScreen();
   const navigate = useNavigate();
   const [value, setValue] = useState("Show All");
   const resetType = useSelector((state: ReduxState) => state.global.resetStatusAndType);
@@ -81,7 +83,12 @@ export const StatusFilter = () => {
 
   let titleType = getTypeStyle();
 
-  let title = (
+  let title = isMobile ? (
+    <>
+      <div className="nameWrapper typeBtnWidth">{titleType}</div>
+      <div className="arrow-down"></div>
+    </>
+  ) : (
     <div className="nameWrapper typeBtnWidth">
       {titleType} <div className="arrow-down"></div>
     </div>
@@ -101,44 +108,44 @@ export const StatusFilter = () => {
             size="sm"
             variant=""
           >
-              <Dropdown.Item eventKey="Show All">
-                {" "}
-                <div className="flex min-w-[5rem] flex-nowrap space-x-1 ">
-                  <img src={showAllIcon} className="aspect-square" alt="show all icon" width={16} />
-                  <div>Show All</div>
-                </div>
-              </Dropdown.Item>
-              <Dropdown.Item eventKey="Completed">
-                {" "}
-                <div className="flex min-w-[5rem] flex-nowrap space-x-1 text-[#10B67A]">
-                  <img
-                    src={completedIcon}
-                    className="aspect-square"
-                    alt="completed icon"
-                    width={16}
-                  />
-                  <div>Completed</div>
-                </div>
-              </Dropdown.Item>
-              <Dropdown.Item eventKey="Pending">
-                {" "}
-                <div className="flex min-w-[5rem] space-x-1 text-[#C058FF]">
-                  <img src={pendingIcon} alt="pending icon" />
-                  <h1>Pending</h1>
-                </div>
-              </Dropdown.Item>
-              <Dropdown.Item eventKey="Processing">
-                <div
-                  className="flex min-w-[5rem] space-x-1 text-[#10B67A] text-[#6D7A92] statusWrapper"
-                  style={{ marginLeft: "3px" }}
-                >
-                  <img src={processing} alt="failed icon" />
-                  <h1>Processing...</h1>
-                  {/* <span data-tip="Halted by the validators <br/>  Please be patient 💙">
+            <Dropdown.Item eventKey="Show All">
+              {" "}
+              <div className="flex min-w-[5rem] flex-nowrap space-x-1 ">
+                <img src={showAllIcon} className="aspect-square" alt="show all icon" width={16} />
+                <div>Show All</div>
+              </div>
+            </Dropdown.Item>
+            <Dropdown.Item eventKey="Completed">
+              {" "}
+              <div className="flex min-w-[5rem] flex-nowrap space-x-1 text-[#10B67A]">
+                <img
+                  src={completedIcon}
+                  className="aspect-square"
+                  alt="completed icon"
+                  width={16}
+                />
+                <div>Completed</div>
+              </div>
+            </Dropdown.Item>
+            <Dropdown.Item eventKey="Pending">
+              {" "}
+              <div className="flex min-w-[5rem] space-x-1 text-[#C058FF]">
+                <img src={pendingIcon} alt="pending icon" />
+                <h1>Pending</h1>
+              </div>
+            </Dropdown.Item>
+            <Dropdown.Item eventKey="Processing">
+              <div
+                className="flex min-w-[5rem] space-x-1 text-[#10B67A] text-[#6D7A92] statusWrapper"
+                style={{ marginLeft: "3px" }}
+              >
+                <img src={processing} alt="failed icon" />
+                <h1>Processing...</h1>
+                {/* <span data-tip="Halted by the validators <br/>  Please be patient 💙">
                   <img src={info} alt="" />
                 </span> */}
-                </div>
-              </Dropdown.Item>
+              </div>
+            </Dropdown.Item>
           </DropdownButton>
         </div>
       </div>

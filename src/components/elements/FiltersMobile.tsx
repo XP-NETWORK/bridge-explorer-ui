@@ -147,13 +147,12 @@ export default function FiltersMobile() {
 
                       <span className="name"> {to === "xDai" ? "Gnosis" : to}</span>
                     </div>
-                    <div className="arrow-downTo"></div>
+                    <div className="arrow-down"></div>
                   </div>
                 </div>
               </div>
               <DropDown />
               <StatusFilter />
-
               <div className="filterBtnsWrapper">
                 <button
                   className="csvBtn clearFilterBtnModal"

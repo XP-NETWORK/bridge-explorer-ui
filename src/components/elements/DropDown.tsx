@@ -6,9 +6,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./DropDown.css";
 import { ReduxState } from "../../store";
 import { useNavigate } from "react-router-dom";
+import useCheckMobileScreen from "../../hooks/isMobile";
 
 export const DropDown = () => {
   const navigate = useNavigate();
+  const isMobile = useCheckMobileScreen();
   const [value, setValue] = useState("Show All");
   const resetType = useSelector((state: ReduxState) => state.global.resetStatusAndType);
   const url = new URL(window.location.href);
@@ -30,7 +32,12 @@ export const DropDown = () => {
     setValue("Show All");
   }, [resetType]);
 
-  let title = (
+  let title = isMobile ? (
+    <>
+      <div className="nameWrapper typeBtnWidth">{value}</div>
+      <div className="arrow-down"></div>
+    </>
+  ) : (
     <div className="nameWrapper typeBtnWidth">
       {value} <div className="arrow-down"></div>
     </div>
