@@ -364,3 +364,9 @@
     margin-bottom: 3px;
   }
 }
+
+@media screen and (max-width: 350px){
+  .mainnetDiv{
+    display: none;
+  }
+}
