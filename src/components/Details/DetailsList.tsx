@@ -139,7 +139,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
           <span className="text-[#222222]">{chainNoncetoName[event?.toChain || 0] || "N/A"}</span>
         </p>
       </div>
-      {/* {event?.toChain && event?.toChain === "24" && (
+      {event?.toChain && event?.toChain === "24" && (
         <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
           <div className="text-[#222222] font-medium w-32">Contract:</div>
           <p
@@ -163,7 +163,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
             )}
           </p>
         </div>
-      )} */}
+      )}
       <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
         <div className="text-[#222222] font-medium w-32">From:</div>
 
