@@ -110,8 +110,8 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
   }, [eventsContext?.events]);
 
   useEffect(() => {
-    const ids: string[] = chains.map((chain) => chain.id);
-    getExchangeRates(ids).then((rates) => {
+    const ids: string[] = chains.map(chain => chain.id);
+    getExchangeRates(ids).then(rates => {
       setExchangeRates(rates);
     });
   }, []);
@@ -120,7 +120,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
     rates: { [key: string]: { usd: number } },
     chainName: string
   ): number => {
-    const chain = chains.find((chain) => chain?.name?.toLowerCase() === chainName?.toLowerCase());
+    const chain = chains.find(chain => chain?.name?.toLowerCase() === chainName?.toLowerCase());
     const rate = (chain && rates[chain.id]?.usd) || 1;
     // if (chainName === "TON") {
     //   console.log({rate , chainName});
@@ -199,7 +199,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
             alt="scrollUp"
             className="scrollTopBtn"
             ref={scrollBtn}
-            onClick={(e) => {
+            onClick={e => {
               setTimeout(() => window.scrollTo({ top: 10, behavior: "smooth" }), 100);
             }}
           />
@@ -242,7 +242,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                     <tr
                       key={event.id + String(idx)}
                       className="bg-white group hover:bg-transparent txRow"
-                      onClick={(e) => navigateTo(e, event)}
+                      onClick={e => navigateTo(e, event)}
                     >
                       <TableData
                         className={`left-0 text-center bg-white group-hover:bg-[#F7F7F9] imgTableData ${
@@ -275,7 +275,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                           <img
                             src={
                               chains.find(
-                                (chain) =>
+                                chain =>
                                   chain.name.toLowerCase() ===
                                   chainNoncetoName[event?.fromChain || 0]?.toLowerCase()
                               )?.icon
@@ -296,7 +296,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                           <img
                             src={
                               chains.find(
-                                (chain) =>
+                                chain =>
                                   chain.name.toLowerCase() ===
                                   chainNoncetoName[event?.toChain || 0]?.toLowerCase()
                               )?.icon
@@ -306,10 +306,8 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                           />
                           <span>{chainNoncetoName[event?.toChain || 0] || "N/A"}</span>
                         </div>
-                        {event?.status === "Completed" ? (
+                        {event?.toHash ? (
                           <ExplorerLink hash={extractHash(event.toHash!)} chain={event.toChain!} />
-                        ) : event?.status === "Pending" ? (
-                          <Loader className="addressLoader" />
                         ) : (
                           <Loader className="addressLoader" />
                         )}

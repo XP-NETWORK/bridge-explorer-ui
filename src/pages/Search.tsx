@@ -287,7 +287,7 @@ export const Search = (props: any) => {
                           />
                           <span>{chainNoncetoName[event?.toChain || 0] || "N/A"}</span>
                         </div>
-                        {event?.status === "Completed" ? (
+                        {event?.toHash ? (
                           <ExplorerLink hash={extractHash(event.toHash!)} chain={event.toChain!} />
                         ) : event?.status === "Pending" ? (
                           <Loader className="addressLoader" />
