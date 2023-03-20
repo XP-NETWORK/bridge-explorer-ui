@@ -264,7 +264,11 @@ export const Search = (props: any) => {
                             alt=""
                             className="chainIcon"
                           />
-                          <span>{chainNoncetoName[event?.fromChain || 0] || "N/A"} </span>
+                          <span>
+                            {chainNoncetoName[event?.fromChain || 0] === "Elrond"
+                              ? "MultiverseX"
+                              : chainNoncetoName[event?.fromChain || 0] || "N/A"}
+                          </span>
                         </div>
                         <ExplorerLink
                           hash={extractHash(event.fromHash!)}
@@ -285,7 +289,11 @@ export const Search = (props: any) => {
                             alt=""
                             className="chainIcon"
                           />
-                          <span>{chainNoncetoName[event?.toChain || 0] || "N/A"}</span>
+                          <span>
+                            {chainNoncetoName[event?.toChain || 0] === "Elrond"
+                              ? "MultiverseX"
+                              : chainNoncetoName[event?.toChain || 0] || "N/A"}
+                          </span>
                         </div>
                         {event?.toHash ? (
                           <ExplorerLink hash={extractHash(event.toHash!)} chain={event.toChain!} />
