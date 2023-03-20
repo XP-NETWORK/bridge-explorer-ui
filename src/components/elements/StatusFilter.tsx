@@ -40,7 +40,7 @@ export const StatusFilter = () => {
     switch (value) {
       case "Show All":
         return (
-          <div className="flex min-w-[5rem] flex-nowrap space-x-1 ">
+          <div className="flex  flex-nowrap space-x-1 ">
             {/* <img
               src={showAllIcon}
               className="aspect-square"
@@ -53,7 +53,7 @@ export const StatusFilter = () => {
         break;
       case "Completed":
         return (
-          <div className="flex min-w-[5rem] flex-nowrap space-x-1 text-[#10B67A]">
+          <div className="flex  flex-nowrap space-x-1 text-[#10B67A]">
             <img src={completedIcon} className="aspect-square" alt="completed icon" width={16} />
             <div>Completed</div>
           </div>
@@ -61,7 +61,7 @@ export const StatusFilter = () => {
         break;
       case "Pending":
         return (
-          <div className="flex min-w-[5rem] space-x-1 text-[#C058FF]">
+          <div className="flex  space-x-1 text-[#C058FF]">
             <img src={pendingIcon} alt="pending icon" />
             <h1>Pending</h1>
           </div>
@@ -69,7 +69,7 @@ export const StatusFilter = () => {
         break;
       case "Processing":
         return (
-          <div className="flex min-w-[5rem] space-x-1 text-[#10B67A] text-[#6D7A92] statusWrapper">
+          <div className="flex  space-x-1 text-[#10B67A] text-[#6D7A92] statusWrapper">
             <img src={processing} alt="failed icon" />
             <h1>Processing</h1>
           </div>
