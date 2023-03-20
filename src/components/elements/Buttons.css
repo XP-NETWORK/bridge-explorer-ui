@@ -87,7 +87,7 @@
 .nameWrapper {
   display: flex;
   flex-direction: row;
-  width: 120px;
+  width: 138px;
   align-items: center;
   gap: 2px;
 }

@@ -54,7 +54,7 @@ export const ChainSwitch = () => {
                       : from === "Elrond"
                       ? "MultiverseX"
                       : from === "Arbitrum Nova"
-                      ? "Arbitrum"
+                      ? "Arbitrum Nova"
                       : from}
                   </span>
                   <div className="arrow-down"></div>
@@ -79,7 +79,7 @@ export const ChainSwitch = () => {
                       : to === "Elrond"
                       ? "MultiverseX"
                       : to === "Arbitrum Nova"
-                      ? "Arbitrum"
+                      ? "Arbitrum Nova"
                       : to}
                   </span>
                   <div className="arrow-downTo"></div>
