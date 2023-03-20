@@ -12,6 +12,7 @@ import Caduceus from "./assets/icons/caduceus.svg"
 import OKC from "./assets/icons/OKC.svg"
 import Arbitrum from "./assets/icons/arbitrum.svg"
 import NearWallet from "./assets/icons/NearWallet.svg"
+import Multi from "./assets/icons/elrond.svg"
 
 import axios from "axios";
 
@@ -166,7 +167,7 @@ export const chains = [
   { id: "gnosis", name: "Gnosis", icon: "./assets/icons/gnosis.svg" },
   { id: "fuse-network-token", name: "Fuse", icon: "./assets/icons/fuse.svg" },
   // { id: "unique-one", name: "Unique", icon: "./assets/icons/unique.svg" }, // TODO: check if this is correct
-  { id: "elrond-erd-2", name: "Elrond", icon: "./assets/icons/elrond.svg" },
+  { id: "elrond-erd-2", name: "Elrond", icon: Multi },
   { id: "tezos", name: "Tezos", icon: "./assets/icons/tezos.svg" },
   { id: "gatechain-token", name: "GateChain", icon: GT },
   { id: "tron", name: "Tron", icon: Tron },

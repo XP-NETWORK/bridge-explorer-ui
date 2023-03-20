@@ -1,6 +1,6 @@
 import Ethereum from "./assets/icons/ethereum.svg";
 import Ton from "./assets/icons/ton.svg";
-import Elrond from "./assets/icons/elrond.svg";
+import Multi from "./assets/icons/elrond.svg";
 import Binance from "./assets/icons/bsc.svg";
 import Cardano from "./assets/icons/cardano.svg";
 import Algorand from "./assets/icons/algarand.svg";
@@ -117,7 +117,7 @@ export const chains = [
     value: ELROND,
     nonce: 2,
     order: 9,
-    image: { avatar: true, src: Elrond },
+    image: { avatar: true, src: Multi },
     maintenance: false,
     testNet: false,
     mainnet: true,
@@ -522,7 +522,7 @@ export const chainsConfig = {
   Elrond: {
     type: ELROND,
     token: "EGLD",
-    img: Elrond,
+    img: Multi,
     // chainData: ChainData.Elrond,
     //Chain: //Chain.ELROND,
     tx: "https://explorer.elrond.com/transactions/",
