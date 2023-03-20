@@ -15,7 +15,7 @@ export const ChainSwitch = () => {
   useEffect(() => {
     setFromIconSrc("");
     setToIconSrc("");
-    chains.map((chain) => {
+    chains.map(chain => {
       if (chain.name.toLowerCase() === from.toLowerCase()) {
         setFromIconSrc(chain.icon.slice(1));
       }
@@ -47,7 +47,10 @@ export const ChainSwitch = () => {
               <div onClick={handleFromChainSwitch} className="chain-switch">
                 <div className="nameWrapper">
                   {fromIconSrc && <img src={fromIconSrc} alt="" className="chainIconDropd" />}
-                  <span className="name"> {from === "xDai" ? "Gnosis" : from}</span>
+                  <span className="name">
+                    {" "}
+                    {from === "xDai" ? "Gnosis" : from === "Elrond" ? "MultiverseX" : from}
+                  </span>
                   <div className="arrow-down"></div>
                 </div>
               </div>
@@ -63,7 +66,10 @@ export const ChainSwitch = () => {
                 <div className="nameWrapper">
                   {toIconSrc && <img src={toIconSrc} alt="" className="chainIconDropd" />}
 
-                  <span className="name"> {to === "xDai" ? "Gnosis" : to}</span>
+                  <span className="name">
+                    {" "}
+                    {to === "xDai" ? "Gnosis" : to === "Elrond" ? "MultiverseX" : to}
+                  </span>
                   <div className="arrow-downTo"></div>
                 </div>
               </div>

@@ -86,17 +86,13 @@ export const ChainListBox = () => {
   useEffect(() => {
     let sorted;
     if (chainSearch && departureOrDestination === "departure") {
-      sorted = chains.filter((chain) =>
-        chain.text.toLowerCase().includes(chainSearch.toLowerCase())
-      );
+      sorted = chains.filter(chain => chain.text.toLowerCase().includes(chainSearch.toLowerCase()));
       setFromChains(sorted);
     } else {
       setFromChains(chains);
     }
     if (chainSearch && departureOrDestination === "destination") {
-      sorted = chains.filter((chain) =>
-        chain.text.toLowerCase().includes(chainSearch.toLowerCase())
-      );
+      sorted = chains.filter(chain => chain.text.toLowerCase().includes(chainSearch.toLowerCase()));
       setToChains(sorted);
     } else {
       setToChains(chains);
@@ -107,14 +103,14 @@ export const ChainListBox = () => {
     // debugger
     let filteredChains = chains;
     const withNew = filteredChains
-      .filter((chain) => chain.newChain)
+      .filter(chain => chain.newChain)
       .sort((a, b) => a.order - b.order);
     const withComing = filteredChains
-      .filter((chain) => chain.coming && !chain.newChain)
+      .filter(chain => chain.coming && !chain.newChain)
       .sort((a, b) => b.order - a.order);
-    const withMaintenance = filteredChains.filter((chain) => chain.maintenance && !chain.newChain);
+    const withMaintenance = filteredChains.filter(chain => chain.maintenance && !chain.newChain);
     const noComingNoMaintenance = filteredChains
-      .filter((chain) => !chain.coming && !chain.maintenance && !chain.newChain)
+      .filter(chain => !chain.coming && !chain.maintenance && !chain.newChain)
       .sort((a, b) => a.order - b.order);
     let sorted = [...withNew, ...noComingNoMaintenance, ...withMaintenance, ...withComing];
     setToChains(sorted);
@@ -170,7 +166,7 @@ export const ChainListBox = () => {
                   >
                     <img className="modalSelectOptionsImage" src={image.src} alt="" />
                     <div className="modalSelectOptionsText">
-                      {text === "xDai" ? "Gnosis" : text}
+                      {text === "xDai" ? "Gnosis" : text === "Elrond" ? "MultiverseX" : text}
                     </div>
                   </li>
                 );
@@ -186,7 +182,7 @@ export const ChainListBox = () => {
                   >
                     <img className="modalSelectOptionsImage" src={image.src} alt="" />
                     <div className="modalSelectOptionsText">
-                      {text === "xDai" ? "Gnosis" : text}
+                      {text === "xDai" ? "Gnosis" : text === "Elrond" ? "MultiverseX" : text}
                     </div>
                   </li>
                 );
