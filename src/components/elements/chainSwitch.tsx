@@ -49,7 +49,13 @@ export const ChainSwitch = () => {
                   {fromIconSrc && <img src={fromIconSrc} alt="" className="chainIconDropd" />}
                   <span className="name">
                     {" "}
-                    {from === "xDai" ? "Gnosis" : from === "Elrond" ? "MultiverseX" : from}
+                    {from === "xDai"
+                      ? "Gnosis"
+                      : from === "Elrond"
+                      ? "MultiverseX"
+                      : from === "Arbitrum Nova"
+                      ? "Arbitrum"
+                      : from}
                   </span>
                   <div className="arrow-down"></div>
                 </div>
@@ -68,7 +74,13 @@ export const ChainSwitch = () => {
 
                   <span className="name">
                     {" "}
-                    {to === "xDai" ? "Gnosis" : to === "Elrond" ? "MultiverseX" : to}
+                    {to === "xDai"
+                      ? "Gnosis"
+                      : to === "Elrond"
+                      ? "MultiverseX"
+                      : to === "Arbitrum Nova"
+                      ? "Arbitrum"
+                      : to}
                   </span>
                   <div className="arrow-downTo"></div>
                 </div>

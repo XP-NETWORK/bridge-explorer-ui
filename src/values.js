@@ -432,7 +432,7 @@ export const chains = [
   {
     type: "EVM",
     key: "Arbitrum",
-    text: "Arbitrum",
+    text: "Arbitrum Nova",
     value: "Arbitrum",
     nonce: 37,
     order: 0,
