@@ -68,10 +68,24 @@ export const Chart = withContainer(
                 </span>
               </span>
               <span>
-                Total Tx: <span>{fetching ? <Loader /> : totalTx.toLocaleString()}</span>
+                Total Tx:{" "}
+                <span>
+                  {fetching ? (
+                    <Loader />
+                  ) : (
+                    Number(mockData[mockData.length - 1]?.Tx).toLocaleString()
+                  )}
+                </span>
               </span>
               <span>
-                Total Assets: <span>{fetching ? <Loader /> : totalAsstest.toLocaleString()}</span>
+                Total Assets:{" "}
+                <span>
+                  {fetching ? (
+                    <Loader />
+                  ) : (
+                    Number(mockData[mockData.length - 1]?.sftNumber).toLocaleString()
+                  )}
+                </span>
               </span>
             </div>
             <div className="lineWrapper">
