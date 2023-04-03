@@ -15,6 +15,7 @@ import {
     scraperSocketUrl,
     destScraperSocketUrl,
 } from "./constants";
+import { handleGoogleAnalyticsPageView } from "./GA4";
 
 const socket = io(socketUrl, {
     path: "/socket.io",
