@@ -6,6 +6,7 @@ import { Chart } from "../components/elements/Сhart";
 import { useState, useEffect } from "react";
 import { url } from "../constants";
 import React from "react";
+import { handleGoogleAnalyticsPageView } from "../GA4";
 
 export interface DailyData {
     id: string;
@@ -21,7 +22,13 @@ export const Dashboard = React.memo(() => {
 
     useEffect(() => {
         setFetching(true);
+        const pageView = {
+            hitType: "Page View",
+            page: window.location.pathname + window.location.search,
+            title: "Dashboard",
+        };
 
+        handleGoogleAnalyticsPageView(pageView);
         (async () => {
             const res = await fetch(`${url}newDash`);
             // console.log("res", res);
