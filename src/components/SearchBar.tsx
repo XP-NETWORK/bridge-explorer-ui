@@ -42,7 +42,7 @@ export const SearchBar: React.FC<{
         ),
         []
     );
-    console.log({ eventsQueryString });
+    // console.log({ eventsQueryString });
 
     useEffect(() => {
         if (resetSearch) {

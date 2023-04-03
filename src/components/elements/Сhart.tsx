@@ -63,7 +63,7 @@ export const Chart = withContainer(
             idx: i,
         }));
 
-        console.log({ mockData });
+        // console.log({ mockData });
 
         const CustomTooltip = ({ active, payload, label }: any) => {
             if (active && payload && payload.length) {
