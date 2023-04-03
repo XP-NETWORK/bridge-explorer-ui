@@ -9,61 +9,82 @@ import io from "socket.io-client";
 import { useEffect, useState } from "react";
 import "./components/ChainModal/Chain.css";
 
-import { socketUrl, url, scraperSocketUrl, destScraperSocketUrl } from "./constants";
+import {
+    socketUrl,
+    url,
+    scraperSocketUrl,
+    destScraperSocketUrl,
+} from "./constants";
 
 const socket = io(socketUrl, {
-  path: "/socket.io",
+    path: "/socket.io",
 });
 const scraperSocket = io(scraperSocketUrl, {
-  path: "/socket.io",
+    path: "/socket.io",
 });
 const destScraperSocket = io(destScraperSocketUrl, {
-  path: "/socket.io",
+    path: "/socket.io",
 });
 interface AppData {
-  totalTx: number;
-  totalWallets: number;
-  totalAsstest: number;
+    totalTx: number;
+    totalWallets: number;
+    totalAsstest: number;
 }
 
 export const App = () => {
-  const [appData, setAppData] = useState<AppData>({
-    totalTx: 0,
-    totalWallets: 0,
-    totalAsstest: 0,
-  });
+    const [appData, setAppData] = useState<AppData>({
+        totalTx: 0,
+        totalWallets: 0,
+        totalAsstest: 0,
+    });
 
-  const [fetching, setFetching] = useState(true);
+    const [fetching, setFetching] = useState(true);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch(`${url}getMetrics`);
-        const metrics = await res.json();
-        if (metrics) {
-          setAppData({
-            totalTx: metrics.totalTx,
-            totalWallets: metrics.totalWallets,
-            totalAsstest: metrics.totalAsstest,
-          });
-        }
-        setFetching(false);
-      } catch (e) {
-        console.error("get metrics route");
-      }
-    })();
-  }, []);
+    useEffect(() => {
+        const pageView = {
+            hitType: "Page View",
+            page: window.location.pathname + window.location.search,
+            title: "Custom Title",
+        };
 
-  return (
-    <ServiceProvider value={{ socket, appData, fetching, scraperSocket, destScraperSocket }}>
-      <Routes>
-        <Route path="/*" element={<Explorer />} />
-        <Route path="/tx/:fromHash" element={<Event />} />
-        <Route path="/network" element={<Network />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/search/*" element={<Search />} />
-      </Routes>
-    </ServiceProvider>
-  );
+        handleGoogleAnalyticsPageView(pageView);
+
+        (async () => {
+            try {
+                const res = await fetch(`${url}getMetrics`);
+                const metrics = await res.json();
+                if (metrics) {
+                    setAppData({
+                        totalTx: metrics.totalTx,
+                        totalWallets: metrics.totalWallets,
+                        totalAsstest: metrics.totalAsstest,
+                    });
+                }
+                setFetching(false);
+            } catch (e) {
+                console.error("get metrics route");
+            }
+        })();
+    }, []);
+
+    return (
+        <ServiceProvider
+            value={{
+                socket,
+                appData,
+                fetching,
+                scraperSocket,
+                destScraperSocket,
+            }}
+        >
+            <Routes>
+                <Route path="/*" element={<Explorer />} />
+                <Route path="/tx/:fromHash" element={<Event />} />
+                <Route path="/network" element={<Network />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/search/*" element={<Search />} />
+            </Routes>
+        </ServiceProvider>
+    );
 };
