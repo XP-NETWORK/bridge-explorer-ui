@@ -11,7 +11,7 @@ export const truncate = function (
   fullStr: string | undefined,
   strLen: number,
   separator?: string,
-  separatorLocation?:string
+  separatorLocation?: string
 ) {
   if (!fullStr) return;
   if (fullStr.length <= strLen) return fullStr;
@@ -23,12 +23,11 @@ export const truncate = function (
     frontChars = Math.ceil(charsToShow / 2),
     backChars = Math.floor(charsToShow / 2);
 
-    if(separatorLocation === "Last"){
-      return (
-        frontChars = Math.ceil(15),
-        fullStr.substr(0, frontChars) + separator 
-      );
-    }
+  if (separatorLocation === "Last") {
+    return (
+      (frontChars = Math.ceil(15)), fullStr.substr(0, frontChars) + separator
+    );
+  }
 
   return (
     fullStr.substr(0, frontChars) +
@@ -62,7 +61,7 @@ export const fetchNtf = async (data: IEvent) => {
     const meta = await cacheService.get(data);
 
     if (meta === "no NFT with that data was found") {
-     console.log("no NFT with that data was found");
+      console.log("no NFT with that data was found");
     } else {
       return meta;
     }
@@ -173,12 +172,21 @@ export const formatFees = (event: IEvent) => {
   }
 
   if (event.fromChain === "27") {
-    return Number(new BigNumber(event.txFees.substring(0,7)).shiftedBy(-7).toString());
+    return Number(
+      new BigNumber(event.txFees.substring(0, 7)).shiftedBy(-7).toString()
+    );
   }
 
   if (chain?.notConvert) return +event.txFees;
 
-  return Number(ethers.utils.formatEther(event.txFees));
+  let res;
+  try {
+    res = Number(ethers.utils.formatEther(event.txFees));
+  } catch (e) {
+    res = +event.txFees;
+  }
+
+  return res;
 };
 
 // const tryNakedIFPS = async (url: string) => {
