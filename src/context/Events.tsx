@@ -36,6 +36,7 @@ export const EventsContext = createContext<IEventsContext | null>(null);
 export const EventsProvider: FC = withContainer(
     ({ children, container: { socket, scraperSocket, destScraperSocket } }) => {
         const [events, setEvents] = useState<IEvent[]>([]);
+        // console.log("🚀 ~ file: Events.tsx:39 ~ events:", events);
         //const [chainName, setChainName] = useState("");
         //const [status, setStatus] = useState("");
         const [isLoading, setIsLoading] = useState(true);
