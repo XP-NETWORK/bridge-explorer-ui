@@ -4,70 +4,89 @@ import { ethers } from "ethers";
 import BigNumber from "bignumber.js";
 
 import CacheService from "../../services/cacheService";
+//import axios from "axios";
 
 const cacheService = CacheService();
 
 export const truncate = function (
-  fullStr: string | undefined,
-  strLen: number,
-  separator?: string,
-  separatorLocation?: string
+    fullStr: string | undefined,
+    strLen: number,
+    separator?: string,
+    separatorLocation?: string
 ) {
-  if (!fullStr) return;
-  if (fullStr.length <= strLen) return fullStr;
+    if (!fullStr) return;
+    if (fullStr.length <= strLen) return fullStr;
 
-  separator = separator || "...";
+    separator = separator || "...";
 
-  var sepLen = separator.length,
-    charsToShow = strLen - sepLen,
-    frontChars = Math.ceil(charsToShow / 2),
-    backChars = Math.floor(charsToShow / 2);
+    var sepLen = separator.length,
+        charsToShow = strLen - sepLen,
+        frontChars = Math.ceil(charsToShow / 2),
+        backChars = Math.floor(charsToShow / 2);
 
-  if (separatorLocation === "Last") {
+    if (separatorLocation === "Last") {
+        return (
+            (frontChars = Math.ceil(15)),
+            fullStr.substr(0, frontChars) + separator
+        );
+    }
+
     return (
-      (frontChars = Math.ceil(15)), fullStr.substr(0, frontChars) + separator
+        fullStr.substr(0, frontChars) +
+        separator +
+        fullStr.substr(fullStr.length - backChars)
     );
-  }
-
-  return (
-    fullStr.substr(0, frontChars) +
-    separator +
-    fullStr.substr(fullStr.length - backChars)
-  );
 };
 
 export const loadImages = async (
-  data: IEvent[],
-  setEvents: (events: IEvent[]) => void
+    data: IEvent[],
+    setEvents: (events: IEvent[]) => void
 ) => {
-  const newEvents = data.map(async (data: IEvent) => {
-    try {
-      // const metadata = await fetchNtf(data);
+    const newEvents = data.map(async (data: IEvent) => {
+        try {
+            // const metadata = await fetchNtf(data);
 
-      return {
-        imgUri: "", //metadata.image as string,
-        ...data,
-      };
-    } catch (e: any) {
-      console.error(e);
-      return { imgUri: "", ...data };
-    }
-  });
-  setEvents(await Promise.all(newEvents));
+            return {
+                imgUri: "", //metadata.image as string,
+                ...data,
+            };
+        } catch (e: any) {
+            console.error(e);
+            return { imgUri: "", ...data };
+        }
+    });
+    setEvents(await Promise.all(newEvents));
 };
 
 export const fetchNtf = async (data: IEvent) => {
-  try {
-    const meta = await cacheService.get(data);
+    try {
+        const meta = await cacheService.get(data);
 
-    if (meta === "no NFT with that data was found") {
-      console.log("no NFT with that data was found");
-    } else {
-      return meta;
+        if (meta === "no NFT with that data was found") {
+            /* const res = await axios.post(
+                "https://nft-cache.herokuapp.com/nft/add",
+                {
+                    nft: {
+                        collectionIdent: data.contract,
+                        native: {
+                            tokenId: data.tokenId,
+                            contract: data.contract,
+                            chainId: data.fromChain,
+                        },
+                        uri: data.nftUri,
+                    },
+                    account: "",
+                    whitelisted: true,
+                }
+            );
+
+            return res.data.metaData;*/
+        } else {
+            return meta;
+        }
+    } catch (err) {
+        console.log(err);
     }
-  } catch (err) {
-    console.log(err);
-  }
 };
 
 // let nakedResult = await tryNakedIFPS(data.nftUri);
@@ -144,49 +163,49 @@ export const fetchNtf = async (data: IEvent) => {
 // };
 
 export const debounce = (cb: Function, delay: number) => {
-  let tm: NodeJS.Timeout | undefined = undefined;
+    let tm: NodeJS.Timeout | undefined = undefined;
 
-  return (...args: any) => {
-    tm && clearTimeout(tm);
-    tm = setTimeout(() => {
-      cb(...args);
-    }, delay);
-  };
+    return (...args: any) => {
+        tm && clearTimeout(tm);
+        tm = setTimeout(() => {
+            cb(...args);
+        }, delay);
+    };
 };
 
 export const compose =
-  (...funcs: Function[]) =>
-  (comp: React.FC<any>) => {
-    return funcs.reduceRight((wrapped, func) => func(wrapped), comp);
-  };
+    (...funcs: Function[]) =>
+    (comp: React.FC<any>) => {
+        return funcs.reduceRight((wrapped, func) => func(wrapped), comp);
+    };
 
 export const formatFees = (event: IEvent) => {
-  if (isNaN(+event.txFees)) return 0;
+    if (isNaN(+event.txFees)) return 0;
 
-  const chain = chains.find(
-    (c) => c.name.toLowerCase() === event.fromChainName?.toLowerCase()
-  );
-
-  if (event.fromChain === "9" || event.fromChain === "24") {
-    return Number(new BigNumber(event.txFees).shiftedBy(-6).toString());
-  }
-
-  if (event.fromChain === "27") {
-    return Number(
-      new BigNumber(event.txFees.substring(0, 7)).shiftedBy(-7).toString()
+    const chain = chains.find(
+        (c) => c.name.toLowerCase() === event.fromChainName?.toLowerCase()
     );
-  }
 
-  if (chain?.notConvert) return +event.txFees;
+    if (event.fromChain === "9" || event.fromChain === "24") {
+        return Number(new BigNumber(event.txFees).shiftedBy(-6).toString());
+    }
 
-  let res;
-  try {
-    res = Number(ethers.utils.formatEther(event.txFees));
-  } catch (e) {
-    res = +event.txFees;
-  }
+    if (event.fromChain === "27") {
+        return Number(
+            new BigNumber(event.txFees.substring(0, 7)).shiftedBy(-7).toString()
+        );
+    }
 
-  return res;
+    if (chain?.notConvert) return +event.txFees;
+
+    let res;
+    try {
+        res = Number(ethers.utils.formatEther(event.txFees));
+    } catch (e) {
+        res = +event.txFees;
+    }
+
+    return res;
 };
 
 // const tryNakedIFPS = async (url: string) => {
@@ -228,4 +247,4 @@ export const formatFees = (event: IEvent) => {
 // };
 
 export const extractHash = (hash: string) =>
-  hash?.split("-")[hash?.split("-")?.length - 1];
+    hash?.split("-")[hash?.split("-")?.length - 1];
