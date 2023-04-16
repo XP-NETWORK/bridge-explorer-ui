@@ -190,6 +190,10 @@ export const formatFees = (event: IEvent) => {
         return Number(new BigNumber(event.txFees).shiftedBy(-6).toString());
     }
 
+    if (event.fromChain === "26") {
+        return Number(new BigNumber(event.txFees).shiftedBy(-9).toString());
+    }
+
     if (event.fromChain === "27") {
         return Number(
             new BigNumber(event.txFees.substring(0, 7)).shiftedBy(-7).toString()
