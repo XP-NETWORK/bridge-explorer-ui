@@ -159,7 +159,9 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
                         className="chainIconDetails"
                     />
                     <span className="text-[#222222]">
-                        {chainNoncetoName[event?.fromChain || 0] || "N/A"}
+                        {chainNoncetoName[event?.fromChain || 0] === "Elrond"
+                            ? "MultiversX"
+                            : chainNoncetoName[event?.fromChain || 0] || "N/A"}
                     </span>
                 </p>
             </div>

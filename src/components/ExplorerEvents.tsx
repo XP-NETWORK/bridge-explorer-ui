@@ -137,10 +137,6 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
     };
 
     useEffect(() => {
-        console.log(
-            "🚀 ~ file: ExplorerEvents.tsx:77 ~ eventsContext:",
-            eventsContext
-        );
         if (
             (typeof eventsQueryString === "object" &&
                 Object.keys(eventsQueryString).length > 0) ||
