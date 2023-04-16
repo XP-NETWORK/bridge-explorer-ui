@@ -13,7 +13,7 @@ import OKC from "./assets/icons/OKC.svg";
 import Arbitrum from "./assets/icons/arbitrum.svg";
 import NearWallet from "./assets/icons/NearWallet.svg";
 import Multi from "./assets/icons/elrond.svg";
-import Solana from "./assets/icons/Solana.svg";
+import Solana from "./assets/icons/solana.svg";
 
 import axios from "axios";
 
