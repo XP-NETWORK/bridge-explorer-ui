@@ -32,7 +32,7 @@ import Arbitrum from "./assets/icons/arbitrum.svg";
 import NearWallet from "./assets/icons/NearWallet.svg";
 
 export const EVM = "EVM";
-export const ELROND = "Elrond";
+export const ELROND = "MultiversX";
 export const TEZOS = "TEZOS";
 
 export const biz =
