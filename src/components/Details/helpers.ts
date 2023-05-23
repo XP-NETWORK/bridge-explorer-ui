@@ -4,6 +4,7 @@ import { ethers } from "ethers";
 import BigNumber from "bignumber.js";
 
 import CacheService from "../../services/cacheService";
+
 //import axios from "axios";
 
 const cacheService = CacheService();
@@ -63,15 +64,21 @@ export const fetchNtf = async (data: IEvent) => {
         const meta = await cacheService.get(data);
 
         if (meta === "no NFT with that data was found") {
-            /* const res = await axios.post(
+            /*   const res1 = (await axios(data.nftUri)).data;
+            const res = await axios.post(
                 "https://nft-cache.herokuapp.com/nft/add",
                 {
                     nft: {
                         collectionIdent: data.contract,
                         native: {
-                            tokenId: data.tokenId,
-                            contract: data.contract,
-                            chainId: data.fromChain,
+                            tokenId:
+                                res1.wrapped.source_mint_ident +
+                                "-" +
+                                Number(res1.wrapped.source_token_id)
+                                    .toString(16)
+                                    .padStart(5, "0"),
+                            contract: res1.wrapped.source_mint_ident,
+                            chainId: res1.wrapped.origin,
                         },
                         uri: data.nftUri,
                     },

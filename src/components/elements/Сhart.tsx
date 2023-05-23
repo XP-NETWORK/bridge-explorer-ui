@@ -9,7 +9,6 @@ import {
     CartesianGrid,
     ResponsiveContainer,
     Tooltip,
-    XAxis,
     YAxis,
 } from "recharts";
 export const Chart = withContainer(
@@ -156,7 +155,17 @@ export const Chart = withContainer(
                                         <YAxis
                                             axisLine={false}
                                             type="number"
-                                            domain={[0, "dataMax + 2000"]}
+                                            domain={[
+                                                () => 0,
+                                                () => {
+                                                    return (
+                                                        Math.max(
+                                                            totalAsstest,
+                                                            totalTx
+                                                        ) * 1.05
+                                                    ).toFixed(0);
+                                                },
+                                            ]}
                                         />
                                         {/* <XAxis dataKey={() => mockData.map(i => i.date)} axisLine={false} /> */}
                                         <CartesianGrid
