@@ -14,6 +14,7 @@ import Arbitrum from "./assets/icons/arbitrum.svg";
 import NearWallet from "./assets/icons/NearWallet.svg";
 import Multi from "./assets/icons/elrond.svg";
 import Solana from "./assets/icons/solana.svg";
+import Hedera from "./assets/icons/Hedera.svg";
 
 import axios from "axios";
 
@@ -45,6 +46,7 @@ export const currency: any = {
     "37": "ARB",
     "31": "Near",
     "26": "SOL",
+    "29": "HBAR",
 };
 
 export const txExplorers: any = {
@@ -77,6 +79,7 @@ export const txExplorers: any = {
     "37": "https://nova.arbiscan.io/tx/",
     "31": "https://explorer.near.org/transactions/",
     "26": "https://solscan.io/tx/",
+    "29": "https://hashscan.io/mainnet/transaction/",
 };
 
 export const addressExplorers: any = {
@@ -109,6 +112,7 @@ export const addressExplorers: any = {
     "37": "https://nova.arbiscan.io/address/",
     "31": "https://explorer.near.org/accounts/",
     "26": "https://solscan.io/account/",
+    "29": "https://hashscan.io/mainnet/account/",
 };
 
 export const chainNoncetoName: any = {
@@ -142,6 +146,7 @@ export const chainNoncetoName: any = {
     "37": "Arbitrum Nova",
     "31": "Near",
     "26": "Solana",
+    "29": "Hedera",
 };
 
 export const _headers = {
@@ -179,7 +184,7 @@ export const chains = [
     { id: "elrond-erd-2", name: "Elrond", icon: Multi },
     { id: "tezos", name: "Tezos", icon: "./assets/icons/tezos.svg" },
     { id: "gatechain-token", name: "GateChain", icon: GT },
-    { id: "tron", name: "Tron", icon: Tron },
+    { id: "tron", name: "Tron", icon: Tron, dec: -6 },
     { id: "vechain", name: "Vechain", icon: Vechain },
     { id: "algorand", name: "Algorand", icon: Algorand, notConvert: true },
     {
@@ -187,17 +192,24 @@ export const chains = [
         name: "Godwoken",
         icon: "./assets/icons/godwoken.svg",
     },
-    { id: "secret", name: "Secret", icon: Secret },
+    { id: "secret", name: "Secret", icon: Secret, dec: -6 },
     { id: "moonbeam", name: "Moonbeam", icon: Moonbeam },
     { id: "abeychain", name: "ABEYCHAIN", icon: Abeychain },
     { id: "dfinity", name: "Dfinity", icon: Dfinity },
     { id: "skale", name: "Skale", icon: Skale },
-    { id: "the-open-network", name: "Ton", icon: Ton, notConvert: true },
+    {
+        id: "the-open-network",
+        name: "Ton",
+        icon: Ton,
+        notConvert: true,
+        dec: -7,
+    },
     { id: "caduceus", name: "Caduceus", icon: Caduceus },
     { id: "oec-token", name: "OKC", icon: OKC },
     { id: "Arbitrum", name: "Arbitrum Nova", icon: Arbitrum },
     { id: "near", name: "Near", icon: NearWallet },
-    { id: "solana", name: "Solana", icon: Solana, notConvert: true },
+    { id: "solana", name: "Solana", icon: Solana, notConvert: true, dec: -9 },
+    { id: "hedera", name: "Hedera", icon: Hedera, dec: -9 },
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";
