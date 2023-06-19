@@ -15,6 +15,7 @@ import NearWallet from "./assets/icons/NearWallet.svg";
 import Multi from "./assets/icons/elrond.svg";
 import Solana from "./assets/icons/solana.svg";
 import Hedera from "./assets/icons/Hedera.svg";
+import Aptos from "./assets/icons/aptos.svg";
 
 import axios from "axios";
 
@@ -47,6 +48,7 @@ export const currency: any = {
     "31": "Near",
     "26": "SOL",
     "29": "HBAR",
+    "34": "APT",
 };
 
 export const txExplorers: any = {
@@ -80,6 +82,7 @@ export const txExplorers: any = {
     "31": "https://explorer.near.org/transactions/",
     "26": "https://solscan.io/tx/",
     "29": "https://hashscan.io/mainnet/transaction/",
+    "34": "https://explorer.aptoslabs.com/txn/",
 };
 
 export const addressExplorers: any = {
@@ -113,6 +116,7 @@ export const addressExplorers: any = {
     "31": "https://explorer.near.org/accounts/",
     "26": "https://solscan.io/account/",
     "29": "https://hashscan.io/mainnet/account/",
+    "34": "https://explorer.aptoslabs.com/account/",
 };
 
 export const chainNoncetoName: any = {
@@ -147,6 +151,7 @@ export const chainNoncetoName: any = {
     "31": "Near",
     "26": "Solana",
     "29": "Hedera",
+    "34": "Aptos",
 };
 
 export const _headers = {
@@ -210,6 +215,7 @@ export const chains = [
     { id: "near", name: "Near", icon: NearWallet },
     { id: "solana", name: "Solana", icon: Solana, notConvert: true, dec: -9 },
     { id: "hedera", name: "Hedera", icon: Hedera, dec: -9 },
+    { id: "aptos", name: "Aptos", icon: Aptos, dec: -9 },
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";
