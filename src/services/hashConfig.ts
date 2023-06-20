@@ -1,7 +1,7 @@
 export const confiUrl = (hash: string) => {
     if (hash.includes("-")) {
         //@ts-ignore
-        hash = hash.replaceAll("-", "%2B");
+        // hash = hash.replaceAll("-", "%2B");
     }
     if (hash.includes("=")) {
         //@ts-ignore
