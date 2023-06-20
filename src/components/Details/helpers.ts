@@ -250,4 +250,6 @@ export const formatFees = (event: IEvent) => {
 // };
 
 export const extractHash = (hash: string) =>
-    hash?.split("-")[hash?.split("-")?.length - 1];
+    /^0\.0\./.test(hash)
+        ? hash
+        : hash?.split("-")[hash?.split("-")?.length - 1];
