@@ -36,7 +36,7 @@ class CacheService {
                 }
                 break;
         }
-        console.log(token, "token");
+
         return { chain, token, collectionIdent, uri };
     }
 

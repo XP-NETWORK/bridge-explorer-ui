@@ -193,11 +193,8 @@ export const formatFees = (event: IEvent) => {
         (c) => c.name.toLowerCase() === event.fromChainName?.toLowerCase()
     );
 
-    if (chain?.dec) {
-        return Number(
-            new BigNumber(event.txFees).shiftedBy(chain.dec).toString()
-        );
-    }
+    if (chain?.dec)
+        return new BigNumber(event.txFees).shiftedBy(chain.dec).toNumber();
 
     if (chain?.notConvert) return +event.txFees;
 

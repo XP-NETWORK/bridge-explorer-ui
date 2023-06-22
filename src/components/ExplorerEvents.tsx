@@ -260,6 +260,15 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                                                 event?.chainName
                                             ) * formatFees(event);
 
+                                        const fees = formatFees(event);
+                                        const digits =
+                                            String(fees).split(".").at(1)
+                                                ?.length || 1;
+
+                                        const fixedFees = fees
+                                            .toFixed(Math.min(digits, 6))
+                                            .toString();
+
                                         return (
                                             <tr
                                                 key={event.id + String(idx)}
@@ -297,11 +306,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                                                             ]
                                                         } <br>${dollarValue} $`}
                                                     >
-                                                        <span>
-                                                            {formatFees(event)
-                                                                .toFixed(7)
-                                                                .toString()}
-                                                        </span>{" "}
+                                                        <span>{fixedFees}</span>{" "}
                                                         <span>
                                                             {event.fromChain &&
                                                                 currency[
