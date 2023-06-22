@@ -210,10 +210,10 @@ export const chains = [
     },
     { id: "caduceus", name: "Caduceus", icon: Caduceus },
     { id: "oec-token", name: "OKC", icon: OKC },
-    { id: "Arbitrum", name: "Arbitrum Nova", icon: Arbitrum },
+    { id: "arbitrum", name: "Arbitrum Nova", icon: Arbitrum },
     { id: "near", name: "Near", icon: NearWallet },
     { id: "solana", name: "Solana", icon: Solana, notConvert: true, dec: -9 },
-    { id: "hedera", name: "Hedera", icon: Hedera, dec: -8 },
+    { id: "hedera-hashgraph", name: "Hedera", icon: Hedera, dec: -8 },
     { id: "aptos", name: "Aptos", icon: Aptos, dec: -8 },
     {
         id: "internet-computer",
