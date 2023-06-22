@@ -142,7 +142,7 @@ export const chainNoncetoName: any = {
     "24": "Secret",
     "32": "Moonbeam",
     "33": "ABEYCHAIN",
-    "28": "Dfinity",
+    "28": "Internet Computer",
     "30": "Skale",
     "27": "Ton",
     "35": "Caduceus",
@@ -200,7 +200,6 @@ export const chains = [
     { id: "secret", name: "Secret", icon: Secret, dec: -6 },
     { id: "moonbeam", name: "Moonbeam", icon: Moonbeam },
     { id: "abeychain", name: "ABEYCHAIN", icon: Abeychain },
-    { id: "dfinity", name: "Dfinity", icon: Dfinity },
     { id: "skale", name: "Skale", icon: Skale },
     {
         id: "the-open-network",
@@ -214,8 +213,14 @@ export const chains = [
     { id: "Arbitrum", name: "Arbitrum Nova", icon: Arbitrum },
     { id: "near", name: "Near", icon: NearWallet },
     { id: "solana", name: "Solana", icon: Solana, notConvert: true, dec: -9 },
-    { id: "hedera", name: "Hedera", icon: Hedera, dec: -9 },
-    { id: "aptos", name: "Aptos", icon: Aptos, dec: -9 },
+    { id: "hedera", name: "Hedera", icon: Hedera, dec: -8 },
+    { id: "aptos", name: "Aptos", icon: Aptos, dec: -8 },
+    {
+        id: "internet-computer",
+        name: "Internet Computer",
+        icon: Dfinity,
+        dec: -8,
+    },
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";
