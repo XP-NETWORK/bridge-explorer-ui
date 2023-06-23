@@ -206,7 +206,7 @@ export const chains = [
         name: "Ton",
         icon: Ton,
         notConvert: true,
-        dec: -7,
+        dec: -9,
     },
     { id: "caduceus", name: "Caduceus", icon: Caduceus },
     { id: "oec-token", name: "OKC", icon: OKC },
