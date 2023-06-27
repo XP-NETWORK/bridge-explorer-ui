@@ -183,7 +183,7 @@ export const chains = [
     { id: "fantom", name: "Fantom", icon: "./assets/icons/fantom.svg" },
     // { id: "celo", name: "Celo", icon: "./assets/icons/celo.svg" },
     { id: "harmony", name: "Harmony", icon: "./assets/icons/harmony.svg" },
-    { id: "gnosis", name: "Gnosis", icon: "./assets/icons/gnosis.svg" },
+    { id: "xdai", name: "Gnosis", icon: "./assets/icons/gnosis.svg" },
     { id: "fuse-network-token", name: "Fuse", icon: "./assets/icons/fuse.svg" },
     // { id: "unique-one", name: "Unique", icon: "./assets/icons/unique.svg" }, // TODO: check if this is correct
     { id: "elrond-erd-2", name: "Elrond", icon: Multi },
