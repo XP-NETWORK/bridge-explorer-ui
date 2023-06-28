@@ -30,6 +30,7 @@ interface AppData {
     totalTx: number;
     totalWallets: number;
     totalAsstest: number;
+    totalValue: number;
 }
 
 export const App = () => {
@@ -37,6 +38,7 @@ export const App = () => {
         totalTx: 0,
         totalWallets: 0,
         totalAsstest: 0,
+        totalValue: 0,
     });
 
     const [fetching, setFetching] = useState(true);
@@ -59,6 +61,7 @@ export const App = () => {
                         totalTx: metrics.totalTx,
                         totalWallets: metrics.totalWallets,
                         totalAsstest: metrics.totalAsstest,
+                        totalValue: metrics.totalValue,
                     });
                 }
                 setFetching(false);
