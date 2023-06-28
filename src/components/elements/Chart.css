@@ -80,6 +80,6 @@ tspan {
 
 @media screen and (max-width: 800px) {
     .chartWrapper {
-        padding: 24px 10px !important;
+        padding: 2px;
     }
 }

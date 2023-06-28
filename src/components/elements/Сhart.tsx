@@ -17,7 +17,6 @@ export const Chart = withContainer(
         charFetching: Boolean;
         container: any;
     }) => {
-        console.log(dailyData, "dailyData");
         const mockData = dailyData.map((item, i) => ({
             ...item,
             adate: new Date(item.date).getTime(),
@@ -106,7 +105,10 @@ export const Chart = withContainer(
                                         <span className="super-loader"></span>
                                     </div>
                                 ) : (
-                                    <ResponsiveContainer height={270}>
+                                    <ResponsiveContainer
+                                        height={270}
+                                        width="100%"
+                                    >
                                         <AreaChart
                                             data={mockData}
                                             margin={{
@@ -156,7 +158,11 @@ export const Chart = withContainer(
                                             </defs>
                                             <YAxis
                                                 axisLine={false}
-                                                hide={true}
+                                                hide={
+                                                    !(window.innerWidth <= 800)
+                                                        ? true
+                                                        : false
+                                                }
                                                 type="number"
                                                 domain={[
                                                     () => 0,
