@@ -158,11 +158,6 @@ export const Chart = withContainer(
                                             </defs>
                                             <YAxis
                                                 axisLine={false}
-                                                hide={
-                                                    !(window.innerWidth <= 800)
-                                                        ? true
-                                                        : false
-                                                }
                                                 type="number"
                                                 domain={[
                                                     () => 0,
