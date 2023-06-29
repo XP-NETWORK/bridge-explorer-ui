@@ -4,7 +4,8 @@ import { ethers } from "ethers";
 import BigNumber from "bignumber.js";
 
 import CacheService from "../../services/cacheService";
-
+import { nftGeneralParser } from "nft-parser/dist/src/index";
+import axios from "axios";
 //import axios from "axios";
 
 const cacheService = CacheService();
@@ -64,6 +65,32 @@ export const fetchNtf = async (data: IEvent) => {
         const meta = await cacheService.get(data);
 
         if (meta === "no NFT with that data was found") {
+            let metadata = {};
+            if (
+                /"(wnfts.xp.network|nft.xp.network|staging-nft.xp.network|bridge-wnftapi)"/.test(
+                    data.nftUri
+                )
+            ) {
+                metadata = (await axios(data.nftUri)).data;
+            } else {
+                metadata = (
+                    await nftGeneralParser(
+                        {
+                            collectionIdent: data.contract!,
+                            native: {
+                                tokenId: data.tokenId!,
+                                contract: data.contract,
+                                chainId: data.fromChain!,
+                            },
+                            uri: data.nftUri,
+                        },
+                        "",
+                        true
+                    )
+                )?.metaData;
+            }
+
+            return metadata;
             /*   const res1 = (await axios(data.nftUri)).data;
             const res = await axios.post(
                 "https://nft-cache.herokuapp.com/nft/add",
