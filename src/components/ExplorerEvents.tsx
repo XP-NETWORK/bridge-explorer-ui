@@ -1,5 +1,5 @@
 import { FC, useEffect, useState, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Container } from "./Container";
 import { useContext } from "react";
 import { EventsContext } from "../context/Events";
