@@ -3,6 +3,12 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "@dfinity/agent": "^0.17.0",
+        "@dfinity/candid": "^0.17.0",
+        "@dfinity/nns": "^0.16.3",
+        "@dfinity/nns-proto": "^0.0.4",
+        "@dfinity/principal": "^0.17.0",
+        "@dfinity/utils": "^0.0.18",
         "@reduxjs/toolkit": "^1.8.2",
         "@types/node": "^16.11.22",
         "@types/react": "^17.0.39",

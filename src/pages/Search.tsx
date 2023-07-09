@@ -14,7 +14,7 @@ import { LoaderRow } from "../components/elements/LoaderRow";
 import { useLocation, useNavigate } from "react-router-dom";
 import ReactTooltip from "react-tooltip";
 import moment from "moment";
-import ExplorerLink from "../components/elements/ExplorerLink";
+import { FromLink, ToLink } from "../components/elements/ExplorerLink";
 import { Loader } from "../components/elements/Loader";
 import { NoEventsRow } from "../components/elements/NoEventsRow";
 import { Status } from "../components/Status";
@@ -338,12 +338,7 @@ export const Search = (props: any) => {
                                                                   ] || "N/A"}
                                                         </span>
                                                     </div>
-                                                    <ExplorerLink
-                                                        hash={extractHash(
-                                                            event.fromHash!
-                                                        )}
-                                                        chain={event.fromChain!}
-                                                    />
+                                                    <FromLink event={event} />
                                                 </TableData>
 
                                                 <TableData>
@@ -375,14 +370,7 @@ export const Search = (props: any) => {
                                                         </span>
                                                     </div>
                                                     {event?.toHash ? (
-                                                        <ExplorerLink
-                                                            hash={extractHash(
-                                                                event.toHash!
-                                                            )}
-                                                            chain={
-                                                                event.toChain!
-                                                            }
-                                                        />
+                                                        <ToLink event={event} />
                                                     ) : event?.status ===
                                                       "Pending" ? (
                                                         <Loader className="addressLoader" />

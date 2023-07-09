@@ -5,18 +5,18 @@ import { useContext } from "react";
 import { EventsContext } from "../context/Events";
 import { Status } from "./Status";
 import { LoaderRow } from "./elements/LoaderRow";
-import { currency, chains, chainNoncetoName, txExplorers } from "../constants";
+import { currency, chains, chainNoncetoName } from "../constants";
 import ReactTooltip from "react-tooltip";
 import moment from "moment";
 import scrollUp from "../assets/img/collapse.svg";
 import { NoEventsRow } from "./elements/NoEventsRow";
 import { getExchangeRates } from "../getExchangeRate";
-import sortIcon from "../assets/img/sort.svg";
+
 import { Paginator } from "./elements/Paginator";
-import { ErrorStatus } from "./elements/ErrorStatus";
+
 import { Loader } from "./elements/Loader";
 import { formatFees } from "./Details/helpers";
-import ExplorerLink from "./elements/ExplorerLink";
+import { FromLink, ToLink } from "./elements/ExplorerLink";
 import { RowNFT } from "./Table/RowNFT";
 import { extractHash } from "./Details/helpers";
 import { useDispatch, useSelector } from "react-redux";
@@ -353,12 +353,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                                                                   ] || "N/A"}
                                                         </span>
                                                     </div>
-                                                    <ExplorerLink
-                                                        hash={extractHash(
-                                                            event.fromHash!
-                                                        )}
-                                                        chain={event.fromChain!}
-                                                    />
+                                                    <FromLink event={event} />
                                                 </TableData>
 
                                                 <TableData>
@@ -390,14 +385,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                                                         </span>
                                                     </div>
                                                     {event?.toHash ? (
-                                                        <ExplorerLink
-                                                            hash={extractHash(
-                                                                event.toHash!
-                                                            )}
-                                                            chain={
-                                                                event.toChain!
-                                                            }
-                                                        />
+                                                        <ToLink event={event} />
                                                     ) : (
                                                         <Loader className="addressLoader" />
                                                     )}
