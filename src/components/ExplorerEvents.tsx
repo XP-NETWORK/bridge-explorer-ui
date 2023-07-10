@@ -199,7 +199,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                     <FiltersBtn />
                     <span className="nothing desktopOnly"></span>
 
-                    <DownloadCSV />
+                    {false && <DownloadCSV />}
                 </Container>
 
                 <Container className="mt-4 px-0 md:px-4 overflow-x-auto tableWrapper">
