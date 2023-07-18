@@ -30,10 +30,9 @@ export const RowNFT = ({ event }: { event: IEvent }) => {
     );
 
     useEffect(() => {
-        if (nftrow.current) {
-            observer.observe(nftrow.current);
-            return () => observer.unobserve(nftrow.current!);
-        }
+        if (nftrow.current) observer.observe(nftrow.current);
+        return () =>
+            nftrow?.current ? observer.unobserve(nftrow.current) : undefined;
     }, [nftrow]);
 
     useEffect(() => {

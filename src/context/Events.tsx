@@ -13,7 +13,7 @@ import { withContainer } from "./ServcieProvder";
 import { loadImages, fetchNtf } from "../components/Details/helpers";
 import { useSelector } from "react-redux";
 import { ReduxState } from "../store";
-import { count } from "console";
+
 import { useLocation } from "react-router-dom";
 
 interface IEventsContext {
@@ -49,8 +49,9 @@ export const EventsProvider: FC = withContainer(
 
         const {
             eventsQueryString,
-            statusFilter,
+
             collectionName,
+
             paginationPage,
         } = useSelector((state: ReduxState) => ({
             paginationPage: state.global.page,
@@ -182,11 +183,6 @@ export const EventsProvider: FC = withContainer(
                 destScraperSocket.off("updateEvent");
                 destScraperSocket.off("updateEvent");
             };
-        }, [events]);
-
-        useEffect(() => {
-            if (events.length <= 50) {
-            }
         }, [events]);
 
         useEffect(() => {

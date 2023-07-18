@@ -1,4 +1,4 @@
-import { FC, MouseEvent, useContext, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { Container } from "react-bootstrap";
 import { ChainListBox } from "../components/ChainModal/ChainListBox";
 import { ChainSwitch } from "../components/elements/chainSwitch";
@@ -30,11 +30,12 @@ import { setFrom, setTo, setEventsQueryString } from "../store/global";
 import { useDispatch } from "react-redux";
 import { Footer } from "../components/Footer";
 
+import { getExchangeRates } from "../getExchangeRate";
+
 export const Search = (props: any) => {
     const uri = `https://dev-explorer-api.herokuapp.com/`;
     const navigate = useNavigate();
     const loc = useLocation();
-    const [showClearBtn, setShowClearBtn] = useState(false);
     const [totalTrx, setTotalTrx] = useState<any>(0);
     const [pageNumber, setPageNumber] = useState(0);
     const [eventsContext, setEventsContext] = useState({
@@ -79,11 +80,19 @@ export const Search = (props: any) => {
     }>({
         velas: { usd: 0 },
     });
+
     const dispatch = useDispatch();
     useEffect(() => {
         console.log("I run everytime this component rerenders");
         getParams();
     }, [loc]);
+
+    useEffect(() => {
+        const ids: string[] = chains.map((chain) => chain.id);
+        getExchangeRates(ids).then((rates) => {
+            setExchangeRates(rates);
+        });
+    }, []);
 
     window.onload = async (event) => {
         event.preventDefault();
@@ -139,7 +148,7 @@ export const Search = (props: any) => {
         rates: { [key: string]: { usd: number } },
         chainName: string
     ): number => {
-        const chain = chains?.find(
+        const chain = chains.find(
             (chain) => chain?.name?.toLowerCase() === chainName?.toLowerCase()
         );
         const rate = (chain && rates[chain.id]?.usd) || 1;
@@ -239,15 +248,25 @@ export const Search = (props: any) => {
                         <tbody className=" divide-y   overflow-x-scroll">
                             {eventsContext?.isLoading ? (
                                 <LoaderRow />
-                            ) : eventsContext?.events.length ? (
+                            ) : // if events length is 0 after 2 seconds, show loader
+                            eventsContext?.events.length ? (
                                 eventsContext?.events.map(
-                                    (event: any, idx: number) => {
-                                        const dollarValue = Number(
+                                    //@ts-ignore
+                                    (event: IEvent, idx: number) => {
+                                        const dollarValue =
                                             getExchangeRate(
                                                 exchangeRates,
                                                 event?.chainName
-                                            ) * formatFees(event)
-                                        );
+                                            ) * formatFees(event);
+
+                                        const fees = formatFees(event);
+                                        const digits =
+                                            String(fees).split(".").at(1)
+                                                ?.length || 1;
+
+                                        const fixedFees = fees
+                                            .toFixed(Math.min(digits, 6))
+                                            .toString();
 
                                         return (
                                             <tr
@@ -277,21 +296,16 @@ export const Search = (props: any) => {
                                                 <TableData>
                                                     <span
                                                         className="cursor-default"
-                                                        data-tip={`
-                        ${formatFees(event)} ${
+                                                        data-tip={`${formatFees(
+                                                            event
+                                                        )} ${
                                                             event.fromChain &&
                                                             currency[
                                                                 event.fromChain
                                                             ]
-                                                        } <br>
-                          ${dollarValue} $
-                      `}
+                                                        } <br>${dollarValue} $`}
                                                     >
-                                                        <span>
-                                                            {formatFees(event)
-                                                                .toFixed(7)
-                                                                .toString()}
-                                                        </span>{" "}
+                                                        <span>{fixedFees}</span>{" "}
                                                         <span>
                                                             {event.fromChain &&
                                                                 currency[
@@ -371,9 +385,6 @@ export const Search = (props: any) => {
                                                     </div>
                                                     {event?.toHash ? (
                                                         <ToLink event={event} />
-                                                    ) : event?.status ===
-                                                      "Pending" ? (
-                                                        <Loader className="addressLoader" />
                                                     ) : (
                                                         <Loader className="addressLoader" />
                                                     )}
