@@ -130,9 +130,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
             (chain) => chain?.name?.toLowerCase() === chainName?.toLowerCase()
         );
         const rate = (chain && rates[chain.id]?.usd) || 1;
-        // if (chainName === "TON") {
-        //   console.log({rate , chainName});
-        // }
+
         return rate;
     };
 
