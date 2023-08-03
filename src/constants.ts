@@ -177,7 +177,7 @@ export const _headers = {
 // IDs from coingecko
 export const chains = [
     {
-        id: "aurora-near",
+        id: "ethereum",
         name: "Aurora",
         icon: "./assets/icons/aurora.svg",
     },
