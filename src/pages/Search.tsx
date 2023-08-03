@@ -390,15 +390,7 @@ export const Search = (props: any) => {
 
                                                 <TableData className="CollectioName">
                                                     <CollectionNameRow
-                                                        hash={extractHash(
-                                                            event.toHash!
-                                                        )}
-                                                        collectionName={
-                                                            event?.collectionName
-                                                                ? event?.collectionName
-                                                                : "-"
-                                                        }
-                                                        chain={event.toChain!}
+                                                        event={event}
                                                     />
                                                 </TableData>
 

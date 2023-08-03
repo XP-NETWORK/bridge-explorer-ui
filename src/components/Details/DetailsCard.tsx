@@ -10,8 +10,8 @@ import SoundOffIcon from "../../assets/icons/sound-off.svg";
 import { ImgOrFail } from "../elements/ImgOrFail";
 
 import { extractHash } from "./helpers";
-import { FromLink } from "../elements/ExplorerLink";
 
+import { truncate } from "./helpers";
 export interface DetailsCard {
     data: {
         loading: boolean;
@@ -38,7 +38,10 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
     const nftVideo = useRef<HTMLVideoElement | null>(null);
 
     const isMobile = useIsMobile();
-    const truncateSize = useMemo(() => (isMobile ? 33 : 60), [isMobile]);
+    const truncateSize = useMemo(
+        () => (window.innerWidth < 1150 ? 33 : 65),
+        [isMobile]
+    );
 
     // @ts-ignore
     const toggleSound = () => {
@@ -250,8 +253,21 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
                         >
                             ID:
                         </div>
-                        <div className="text-[#222222] w-32">
-                            {dataLoad ? "" : event.tokenId}
+                        <div className="copyBtnWrapper">
+                            <span className="text-[#222222] ">
+                                {dataLoad
+                                    ? ""
+                                    : event.tokenId && event.tokenId.length > 50
+                                    ? truncate(event.tokenId, truncateSize)
+                                    : event.tokenId}
+                            </span>
+                            {!dataLoad && (
+                                <CopyWithTooltip
+                                    copyValue={event?.tokenId}
+                                    copyProps={copyProps}
+                                    copyIdx={2}
+                                />
+                            )}
                         </div>
                     </div>
                     {!dataLoad && (
@@ -276,7 +292,11 @@ const DetailsCard = ({ data, copyProps }: DetailsCard) => {
                                     rel="noreferrer"
                                     className="text-[#222222] w-32 trxHash"
                                 >
-                                    <FromLink event={event} />
+                                    {truncate(
+                                        event?.fromHash &&
+                                            extractHash(event.fromHash),
+                                        truncateSize
+                                    ) || "N/A"}
                                 </a>
                                 <div className="copyBtnWrapper">
                                     {" "}

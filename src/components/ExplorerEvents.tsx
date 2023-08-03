@@ -62,7 +62,9 @@ export interface IEvent {
     imgUri?: string;
     name: string;
     contract?: string;
+    destContract?: string;
     collectionName?: string;
+    destCollectionName?: string;
     originalChainNonce?: string;
     originalContract?: string;
     originalTokenId?: string;
@@ -391,15 +393,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
 
                                                 <TableData className="CollectioName">
                                                     <CollectionNameRow
-                                                        hash={extractHash(
-                                                            event.toHash!
-                                                        )}
-                                                        collectionName={
-                                                            event?.collectionName
-                                                                ? event?.collectionName
-                                                                : "-"
-                                                        }
-                                                        chain={event.toChain!}
+                                                        event={event}
                                                     />
                                                 </TableData>
 

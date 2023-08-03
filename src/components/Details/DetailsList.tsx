@@ -59,7 +59,10 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
         //   setToIconSrc("");
         // }
         chains?.map((chain) => {
-            if (chain?.name === chainNoncetoName[event?.fromChain || 0]) {
+            if (
+                chain.name?.toLowerCase() ===
+                chainNoncetoName[event?.fromChain || 0]?.toLowerCase()
+            ) {
                 if (chain?.icon[0] === ".") {
                     setFromIconSrc(chain?.icon?.slice(1));
                 } else {
@@ -282,6 +285,39 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
                     )}
                 </p>
             </div>
+            {event?.destContract && (
+                <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
+                    <div className="text-[#222222] font-medium w-32">
+                        To Contract:
+                    </div>
+                    <p
+                        className={`md:pl-14 break-words shrink w-[calc(100%-8rem)] md:w-fit ${
+                            dataLoad ? "loadingWrapper" : "loadedWrapper"
+                        }`}
+                    >
+                        <a
+                            target="_blank"
+                            rel="noreferrer"
+                            href={`${
+                                event?.toChain &&
+                                addressExplorers[event.toChain]
+                            }${encodeURIComponent(event.destContract)}`}
+                        >
+                            <span className="text-[#235EF5]">
+                                {truncate(event.destContract, truncateSize) ||
+                                    "N/A"}
+                            </span>
+                        </a>
+                        {!dataLoad && (
+                            <CopyWithTooltip
+                                copyValue={event?.targetAddress}
+                                copyProps={copyProps}
+                                copyIdx={8}
+                            />
+                        )}
+                    </p>
+                </div>
+            )}
             <div className="flex items-start justify-start gap-2 border-b py-4 detailsListRow">
                 <div className="text-[#222222] font-medium w-32">Date:</div>
                 <p
