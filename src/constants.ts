@@ -67,7 +67,7 @@ export const txExplorers: any = {
     "18": "https://tezblock.io/transaction/",
     "23": "https://gatescan.org/tx/",
     "9": "https://tronscan.org/#/transaction/",
-    "25": "https://explore.vechain.org/transactions/",
+    "25": "https://vechainstats.com/transaction/",
     "15": "https://algoexplorer.io/tx/",
     "22": "https://v1.gwscan.com/tx/",
     "24": "https://www.mintscan.io/secret/transactions/",
@@ -86,7 +86,7 @@ export const txExplorers: any = {
 };
 
 export const addressExplorers: any = {
-    "4": "https://bscscan.com//address/",
+    "4": "https://bscscan.com/address/",
     "19": "https://explorer.velas.com/address/",
     "14": "https://blockscout.com/xdai/mainnet/address/",
     "2": "https://explorer.elrond.com/accounts/",
@@ -101,9 +101,9 @@ export const addressExplorers: any = {
     "18": "https://tezblock.io/account/",
     "23": "https://gatescan.org/address/",
     "9": "https://tronscan.org/#/address/",
-    "25": "https://explore.vechain.org/accounts/",
+    "25": "https://vechainstats.com/account/",
     "15": "https://algoexplorer.io/address/",
-    "22": "https://v1.gwscan.com/tx/",
+    "22": "https://v1.gwscan.com/address/",
     "24": `https://www.mintscan.io/secret/accounts/`,
     "32": "https://moonscan.io/address/",
     "27": "https://tonscan.org/address/",
@@ -117,6 +117,21 @@ export const addressExplorers: any = {
     "26": "https://solscan.io/account/",
     "29": "https://hashscan.io/mainnet/account/",
     "34": "https://explorer.aptoslabs.com/account/",
+};
+
+export const collectionExplorers: any = {
+    ...Object.entries(addressExplorers).reduce(
+        (acc: Object, [k, v]) => ({
+            ...acc,
+            [k]: (v as string).replace(/(address|accounts?)\/$/, "token/"),
+        }),
+        {}
+    ),
+    "25": "https://vechainstats.com/account/",
+    "22": "https://v1.gwscan.com/nft-collection/",
+    "14": "https://gnosis.blockscout.com/address/",
+    "20": "https://iotexscan.io/address/",
+    "9": "https://tronscan.org/#/contract/",
 };
 
 export const chainNoncetoName: any = {

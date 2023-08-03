@@ -12,15 +12,16 @@ import {
     currency,
     chains,
     chainNoncetoName,
+    collectionExplorers,
 } from "../../constants";
-import { ethers } from "ethers";
+
 import ClockIcon from "../../assets/icons/clock.svg";
 import { getExchangeRates } from "../../getExchangeRate";
 import { formatFees, extractHash } from "./helpers";
 
 const DetailsList = ({ data, copyProps }: DetailsCard) => {
     const { loading: dataLoad, event } = data;
-    const { setTooltipCopy, tooltipCopy, tooltips } = copyProps;
+    const { tooltipCopy } = copyProps;
     const [exchangeRates, setExchangeRates] = useState<{
         [key: string]: { usd: number };
     }>({});
@@ -300,7 +301,7 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
                             rel="noreferrer"
                             href={`${
                                 event?.toChain &&
-                                addressExplorers[event.toChain]
+                                collectionExplorers[event.toChain]
                             }${encodeURIComponent(event.destContract)}`}
                         >
                             <span className="text-[#235EF5]">
