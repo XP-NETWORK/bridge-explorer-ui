@@ -16,6 +16,7 @@ import Multi from "./assets/icons/elrond.svg";
 import Solana from "./assets/icons/solana.svg";
 import Hedera from "./assets/icons/Hedera.svg";
 import Aptos from "./assets/icons/aptos.svg";
+import optimism from "./assets/icons/optimism.svg";
 
 import axios from "axios";
 
@@ -49,6 +50,7 @@ export const currency: any = {
     "26": "SOL",
     "29": "HBAR",
     "34": "APT",
+    "40": "ETH",
 };
 
 export const txExplorers: any = {
@@ -83,6 +85,7 @@ export const txExplorers: any = {
     "26": "https://solscan.io/tx/",
     "29": "https://hashscan.io/mainnet/transaction/",
     "34": "https://explorer.aptoslabs.com/txn/",
+    "40": "https://optimistic.etherscan.io/tx/",
 };
 
 export const addressExplorers: any = {
@@ -117,6 +120,7 @@ export const addressExplorers: any = {
     "26": "https://solscan.io/account/",
     "29": "https://hashscan.io/mainnet/account/",
     "34": "https://explorer.aptoslabs.com/account/",
+    "40": "https://optimistic.etherscan.io/address/",
 };
 
 export const collectionExplorers: any = {
@@ -167,6 +171,7 @@ export const chainNoncetoName: any = {
     "26": "Solana",
     "29": "Hedera",
     "34": "Aptos",
+    "40": "Optimism",
 };
 
 export const _headers = {
@@ -215,6 +220,7 @@ export const chains = [
     { id: "secret", name: "Secret", icon: Secret, dec: -6 },
     { id: "moonbeam", name: "Moonbeam", icon: Moonbeam },
     { id: "abeychain", name: "ABEYCHAIN", icon: Abeychain },
+    { id: "ethereum", name: "Optimism", icon: optimism },
     { id: "skale", name: "Skale", icon: Skale },
     {
         id: "the-open-network",
