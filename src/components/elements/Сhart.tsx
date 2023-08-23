@@ -49,7 +49,7 @@ export const Chart = withContainer(
             return null;
         };
 
-        const max = Math.max(16_000, Math.max(totalAsstest, totalTx) * 1.05);
+        const max = Math.max(20_000, Math.max(totalAsstest, totalTx) * 1.05);
 
         return (
             <div className="lg:max-w-5xl mx-auto px-4 mt-3 md:mt-6">
