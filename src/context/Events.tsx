@@ -73,6 +73,7 @@ export const EventsProvider: FC = withContainer(
             destScraperSocket.off("updateEvent");
 
             socket.on("incomingEvent", async (event: IEvent) => {
+                if (!event) return;
                 console.log("socket-incoming", event);
                 if (loc.pathname === "/") {
                     try {
@@ -88,6 +89,7 @@ export const EventsProvider: FC = withContainer(
 
             socket.on("updateEvent", async (updated: IEvent) => {
                 console.log("socket-updateEvent!!", updated);
+                if (!updated) return;
                 const idx = events.findIndex(
                     (event) =>
                         event.fromChain + event.actionId ===
