@@ -9,23 +9,18 @@ import io from "socket.io-client";
 import { useEffect, useState } from "react";
 import "./components/ChainModal/Chain.css";
 
-import {
-    socketUrl,
-    url,
-    scraperSocketUrl,
-    destScraperSocketUrl,
-} from "./constants";
+import { socketUrl, url } from "./constants";
 import { handleGoogleAnalyticsPageView } from "./GA4";
 
 const socket = io(socketUrl, {
     path: "/socket.io",
 });
-const scraperSocket = io(scraperSocketUrl, {
+/*const scraperSocket = io(scraperSocketUrl, {
     path: "/socket.io",
 });
 const destScraperSocket = io(destScraperSocketUrl, {
     path: "/socket.io",
-});
+});*/
 interface AppData {
     totalTx: number;
     totalWallets: number;
@@ -77,8 +72,6 @@ export const App = () => {
                 socket,
                 appData,
                 fetching,
-                scraperSocket,
-                destScraperSocket,
             }}
         >
             <Routes>

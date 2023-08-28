@@ -34,7 +34,7 @@ interface IEventsContext {
 
 export const EventsContext = createContext<IEventsContext | null>(null);
 export const EventsProvider: FC = withContainer(
-    ({ children, container: { socket, scraperSocket, destScraperSocket } }) => {
+    ({ children, container: { socket } }) => {
         const [events, setEvents] = useState<IEvent[]>([]);
         // console.log("🚀 ~ file: Events.tsx:39 ~ events:", events);
         //const [chainName, setChainName] = useState("");
@@ -66,11 +66,11 @@ export const EventsProvider: FC = withContainer(
             socket.off("incomingEvent");
             socket.off("updateEvent");
 
-            scraperSocket.off("incomingEvent");
+            /*scraperSocket.off("incomingEvent");
             scraperSocket.off("updateEvent");
 
             destScraperSocket.off("incomingEvent");
-            destScraperSocket.off("updateEvent");
+            destScraperSocket.off("updateEvent");*/
 
             socket.on("incomingEvent", async (event: IEvent) => {
                 if (!event) return;
@@ -116,7 +116,7 @@ export const EventsProvider: FC = withContainer(
                 console.log("disconnect!!!!!");
             });
 
-            scraperSocket.on("incomingEvent", async (event: IEvent) => {
+            /*scraperSocket.on("incomingEvent", async (event: IEvent) => {
                 console.log("scraperSocket-Incoming Event!!", event);
                 if (eventsQueryString) return;
                 try {
@@ -175,15 +175,11 @@ export const EventsProvider: FC = withContainer(
                         ...events.slice(idx + 1),
                     ]); //updateEvent
                 }
-            });
+            });*/
 
             return () => {
                 socket.off("incomingEvent");
                 socket.off("updateEvent");
-                scraperSocket.off("incomingEvent");
-                scraperSocket.off("updateEvent");
-                destScraperSocket.off("updateEvent");
-                destScraperSocket.off("updateEvent");
             };
         }, [events]);
 
