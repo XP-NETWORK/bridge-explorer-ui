@@ -18,7 +18,7 @@ import Hedera from "./assets/icons/Hedera.svg";
 import Aptos from "./assets/icons/aptos.svg";
 import optimism from "./assets/icons/optimism.svg";
 
-import axios from "axios";
+import casper from "./assets/icons/casper.svg";
 
 export const currency: any = {
     "4": "BNB",
@@ -51,6 +51,8 @@ export const currency: any = {
     "29": "HBAR",
     "34": "APT",
     "40": "ETH",
+    "38": "ETH",
+    "39": "CSPR",
 };
 
 export const txExplorers: any = {
@@ -86,6 +88,7 @@ export const txExplorers: any = {
     "29": "https://hashscan.io/mainnet/transaction/",
     "34": "https://explorer.aptoslabs.com/txn/",
     "40": "https://optimistic.etherscan.io/tx/",
+    "39": "https://cspr.live/deploy/",
 };
 
 export const addressExplorers: any = {
@@ -121,6 +124,7 @@ export const addressExplorers: any = {
     "29": "https://hashscan.io/mainnet/account/",
     "34": "https://explorer.aptoslabs.com/account/",
     "40": "https://optimistic.etherscan.io/address/",
+    "39": "https://cspr.live/address/",
 };
 
 export const collectionExplorers: any = {
@@ -136,6 +140,7 @@ export const collectionExplorers: any = {
     "14": "https://gnosis.blockscout.com/address/",
     "20": "https://iotexscan.io/address/",
     "9": "https://tronscan.org/#/contract/",
+    "39": "https://cspr.live/contract-package/",
 };
 
 export const chainNoncetoName: any = {
@@ -172,6 +177,7 @@ export const chainNoncetoName: any = {
     "29": "Hedera",
     "34": "Aptos",
     "40": "Optimism",
+    "39": "Casper",
 };
 
 export const _headers = {
@@ -236,6 +242,7 @@ export const chains = [
     { id: "solana", name: "Solana", icon: Solana, notConvert: true, dec: -9 },
     { id: "hedera-hashgraph", name: "Hedera", icon: Hedera, dec: -8 },
     { id: "aptos", name: "Aptos", icon: Aptos, dec: -8 },
+    { id: "casper-network", name: "Casper", icon: casper, dec: -9 },
     {
         id: "internet-computer",
         name: "Internet Computer",
