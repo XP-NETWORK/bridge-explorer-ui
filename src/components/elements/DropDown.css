@@ -1,0 +1,126 @@
+.dropDownContainer {
+  display: flex;
+  margin-left: 5px;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 4px;
+  /* width: 167px; */
+  height: 32px;
+  flex: none;
+  flex-grow: 0;
+}
+
+.dropDownWrapper {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* padding: 2px; */
+  gap: 2px;
+  /* width: 167px; */
+  height: 32px;
+  background: #eeeef2;
+  border: 1px solid #ebecef;
+  border-radius: 4px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+#dropdown-basic-button:hover .arrow-down {
+  background-image: url("/src/assets/icons/arrow-down-hovered.svg") !important;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.chain-switch:hover .arrow-down {
+  background-image: url("/src/assets/icons/arrow-down-hovered.svg") !important;
+}
+
+.chain-switch:hover .arrow-downTo {
+  background-image: url("/src/assets/icons/arrow-down-hovered.svg") !important;
+}
+
+.dropDownTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 4px 6px;
+  gap: 6px;
+  /* width: 65px; */
+  height: 28px;
+  border-radius: 4px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.dropDownTitle > p {
+  /* width: 53px; */
+  height: 22px;
+  font-weight: 350;
+  font-size: 14px;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+  color: #222222;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.dropdown {
+  position: relative;
+}
+
+#dropdown-basic-button {
+  background-color: white;
+  height: 28px;
+  padding-right: 11px;
+  line-height: 18px;
+  border-radius: 4px;
+}
+
+.dropdown-toggle::after {
+  margin-left: 8px !important;
+}
+.dropdown-menu {
+  --bs-dropdown-min-width: 140px;
+}
+
+.dropdown-menu.show {
+  /* display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px;
+  position: absolute;
+  width: 40px !important;
+  background: #ffffff;
+  border: 1px solid #ced5e0;
+  box-shadow: 0px 14px 29px rgba(19, 35, 58, 0.12);
+  border-radius: 6px; */
+}
+
+.dropdown-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 12px;
+
+  width: -webkit-fill-available;
+  height: 44px;
+
+  border-radius: 8px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.dropdown-item:hover {
+  background: #f7f7f9;
+}

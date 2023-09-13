@@ -1,146 +1,256 @@
-import * as React from "react";
 import { DailyData } from "../../pages/Dashboard";
 import { withContainer } from "../../context/ServcieProvder";
-import { Line, Column } from "@ant-design/plots";
-import moment from "moment";
 import { Loader } from "./Loader";
+import "./Chart.css";
 
+import { Area, AreaChart, ResponsiveContainer, Tooltip, YAxis } from "recharts";
 export const Chart = withContainer(
-  ({
-    dailyData,
-    container: {
-      fetching,
-      appData: { totalTx },
-    },
-  }: {
-    dailyData: DailyData[];
-    container: any;
-  }) => {
-    let mockData = [
-      {
-        txNumber: 22,
-        walletsNumber: 3,
-        date: "2022/3/3",
-      },
-      {
-        txNumber: 7,
-        walletsNumber: 3,
-        date: "2022/3/4",
-      },
-      {
-        txNumber: 19,
-        walletsNumber: 3,
-        date: "2022/3/5",
-      },
-      {
-        txNumber: 56,
-        walletsNumber: 3,
-        date: "2022/3/6",
-      },
-      {
-        txNumber: 31,
-        walletsNumber: 3,
-        date: "2022/3/7",
-      },
-      ...dailyData,
-    ];
-
-    mockData = mockData.map((item, i) => ({
-      ...item,
-      adate: new Date(item.date).getTime(),
-      idx: i,
-    }));
-
-    console.log(mockData);
-    const config = {
-      data: mockData,
-      xField: "adate",
-      yField: "txNumber",
-      height: 200,
-      
-      tooltip: {
-        showTitle: false,
-        fields: ["txNumber", "date"],
-      },
-      yAxis: {
-        grid: null
-      },
-      xAxis: {
-        tickLine: {
-          length: 0
+    ({
+        dailyData,
+        charFetching,
+        container: {
+            fetching,
+            appData: { totalValue },
         },
-        
-        label: {
-          offsetX: 30,
-          formatter: (text: string, x:any, idx:number) => {
+    }: {
+        dailyData: DailyData[];
+        charFetching: Boolean;
+        container: any;
+    }) => {
+        const mockData = dailyData.map((item, i) => ({
+            ...item,
+            adate: new Date(item.date).getTime(),
+            idx: i,
+        }));
 
-            if (+text === +moment("03/03/2022").startOf("day")) {
-                return moment("03/03/2022").format("D MMM YYYY");
+        const CustomTooltip = ({ active, payload }: any) => {
+            if (active && payload && payload.length) {
+                return (
+                    <div className="tooltipDiv">
+                        <p className="dateTool">{payload[0].payload.date}</p>
+                        <span>
+                            {payload[0].value
+                                .toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                            TXN <br />
+                        </span>
+                        <span>
+                            {payload[1].value
+                                .toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                            Assets <br />
+                        </span>
+
+                        <br />
+                    </div>
+                );
             }
-            return +idx === mockData.length - 3 ? moment().format("D MMM YYYY") : '';
-              
-          },
-        },
-      },
-    };
 
-    return (
-      <div className="lg:max-w-5xl mx-auto px-4 mt-3 md:mt-6">
-        <div className="chartWrapper">
-          <div className="chartVisual">
-            <h3 className="font-medium text-[#222222]">Daily Transactions</h3>
-            <div className="chartMetrics">
-              <span>
-                Today Tx:{" "}
-                <span>
-                  {fetching ? (
-                    <Loader />
-                  ) : (
-                    mockData[mockData.length - 1].txNumber
-                  )}
-                </span>
-              </span>
-              <span>
-                Total Tx: <span>{fetching ? <Loader /> : totalTx}</span>
-              </span>
+            return null;
+        };
+
+        const tx_num = mockData[mockData.length - 1]?.Tx;
+        const max = Math.floor(Number(tx_num || 0) * 1.05);
+
+        return (
+            <div className="lg:max-w-5xl mx-auto px-4 mt-3 md:mt-6">
+                <div className="chartWrapper">
+                    <div className="chartVisual">
+                        <div className="lineWrapper">
+                            <div className="chartMetrics">
+                                {totalValue && (
+                                    <div className="chartMetric">
+                                        <span>Total Value</span>
+                                        <strong>
+                                            {fetching ? (
+                                                <Loader />
+                                            ) : (
+                                                "$" +
+                                                Number(
+                                                    totalValue
+                                                ).toLocaleString()
+                                            )}
+                                        </strong>
+                                    </div>
+                                )}
+
+                                <div className="chartMetric">
+                                    <span>Total Transactions</span>
+                                    <strong style={{ color: "#2E66F5" }}>
+                                        {" "}
+                                        {fetching ? (
+                                            <Loader />
+                                        ) : (
+                                            Number(tx_num).toLocaleString()
+                                        )}
+                                    </strong>
+                                </div>
+
+                                <div className="chartMetric">
+                                    <span>Total Assets</span>
+                                    <strong style={{ color: "#10B67A" }}>
+                                        {" "}
+                                        {fetching ? (
+                                            <Loader />
+                                        ) : (
+                                            Math.floor(Number(tx_num) * 1.05)
+                                        )}
+                                    </strong>
+                                </div>
+                            </div>
+                            <div className="chartContainer">
+                                {charFetching ? (
+                                    <div className="chartLoaderWrap">
+                                        <span className="super-loader"></span>
+                                    </div>
+                                ) : (
+                                    <ResponsiveContainer
+                                        height={270}
+                                        width="100%"
+                                    >
+                                        <AreaChart
+                                            data={mockData}
+                                            margin={{
+                                                top: 0,
+                                                right: 0,
+                                                left: 0,
+                                                bottom: 0,
+                                            }}
+                                        >
+                                            <defs>
+                                                <linearGradient
+                                                    id="colorUv"
+                                                    x1="0"
+                                                    y1="0"
+                                                    x2="0"
+                                                    y2="1"
+                                                >
+                                                    <stop
+                                                        offset="5%"
+                                                        stopColor="#5B8FF9"
+                                                        stopOpacity={0.25}
+                                                    />
+                                                    <stop
+                                                        offset="95%"
+                                                        stopColor="#5B8FF9"
+                                                        stopOpacity={0.25}
+                                                    />
+                                                </linearGradient>
+                                                <linearGradient
+                                                    id="colorPv"
+                                                    x1="0"
+                                                    y1="0"
+                                                    x2="0"
+                                                    y2="1"
+                                                >
+                                                    <stop
+                                                        offset="1%"
+                                                        stopColor="#10B67A"
+                                                        stopOpacity={0.1}
+                                                    />
+                                                    <stop
+                                                        offset="99%"
+                                                        stopColor=""
+                                                        stopOpacity={0}
+                                                    />
+                                                </linearGradient>
+                                            </defs>
+                                            <YAxis
+                                                axisLine={false}
+                                                type="number"
+                                                domain={[
+                                                    () => 0,
+                                                    () => {
+                                                        console.log(max, "max");
+                                                        return max;
+                                                    },
+                                                ]}
+                                            />
+                                            {/* <XAxis dataKey={() => mockData.map(i => i.date)} axisLine={false} /> */}
+                                            {/*<CartesianGrid
+                                                strokeDasharray="0"
+                                                vertical={false}
+                                            />*/}
+                                            <Tooltip
+                                                content={<CustomTooltip />}
+                                            />
+                                            <Area
+                                                type="monotone"
+                                                dataKey="Tx"
+                                                stroke="#8884d8"
+                                                fillOpacity={1}
+                                                fill="url(#colorUv)"
+                                            />
+                                            <Area
+                                                type="monotone"
+                                                dataKey="sftNumber"
+                                                stroke="#82ca9d"
+                                                fillOpacity={1}
+                                                fill="url(#colorPv)"
+                                            />
+                                        </AreaChart>
+                                    </ResponsiveContainer>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                    {false && (
+                        <div className="chartRates">
+                            <div className="periodButtons">
+                                <span className="text-[#222222]">Today</span>
+                                <span className="text-[#222222]">
+                                    Last 7 days
+                                </span>
+                                <span className="text-[#222222]">
+                                    All period
+                                </span>
+                            </div>
+                            <ul className="chartInfoList">
+                                <li>
+                                    <span className="chartItemName font-medium">
+                                        Volume
+                                    </span>
+                                    <span className="chartItemValue">
+                                        $324.34 M
+                                    </span>
+                                </li>
+                                <li>
+                                    <span className="chartItemName font-medium">
+                                        Fees
+                                    </span>
+                                    <span className="chartItemValue">
+                                        $324.34 M
+                                    </span>
+                                </li>
+                                <li>
+                                    <span className="chartItemName font-medium">
+                                        Users
+                                    </span>
+                                    <span className="chartItemValue">
+                                        $324.34 M
+                                    </span>
+                                </li>
+                                <li>
+                                    <span className="chartItemName font-medium">
+                                        Tx
+                                    </span>
+                                    <span className="chartItemValue">
+                                        $324.34 M
+                                    </span>
+                                </li>
+                                <li>
+                                    <span className="chartItemName font-medium">
+                                        Avg Tx time
+                                    </span>
+                                    <span className="chartItemValue">
+                                        213.12s/2.12m
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
+                </div>
             </div>
-            <div className="lineWrapper">
-              <Column {...config} />
-            </div>
-          </div>
-          {false && (
-            <div className="chartRates">
-              <div className="periodButtons">
-                <span className="text-[#222222]">Today</span>
-                <span className="text-[#222222]">Last 7 days</span>
-                <span className="text-[#222222]">All period</span>
-              </div>
-              <ul className="chartInfoList">
-                <li>
-                  <span className="chartItemName font-medium">Volume</span>
-                  <span className="chartItemValue">$324.34 M</span>
-                </li>
-                <li>
-                  <span className="chartItemName font-medium">Fees</span>
-                  <span className="chartItemValue">$324.34 M</span>
-                </li>
-                <li>
-                  <span className="chartItemName font-medium">Users</span>
-                  <span className="chartItemValue">$324.34 M</span>
-                </li>
-                <li>
-                  <span className="chartItemName font-medium">Tx</span>
-                  <span className="chartItemValue">$324.34 M</span>
-                </li>
-                <li>
-                  <span className="chartItemName font-medium">Avg Tx time</span>
-                  <span className="chartItemValue">213.12s/2.12m</span>
-                </li>
-              </ul>
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  }
+        );
+    }
 );

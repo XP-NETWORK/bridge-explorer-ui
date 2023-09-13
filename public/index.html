@@ -5,41 +5,87 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta name="description" content="XP.NETWORK Bridge Events Explorer." />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.png" />
-    <script
-      type="text/javascript"
-      async
-      defer
-      src="https://www.google.com/recaptcha/api.js"
-    ></script>
-    <script>
-      window.SITE_KEY_CAPTCHA = "6LeZLsseAAAAAL1P7An5_2GkIy-BZvd-kK3duuWa";
-    </script>
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+   
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
+    <meta
+    name="description"
+    content="View, search & export transactions on the multichain NFT bridge across 20+ blockchains"
+  />
+  <meta
+    name="twitter:image:src"
+    content="%PUBLIC_URL%/favicon.png"
+  />
+  <meta content="summary_large_image" name="twitter:card" />
+  <meta
+    content="XP.NETWORK NFT Bridge Explorer"
+    property="twitter:title"
+  />
+  <meta
+    content="View, search & export transactions on the multichain NFT bridge across 20+ blockchains"
+    property="twitter:description"
+  />
+  <meta
+    name="twitter:image"
+    content="%PUBLIC_URL%/Meta.png"
+  />
+  <meta
+  property="og:image"
+  content="%PUBLIC_URL%/Meta.png"
+/>
+
+
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.png" />
+
+    <script>
+           
+ 
+      window.SITE_KEY_CAPTCHA = "6LeZLsseAAAAAL1P7An5_2GkIy-BZvd-kK3duuWa";
+      window.SITE_KEY_INV_CAPTCHA = "6LfQOTEgAAAAAL07CQVjXTx8ixN1koilgCPRnzd4";
+      window.NEWS_EMAIL = ''
+     
+      function sendNewsletter(token) {
+     
+       document.getElementById('newsLetterWrap')?.remove();
+     
+       document.querySelector('.newsLetterWrapper .quick_links p').innerHTML = 'Stay tuned for future updates.';
+      
+     
+        return;
+     
+        fetch('https://xpnetwork-staging.herokuapp.com/subscriber', {
+            method: 'post',
+            headers: {
+                  Accept: "*",
+                  "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: window.NEWS_EMAIL,
+              token
+            })
+        }).then(res => {
+         document.getElementById('newsLetterWrap')?.remove();
+     
+         document.querySelector('.newsLetterWrapper .quick_links p').innerHTML = 'Stay tuned for future updates.'
+        })
+      }
+
+
+      window.sendNewsletter = sendNewsletter;
+      
+      </script>
+ 
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <title>XP.NETWORK | Bridge Explorer</title>
   </head>
   <body>
+
+ 
+
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <div id="portal"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    
   </body>
 </html>

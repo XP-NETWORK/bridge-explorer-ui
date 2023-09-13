@@ -16,13 +16,20 @@ export const ExplorerCard: FC<Props> = ({
   fetching,
 }) => {
   return (
-    <div className="shadow-[0_1px_15px_0px_#2F303214] relative overflow-hidden rounded-lg font-poppins bg-white w-full p-5 explorerCard ">
-      <img className="select-none pointer-events-none" src={icon} alt="icon" />
-      <h1 className={`text-[22px] md:text-[2rem] font-medium mt-3 `}>
-        {!fetching ? title : <Loader />}
-      </h1>
-      <h2 className="text-md font-medium mt-2">{subtitle}</h2>
-      <ExplorerCardBg className="absolute select-none pointer-events-none right-0 top-0 dotsImg" />
-    </div>
+    // <div className="shadow-[0_1px_15px_0px_#2F303214] relative overflow-hidden rounded-lg font-poppins bg-white w-full p-5 explorerCard ">
+    //   <h1 className={`text-[22px] md:text-[2rem] font-medium `}>
+    //     {!fetching ? title : <Loader />}
+    //   </h1>
+    //   <label className="rowLabelCard">
+    //     <img
+    //       className="select-none pointer-events-none"
+    //       src={icon}
+    //       alt="icon"
+    //     />
+    //     <h2 className="text-md font-medium">{subtitle}</h2>
+    //   </label>
+    //   <ExplorerCardBg className="absolute select-none pointer-events-none right-0 top-0 dotsImg" />
+    // </div>
+    <></>
   );
 };

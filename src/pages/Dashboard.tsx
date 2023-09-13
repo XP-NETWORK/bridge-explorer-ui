@@ -8,27 +8,34 @@ import { url } from "../constants";
 import React from "react";
 
 export interface DailyData {
-  txNumber: number;
+  id: string;
+  Tx: string;
+  sftNumber?: string;
   walletsNumber: number;
   date: string;
+  day: string;
 }
 
 export const Dashboard = React.memo(() => {
   const [dailyData, setDailyData] = useState<DailyData[]>([]);
+  const [fetching, setFetching] = useState(false);
 
   useEffect(() => {
+    setFetching(true);
+
     (async () => {
-      const res = await fetch(`${url}dashboard`);
+      const res = await fetch(`${url}newDash`);
+      // console.log("res", res);
+      setFetching(false);
       if (res.ok) {
         const body = await res.json();
         setDailyData(body);
       }
     })();
   }, []);
-
   return (
     <div>
-      <Chart dailyData={dailyData} />
+      <Chart dailyData={dailyData} charFetching={fetching} />
     </div>
   );
 });

@@ -3,7 +3,7 @@ name: Deploy Bridge Explorer to Staging
 on:
   push:
     branches:
-      - dev
+      - new-dev
 jobs:
   run:
     runs-on: ubuntu-latest

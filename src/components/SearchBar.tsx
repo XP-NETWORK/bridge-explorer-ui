@@ -1,48 +1,46 @@
 import { Container } from "./Container";
 import SearchIcon from "../assets/icons/search.svg";
 import Cross from "../assets/icons/cross.svg";
-import { useContext, useEffect, useState } from "react";
-import { EventsContext } from "../context/Events";
-import { useCallback } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { debounce } from "./Details/helpers";
-
-export const SearchBar = () => {
+export const SearchBar: React.FC<{}> = () => {
   const [value, setValue] = useState("");
-  // @ts-ignore
-  const { setChainName } = useContext(EventsContext);
+  const navigate = useNavigate();
 
-  const debounced = useCallback(debounce(setChainName, 1000), []);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
 
-  useEffect(() => {
-    debounced(value);
-  }, [value]);
+  const handleClearSearch = () => {
+    setValue("");
+  };
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    navigate(`/search?bar=${value}&offset=${0}`);
+    console.log("onSubmit");
+  };
 
   return (
     <Container className="mt-6">
       <form
         className="flex max-w-[635px] leading-9 mx-auto px-4 py-2 bg-white rounded shadow-[0_1px_15px_0px_#2F303214]"
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
+        onSubmit={(e) => onSubmit(e)}
       >
         <input
-          //type="search"
-          placeholder="Search address or name"
+          placeholder="Search address or chain name"
           className="flex-1 bg-transparent focus:outline-none "
-          onChange={(e) => setValue(e.target.value)}
+          onChange={handleChange}
           value={value}
         />
-        <div
-          className="clearWrapper"
-          style={{ display: value ? "flex" : "none" }}
-        >
+        <div className="clearWrapper" style={{ display: value ? "flex" : "none" }}>
           <img
             src={Cross}
             alt="cross"
             width={12}
             className="searchIcon clearSearch"
-            onClick={() => setValue("")}
+            onClick={handleClearSearch}
           />
         </div>
         <img src={SearchIcon} alt="search" className="searchIcon" />

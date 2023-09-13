@@ -11,10 +11,10 @@ export const Tools = () => {
   return (
     <Container>
       <div className="grid grid-cols-1 md:grid-cols-6 mt-5 gap-10 mb-44">
-        <div className="col-span-4 md:order-2">
+        <div className="col-span-4 md:order-2 md:col-span-3">
           <Card />
         </div>
-        <div className="col-span-4 md:order-1 md:col-span-2">
+        <div className="col-span-4 md:order-1 md:col-span-3">
           <Form />
         </div>
       </div>
@@ -96,9 +96,11 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="issueForm -mt-1">
-      <div className="block space-y-1 mb-9">
-        <span className="text-sm">Tx Hash:</span>
+    <form onSubmit={handleSubmit} className="bg-white issueForm -mt-1 p-10">
+      <h2 className="font-roboto">Keep calm, your asset is safe!</h2>
+      <h5 className="mt-4 mb-5 text-sm">Use the tool below to register your transaction.</h5>
+      <div className="block mb-9 space-y-1">
+        <span className="text-sm mt-5">Tx Hash:</span>
         <div className={`inputWrap ${validError ? "failValid" : ""}`}>
           <input
             type="text"
@@ -122,7 +124,6 @@ const Form = () => {
           setDepChain(val)}} />
       {depValidError &&  <span className="inputError"><img src={warnSmall} alt="small" /><span>Select Departure Chain</span></span>}
       </div>
-
       <div className={`block space-y-1  ${desValidError ? "failValid" : ""}`}>
         <span className="text-sm">Destination Chain:</span>
         <Dropdown value={destChain} _chains={chains.filter(chain => chain.name !== depChain)} setSelectedChain={(val) => {
@@ -141,7 +142,7 @@ const Form = () => {
           className="block mt-6 w-full p-2 text-center text-white rounded-md bg-[#297EFE] hover:bg-[#154EDF]"
           type="submit"
         >
-          Send
+          Register transaction
         </button>
       )}
       {success && <div className="formSuccess"><img src={successIcon} alt="success" /><span>Done! You successfully sent your request.</span> <pre>|</pre> <img onClick={() => setSuccess(false)} src={closeIcon} alt="close" /></div>}
@@ -189,18 +190,18 @@ const Dropdown: FC<{
           </svg>
         </h1>
         <ul
-          className={`${
+          className={`toolsChainList ${
             isOpen || "hidden"
           } z-10 mt-1 dropdown-scrollbar rounded absolute w-full py-2 bg-white shadow-[0_1px_15px_0px_#2F303214] max-h-52 no-scrollbar overflow-y-scroll`}
         >
-          {_chains.map((chain) => (
+          {_chains.map((chain , index) => (
             <li
               onClick={(e) => {
                 setSelectedChain(e.currentTarget.innerText);
                 setIsOpen(false);
               }}
               className="py-2 flex px-4 select-none cursor-pointer hover:bg-[#F7F7F9]"
-              key={chain.name}
+              key={chain.name + String(index)}
             >
               <img src={chain.icon} alt="chain icon" />
               <span className="ml-2">{chain.name}</span>
@@ -214,20 +215,15 @@ const Dropdown: FC<{
 
 const Card = () => {
   return (
-    <div className="bg-white text-[#000000D9] rounded-lg border p-8">
-      <h2 className="font-roboto">Keep calm. We are on it!</h2>
-      <p className="mt-5 text-sm">First of all, don't panic. Your asset is safe.</p>
+    <div className=" text-[#000000D9] rounded-lg border p-10">
+      <h2 className="font-roboto">INFORMATION</h2>
       <p className="mt-5 text-sm">
-        Sometimes you may not see your cross-chain transaction in the XP.NETWORK
-        explorer due to unpredictable glitches on different blockchain networks
-        and the decentralized nature of XP.NETWORK protocol.
+      You may not see your cross-chain transaction due
+      to unpredictable glitches on different blockchain networks
+      and the decentralized nature of XP.NETWORK protocol.
       </p>
       <p className="mt-5 text-sm">
-        If your transaction is not showing up in our explorer, You can use the tool below, and we will register your transaction.
-      </p>
-      <p className="mt-5 text-sm">
-        Please check your transaction in XP.NETWORK explorer 5 minutes after
-        using this tool.
+      Please be patient and follow the instructions 💙
       </p>
     </div>
   );

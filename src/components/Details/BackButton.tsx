@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 export const BackButton = () => {
+  const navigate = useNavigate();
+
   return (
-    <Link
-      to="/"
-      className="w-fit flex rounded items-center space-x-2 py-1.5 px-2.5 text-sm font-medium mb-4 bg-[#EEEEF2] text-[#222222] hover:bg-[#235EF51A] hover:text-[#235EF5]"
-    >
+    <button 
+    onClick={()=>navigate(-1)}
+    className="w-fit flex rounded items-center space-x-2 py-1.5 px-2.5 text-sm font-medium mb-4 bg-[#EEEEF2] text-[#222222] hover:bg-[#235EF51A] hover:text-[#235EF5]">
       <svg
         width="8"
         height="12"
@@ -19,6 +20,6 @@ export const BackButton = () => {
         />
       </svg>
       <span>Back to all transactions</span>
-    </Link>
+      </button>
   );
 };
