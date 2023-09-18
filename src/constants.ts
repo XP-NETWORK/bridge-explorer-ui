@@ -266,8 +266,8 @@ export const chains = [
     },
 ];
 
-export const url = "https://testnet-explorer-api.herokuapp.com/";
-export const socketUrl = "wss://testnet-explorer-api.herokuapp.com/";
+export const url = "https://testnet-bridge-explorer.herokuapp.com/";
+export const socketUrl = "wss://testnet-bridge-explorer.herokuapp.com/";
 //export const scraperSocketUrl = "wss://explorer-scraper.herokuapp.com/";
 //export const destScraperSocketUrl = "wss://dest-scraper.herokuapp.com/";
 
