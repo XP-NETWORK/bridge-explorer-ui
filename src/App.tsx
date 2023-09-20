@@ -51,7 +51,7 @@ export const App = () => {
             try {
                 const res = await fetch(`${url}getMetrics`);
                 const metrics = await res.json();
-                console.log(metrics, "metrics");
+
                 if (metrics) {
                     setAppData({
                         totalTx: metrics.totalTx,

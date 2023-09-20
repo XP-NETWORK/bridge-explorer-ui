@@ -29,13 +29,13 @@ export const Chart = withContainer(
                     <div className="tooltipDiv">
                         <p className="dateTool">{payload[0].payload.date}</p>
                         <span>
-                            {payload[0].value
+                            {payload[0]?.value
                                 .toString()
                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
                             TXN <br />
                         </span>
                         <span>
-                            {payload[1].value
+                            {payload[1]?.value
                                 .toString()
                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
                             Assets <br />
