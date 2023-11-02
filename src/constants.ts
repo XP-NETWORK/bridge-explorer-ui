@@ -251,8 +251,9 @@ export const chains = [
     },
 ];
 
-export const url = "https://dev-explorer-api.herokuapp.com/";
-export const socketUrl = "wss://dev-explorer-api.herokuapp.com/";
+export const url = "https://explorer-app.xp.network/";
+export const socketUrl = "https://explorer-app.xp.network";
+export const socketUrlPath = "/ws";
 //export const scraperSocketUrl = "wss://explorer-scraper.herokuapp.com/";
 //export const destScraperSocketUrl = "wss://dest-scraper.herokuapp.com/";
 
