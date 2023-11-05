@@ -10,7 +10,7 @@ export const Footer = () => {
     const [failedEmail, setFailed] = useState(false);
 
     useEffect(() => {
-        fetch("https://xpvitaldata.herokuapp.com/last-commit")
+        fetch("https://case-studies.xp.network/last-commit")
             .then((res) => res.json())
             .then((data) => {
                 setLatestCommit(data);
