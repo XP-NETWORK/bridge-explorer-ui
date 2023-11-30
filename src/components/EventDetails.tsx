@@ -12,6 +12,8 @@ import ReactTooltip from "react-tooltip";
 
 import { FromLink } from "./elements/ExplorerLink";
 
+import { url } from "../constants";
+
 export const EventDetails = () => {
     let params = useParams();
     const [event, setEvent] = useState<IEvent>();
@@ -21,9 +23,7 @@ export const EventDetails = () => {
     useEffect(() => {
         new ClipboardJS(".copy-btn");
 
-        fetch(
-            `https://dev-explorer-api.herokuapp.com/?fromHash=${params.fromHash}`
-        ) //https://dev-explorer-api.herokuapp.com
+        fetch(`${url}?fromHash=${params.fromHash}`) //https://dev-explorer-api.herokuapp.com
             .then((res) => res.json())
             .then((data) => {
                 setEvent(data[0]);

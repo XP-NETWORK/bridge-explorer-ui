@@ -29,11 +29,11 @@ import axios from "axios";
 import { setFrom, setTo, setEventsQueryString } from "../store/global";
 import { useDispatch } from "react-redux";
 import { Footer } from "../components/Footer";
+import { url as uri } from "../constants";
 
 import { getExchangeRates } from "../getExchangeRate";
 
 export const Search = (props: any) => {
-    const uri = `https://dev-explorer-api.herokuapp.com/`;
     const navigate = useNavigate();
     const loc = useLocation();
     const [totalTrx, setTotalTrx] = useState<any>(0);
