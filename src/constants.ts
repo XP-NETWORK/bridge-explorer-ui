@@ -253,7 +253,7 @@ export const chains = [
         icon: Dfinity,
         dec: -8,
     },
-    { id: "bitgert", name: "Bitgert", icon: Bitgert }
+    { id: "bitrise-token", name: "Bitgert", icon: Bitgert }
 ];
 
 export const url = "https://explorer-app.xp.network/";
