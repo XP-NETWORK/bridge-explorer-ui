@@ -17,8 +17,8 @@ import Solana from "./assets/icons/solana.svg";
 import Hedera from "./assets/icons/Hedera.svg";
 import Aptos from "./assets/icons/aptos.svg";
 import optimism from "./assets/icons/optimism.svg";
-
 import casper from "./assets/icons/casper.svg";
+import Bitgert from "./assets/icons/brise.png"
 
 export const currency: any = {
     "4": "BNB",
@@ -51,7 +51,7 @@ export const currency: any = {
     "29": "HBAR",
     "34": "APT",
     "40": "ETH",
-    "38": "ETH",
+    "38": "BRISE",
     "39": "CSPR",
 };
 
@@ -89,6 +89,7 @@ export const txExplorers: any = {
     "34": "https://explorer.aptoslabs.com/txn/",
     "40": "https://optimistic.etherscan.io/tx/",
     "39": "https://cspr.live/deploy/",
+    "38": "https://brisescan.com/tx/"
 };
 
 export const addressExplorers: any = {
@@ -125,6 +126,7 @@ export const addressExplorers: any = {
     "34": "https://explorer.aptoslabs.com/account/",
     "40": "https://optimistic.etherscan.io/address/",
     "39": "https://cspr.live/address/",
+    "38": "https://brisescan.com/address/"
 };
 
 export const collectionExplorers: any = {
@@ -141,6 +143,7 @@ export const collectionExplorers: any = {
     "20": "https://iotexscan.io/address/",
     "9": "https://tronscan.org/#/contract/",
     "39": "https://cspr.live/contract-package/",
+    "38": "https://brisescan.com/address/"
 };
 
 export const chainNoncetoName: any = {
@@ -178,6 +181,7 @@ export const chainNoncetoName: any = {
     "34": "Aptos",
     "40": "Optimism",
     "39": "Casper",
+    "38": "Bitgert"
 };
 
 export const _headers = {
@@ -249,6 +253,7 @@ export const chains = [
         icon: Dfinity,
         dec: -8,
     },
+    { id: "bitgert", name: "Bitgert", icon: Bitgert }
 ];
 
 export const url = "https://explorer-app.xp.network/";
