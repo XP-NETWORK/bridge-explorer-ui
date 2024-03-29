@@ -3,7 +3,7 @@ import Tron from "./assets/chains/tron.svg";
 import Vechain from "./assets/chains/Vechain.png";
 import Algorand from "./assets/chains/algorand.svg";
 import Secret from "./assets/icons/secret.svg";
-
+import Bitgert from "./assets/chains/bitgert.png";
 import axios from "axios";
 
 export const currency: any = {
@@ -25,7 +25,8 @@ export const currency: any = {
   "25": "VET",
   "15": "ALGOS",
   "22": "CKB",
-  "24": "SCRT"
+  "24": "SCRT",
+  "38": "BRISE"
 };
 
 export const txExplorers: any = {
@@ -47,7 +48,8 @@ export const txExplorers: any = {
   "25": "https://explore.vechain.org/transactions/",
   "15": "https://algoexplorer.io/tx/",
   "22": "https://v1.gwscan.com/tx/",
-  "24": "https://atomscan.com/secret-network/transactions/"
+  "24": "https://atomscan.com/secret-network/transactions/",
+  "38": "https://brisescan.com/tx/"
 };
 
 export const addressExplorers: any = {
@@ -69,7 +71,8 @@ export const addressExplorers: any = {
   "25": "https://explore.vechain.org/accounts/",
   "15": "https://algoexplorer.io/address/",
   "22": "https://v1.gwscan.com/tx/",
-  "24": `https://atomscan.com/secret-network/accounts/`
+  "24": `https://atomscan.com/secret-network/accounts/`,
+  "38": "https://brisescan.com/address/"
 };
 
 export const chainNoncetoName: any = {
@@ -92,7 +95,8 @@ export const chainNoncetoName: any = {
   "25": "Vechain",
   "15": "Algorand",
   "22": "Godwoken",
-  "24": "Secret"
+  "24": "Secret",
+  "38": "Bitgert"
 };
 
 export const _headers = {
@@ -131,6 +135,7 @@ export const chains = [
   { id: "algorand", name: "Algorand", icon: Algorand, notConvert: true },
   { id: "nervos-network", name: "Godwoken", icon: "./assets/icons/godwoken.svg" },
   { id: "secret", name: "Secret", icon: Secret },
+  { id: "bitgert", name: "Bitgert", icon: Bitgert }
 ];
 
 export const url = "https://dev-explorer-api.herokuapp.com/";

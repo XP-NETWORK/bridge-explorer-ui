@@ -21,6 +21,7 @@ import VET from "./assets/icons/vechain.png";
 // import { //Chain } from "xp.network/dist/consts";
 import SCRT from "./assets/icons/secret.svg";
 import CKB from "./assets/icons/godwoken.svg";
+import BIT from "./assets/icons/bitgert.png";
 
 export const EVM = "EVM";
 export const ELROND = "Elrond";
@@ -335,6 +336,20 @@ export const chains = [
         test: false,
         newChain: biz,
     },
+    {
+        type: "EVM",
+        key: "Bitgert",
+        text: "Bitgert",
+        value: "Bitgert",
+        nonce: 0x26,
+        chainId: 32520,
+        order: 23,
+        image: { avatar: true, src: BIT },
+        maintenance: false,
+        testNet: true,
+        mainnet: biz || window.location.hostname.includes("testing"),
+        newChain: true,
+    },
 ];
 
 export const chainsConfig = {
@@ -531,6 +546,17 @@ export const chainsConfig = {
         tx: "https://gwscan.com/tx/",
         testTxn: "https://v1.testnet.gwscan.com/tx",
     },
+
+    Bitgert: {
+        type: EVM,
+        token: "BRISE",
+        image: BIT,
+        chainId: 32520,
+        tnChainId: 64668,
+        //Chain: //Chain.GODWOKEN,
+        tx: "https://brisescan.com/tx/",
+        testTxn: "https://testnet-explorer.brisescan.com/tx",
+    },
 };
 
 export const coins = [
@@ -556,6 +582,7 @@ export const coins = [
     "VET", //19
     "CKB", //20
     "SCRT", //21
+    "BRISE", //22
 ];
 
 export const TESTNET_CHAIN_INFO = {
@@ -604,6 +631,10 @@ export const TESTNET_CHAIN_INFO = {
         nonce: 22,
         chainId: 71401,
     },
+    Bitgert: {
+        nonce: 38,
+        chainId: 64668,
+    }
 };
 
 export const CHAIN_INFO = {
@@ -814,5 +845,15 @@ export const CHAIN_INFO = {
         rpc: "https://v1.mainnet.godwoken.io/rpc",
         blockExplorerUrl: "https://gwscan.com/account/",
         testBlockExplorerUrls: "https://v1.testnet.gwscan.com/account",
+    },
+    Bitgert: {
+        nonce: 0x26,
+        native: coins[22],
+        chainId: 32520,
+        tnChainId: 64668,
+        decimals: 1e18,
+        rpcUrl: "https://mainnet-rpc.brisescan.com",
+        blockExplorerUrls: "https://brisescan.com/address/",
+        testBlockExplorerUrls: "https://testnet-explorer.brisescan.com/address/",
     },
 };
