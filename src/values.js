@@ -36,6 +36,7 @@ import arbitrumTestNet from "./assets/icons/arbitrumTN.svg";
 import Aptos from "./assets/icons/aptos.svg";
 import brise from "./assets/icons/brise.png";
 import casper from "./assets/icons/casper.svg";
+import base from "./assets/icons/base.svg";
 
 export const EVM = "EVM";
 export const ELROND = "MultiversX";
@@ -525,5 +526,19 @@ export const chains = [
         newChain: false,
         chainId: 32520,
         tnChainId: 64668,
+    },
+    {
+        type: "EVM",
+        key: "Base",
+        text: "Base",
+        value: "Base",
+        nonce: 0x2b,
+        chainId: 8453,
+        order: 24,
+        image: { avatar: true, src: base },
+        maintenance: false,
+        testNet: true,
+        mainnet: true,
+        newChain: true,
     },
 ];
