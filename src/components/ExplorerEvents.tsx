@@ -57,6 +57,7 @@ export interface IEvent {
     toHash?: string;
     senderAddress: string;
     targetAddress?: string;
+    createdWith?: string;
     createdAt: Date;
     nftUri: string;
     imgUri?: string;
@@ -126,7 +127,7 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
 
     const getExchangeRate = (
         rates: { [key: string]: { usd: number } },
-        chainName: string
+        chainName?: string
     ): number => {
         const chain = chains.find(
             (chain) => chain?.name?.toLowerCase() === chainName?.toLowerCase()
@@ -254,10 +255,11 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                             eventsContext?.events.length ? (
                                 eventsContext?.events.map(
                                     (event: IEvent, idx: number) => {
+                                        const chainName = event?.createdWith === "v4" ? event?.toChainName : event?.chainName;
                                         const dollarValue =
                                             getExchangeRate(
                                                 exchangeRates,
-                                                event?.chainName
+                                                chainName
                                             ) * formatFees(event);
 
                                         const fees = formatFees(event);
@@ -300,15 +302,20 @@ export const ExplorerEvents: FC<{ status?: string }> = ({ status = "" }) => {
                                                         data-tip={`${formatFees(
                                                             event
                                                         )} ${
-                                                            event.fromChain &&
+                                                            event?.createdWith === "v4" ? event.toChain && currency[
+                                                                event.toChain
+                                                            ] : event.fromChain &&
                                                             currency[
-                                                                event.fromChain
+                                                                event
+                                                                    .fromChain
                                                             ]
                                                         } <br>${dollarValue} $`}
                                                     >
                                                         <span>{fixedFees}</span>{" "}
                                                         <span>
-                                                            {event.fromChain &&
+                                                            {event?.createdWith === "v4" ? event.toChain && currency[
+                                                                    event.toChain
+                                                                ] : event.fromChain &&
                                                                 currency[
                                                                     event
                                                                         .fromChain
