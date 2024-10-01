@@ -365,12 +365,13 @@ const DetailsList = ({ data, copyProps }: DetailsCard) => {
                 >
                     <span className="text-[#222222]">
                         {event?.txFees && formatFees(event)}{" "}
-                        {event?.fromChain && currency[event?.fromChain]} ($
+                        {event?.createdWith === "v4" 
+                        ? event?.toChain && currency[event?.toChain] : event?.fromChain && currency[event?.fromChain]} ($
                         {event?.fromChain &&
                             (
                                 getExchangeRate(
                                     exchangeRates,
-                                    event?.chainName
+                                    event?.createdWith === "v4" ? event?.toChainName : event?.chainName
                                 ) * formatFees(event)
                             )?.toFixed(2)}
                         )

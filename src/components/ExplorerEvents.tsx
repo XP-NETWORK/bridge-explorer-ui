@@ -48,7 +48,7 @@ export interface IEvent {
     fromChain?: string;
     toChain: string;
     fromChainName?: string;
-    toChainName?: string;
+    toChainName: string;
     actionId: string;
     txFees: string;
     tokenId?: string;
