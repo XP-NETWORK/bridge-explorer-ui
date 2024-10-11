@@ -37,6 +37,7 @@ import Aptos from "./assets/icons/aptos.svg";
 import brise from "./assets/icons/brise.png";
 import casper from "./assets/icons/casper.svg";
 import base from "./assets/icons/base.svg";
+import blast from "./assets/icons/blast.webp";
 
 export const EVM = "EVM";
 export const ELROND = "MultiversX";
@@ -536,6 +537,20 @@ export const chains = [
         chainId: 8453,
         order: 24,
         image: { avatar: true, src: base },
+        maintenance: false,
+        testNet: true,
+        mainnet: true,
+        newChain: true,
+    },
+    {
+        type: "EVM",
+        key: "Blast",
+        text: "Blast",
+        value: "Blast",
+        nonce: 0x2d,
+        chainId: 81457,
+        order: 24,
+        image: { avatar: true, src: blast },
         maintenance: false,
         testNet: true,
         mainnet: true,

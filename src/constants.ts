@@ -20,6 +20,7 @@ import optimism from "./assets/icons/optimism.svg";
 import casper from "./assets/icons/casper.svg";
 import Bitgert from "./assets/icons/brise.png";
 import Base from "./assets/icons/base.svg";
+import Blast from "./assets/icons/blast.webp";
 
 export const currency: any = {
     "4": "BNB",
@@ -54,7 +55,8 @@ export const currency: any = {
     "40": "ETH",
     "38": "BRISE",
     "39": "CSPR",
-    "43": "BASE"
+    "43": "BASE",
+    "45": "BLAST"
 };
 
 export const txExplorers: any = {
@@ -92,7 +94,8 @@ export const txExplorers: any = {
     "40": "https://optimistic.etherscan.io/tx/",
     "39": "https://cspr.live/deploy/",
     "38": "https://brisescan.com/tx/",
-    "43": "https://basescan.org/tx/"
+    "43": "https://basescan.org/tx/",
+    "45": "https://blastscan.io/tx/"
 };
 
 export const addressExplorers: any = {
@@ -130,7 +133,8 @@ export const addressExplorers: any = {
     "40": "https://optimistic.etherscan.io/address/",
     "39": "https://cspr.live/address/",
     "38": "https://brisescan.com/address/",
-    "43": "https://basescan.org/address/"
+    "43": "https://basescan.org/address/",
+    "45": "https://blastscan.io/address/"
 };
 
 export const collectionExplorers: any = {
@@ -148,7 +152,8 @@ export const collectionExplorers: any = {
     "9": "https://tronscan.org/#/contract/",
     "39": "https://cspr.live/contract-package/",
     "38": "https://brisescan.com/address/",
-    "43": "https://basescan.org/address/"
+    "43": "https://basescan.org/address/",
+    "45": "https://blastscan.io/address/"
 };
 
 export const chainNoncetoName: any = {
@@ -187,7 +192,8 @@ export const chainNoncetoName: any = {
     "40": "Optimism",
     "39": "Casper",
     "38": "Bitgert",
-    "43": "Base"
+    "43": "Base",
+    "45": "Blast"
 };
 
 export const _headers = {
@@ -260,7 +266,8 @@ export const chains = [
         dec: -8,
     },
     { id: "bitrise-token", name: "Bitgert", icon: Bitgert },
-    { id: "ethereum", name: "Base", icon: Base }
+    { id: "ethereum", name: "Base", icon: Base },
+    { id: "ethereum", name: "Blast", icon: Blast }
 ];
 
 export const url = "https://explorer-app.xp.network/";
