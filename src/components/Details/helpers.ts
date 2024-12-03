@@ -209,15 +209,16 @@ export const debounce = (cb: Function, delay: number) => {
 
 export const compose =
     (...funcs: Function[]) =>
-    (comp: React.FC<any>) => {
-        return funcs.reduceRight((wrapped, func) => func(wrapped), comp);
-    };
+        (comp: React.FC<any>) => {
+            return funcs.reduceRight((wrapped, func) => func(wrapped), comp);
+        };
 
 export const formatFees = (event: IEvent) => {
+    debugger;
     if (isNaN(+event.txFees)) return 0;
 
     const chain = chains.find(
-        (c) => c.name.toLowerCase() === event.fromChainName?.toLowerCase()
+        (c) => c.name.toLowerCase() === event.toChainName?.toLowerCase()
     );
 
     if (chain?.dec)
@@ -226,6 +227,9 @@ export const formatFees = (event: IEvent) => {
     if (chain?.notConvert) return +event.txFees;
 
     let res;
+    // if (event.toChainName === "CASPER") {
+    //     event.txFees = (Number(event.txFees) * 1e9).toString();
+    // }
     try {
         res = Number(ethers.utils.formatEther(event.txFees));
     } catch (e) {
