@@ -248,228 +248,232 @@ export const Search = (props: any) => {
                             {eventsContext?.isLoading ? (
                                 <LoaderRow />
                             ) : // if events length is 0 after 2 seconds, show loader
-                            eventsContext?.events.length ? (
-                                eventsContext?.events.map(
-                                    //@ts-ignore
-                                    (event: IEvent, idx: number) => {
-                                        const dollarValue =
-                                            getExchangeRate(
-                                                exchangeRates,
-                                                event?.chainName
-                                            ) * formatFees(event);
+                                eventsContext?.events.length ? (
+                                    eventsContext?.events.map(
+                                        //@ts-ignore
+                                        (event: IEvent, idx: number) => {
+                                            const chainName = event?.createdWith === "v4" ? event?.toChainName : event?.chainName;
+                                            const dollarValue =
+                                                getExchangeRate(
+                                                    exchangeRates,
+                                                    chainName
+                                                ) * formatFees(event);
 
-                                        const fees = formatFees(event);
-                                        const digits =
-                                            String(fees).split(".").at(1)
-                                                ?.length || 1;
+                                            const fees = formatFees(event);
+                                            const digits =
+                                                String(fees).split(".").at(1)
+                                                    ?.length || 1;
 
-                                        const fixedFees = fees
-                                            .toFixed(Math.min(digits, 6))
-                                            .toString();
+                                            const fixedFees = fees
+                                                .toFixed(Math.min(digits, 6))
+                                                .toString();
 
-                                        return (
-                                            <tr
-                                                key={event.id + String(idx)}
-                                                className="bg-white group hover:bg-transparent txRow"
-                                                onClick={(e) =>
-                                                    navigateTo(e, event)
-                                                }
-                                            >
-                                                <TableData
-                                                    className={`left-0 text-center bg-white group-hover:bg-[#F7F7F9] imgTableData ${
-                                                        /^((?!chrome|android).)*safari/i.test(
+                                            return (
+                                                <tr
+                                                    key={event.id + String(idx)}
+                                                    className="bg-white group hover:bg-transparent txRow"
+                                                    onClick={(e) =>
+                                                        navigateTo(e, event)
+                                                    }
+                                                >
+                                                    <TableData
+                                                        className={`left-0 text-center bg-white group-hover:bg-[#F7F7F9] imgTableData ${/^((?!chrome|android).)*safari/i.test(
                                                             navigator.userAgent
                                                         )
                                                             ? "safariHack"
                                                             : "sitckyBottomLine"
-                                                    }`}
-                                                >
-                                                    <ReactTooltip
-                                                        effect="solid"
-                                                        className="copyTip"
-                                                        multiline
-                                                    />
-                                                    <RowNFT event={event} />
-                                                </TableData>
-
-                                                <TableData>
-                                                    <span
-                                                        className="cursor-default"
-                                                        data-tip={`${formatFees(
-                                                            event
-                                                        )} ${
-                                                            event.fromChain &&
-                                                            currency[
-                                                                event.fromChain
-                                                            ]
-                                                        } <br>${dollarValue} $`}
+                                                            }`}
                                                     >
-                                                        <span>{fixedFees}</span>{" "}
-                                                        <span>
-                                                            {event.fromChain &&
+                                                        <ReactTooltip
+                                                            effect="solid"
+                                                            className="copyTip"
+                                                            multiline
+                                                        />
+                                                        <RowNFT event={event} />
+                                                    </TableData>
+
+                                                    <TableData>
+                                                        <span
+                                                            className="cursor-default"
+                                                            data-tip={`${formatFees(
+                                                                event
+                                                            )} ${event?.createdWith === "v4" ? event.toChain && currency[
+                                                                event.toChain
+                                                            ] : event.fromChain &&
+                                                            currency[
+                                                            event
+                                                                .fromChain
+                                                            ]
+                                                                } <br>${dollarValue} $`}
+                                                        >
+                                                            <span>{fixedFees}</span>{" "}
+                                                            <span>
+                                                                {event?.createdWith === "v4" ? event.toChain && currency[
+                                                                    event.toChain
+                                                                ] : event.fromChain &&
                                                                 currency[
-                                                                    event
-                                                                        .fromChain
+                                                                event
+                                                                    .fromChain
                                                                 ]}
+                                                            </span>
+                                                            <br />
+                                                            <span className="text-xs">
+                                                                $
+                                                                {dollarValue &&
+                                                                    dollarValue.toFixed(
+                                                                        2
+                                                                    )}
+                                                            </span>
                                                         </span>
-                                                        <br />
-                                                        <span className="text-xs">
-                                                            $
-                                                            {dollarValue &&
-                                                                dollarValue.toFixed(
-                                                                    2
+                                                    </TableData>
+
+                                                    <TableData>
+                                                        <div className="flex space-x-1 mb-1">
+                                                            <img
+                                                                src={
+                                                                    chains.find(
+                                                                        (chain) =>
+                                                                            chain.name.toLowerCase() ===
+                                                                            chainNoncetoName[
+                                                                                event?.fromChain ||
+                                                                                0
+                                                                            ]?.toLowerCase()
+                                                                    )?.icon
+                                                                }
+                                                                alt=""
+                                                                className="chainIcon"
+                                                            />
+                                                            <span>
+                                                                {chainNoncetoName[
+                                                                    event?.fromChain ||
+                                                                    0
+                                                                ] === "Elrond"
+                                                                    ? "MultiverseX"
+                                                                    : chainNoncetoName[
+                                                                    event?.fromChain ||
+                                                                    0
+                                                                    ] || "N/A"}
+                                                            </span>
+                                                        </div>
+                                                        <FromLink event={event} />
+                                                    </TableData>
+
+                                                    <TableData>
+                                                        <div className="flex space-x-1 mb-1">
+                                                            <img
+                                                                src={
+                                                                    chains.find(
+                                                                        (chain) =>
+                                                                            chain.name.toLowerCase() ===
+                                                                            chainNoncetoName[
+                                                                                event?.toChain ||
+                                                                                0
+                                                                            ]?.toLowerCase()
+                                                                    )?.icon
+                                                                }
+                                                                alt=""
+                                                                className="chainIcon"
+                                                            />
+                                                            <span>
+                                                                {chainNoncetoName[
+                                                                    event?.toChain ||
+                                                                    0
+                                                                ] === "Elrond"
+                                                                    ? "MultiverseX"
+                                                                    : chainNoncetoName[
+                                                                    event?.toChain ||
+                                                                    0
+                                                                    ] || "N/A"}
+                                                            </span>
+                                                        </div>
+                                                        {event?.toHash ? (
+                                                            <ToLink event={event} />
+                                                        ) : (
+                                                            <Loader className="addressLoader" />
+                                                        )}
+                                                    </TableData>
+
+                                                    <TableData className="CollectioName">
+                                                        <CollectionNameRow
+                                                            event={event}
+                                                        />
+                                                    </TableData>
+
+                                                    <TableData>
+                                                        <span className="methodDataTable">
+                                                            {event.type || "N/A"}
+                                                        </span>
+                                                    </TableData>
+
+                                                    <TableData>
+                                                        <span
+                                                            className="valueData "
+                                                            data-tip={moment(
+                                                                event?.createdAt
+                                                            ).format(
+                                                                "YYYY/MM/DD H:mm"
+                                                            )}
+                                                        >
+                                                            {moment(event.createdAt)
+                                                                .fromNow()
+                                                                .replace("in", "")
+                                                                .replace(
+                                                                    "a few ",
+                                                                    "3 "
+                                                                )
+                                                                .replace("few ", "")
+                                                                .replace(
+                                                                    "an ",
+                                                                    "1 "
+                                                                )
+                                                                .replace("a ", "1 ")
+                                                                .replace(
+                                                                    "hours ",
+                                                                    "hrs "
+                                                                )
+                                                                .replace(
+                                                                    "hour ",
+                                                                    "hr "
+                                                                )
+                                                                .replace(
+                                                                    "minutes ",
+                                                                    "mins "
+                                                                )
+                                                                .replace(
+                                                                    "minute ",
+                                                                    "min "
+                                                                )
+                                                                .replace(
+                                                                    "mutes ",
+                                                                    "mins "
+                                                                )
+                                                                .replace(
+                                                                    "mute ",
+                                                                    "min "
+                                                                )
+                                                                .replace(
+                                                                    "seconds ",
+                                                                    "secs "
+                                                                )
+                                                                .replace(
+                                                                    "second ",
+                                                                    "sec "
                                                                 )}
                                                         </span>
-                                                    </span>
-                                                </TableData>
+                                                    </TableData>
 
-                                                <TableData>
-                                                    <div className="flex space-x-1 mb-1">
-                                                        <img
-                                                            src={
-                                                                chains.find(
-                                                                    (chain) =>
-                                                                        chain.name.toLowerCase() ===
-                                                                        chainNoncetoName[
-                                                                            event?.fromChain ||
-                                                                                0
-                                                                        ]?.toLowerCase()
-                                                                )?.icon
-                                                            }
-                                                            alt=""
-                                                            className="chainIcon"
+                                                    <TableData>
+                                                        <Status
+                                                            status={event.status}
                                                         />
-                                                        <span>
-                                                            {chainNoncetoName[
-                                                                event?.fromChain ||
-                                                                    0
-                                                            ] === "Elrond"
-                                                                ? "MultiverseX"
-                                                                : chainNoncetoName[
-                                                                      event?.fromChain ||
-                                                                          0
-                                                                  ] || "N/A"}
-                                                        </span>
-                                                    </div>
-                                                    <FromLink event={event} />
-                                                </TableData>
-
-                                                <TableData>
-                                                    <div className="flex space-x-1 mb-1">
-                                                        <img
-                                                            src={
-                                                                chains.find(
-                                                                    (chain) =>
-                                                                        chain.name.toLowerCase() ===
-                                                                        chainNoncetoName[
-                                                                            event?.toChain ||
-                                                                                0
-                                                                        ]?.toLowerCase()
-                                                                )?.icon
-                                                            }
-                                                            alt=""
-                                                            className="chainIcon"
-                                                        />
-                                                        <span>
-                                                            {chainNoncetoName[
-                                                                event?.toChain ||
-                                                                    0
-                                                            ] === "Elrond"
-                                                                ? "MultiverseX"
-                                                                : chainNoncetoName[
-                                                                      event?.toChain ||
-                                                                          0
-                                                                  ] || "N/A"}
-                                                        </span>
-                                                    </div>
-                                                    {event?.toHash ? (
-                                                        <ToLink event={event} />
-                                                    ) : (
-                                                        <Loader className="addressLoader" />
-                                                    )}
-                                                </TableData>
-
-                                                <TableData className="CollectioName">
-                                                    <CollectionNameRow
-                                                        event={event}
-                                                    />
-                                                </TableData>
-
-                                                <TableData>
-                                                    <span className="methodDataTable">
-                                                        {event.type || "N/A"}
-                                                    </span>
-                                                </TableData>
-
-                                                <TableData>
-                                                    <span
-                                                        className="valueData "
-                                                        data-tip={moment(
-                                                            event?.createdAt
-                                                        ).format(
-                                                            "YYYY/MM/DD H:mm"
-                                                        )}
-                                                    >
-                                                        {moment(event.createdAt)
-                                                            .fromNow()
-                                                            .replace("in", "")
-                                                            .replace(
-                                                                "a few ",
-                                                                "3 "
-                                                            )
-                                                            .replace("few ", "")
-                                                            .replace(
-                                                                "an ",
-                                                                "1 "
-                                                            )
-                                                            .replace("a ", "1 ")
-                                                            .replace(
-                                                                "hours ",
-                                                                "hrs "
-                                                            )
-                                                            .replace(
-                                                                "hour ",
-                                                                "hr "
-                                                            )
-                                                            .replace(
-                                                                "minutes ",
-                                                                "mins "
-                                                            )
-                                                            .replace(
-                                                                "minute ",
-                                                                "min "
-                                                            )
-                                                            .replace(
-                                                                "mutes ",
-                                                                "mins "
-                                                            )
-                                                            .replace(
-                                                                "mute ",
-                                                                "min "
-                                                            )
-                                                            .replace(
-                                                                "seconds ",
-                                                                "secs "
-                                                            )
-                                                            .replace(
-                                                                "second ",
-                                                                "sec "
-                                                            )}
-                                                    </span>
-                                                </TableData>
-
-                                                <TableData>
-                                                    <Status
-                                                        status={event.status}
-                                                    />
-                                                </TableData>
-                                            </tr>
-                                        );
-                                    }
-                                )
-                            ) : (
-                                <NoEventsRow />
-                            )}
+                                                    </TableData>
+                                                </tr>
+                                            );
+                                        }
+                                    )
+                                ) : (
+                                    <NoEventsRow />
+                                )}
                         </tbody>
                     </table>
                     <SearchPaginator
